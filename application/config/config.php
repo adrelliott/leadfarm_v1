@@ -30,10 +30,10 @@ function __autoload ($class)
 switch (ENVIRONMENT)
 {
     case 'development':
-        $base_url = 'http://localhost/projects/_leadfarm/leadfarm.co.uk';
+        $base_url = 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1';
         break;
     case 'staging':
-        $base_url = 'http://localhost/projects/';//shall we buy another domain for this?
+        $base_url = 'http://leadfarm-staging.co.uk';//shall we buy another domain for this?
         break;
     case 'production':
         $base_url = 'http://leadfarm.co.uk/';
