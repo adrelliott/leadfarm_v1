@@ -20,11 +20,10 @@ class Contactaction extends T_Contactaction {
        parent::index();
    }
    
-  public function view($view_file, $rID = 'new', $ContactId) {     
-        $this->data['view_setup']['view_file'] = '????filename?????';
-       parent::view($view_file, $rID, $ContactId);
-   }
+  public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
+       $this->data['view_setup']['view_file'] = 'v_contactaction_' . $view_file;
+       parent::view($rID, $ContactId);
 
-   
+  }
 }
    

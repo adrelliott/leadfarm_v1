@@ -20,9 +20,8 @@ class T_Contact extends MY_Controller {
        parent::index();
    }
    
-  public function view($view_file, $rID, $ContactId = NULL) {    //false = create new record
+  public function view($rID, $ContactId = NULL) {    //false = create new record
        $this->data['controller_setup']['method_name'] = 'view';
-       $this->data['view_setup']['view_file'] = 'viewRecord_' . $view_file;
        $this->data['view_setup']['header_file'] .= '';  //add '_modal' for modal
        $this->data['view_setup']['footer_file'] .= '';  //add '_modal' for modal       
        $this->data['view_setup']['rID'] = $rID;

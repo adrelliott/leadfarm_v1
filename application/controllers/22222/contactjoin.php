@@ -20,10 +20,11 @@ class Contactjoin extends T_Contactjoin {
        parent::index();
    }
    
-  public function view($view_file, $rID = 'new', $ContactId) {     
-        $this->data['view_setup']['view_file'] = '????filename?????';
-       parent::view($view_file, $rID, $ContactId);
-   }
+  public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
+       $this->data['view_setup']['view_file'] = 'v_contactjoin_' . $view_file;
+       parent::view($rID, $ContactId);
+
+  }
 
    
 }

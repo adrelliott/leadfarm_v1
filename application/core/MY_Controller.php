@@ -55,19 +55,119 @@ class MY_Controller extends CI_Controller {
         // 6. Finally set up last minute vars
         $this->data['controller_setup']['controller_name'] = $this->controller_name;
         
-    ///#/#/#/#/#/#/#/#/#/#CHANGE THIS TO **FALSE** WHEN IN PRODUCTION!/'/#/#/#/#
-        $this->output->enable_profiler(TRUE);
+        
+///#/#/#/#/#/#/#/#/#/#CHANGE THIS TO **FALSE** WHEN IN PRODUCTION!/'/#/#/#/#
+$this->output->enable_profiler(TRUE);
     }
-    
     
     
     public function index() {
         // 1. Set up the vars for this method
         extract($this->data); 
+        extract($this->data['controller_setup']);
+//$this->nativesession->set_native_session('test', 12345);
+        
+         // 2. prepare the model_setup array (this controls the queries)
+        $this->data['model_setup'] = $this->prepare_model($config, $method_name);
+        unset($this->data['config']);   //Tidy up
+        
+        // 3. Do the datasets query & hand over to the controller_setup to post-process data
+        $this->data['controller_setup']['datasets'] = $this->generate_datasets($this->data['model_setup']['datasets']);
+        unset($this->data['model_setup']); //Tidy up...
+        
+        // 4. Generate the view!
+        $this->generate_view($this->data);        
+        
+    }
+    
+    public function view($rID) {
+        // 1. Set up the vars for this method
+        extract($this->data); 
         extract($this->data['controller_setup']); 
         
         // 2. prepare the model_setup array (this controls the queries)
-        if (isset($config['datasets'][$method_name]))
+        $this->data['model_setup'] = $this->prepare_model($config, $method_name);
+        unset($this->data['config']);   //Tidy up
+        
+        // 3. Do the datasets query & hand over to the controller_setup to post-process data
+        $this->data['controller_setup']['datasets'] = $this->generate_datasets($this->data['model_setup']['datasets']);
+        
+        // 4. Now do the record query (data goes in ['controller_setup']['results']['record']
+        // (This is the query that gets all the data for this record        
+        $this->data['controller_setup']['record'] = $this->retrieve_record($rID, $this->data['model_setup']['record']);
+        unset($this->data['model_setup']); //Tidy up...
+       
+        // 4. Generate the view!
+       $this->generate_view($this->data);
+       
+    }
+    
+    
+    public function add($rID) {
+        // 1. Set up the vars for this method
+        extract($this->data); 
+        extract($this->data['controller_setup']); 
+        
+        // 2. process the input
+        
+        // 3. Prepare the query (if rID = new then its insert)
+
+        // 4. set up the message and prepare the view
+
+        // 2. prepare the model_setup array (this controls the queries)
+        $this->data['model_setup'] = $this->prepare_model($config, $method_name);
+        unset($this->data['config']);   //Tidy up
+        
+        // 3. Do the datasets query & hand over to the controller_setup to post-process data
+        $this->data['controller_setup']['datasets'] = $this->generate_datasets($this->data['model_setup']['datasets']);
+        
+        // 4. Now do the record query (data goes in ['controller_setup']['results']['record']
+        // (This is the query that gets all the data for this record        
+        $this->data['controller_setup']['record'] = $this->retrieve_record($rID, $this->data['model_setup']['record']);
+        unset($this->data['model_setup']); //Tidy up...
+       
+        // 4. Generate the view!
+       $this->generate_view($this->data);
+       
+    }
+               
+    /*
+    |--------------------------------------------------------------------------
+    | Data Manipulation Methods
+    |--------------------------------------------------------------------------
+    | These methods are post-processing of data retrieved from DB or API, or 
+     *data that has been submitted and needs cleaning before instertion
+    |
+    */
+    public function process_datasets ($datasets) {
+        $results = array(); 
+        foreach ($datasets as $dataset => $config)
+        {
+            if (isset($config['include_in_query']))
+            {
+                //go through the data set and 
+            }
+            else
+            {
+                //$results[$dataset] = $config;
+            }            
+        }
+        
+        return $results;     
+    }
+    
+   
+    
+    
+    /*
+    |--------------------------------------------------------------------------
+    | CRUD methods
+    |--------------------------------------------------------------------------
+    | Methods for CRUD   
+    |
+    */
+    public function prepare_model($config, $method_name) {
+         if (isset($config['datasets'][$method_name]))
         {
             $model_setup['datasets'] = 
                     $config['datasets'][$method_name];
@@ -77,79 +177,34 @@ class MY_Controller extends CI_Controller {
             $model_setup['record'] = 
                     $config['record'][$method_name];
         }
-        $this->data['model_setup'] = $model_setup;
-        unset($this->data['config']);   //Tidy up
         
-        // 3. Do the queries (data goes in ['controller_setup']['results']
-        $results = array();
-        foreach ($this->data['model_setup'] as $query_type => $array)
-        {
-            switch ($query_type)
-            {
-                case 'datasets':
-                    foreach ($array as $dataset => $config)
-                    {
-                        extract($config);
-                        //do query
-                        $this->load->model($model_name);
-                        $this->db->select(array_keys($fields));
-                        $results[$query_type][$dataset] = $this->$model_name->get_all_records($model_params);
-                    }
-                    break;
-                case 'record':
-                        //$results[$query_type] = $this->$model_name->get_single_record($id, $model_params);  //make sure $id is passed properly
-                    break;
-                default:
-                    show_error("MY_Controller:88, query_type didn't match datasets or record");
-            }
-        }
-        
-        // 4 . Hand over to $this->data['controller_setup'] to process results
-        unset($this->data['model_setup']);  //Tidy up
-        $this->data['controller_setup']['results'] = $results;
-
-print_array($this->data);
+        return $model_setup;
     }
     
-    public function view($rID) {
-        // 1. Set up the vars for this method
-        extract($this->data); 
-        extract($this->data['controller_setup']); 
-        
-        // 2. prepare the model_setup array (this controls the queries)
-        if (if_exists($config['datasets'][$method_name]))
-        {
-            $model_setup['datasets'] = 
-                    $config['datasets'][$method_name];
-        }        
-        if (if_exists($config['record'][$method_name]))
-        {
-            $model_setup['record'] = 
-                    $config['record'][$method_name];
-        }
-        $this->data['model_setup'] = $model_setup;
-        unset($this->data['config']);   //Tidy up
-        
-        // 3. Do the datasets query (data goes in ['controller_setup']['results']['datasets']
+    public function generate_datasets($datasets) {
         $results = array(); 
-        foreach ($this->data['model_setup']['datasets'] as $dataset => $config)
+        foreach ($datasets as $dataset => $config)
         {
-            $model_name = $config['model_name'];
-            $model_method = $config['model_method'];
-            $this->load->model($model_name );
-            $this->db->select(array_keys($config['fields']));
-            $results[$dataset] = $this->$model_name->
+            if (isset($config['include_in_query']) && $config['include_in_query'])
+            {
+                $model_name = $config['model_name'];
+                $model_method = $config['model_method'];
+                $this->load->model($model_name );
+                $this->db->select(array_keys($config['fields']));
+                $results[$dataset] = $this->$model_name->
                     $model_method(if_exists($config['model_params']));
+            }
+            else
+            {
+                $results[$dataset] = $config;
+            }            
         }
         
-        //hand over to the controller_setup to post-process data
-        $this->data['controller_setup']['datasets'] = $results;
-        
-        // 4. Now do the record query (data goes in ['controller_setup']['results']['record']
-        // (This is the query that gets all the data for this record        
-        $config = $this->data['model_setup']['record'];
-        $results = $config['fields'];
-        
+        return $results;        
+    }
+    
+    function retrieve_record ($rID, $config) {
+        $results = $config['fields'];        
         //now either get the record or leave it as blank
         if ($rID != 'new')
         {
@@ -164,63 +219,88 @@ print_array($this->data);
                 $results[$col_name]['value'] = $value;
             }
         }
-        
-        //hand over to the controller_setup to post-process data
-        $this->data['controller_setup']['record'] = $results;
-        unset($this->data['model_setup']); //Tidy up...
-        
-       $this->generate_view();
-       
-       //print_array($this->data);
-               
-        
+		
+        return $results;
     }
     
-     
-    public function generate_view($view_array = NULL) {
-        extract($this->data['controller_setup']);
-        $this->data['view_setup']['method_name'] = $method_name;
-        $this->data['view_setup']['controller_name'] = $controller_name;
+    
+    
+    
+    
+    
+    
+    
+      /*
+    |--------------------------------------------------------------------------
+    | View methods
+    |--------------------------------------------------------------------------
+    | Methods for loggin in and out. See also controllers/login.php   
+    |
+    */
+    
+     public function generate_view($data, $view_array = NULL) {
+        // 1 . Set up the variables
+        extract($data['controller_setup']);
+        $data['view_setup']['method_name'] = $method_name;
+        $data['view_setup']['controller_name'] = $controller_name;
         //This method talkes the view array and generates the header/navbar/body/footer
 
-        //first, generate the navbar and output as HTML
-        $navbar_setup = $this->data['view_setup']['navbar'];
-        //Loop through each of the navbar setup properties and generate html <li>
+        // 2. Generate the navbar and output as HTML
+        $navbar_setup = $data['view_setup']['navbar'];
+            //Loop through each of the navbar setup properties and generate html <li>
         $html = '';
         foreach ( $navbar_setup as $navbar_item => $array )
         {
             if ($array['controller'] == $this->controller_name)
             {
-                //$array['css'] = $array['css'] . ' active';    //Sets CSS for current page
                 $array['css'] .= ' active';    //Sets CSS for current page
             }
             $html .= '<li class="' .$array['css'] . ' ">';
             $html .= '<a href="' . base_url() . DATAOWNER_ID . '/' . $array['controller'];
             $html .= '"><span>' . $array['icon'] . $array['pagename'] . '</span></a></li>';
         }
+            //This is the HTML for the navbar
+        $data['view_setup']['navbar'] = $html;
+        $this->data['view_setup'] = $data['view_setup'];
         
+        // 3. Load the views & pass the data
+        extract($data['view_setup']);
+        $this->load->view($this->custom_or_default_file('common', 'header'), $data);
+        $this->load->view($this->custom_or_default_file($controller_name, $view_file), $data);
+        $this->load->view($this->custom_or_default_file('common', 'footer'), $data);
+    }
+    
+    public function generate_view_backup($view_array = NULL) {
+        // 1 . Set up the variables
+        extract($this->data['controller_setup']);
+        $this->data['view_setup']['method_name'] = $method_name;
+        $this->data['view_setup']['controller_name'] = $controller_name;
+        //This method talkes the view array and generates the header/navbar/body/footer
+
+        // 2. Generate the navbar and output as HTML
+        $navbar_setup = $this->data['view_setup']['navbar'];
+            //Loop through each of the navbar setup properties and generate html <li>
+        $html = '';
+        foreach ( $navbar_setup as $navbar_item => $array )
+        {
+            if ($array['controller'] == $this->controller_name)
+            {
+                $array['css'] .= ' active';    //Sets CSS for current page
+            }
+            $html .= '<li class="' .$array['css'] . ' ">';
+            $html .= '<a href="' . base_url() . DATAOWNER_ID . '/' . $array['controller'];
+            $html .= '"><span>' . $array['icon'] . $array['pagename'] . '</span></a></li>';
+        }
+            //This is the HTML for the navbar
         $this->data['view_setup']['navbar'] = $html;
         
-       // print_array($this->data['view'])
-        //Now load the views
+        // 3. Load the views & pass the data
         extract($this->data['view_setup']);
         $this->load->view($this->custom_or_default_file('common', 'header'), $this->data);
-        $this->load->view($this->custom_or_default_file($controller_name, $view_file));
-        $this->load->view($this->custom_or_default_file('common', 'footer'));
-        
-//$paths['header'] = $this->custom_or_default_view_file('common', 'header');
-        
-        //print_array($paths)
-        ;
-        
-        
-           
-        //add vars like controller_name to view_setup
-       //finally send them all together
-        
-        
-        
+        $this->load->view($this->custom_or_default_file($controller_name, $view_file), $this->data);
+        $this->load->view($this->custom_or_default_file('common', 'footer'), $this->data);
     }
+    
     
       function custom_or_default_file($dir, $filename, $containing_dir = 'view', $file_ext = 'php') {
         //looks in views/custom/DATAOWNER_ID/dir for filename first then, if it is
@@ -228,12 +308,10 @@ print_array($this->data);
         //This allows us to over-ride deafult views with cutom ones
         if (file_exists(APPPATH . "views/custom/" . DATAOWNER_ID . "/$dir/$filename.$file_ext"))
         {
-            //$retval = "views/custom/" . DATAOWNER_ID . "/$dir/$filename.$file_ext";
             $retval = "custom/" . DATAOWNER_ID . "/$dir/$filename.$file_ext";
         }         
         elseif (file_exists(APPPATH . "views/default/$dir/$filename.$file_ext"))
         {
-            //$retval = "views/default/$dir/$filename.$file_ext";
             $retval = "default/$dir/$filename.$file_ext";
         }
         else
@@ -282,36 +360,6 @@ print_array($this->data);
         
         
         
-        function custom_or_default_view_file_test($dir, $filename, $file_type = 'php') {
-        
-        echo "dir = $dir, fielname = $filename, fieltype = $file_type,";
-        
-       $result = file_exists(APPPATH . 'views/custom/22222/common/page.php');
-        echo "<p>Result = $result, fiepath is " . APPPATH . 'views/custom/22222/common/page.php' . "</p>";
-        
-        //echo "<br/> path 1 is " . APPPATH . 'views/custom/' . DATAOWNER_ID . "/$dir/$filename.$file_type";
-        
-        if (file_exists(APPPATH . 'views/custom/' . DATAOWNER_ID . "/$dir/$filename.$file_type"))
-        {
-           //echo "/... yes! 1, ";
-                $retval = "custom/" . DATAOWNER_ID . "/$dir/$filename.$file_type";
-        }          
-        elseif (file_exists(APPPATH . "views/default/$dir/$filename.$file_type"))
-        {
-            //echo "/... yes! 2, ";
-            $retval = "default/$dir/$filename.$file_type";
-        }
-        else
-        {
-             show_error("Unable to load the requested file from $dir: $filename.$file_type");
-        }
-        
-        return $retval;
-        }
-        
-    
-    
-    
     
     
     

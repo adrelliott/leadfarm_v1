@@ -9,13 +9,17 @@
 class Contact_model extends MY_Model {
 
     function __construct (){
-    //parent::__construct();
-    //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
-    $this->table_name = 'Contact';
-    $this->order_by = 'LastName ASC';
+        //parent::__construct();
+        //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
+        $this->table_name = 'Contact';
+        $this->order_by = 'LastName ASC';    
+        if (isset($this->data['view_setup']['ContactId']))
+        {
+            $this->current_ContactId = $this->data['view_setup']['ContactId'];
+        }
     }
         
-    
+    /*
     public function get_all_records($where = NULL) {
         //get all records. $where set up in dataset['model_params']
         if ($where != NULL) { $this->db->where($where); }
@@ -28,6 +32,7 @@ class Contact_model extends MY_Model {
         return $this->get($rID);
     }
     
+    */
     
     
     
@@ -40,11 +45,10 @@ class Contact_model extends MY_Model {
     
     
     
-    
-    public function get_by_rID($rID) {
+   /* public function get_by_rID($rID) {
         //get one record with the ID of $rID
         parent::get($rID);
-    }
+    }*/
     
     
 

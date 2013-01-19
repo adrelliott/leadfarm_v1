@@ -30,7 +30,7 @@ function __autoload ($class)
 switch (ENVIRONMENT)
 {
     case 'development':
-        $base_url = 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1';
+        $base_url = 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html';
         break;
     case 'staging':
         $base_url = 'http://leadfarm-staging.co.uk';//shall we buy another domain for this?
@@ -308,7 +308,7 @@ $config['cookie_secure']	= FALSE;
 | COOKIE data is encountered
 |
 */
-$config['global_xss_filtering'] = FALSE;
+$config['global_xss_filtering'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

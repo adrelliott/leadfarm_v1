@@ -14,14 +14,14 @@ class Contact extends T_Contact {
          parent::__construct();
     }
     
-  public function index() {     
-        $this->data['view_setup']['view_file'] = '????filename?????';
-       parent::index();
+  public function index($view_file = 'index') {   
+      $this->data['view_setup']['view_file'] = 'v_contact_' . $view_file;
+      parent::index();
    }
    
-  public function view($view_file, $rID = 'new', $ContactId = FALSE) {     
-        $this->data['view_setup']['view_file'] = '????filename?????';
-       parent::view($view_file, $rID, $ContactId);
+  public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
+       $this->data['view_setup']['view_file'] = 'v_contact_' . $view_file;
+       parent::view($rID, $ContactId);
    }
 
    

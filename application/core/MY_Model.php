@@ -28,6 +28,8 @@ class MY_Model extends CI_Model {
      */
     public $order_by = '';
     
+    public $current_ContactId = '';
+    
     function __construct() {
         parent::__construct();
     }
@@ -245,4 +247,58 @@ class MY_Model extends CI_Model {
         
         $this->db->where(htmlentities($key), htmlentities($value))->delete($this->table_name);
     }
+    
+    
+    /* ======================== All bespoke model methods for this app =========*/
+    
+    public function get_all_records($where = NULL) {
+        //get all records. $where set up in dataset['model_params']
+        if ($where != NULL) { $this->db->where($where); }
+        return $this->get();
+    }
+    
+    public function get_all_contacts_records($where = NULL) {
+        //get all records. $where set up in dataset['model_params']
+        if ($where != NULL) { $this->db->where($where); }
+        $this->db->where(
+                $this->contactId_fieldname, 
+                $this->current_ContactId
+                );
+        return $this->get();
+    }
+    
+     public function get_single_record($rID, $where = NULL) {
+        //get the record with rID. $where set up in dataset['model_params']
+        if ($where != NULL) { $this->db->where($where); }
+        return $this->get($rID);
+    }
+    
+    
+    /**
+     * Get records joined on Contact.Id
+     * @param array (this is the where condition as set in the config file) 
+     * @return void
+     * @author Al Elliott
+     */
+     public function joinon_Contact($where = NULL) {
+        //get all records $where joined on contact (ie get fields from contact table too)
+        if ($where != NULL) { $this->db->where($where); }        
+        $this->db->join(
+                'Contact', 
+                'Contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
+                'left outer'
+                );        
+        return $this->get();
+    } 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

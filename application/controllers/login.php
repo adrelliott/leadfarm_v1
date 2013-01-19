@@ -11,6 +11,9 @@
 
   
 class Login extends MY_Controller {
+    
+    public $controller_name = 'login';
+    
     public function __construct()    {
          parent::__construct();
          

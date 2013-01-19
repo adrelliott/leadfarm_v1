@@ -14,20 +14,11 @@ class Dashboard extends T_Dashboard {
          parent::__construct();
     }
     
-  public function index() {     
-        $this->data['view_setup']['view_file'] = 'dashboardIndex';
-       parent::index();
+  public function index() {  
+      $this->data['view_setup']['view_file'] = 'v_dashboard';
+      parent::index();
    }
    
-   
-   //////delet me!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   public function testing() {
-        $this->load->view('default/common/header.php');
-        $this->load->view('default/contact/text.php');
-        $this->load->view('default/common/footer_modal.php');
-       
-   }
-
    
 }
    

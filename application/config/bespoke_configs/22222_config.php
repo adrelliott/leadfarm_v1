@@ -145,6 +145,8 @@ $config['dashboard'] = Array
             (
                 'contacts' => array
                 (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'contacts', //The dataset name defined in this file
                     'model_name' => 'contact_model',
                     'model_method' => 'get_all_records',
                     'model_params' => array 
@@ -161,6 +163,8 @@ $config['dashboard'] = Array
                 ),            
                 'organisations' => array
                 (
+                    'include_in_query' => FALSE, //TRUE or FALSE,
+                    'data_source' => 'contacts', //The dataset name defined in this file
                     'model_name' => 'contact_model',
                     'model_method' => 'get_all_records',
                     'model_params' => array 
@@ -170,19 +174,63 @@ $config['dashboard'] = Array
                     'fields' => array 
                     (
                         'Id' => '#',
-                        'FirstName' => 'First Name',
-                        'LastName' => 'Last Name',
-                        'PostalCode' => 'Postcode',
                     ),
                 ), 
                 'actions' => array
                 (
+                    'include_in_query' => TRUE, //TRUE or FALSE
+                    'data_source' => 'actions', //The dataset name defined in this file
                     'model_name' => 'contactaction_model',
-                    'model_method' => 'get_all__records',
+                    'model_method' => 'get_all_records',
                     'model_params' => NULL,
                     'fields' => array 
                     (
                         'Id' => '#',
+                        //'FirstName' => 'First Name',
+                        //'LastName' => 'Last Name',
+                        //'PostalCode' => 'Postcode',
+                    ),
+                ),
+                'tasks' => array
+                (
+                    'include_in_query' => FALSE, //TRUE or FALSE
+                    'data_source' => 'actions', //The dataset name defined in this file
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'get_all_records',
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        //'FirstName' => 'First Name',
+                        //'LastName' => 'Last Name',
+                        //'PostalCode' => 'Postcode',
+                    ),
+                ),
+                'bookings' => array
+                (
+                    'include_in_query' => FALSE, //TRUE or FALSE
+                    'data_source' => 'actions', //The dataset name defined in this file
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'get_all_records',
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        //'FirstName' => 'First Name',
+                        //'LastName' => 'Last Name',
+                        //'PostalCode' => 'Postcode',
+                    ),
+                ),
+                'vehicles' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE
+                    'data_source' => 'vehicles', //The dataset name defined in this file
+                    'model_name' => 'vehicle_model',
+                    'model_method' => 'get_all_records',
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        '__Id' => '#',
                         //'FirstName' => 'First Name',
                         //'LastName' => 'Last Name',
                         //'PostalCode' => 'Postcode',
@@ -223,11 +271,13 @@ $config['contact'] = Array
             (
                 'contacts' => array
                 (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'contacts', //The dataset name defined in this file
                     'model_name' => 'contact_model',
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisation !=' => 1, 
+                            '_IsOrganisation !=' => 0, 
                         ),
                     'fields' => array 
                     (
@@ -239,6 +289,8 @@ $config['contact'] = Array
                 ),            
                 'organisations' => array
                 (
+                    'include_in_query' => FALSE, //TRUE or FALSE,
+                    'data_source' => 'contacts', //The dataset name defined in this file
                     'model_name' => 'contact_model',
                     'model_method' => 'get_all_records',
                     'model_params' => array 
@@ -248,19 +300,18 @@ $config['contact'] = Array
                     'fields' => array 
                     (
                         'Id' => '#',
-                        'FirstName' => 'First Name',
-                        'LastName' => 'Last Name',
-                        'PostalCode' => 'Postcode',
                     ),
                 ),            
             ),
             'view' => array 
             (
-                'actions' => array
+                'all_actions' => array
                 (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'all_actions', //The dataset name defined above
                     'model_name' => 'contactaction_model',
                     'model_method' => 'get_all_contacts_records', 
-                    'model_params' => NULL,                   
+                    'model_params' => NULL,    
                     'fields' => array 
                     (
                         'Id' => '#',
@@ -268,6 +319,68 @@ $config['contact'] = Array
                         'ActionDescription' => 'Description',
                     ),
                 ),     
+                'bookings' => array
+                (
+                    'include_in_query' => FALSE, //TRUE or FALSE,                    
+                    'data_source' => 'all_actions', //The dataset name defined above
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'get_all_contacts_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            //'ContactId =' => '??ContactId', 
+                            'ActionType =' => 'Bookings', 
+                        ),                  
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        'ActionType' => 'Type',
+                        'ActionDescription' => 'Description',
+                    ),
+                ),     
+                'vehicles' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'vehicles', //The dataset name defined above
+                    'model_name' => 'vehicle_model',
+                    'model_method' => 'get_all_contacts_records', 
+                    'model_params' => NULL,        
+                    'fields' => array 
+                    (
+                        '__Id' => '#',
+                        '__ContactId' => 'Contact Id of vehicle owner',
+                    ),
+                ),     
+                'communications' => array
+                (
+    // this needs to be turned to TRUE!!! )(create table & model first though)                
+                    'include_in_query' => FALSE, //TRUE or FALSE,
+                    'data_source' => 'comminications', //The dataset name defined above
+                    'model_name' => 'communications_model',
+                    'model_method' => 'get_all_contacts_records', 
+                    'model_params' => NULL,      
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                    ),
+                ),     
+                'relationships' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => 'relationships', //The dataset name defined above
+                    'model_name' => 'contactjoin_model',
+                    'model_method' => 'joinon_ContactJoin', 
+                    'model_params' => NULL, 
+                    'fields' => array 
+                    (
+                        'Contact.Id' => 'contact Id',
+                        'Contact.FirstName' => 'First Name',
+                        'Contact.LastName' => 'Last Name',
+                        '__ContactJoin.__Id' => 'Realtionship Id',
+                        '__ContactJoin.__Reason' => 'reason',
+                        '__ContactJoin.__ContactId' => 'reason',
+                        '__ContactJoin.__ContactId2' => 'reason',
+                    ),
+                ),                
             ),
         ),
         'record' => array
@@ -397,6 +510,182 @@ $config['contact'] = Array
                         'HTML_before' => '',
                         'HTML_after' => '',  
                         'value' => '',              
+                    ),
+                ),                
+            ),
+        ),
+    );
+
+$config['booking'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                'bookings' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'bookings', //The dataset name defined in this file
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            //'_IsOrganisation !=' => 1,
+                            'ActionType =' => 'Booking',
+                        ),
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        //'FirstName' => 'First Name',
+                        //'LastName' => 'Last Name',
+                        //'PostalCode' => 'Postcode',
+                    ),
+                    'bookings_join' => array
+                    (
+                        'include_in_query' => TRUE, //TRUE or FALSE,                    
+                        'data_source' => 'bookings_join', //The dataset name defined above
+                        'model_name' => 'contactaction_model',
+                        'model_method' => 'joinon_Contact', 
+                        'model_params' => array 
+                            (   //These are chained with 'AND'
+                                'ActionType =' => 'Booking', 
+                            ),           
+                        'fields' => array 
+                        (
+                            'Contact.Id' => 'contact Id',
+                            'Contact.FirstName' => 'First Name',
+                            'Contact.LastName' => 'Last Name',
+                            'ContactAction.Id' => 'booking Id',
+                            'ContactAction.ActionDescription' => 'ActionDescription',
+                        ),
+                    ), 
+                ),      
+            ),
+            'view' => array 
+            (                
+                'vehicles' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'vehicles', //The dataset name defined above
+                    'model_name' => 'vehicle_model',
+                    'model_method' => 'get_all_contacts_records', 
+                    'model_params' => NULL,        
+                    'fields' => array 
+                    (
+                        '__Id' => '#',
+                    ),
+                ), 
+                'users' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'users', //The dataset name defined above
+                    'model_name' => 'contact_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            '_IsUserYN =' => 1, 
+                        ),
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        'FirstName' => 'First Name',
+                        'LastName' => 'Last Name',
+                        'Username' => 'Username',
+                        'Password' => 'Password',
+                    ),
+                ),
+                'bookings_join' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => 'bookings_join', //The dataset name defined above
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'joinon_Contact', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'
+                            'ActionType =' => 'Booking', 
+                        ),           
+                    'fields' => array 
+                    (
+                        'Contact.Id' => 'contact Id',
+                        'Contact.FirstName' => 'First Name',
+                        'Contact.LastName' => 'Last Name',
+                        'ContactAction.Id' => 'booking Id',
+                        'ContactAction.ActionDescription' => 'ActionDescription',
+                    ),
+                ), 
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'contactaction_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL,                         
+                'fields' => array 
+                (
+                    'Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'ActionType' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Record Type',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'ActionType',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'ActionDescription' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'ActionDescription',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'ActionDescription',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
                     ),
                 ),                
             ),
