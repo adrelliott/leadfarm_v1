@@ -1,34 +1,21 @@
-<h1>this is the custom!!! file for the CONTACT page..."</h1>
-<p> FRONTEND! this what the view needs:</p>
-    <ul>
-        this on the left habnd col
-    <li>Tab 1: a fieldset shwogin all contact details (esp datepicker, nickname & postcode lookup</li>
-    <li>Tab 2: a contact note field note where it appends note the field</li>
-    <li>Tab 3: a relatinships table and add new relaitonship button) and contacId = ContactId</li>
-    <li>Tab 4: a vehciles table (and add new vehicle button) and contacId = ContactId</li>
-    
-    on right hand col
-    <li>Tab 1: a tabel showing contacactions where type = task, phonecall, and contacId = ContactId</li>
-    <li>Tab 2: a table showing contacactions where type = booking and contacId = ContactId</li>
-    <li>Tab 3: a table showing communications senbt and contacId = ContactId</li>
-    
-    
-    then, underneath, a drop down menu showing tyopes of emails (opens up a modal window with the emaiul template)
-    
-    then, underneath, a fieldset showign opt-ins
-    
-    DO WE NEED A TABLE SHWOING TAGS???
-    </ul>
-<code>For JQuery, we need a datepicker, a nickname, a drop down county list, default conutry to UK, modalbox,  </code>
-
-
-    anything else? Check in the trello board<br/><br/><br/>"
-
-    <p>BACKEND: This si the data that we need ot trrieve </p>
-    <ul>
-        <li>contact record where Id = contactId</li>
-        <li>contactaxctions where conatcId = ContactId</li>
-        <li>vehicles where conatcId = ContactId</li>
-        <li>communications where conatcId = ContactId</li>
-        <li>relationships (contactJoin) where conatcId = ContactId</li>
-    </ul>
+<?php echo form_open(DATAOWNER_ID . '/contact/add/' . $rID); ?>
+    <?php display_field($fields['_OrganisationName']); ?>
+    <?php display_field($fields['Title'], array('label' => 'Main Contact Title')); ?>
+    <?php display_field($fields['FirstName'], array('label' => 'Main Contact First Name')); ?>
+    <?php display_field($fields['LastName'], array('label' => 'Main Contact Last Name')); ?>    
+    <?php display_field($fields['Email'], array('label' => 'Main Email')); ?>
+    <?php display_field($fields['StreetAddress1']); ?>
+    <?php display_field($fields['StreetAddress2']); ?>
+    <?php display_field($fields['City']); ?>
+    <?php display_field($fields['State']); ?>
+    <?php display_field($fields['PostalCode']); ?>
+    <?php display_field($fields['Phone1'], array('label' => 'Switchboard')); ?>
+    <?php display_field($fields['Phone2'], array('label' => 'Alt Phone')); ?>
+    <?php display_field($fields['Leadsource']); ?>
+    <div style="<?php echo $display_none; ?>"">
+        <?php echo display_field($fields['_IsOrganisation'], array('value' => 1)); ?>
+    </div>
+    <div class="clearfix">
+        <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
+    </div>
+<?php echo form_close(); ?>

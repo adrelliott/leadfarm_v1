@@ -110,7 +110,71 @@ $this->output->enable_profiler(TRUE);
     
     
     
-    public function view($rID) {
+    public function view($rID, $fieldset = NULL) {
+        // 1. Set up the vars for this method
+        extract($this->data); 
+        extract($this->data['controller_setup']); 
+        $this->data['view_setup']['fieldset'] = $fieldset;
+        
+        // 2. prepare the model_setup array (this controls the queries)
+        $this->data['model_setup'] = $this->prepare_model($config, $method_name);        
+        
+        // 3. Do the datasets query & hand over to the controller_setup to post-process data
+        $this->data['controller_setup']['datasets'] = $this->generate_datasets(
+                $this->data['model_setup']['datasets']
+                );
+        
+        // 4. Now do the record query (data goes in ['controller_setup']['results']['record']
+        // (This is the query that gets all the data for this record        
+        $this->data['controller_setup']['record'] = $this->retrieve_record(
+                $rID, 
+                $this->data['model_setup']['record']
+                );
+        unset($this->data['model_setup']); //Tidy up...
+        
+         // 5. Create the dropdown menus & table
+        $datasets = $this->data['controller_setup']['datasets'];
+        $dropdowns = $this->data['config']['record'][$method_name]['dropdowns'];
+        $table_headers =  $this->data['config']['datasets'][$method_name];//daataset['fields']
+        
+            //Feed the dropdown config and the data to this method to generate an array of options
+        if (isset($dropdowns))
+        {
+            foreach ($dropdowns as $dropdown => $config)
+            {
+                $this->data['view_setup']['dropdowns'][$dropdown] = $this->create_dropdown(
+                    $dropdowns[$dropdown], 
+                    $datasets[$dropdown]
+                    );
+            }
+        }
+        
+            //Create the table headers & table data
+        if (isset($datasets))
+        {
+            foreach ($datasets as $dataset => $array)
+            {
+               $this->data['view_setup']['tables'][$dataset]['table_headers'] = 
+                        $this->generate_table_headings($table_headers[$dataset]['fields']);
+               $this->data['view_setup']['tables'][$dataset]['table_data'] = $array;
+            }
+        }
+        
+        // 6. Now add the fields to view set up, tidy up & generate the view        
+        $this->data['view_setup']['fields'] = $this->data['controller_setup']['record'];
+        $this->data['view_setup']['method_name'] = $method_name;
+        $this->data['view_setup']['controller_name'] = $controller_name;
+        
+               //Tidy up 
+        unset($this->data['config']);       
+        unset($this->data['controller_setup']);
+        
+            // Generate the view!
+        $this->generate_view($this->data);
+       
+    }
+    
+    public function view_backup($rID) {
         // 1. Set up the vars for this method
         extract($this->data); 
         extract($this->data['controller_setup']); 
@@ -162,8 +226,7 @@ $this->output->enable_profiler(TRUE);
         // 6. Now add the fields to view set up, tidy up & generate the view        
         $this->data['view_setup']['fields'] = $this->data['controller_setup']['record'];
         $this->data['view_setup']['method_name'] = $method_name;
-        $this->data['view_setup']['controller_name'] = $controller_name;
-        $this->data['view_setup']['display_none'] = '';
+        $this->data['view_setup']['controller_name'] = $controller_name;        
         
                //Tidy up 
         unset($this->data['config']);       
@@ -185,6 +248,9 @@ $this->output->enable_profiler(TRUE);
         // 3. Prepare the query (if rID = new then its insert)
 
         // 4. set up the message and prepare the view
+        //if its new, then 
+        $this->data['view_setup']['display_none'] = 'display:none';
+        $this->data['view_setup']['org_flag'] = '1 OR 0'; //depedns on the typ of record
 
         // 2. prepare the model_setup array (this controls the queries)
         $this->data['model_setup'] = $this->prepare_model($config, $method_name);
@@ -318,7 +384,8 @@ $this->output->enable_profiler(TRUE);
     function retrieve_record ($rID, $config) {
         $results = $config['fields'];        
         //now either get the record or leave it as blank
-        if ($rID != 'new')
+        //if ($rID != 'new')
+        if (is_numeric($rID))
         {
             $model_name = $config['model_name'];
             $model_method = $config['model_method']; 
@@ -339,7 +406,15 @@ $this->output->enable_profiler(TRUE);
             foreach ($query as $col_name => $value)
             {
                 $results[$col_name]['value'] = $value;
+                if ($col_name == '_IsOrganisation' AND $value == 1)
+                {
+                    $this->data['view_setup']['fieldset'] = 'v_contact_organisation';
+                }
             }
+        }
+        else
+        {
+            $this->data['view_setup']['display_none'] = 'display:none'; //hides the other parts fo the form
         }
 		
         return $results;

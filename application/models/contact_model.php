@@ -18,6 +18,25 @@ class Contact_model extends MY_Model {
             $this->current_ContactId = $this->data['view_setup']['ContactId'];
         }
     }
+    
+    function add($input, $rID) {
+        //mimic infusionsoft creation of record
+       if ($rID == 'ind' OR $rID == 'org')
+       {
+          $input['Id'] = rand(7000, 8000);
+          $rID = NULL;
+       }
+       else
+       {
+           $input['Id'] = $rID;
+       }
+       
+       //print_array($input, 0, "here is arrya for rID=$rID");
+       $this->save($input, $rID);
+       
+       return $input['Id'];
+    }
+   
         
     /*
     public function get_all_records($where = NULL) {
