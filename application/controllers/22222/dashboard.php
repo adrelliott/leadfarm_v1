@@ -16,6 +16,7 @@ class Dashboard extends T_Dashboard {
     
   public function index() {  
       $this->data['view_setup']['view_file'] = 'v_dashboard';
+      $this->table_list = array('contacts', 'organisations');   //these are names of the datasets
       parent::index();
    }
    

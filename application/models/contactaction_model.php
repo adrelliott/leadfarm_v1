@@ -19,5 +19,38 @@ class Contactaction_model extends MY_Model {
             $this->current_ContactId = $this->data['view_setup']['ContactId'];
         }
     }
+    
+    function joinon_Contact_and_Vehicle($where = NULL) {
+        //get all records $where joined on contact (ie get fields from contact table too)
+        if ($where != NULL) { $this->db->where($where); }        
+        $this->db->join(
+                'Contact', 
+                'Contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
+                'left outer'
+                );        
+        $this->db->join(
+                '__Vehicles', 
+                '__Vehicles.__Id = ' . $this->table_name. '._VehicleId', 
+                'left outer'
+                );        
+        return $this->get();
+    }
+    
+    function joinon_Contact_and_Vehicle_singlerecord($rID, $where = NULL) {
+        //get all records $where joined on contact (ie get fields from contact table too)
+        if ($where != NULL) { $this->db->where($where); }        
+        $this->db->join(
+                'Contact', 
+                'Contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
+                'left outer'
+                );        
+        $this->db->join(
+                '__Vehicles', 
+                '__Vehicles.__Id = ' . $this->table_name. '._VehicleId', 
+                'left outer'
+                );        
+        return $this->get($rID);
+    }
+
 
 }

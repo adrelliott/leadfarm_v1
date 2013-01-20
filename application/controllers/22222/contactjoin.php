@@ -11,12 +11,14 @@ class Contactjoin extends T_Contactjoin {
 	 */
 
     public function __construct()    {
-        $this->data['view_setup']['modal'] = TRUE; 
+        $this->data['view_setup']['modal'] = TRUE;
+        $this->data['view_setup']['header_file'] = 'header_modal'; 
+        $this->data['view_setup']['footer_file'] = 'footer_modal'; 
         parent::__construct();
     }
     
   public function index() {     
-        $this->data['view_setup']['view_file'] = '????filename?????';
+        //$this->data['view_setup']['view_file'] = '????filename?????';
        parent::index();
    }
    

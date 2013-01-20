@@ -65,7 +65,8 @@ class MY_Model extends CI_Model {
             $filter = $this->primaryFilter;
             $ids = array_map($filter, $ids); 
             
-            $this->db->where_in($this->primary_key, $ids);
+            $col_name = $this->table_name .'.'.$this->primary_key;
+            $this->db->where_in($col_name, $ids);
         }
         
         // Set order by if it was not already set

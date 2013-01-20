@@ -14,6 +14,7 @@ class Contactjoin_model extends MY_Model {
         $this->table_name = '__ContactJoin';
         $this->order_by = '__Id DESC';
         $this->contactId_fieldname = '__ContactId';
+        $this->primary_key = '__Id';
         if (isset($this->data['view_setup']['ContactId']))
         {
             $this->current_ContactId = $this->data['view_setup']['ContactId'];

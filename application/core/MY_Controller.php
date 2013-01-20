@@ -75,7 +75,32 @@ $this->output->enable_profiler(TRUE);
         $this->data['controller_setup']['datasets'] = $this->generate_datasets($this->data['model_setup']['datasets']);
         unset($this->data['model_setup']); //Tidy up...
         
-        // 4. Generate the view!
+        // Turn remaining datasets with config inot an actual dataset
+        /*$datasets = $this->data['controller_setup']['datasets'];
+        foreach ($datasets as $dataset => $config)
+        {
+            if (isset($config['include_in_query']))
+            {
+                //echo "<p>found one: daatset = $dataset</p>";
+                foreach ($datasets[$config['data_source']] as $row => $data)
+                {
+                    //echo "<p>(Dataset row $row of " . $config['data_source'] . ": data = </p>";print_r($data);
+                    
+                }
+            }
+        }*/
+
+        // 5. Now turn datasets into tables
+        if (isset ($this->table_list))
+        {
+            foreach ($this->table_list as $table)
+            {
+
+            }
+        }
+        
+        
+        // xxxxxxxxx. Generate the view!
         $this->generate_view($this->data);        
         
     }
@@ -211,7 +236,17 @@ $this->output->enable_profiler(TRUE);
             $model_name = $config['model_name'];
             $model_method = $config['model_method']; 
             $this->load->model($model_name );
-            $this->db->select(array_keys($config['fields']));
+            $col_names = array();
+            foreach ($config['fields'] as $key => $array)
+            {
+                //echo "<br/>key = $key, ";print_r($array);
+                if ($array['on'])
+                {
+                    $col_names[] = $array['name'];
+                }
+            }
+           // print_array($col_names);
+            $this->db->select($col_names);
             $query = $this->$model_name->
                 $model_method($rID, if_exists($config['model_params']));
             foreach ($query as $col_name => $value)
