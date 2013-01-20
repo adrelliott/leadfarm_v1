@@ -20,7 +20,8 @@ $(function() {
           });
 
     // Tabs
-    $('#tabs').tabs();
+    $('.tabs').tabs();
+    
 
     // Dialog			
     $('#dialog').dialog({

@@ -244,7 +244,9 @@ $config['dashboard'] = Array
                     'fields' => array 
                     (
                         '__Id' => '#',
-                        //'FirstName' => 'First Name',
+                        '__Registration' => 'Reg',
+                        '__Make' => 'Manufacturer',
+                        '__Model' => 'Model',
                         //'LastName' => 'Last Name',
                         //'PostalCode' => 'Postcode',
                     ),

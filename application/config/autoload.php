@@ -64,7 +64,7 @@ $autoload['libraries'] = array('table', 'session', 'nativesession');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'form', 'general_helper', 'data_cleanse_helper' );    //'file', 'general_helper', 'field_helper'
+$autoload['helper'] = array('url', 'form', 'general_helper', 'data_cleanse_helper', 'view_helper' );    //'file', 'general_helper', 'field_helper'
 
 
 /*

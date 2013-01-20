@@ -96,6 +96,7 @@ $this->output->enable_profiler(TRUE);
         // 5. Now add the fields to view set up, tidy up & generate the view        
         $this->data['view_setup']['method_name'] = $method_name;
         $this->data['view_setup']['controller_name'] = $controller_name;
+        $this->data['view_setup']['display_none'] = '';
         
                //Tidy up 
         unset($this->data['config']);       
@@ -162,6 +163,7 @@ $this->output->enable_profiler(TRUE);
         $this->data['view_setup']['fields'] = $this->data['controller_setup']['record'];
         $this->data['view_setup']['method_name'] = $method_name;
         $this->data['view_setup']['controller_name'] = $controller_name;
+        $this->data['view_setup']['display_none'] = '';
         
                //Tidy up 
         unset($this->data['config']);       
@@ -386,7 +388,7 @@ $this->output->enable_profiler(TRUE);
         // 3. Load the views & pass the data
         extract($data['view_setup']);
         $this->load->view($this->custom_or_default_file('common', 'header'), $data);
-        $this->load->view($this->custom_or_default_file($controller_name, $view_file), $data);
+        $this->load->view($this->custom_or_default_file($controller_name, $view_file), $data['view_setup']);
         $this->load->view($this->custom_or_default_file('common', 'footer'), $data);
     }
     
