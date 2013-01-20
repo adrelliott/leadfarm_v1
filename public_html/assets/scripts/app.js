@@ -113,10 +113,11 @@ $(function() {
     });
 
     // Button Set
-    $("#radio1").buttonset();
+    //$("#radio1").buttonset();
 
 
     // Progressbar
+    /*
     $("#progressbar").progressbar({
         value: 37
     }).width(500);
@@ -125,6 +126,7 @@ $(function() {
         $("#progressbar div").animate({ width: randNum + "%" });
         event.preventDefault();
     });
+    */
 
 
     //Datatable
@@ -158,7 +160,7 @@ $(function() {
 
 
     //Uses formvalidator
-    $("#form0, #form1, #form2").validationEngine();
+    //$("#form0, #form1, #form2").validationEngine();
 
     //Calendar
     var date = new Date();
@@ -176,50 +178,40 @@ $(function() {
         theme: true,
         defaultView: 'agendaWeek',
         events: [
-            {
-                title: 'All Day Event',
-                start: new Date(y, m, 1)
-            },
-            {
-                title: 'Long Event',
-                start: new Date(y, m, d - 5),
-                end: new Date(y, m, d - 2)
-            },
+            
+            
+           
             {
                 id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d - 3, 16, 0),
-                allDay: false
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
+                title: 'Interim Service',
                 start: new Date(y, m, d + 4, 16, 0),
-                allDay: false
+                allDay: false,
+                url: 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html/22222/contactaction/view/edit_action/1352'
             },
             {
-                title: 'Meeting',
+                title: 'MOT - YG02 YTR',
                 start: new Date(y, m, d, 10, 30),
-                allDay: false
+                allDay: false,
+                url: 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html/22222/contactaction/view/edit_booking_main/1352'
             },
             {
-                title: 'Lunch',
+                title: 'Extended Service - X678 TRY',
                 start: new Date(y, m, d, 12, 0),
                 end: new Date(y, m, d, 14, 0),
                 allDay: false
             },
             {
-                title: 'Birthday Party',
-                start: new Date(y, m, d + 1, 19, 0),
+                title: 'Diagnosis - MM07 YTR',
+                start: new Date(y, m, d + 2, 14, 0),
                 end: new Date(y, m, d + 1, 22, 30),
                 allDay: false
             },
             {
-                title: 'Click for Google',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
-                url: 'http://google.com/'
-            }
+                title: 'Diagnosis - MM07 YTR',
+                start: new Date(y, m, d + 1, 08, 0),
+                end: new Date(y, m, d + 1, 10, 30),
+                allDay: false
+            },
         ]
     });
 

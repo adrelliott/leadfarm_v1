@@ -13,6 +13,7 @@ class Vehicle_model extends MY_Model {
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = '__Vehicles';
         $this->order_by = '__Id DESC';
+        $this->primary_key = '__Id';
         $this->contactId_fieldname = '__ContactId';
         if (isset($this->data['view_setup']['ContactId']))
         {

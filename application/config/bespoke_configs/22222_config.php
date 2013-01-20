@@ -206,7 +206,7 @@ $config['dashboard'] = Array
                     'model_method' => 'get_all_records',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            'ActionType =' => 'Task', 
+                            'ActionType !=' => 'Booking', 
                         ), 
                     'fields' => array 
                     (
@@ -331,7 +331,10 @@ $config['contact'] = Array
                     'data_source' => 'all_actions', //The dataset name defined above
                     'model_name' => 'contactaction_model',
                     'model_method' => 'get_all_contacts_records', 
-                    'model_params' => NULL,    
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            'ActionType !=' => 'Booking', 
+                        ),     
                     'fields' => array 
                     (
                         'Id' => '#',
@@ -348,7 +351,7 @@ $config['contact'] = Array
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
                             //'ContactId =' => '??ContactId', 
-                            'ActionType =' => 'Bookings', 
+                            'ActionType =' => 'Booking', 
                         ),                  
                     'fields' => array 
                     (
@@ -1227,6 +1230,10 @@ $config['contactaction'] = Array
                     'fields' => array 
                     (
                         '__Id' => '#',
+                        '__ContactId' => 'Contact Id of vehicle owner',
+                        '__Make' => 'Make',
+                        '__Model' => 'model',
+                        '__Registration' => 'Reg',
                     ),
                 ), 
                 'users' => array
@@ -1275,7 +1282,24 @@ $config['contactaction'] = Array
             (
                 'model_name' => 'contactaction_model',
                 'model_method' => 'get_single_record',
-                'model_params' => NULL,                         
+                'model_params' => NULL,
+                'dropdowns' => array    //or NULL
+                (
+                    'users' => array
+                    (
+                        'source' => 'users',    //which dataset are we using?
+                        'label' => array ('FirstName', 'LastName'),
+                        'label_separator' => ' ',
+                        'value' => 'Id',
+                    ),
+                    'vehicles' => array
+                    (
+                        'source' => 'vehicles',    //which dataset are we using?
+                        'label' => array ('__Make', '__Model', '__Registration'),
+                        'label_separator' => ' ',
+                        'value' => '__Id',
+                    ),
+                ),
                 'fields' => array 
                 (
                     'Id' => array
@@ -1312,10 +1336,16 @@ $config['contactaction'] = Array
                         'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'text',
+                        'type' => 'select',
                         'name' => 'ContactAction.ActionType',
                         'helpText' => '',                        
                         'length' => '',
+                        'options' => array
+                        (
+                            'Task' => 'Task',
+                            'Meeting' => 'Meeting',
+                            'Phone Call' => 'Phone Call',
+                        ),
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -1330,11 +1360,36 @@ $config['contactaction'] = Array
                         'label' => 'ActionDescription',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'ContactAction.ActionDescription',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                         (
+                            // 
+                         ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'CreationNotes' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Notes',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => 'CreationNotes',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
@@ -1358,6 +1413,78 @@ $config['contactaction'] = Array
                         'name' => 'ContactAction.ContactId',
                         'helpText' => '',                        
                         'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'ActionDate' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Completion Date',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'datepicker',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'ContactAction.ActionDate',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'UserID' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Person Responsible',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => 'ContactAction.ActionDate',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            //This is overidden. Its the dropdown 'users'
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '_CompletedYN' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Is this Completed?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => 'ContactAction._CompletedYN',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Yes' => 1,
+                            'No' => 0
+                        ),
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -1536,6 +1663,342 @@ $config['contactjoin'] = Array
         ),
     );
 
+$config['vehicles'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                /*'bookings_join' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => 'bookings_join', //The dataset name defined above
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'joinon_Contact_and_Vehicle', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'
+                            'ActionType =' => 'Booking', 
+                        ),           
+                    'fields' => array 
+                    (
+                        'Contact.Id' => 'contact Id',
+                        'Contact.FirstName' => 'First Name',
+                        'Contact.LastName' => 'Last Name',
+                        'ContactAction.Id' => 'booking Id',
+                        'ContactAction.ActionDescription' => 'ActionDescription',
+                        '__Vehicles.__Registration' => 'Reg',
+                    ),
+                ),*/ 
+            ),
+            'view' => array 
+            (                
+                'vehicles' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'vehicles', //The dataset name defined above
+                    'model_name' => 'vehicle_model',
+                    'model_method' => 'get_all_contacts_records', 
+                    'model_params' => NULL,        
+                    'fields' => array 
+                    (
+                        '__Id' => '#',
+                        '__ContactId' => 'Contact Id of vehicle owner',
+                        '__Make' => 'Make',
+                        '__Model' => 'model',
+                        '__Registration' => 'Reg',
+                    ),
+                ), 
+                'users' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'users', //The dataset name defined above
+                    'model_name' => 'contact_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            '_IsUserYN =' => 1, 
+                        ),
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        'FirstName' => 'First Name',
+                        'LastName' => 'Last Name',
+                        'Username' => 'Username',
+                        'Password' => 'Password',
+                    ),
+                ),
+                /*'tasks_join' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => 'bookings_join', //The dataset name defined above
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'joinon_Contact', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'
+                            'ActionType =' => 'Booking', 
+                        ),           
+                    'fields' => array 
+                    (
+                        'Contact.Id' => 'contact Id',
+                        'Contact.FirstName' => 'First Name',
+                        'Contact.LastName' => 'Last Name',
+                        'ContactAction.Id' => 'booking Id',
+                        'ContactAction.ActionDescription' => 'ActionDescription',
+                    ),
+                ), */
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'vehicle_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL,
+                'dropdowns' => array    //or NULL
+                (
+                    'users' => array
+                    (
+                        'source' => 'users',    //which dataset are we using?
+                        'label' => array ('FirstName', 'LastName'),
+                        'label_separator' => ' ',
+                        'value' => 'Id',
+                    ),
+                    'vehicles' => array
+                    (
+                        'source' => 'vehicles',    //which dataset are we using?
+                        'label' => array ('__Make', '__Model', '__Registration'),
+                        'label_separator' => ' ',
+                        'value' => '__Id',
+                    ),
+                ),
+                'fields' => array 
+                (
+                    '__Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Vehicles.__Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__ContactId' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Contact ID',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Vehicles.__ContactId',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Task' => 'Task',
+                            'Meeting' => 'Meeting',
+                            'Phone Call' => 'Phone Call',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Registration' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Registration',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Vehicles.__Registration',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Task' => 'Task',
+                            'Meeting' => 'Meeting',
+                            'Phone Call' => 'Phone Call',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__ActiveYN' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Active?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Vehicles.__ActiveYN',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Yes' => 1,
+                            'No' => 0
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Make' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Manufacturer',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '__Vehicles.__Make',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            '' => '',
+                            'Audi' => 'Audi',
+                            'BMW' => 'BMW',
+                            'Chevrolet' => 'Chevrolet',
+                            'Datsun' => 'Datsun',
+                            'Ford' => 'Ford',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Model' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Manufacturer',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Vehicles.__Model',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            '' => '',
+                            'Audi' => 'Audi',
+                            'BMW' => 'BMW',
+                            'Chevrolet' => 'Chevrolet',
+                            'Datsun' => 'Datsun',
+                            'Ford' => 'Ford',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__MOT_expiry' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'MOT Due:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'datepicker',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Vehicles.__MOT_expiry',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            '' => '',
+                            'Audi' => 'Audi',
+                            'BMW' => 'BMW',
+                            'Chevrolet' => 'Chevrolet',
+                            'Datsun' => 'Datsun',
+                            'Ford' => 'Ford',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Service_expiry' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Service Due:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'datepicker',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Vehicles.__Service_expiry',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            '' => '',
+                            'Audi' => 'Audi',
+                            'BMW' => 'BMW',
+                            'Chevrolet' => 'Chevrolet',
+                            'Datsun' => 'Datsun',
+                            'Ford' => 'Ford',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    )
+                ),                
+            ),
+        ),
+    );
 
 
 /* End of file */

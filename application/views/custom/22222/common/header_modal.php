@@ -1,7 +1,8 @@
 <html lang="en-us">
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" >
-        <meta charset="utf-8" />
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" >
+	<meta charset="utf-8" />
 
         <link rel="apple-touch-con" href="" />
 
@@ -9,42 +10,64 @@
 
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 
-        <!-- The Columnal Grid and mobile stylesheet -->
-        <link rel="stylesheet" href="assets/styles/columnal/columnal.css" type="text/css" media="screen" />
+	<!-- The Columnal Grid and mobile stylesheet -->
+        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/columnal/columnal.css" type="text/css" media="screen" />
 
-        <!-- Fixes for IE -->
-
-        <!--[if lt IE 9]>
-            <link rel="stylesheet" href="assets/styles/columnal/ie.css" type="text/css" media="screen" />
-            <link rel="stylesheet" href="assets/styles/ie8.css" type="text/css" media="screen" />
+	<!-- Fixes for IE -->
+        
+	<!--[if lt IE 9]>
+            <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/columnal/ie.css" type="text/css" media="screen" />
+            <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/ie8.css" type="text/css" media="screen" />
             <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
-        <![endif]-->        
+	<![endif]-->        
+        
+	
+	<!-- Now that all the grids are loaded, we can move on to the actual styles. --> 
+        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/jqueryui/jqueryui.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/global.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/config.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/custom_styles.php" type="text/css" media="screen" />
+        
+       <!-- Load Main Jquery libraries -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>	
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>  
+     
+    <!-- Adds HTML5 Placeholder attributes to those lesser browsers (i.e. IE) -->
+    <script type="text/javascript" src="<?php echo site_url(); ?>assets/scripts/jquery.placeholder.1.2.min.shrink.js"></script>
 
+    <!-- Sortable, searchable DataTable -->
+    <script src="<?php echo site_url(); ?>assets/scripts/jquery.dataTables.min.js"></script>
+    
+    <!-- Custom Tooltips -->
+    <script src="<?php echo site_url(); ?>assets/scripts/twipsy.js"></script>
 
-        <!-- Now that all the grids are loaded, we can move on to the actual styles. --> 
-        <link rel="stylesheet" href="assets/scripts/jqueryui/jqueryui.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="assets/styles/style.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="assets/styles/global.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="assets/styles/config.css" type="text/css" media="screen" />
+    <!-- WYSIWYG Editor -->
+    <script src="<?php echo site_url(); ?>assets/scripts/cleditor/jquery.cleditor.min.js"></script>
+    <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/cleditor/jquery.cleditor.css" type="text/css" media="screen" />
+    
+    <!-- Fullsized calendars -->
+    <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/fullcalendar/fullcalendar.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/fullcalendar/fullcalendar.print.css" type="text/css" media="print" />
+    <script src="<?php echo site_url(); ?>assets/scripts/fullcalendar/fullcalendar.min.js"></script>
+    <script src="<?php echo site_url(); ?>assets/scripts/fullcalendar/gcal.js"></script>
 
-        <!-- Adds HTML5 Placeholder attributes to those lesser browsers (i.e. IE) -->
-        <script type="text/javascript" src="assets/scripts/jquery.placeholder.1.2.min.shrink.js"></script>
+    <!-- Colorbox is a lightbox alternative-->
+    <script src="<?php echo site_url(); ?>assets/scripts/colorbox/jquery.colorbox-min.js"></script>
+    <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/colorbox/colorbox.css" type="text/css" media="screen" />
+    
+     <!-- Uploadify -->
+    <script type="text/javascript" src="<?php echo site_url(); ?>assets/scripts/uploadify/jquery.uploadify.v2.1.4.min.js"></script>
+    <script type="text/javascript" src="<?php echo site_url(); ?>assets/scripts/uploadify/swfobject.js"></script>
+    <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/uploadify/uploadify.css" type="text/css" media="screen" />
+     
+    <!-- All the js used in the demo -->
+    <script src="<?php echo site_url(); ?>assets/scripts/app.js"></script>
 
+        
 
-        <!-- Use CDN on production server -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-
-        <!-- Menu -->
-        <link rel="stylesheet" href="assets/scripts/superfish/superfish.css" type="text/css" media="screen" />
-        <script src="assets/scripts/superfish/superfish.js"></script>
-
-
-        <!-- Js used in the theme -->
-        <script src="assets/scripts/muse.js"></script>
-
-    </head>
-    <body>
-        <div id="wrap">
-            <div id="main">
-                <div class="container" id="actualbody_modal">
+</head>
+<body>
+<div id="wrap">
+    <div id="main">        
+        <div class="container" id="actualbody"><!-- Start body -->

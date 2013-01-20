@@ -1,4 +1,7 @@
 <div class="col_6"><!-- Start Column 1-->								
+    <span class="notification undone">
+        MOT is Overdue (01-01-13)
+    </span>
     <div class="row clearfix">
         <div class="row"><!-- Tabs begin -->
             <div class="widget clearfix tabs">
@@ -11,6 +14,10 @@
                     </li>
                     <li style="<?php echo $display_none; ?>">
                         <h2><a href="#tab-3">Links</a></h2>
+                    </li>
+                    </li>
+                    <li style="<?php echo $display_none; ?>">
+                        <h2><a href="#tab-4">Vehicles</a></h2>
                     </li>
                 </ul>
                 <div class="widget_inside">
@@ -41,7 +48,20 @@
                             $this->table->set_template_custom(array ('anchor_uri' => 'contactjoin/view/edit', 'anchor_attr' => 'class="iframe"'));    
                             $this->table->set_heading_custom($tables['relationships']['table_headers']);
                             echo $this->table->generate_custom($tables['relationships']['table_data']); 
-                        ?> 
+                        ?>
+                        <div class="clearfix">
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/new/<?php echo $rID; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
+                       </div>
+                    </div>
+                    <div id="tab-4">
+                        <?php 
+                            $this->table->set_template_custom(array ('anchor_uri' => 'vehicles/view/edit', 'anchor_attr' => 'class="iframe"', 'primary_key_fieldname' => '__Id'));    
+                            $this->table->set_heading_custom($tables['vehicles']['table_headers']);
+                            echo $this->table->generate_custom($tables['vehicles']['table_data']); 
+                        ?>
+                        <div class="clearfix">
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/view/new/<?php echo $rID; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
+                       </div>
                     </div>
                 </div>
             </div>
@@ -61,17 +81,23 @@
                 <div class="widget_inside">
                     <div id="tab-1">
                         <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit', 'anchor_attr' => 'class="iframe"'));    
+                            $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit_action', 'anchor_attr' => 'class="iframe"'));    
                             $this->table->set_heading_custom($tables['all_actions']['table_headers']);
                             echo $this->table->generate_custom($tables['all_actions']['table_data']); 
                         ?> 
+                        <div class="clearfix margin_top_15">
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_action/new/<?php echo $rID; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
+                       </div>
                     </div>
                     <div id="tab-2">
                         <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit', 'anchor_attr' => 'class="iframe"'));    
+                            $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit_booking', 'anchor_attr' => 'class="iframe"'));    
                             $this->table->set_heading_custom($tables['bookings']['table_headers']);
                             echo $this->table->generate_custom($tables['bookings']['table_data']); 
-                        ?> 
+                        ?>
+                        <div class="clearfix margin_top_15">
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_booking/new/<?php echo $rID; ?>" class="large blue button right iframe"><span>Create New Booking</span></a>
+                       </div>
                     </div>
                     <div id="tab-3">
                         <?php 

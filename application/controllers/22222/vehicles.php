@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Contactaction extends T_Contactaction {
+class Vehicles extends T_Vehicles {
 
 	/**
 	 * This acts as a template for every controller.
@@ -23,7 +23,7 @@ class Contactaction extends T_Contactaction {
    }
    
   public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
-        $this->data['view_setup']['view_file'] = 'v_contactaction_' . $view_file;
+        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;
         //$this->table_list = array('contacts', 'organisations');   //these are names of the datasets
         parent::view($rID, $ContactId);
         //print_array($this->data);

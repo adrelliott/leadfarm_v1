@@ -443,7 +443,8 @@ $this->output->enable_profiler(TRUE);
         //This method talkes the view array and generates the header/navbar/body/footer
 
         // 2. Generate the navbar and output as HTML
-        $navbar_setup = $data['view_setup']['navbar'];
+        
+         $navbar_setup = $data['view_setup']['navbar'];
             //Loop through each of the navbar setup properties and generate html <li>
         $html = '';
         foreach ( $navbar_setup as $navbar_item => $array )
@@ -462,9 +463,9 @@ $this->output->enable_profiler(TRUE);
         
         // 3. Load the views & pass the data
         extract($data['view_setup']);
-        $this->load->view($this->custom_or_default_file('common', 'header'), $data);
+        $this->load->view($this->custom_or_default_file('common', $header_file), $data);
         $this->load->view($this->custom_or_default_file($controller_name, $view_file), $data['view_setup']);
-        $this->load->view($this->custom_or_default_file('common', 'footer'), $data);
+        $this->load->view($this->custom_or_default_file('common', $footer_file), $data);
     }
     
     /*public function generate_view_backup($view_array = NULL) {
