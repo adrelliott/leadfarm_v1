@@ -294,7 +294,7 @@ $config['contact'] = Array
                         ),
                     'fields' => array 
                     (
-                        'Id' => '#',
+                        'Id' => '',
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
                         'PostalCode' => 'Postcode',
@@ -366,6 +366,9 @@ $config['contact'] = Array
                     (
                         '__Id' => '#',
                         '__ContactId' => 'Contact Id of vehicle owner',
+                        '__Make' => 'Make',
+                        '__Model' => 'model',
+                        '__Registration' => 'Reg',
                     ),
                 ),     
                 /*'communications' => array
@@ -435,7 +438,13 @@ $config['contact'] = Array
                         'label' => array ('FirstName', 'LastName'),
                         'label_separator' => ' ',
                         'value' => 'Id',
-                        //''
+                    ),
+                    'vehicles' => array
+                    (
+                        'source' => 'vehicles',    //which dataset are we using?
+                        'label' => array ('__Make', '__Model', '__Registration'),
+                        'label_separator' => ' ',
+                        'value' => '__Id',
                     ),
                 ),
                 'fields' => array 

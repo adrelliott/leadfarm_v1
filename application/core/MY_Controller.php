@@ -61,49 +61,53 @@ $this->output->enable_profiler(TRUE);
     }
     
     
+   
+    
     public function index() {
         // 1. Set up the vars for this method
         extract($this->data); 
         extract($this->data['controller_setup']);
-//$this->nativesession->set_native_session('test', 12345);
         
          // 2. prepare the model_setup array (this controls the queries)
         $this->data['model_setup'] = $this->prepare_model($config, $method_name);
-        unset($this->data['config']);   //Tidy up
+        
         
         // 3. Do the datasets query & hand over to the controller_setup to post-process data
-        $this->data['controller_setup']['datasets'] = $this->generate_datasets($this->data['model_setup']['datasets']);
+        $this->data['controller_setup']['datasets'] = 
+                $this->generate_datasets($this->data['model_setup']['datasets']);
         unset($this->data['model_setup']); //Tidy up...
         
-        // Turn remaining datasets with config inot an actual dataset
-        /*$datasets = $this->data['controller_setup']['datasets'];
-        foreach ($datasets as $dataset => $config)
+         // 4. Create the dropdown menus & table
+        $datasets = $this->data['controller_setup']['datasets'];
+        //$dropdowns = $this->data['config']['record'][$method_name]['dropdowns'];
+        $table_headers =  $this->data['config']['datasets'][$method_name];//daataset['fields']
+        
+            //Create the table headers & table data
+        if (isset($datasets))
         {
-            if (isset($config['include_in_query']))
+            foreach ($datasets as $dataset => $array)
             {
-                //echo "<p>found one: daatset = $dataset</p>";
-                foreach ($datasets[$config['data_source']] as $row => $data)
-                {
-                    //echo "<p>(Dataset row $row of " . $config['data_source'] . ": data = </p>";print_r($data);
-                    
-                }
-            }
-        }*/
-
-        // 5. Now turn datasets into tables
-        if (isset ($this->table_list))
-        {
-            foreach ($this->table_list as $table)
-            {
-
+               $this->data['view_setup']['tables'][$dataset]['table_headers'] = 
+                        $this->generate_table_headings($table_headers[$dataset]['fields']);
+               $this->data['view_setup']['tables'][$dataset]['table_data'] = $array;
             }
         }
+              
+        // 5. Now add the fields to view set up, tidy up & generate the view        
+        $this->data['view_setup']['method_name'] = $method_name;
+        $this->data['view_setup']['controller_name'] = $controller_name;
         
+               //Tidy up 
+        unset($this->data['config']);       
+        unset($this->data['controller_setup']);
         
-        // xxxxxxxxx. Generate the view!
-        $this->generate_view($this->data);        
+            // Generate the view!
+        $this->generate_view($this->data);       
         
     }
+    
+    
+    
     
     public function view($rID) {
         // 1. Set up the vars for this method
@@ -111,19 +115,60 @@ $this->output->enable_profiler(TRUE);
         extract($this->data['controller_setup']); 
         
         // 2. prepare the model_setup array (this controls the queries)
-        $this->data['model_setup'] = $this->prepare_model($config, $method_name);
-        unset($this->data['config']);   //Tidy up
+        $this->data['model_setup'] = $this->prepare_model($config, $method_name);        
         
         // 3. Do the datasets query & hand over to the controller_setup to post-process data
-        $this->data['controller_setup']['datasets'] = $this->generate_datasets($this->data['model_setup']['datasets']);
+        $this->data['controller_setup']['datasets'] = $this->generate_datasets(
+                $this->data['model_setup']['datasets']
+                );
         
         // 4. Now do the record query (data goes in ['controller_setup']['results']['record']
         // (This is the query that gets all the data for this record        
-        $this->data['controller_setup']['record'] = $this->retrieve_record($rID, $this->data['model_setup']['record']);
+        $this->data['controller_setup']['record'] = $this->retrieve_record(
+                $rID, 
+                $this->data['model_setup']['record']
+                );
         unset($this->data['model_setup']); //Tidy up...
-       
-        // 4. Generate the view!
-       $this->generate_view($this->data);
+        
+         // 5. Create the dropdown menus & table
+        $datasets = $this->data['controller_setup']['datasets'];
+        $dropdowns = $this->data['config']['record'][$method_name]['dropdowns'];
+        $table_headers =  $this->data['config']['datasets'][$method_name];//daataset['fields']
+        
+            //Feed the dropdown config and the data to this method to generate an array of options
+        if (isset($dropdowns))
+        {
+            foreach ($dropdowns as $dropdown => $config)
+            {
+                $this->data['view_setup']['dropdowns'][$dropdown] = $this->create_dropdown(
+                    $dropdowns[$dropdown], 
+                    $datasets[$dropdown]
+                    );
+            }
+        }
+        
+            //Create the table headers & table data
+        if (isset($datasets))
+        {
+            foreach ($datasets as $dataset => $array)
+            {
+               $this->data['view_setup']['tables'][$dataset]['table_headers'] = 
+                        $this->generate_table_headings($table_headers[$dataset]['fields']);
+               $this->data['view_setup']['tables'][$dataset]['table_data'] = $array;
+            }
+        }
+        
+        // 6. Now add the fields to view set up, tidy up & generate the view        
+        $this->data['view_setup']['fields'] = $this->data['controller_setup']['record'];
+        $this->data['view_setup']['method_name'] = $method_name;
+        $this->data['view_setup']['controller_name'] = $controller_name;
+        
+               //Tidy up 
+        unset($this->data['config']);       
+        unset($this->data['controller_setup']);
+        
+            // Generate the view!
+        $this->generate_view($this->data);
        
     }
     
@@ -164,7 +209,48 @@ $this->output->enable_profiler(TRUE);
      *data that has been submitted and needs cleaning before instertion
     |
     */
-    public function process_datasets ($datasets) {
+       
+    function create_dropdown($config, $data, $direction = NULL) {
+        //converts table results to a dropdown as defined in $config['controller_name']['dropdowns']
+        $retval = array();
+        extract($config);
+        
+        //cycle through each result
+        foreach ($data as $row => $array)
+        {
+            $k = '';
+            foreach ($label as $col_name)
+            {
+                $k .= $array[$col_name] . $label_separator;
+            }
+            
+            $retval[$k] = $array[$value];
+        }
+        
+        return $retval;
+    } 
+    
+     function generate_table_headings($fields) {
+        $retval = array();
+        foreach ($fields as $fieldName => $tableHeading)
+        {
+            if ($tableHeading != '')    //no value = no heading rqd
+            {
+                if (strpos($fieldName, '.')) //Strips out the table name
+                { 
+                    $fieldname_array = explode('.', $fieldName);
+                        //creates [0] => table, and [1] => fieldname
+                    $fieldName = $fieldname_array[1];
+                }                        
+                $retval[$fieldName] = $tableHeading;
+            }
+        }
+        
+        return $retval;
+    }
+    
+    
+     /*function process_datasets ($datasets) {
         $results = array(); 
         foreach ($datasets as $dataset => $config)
         {
@@ -179,8 +265,7 @@ $this->output->enable_profiler(TRUE);
         }
         
         return $results;     
-    }
-    
+    }*/
    
     
     
@@ -275,9 +360,9 @@ $this->output->enable_profiler(TRUE);
     
      public function generate_view($data, $view_array = NULL) {
         // 1 . Set up the variables
-        extract($data['controller_setup']);
+        /*extract($data['controller_setup']);
         $data['view_setup']['method_name'] = $method_name;
-        $data['view_setup']['controller_name'] = $controller_name;
+        $data['view_setup']['controller_name'] = $controller_name;*/
         //This method talkes the view array and generates the header/navbar/body/footer
 
         // 2. Generate the navbar and output as HTML
@@ -305,7 +390,7 @@ $this->output->enable_profiler(TRUE);
         $this->load->view($this->custom_or_default_file('common', 'footer'), $data);
     }
     
-    public function generate_view_backup($view_array = NULL) {
+    /*public function generate_view_backup($view_array = NULL) {
         // 1 . Set up the variables
         extract($this->data['controller_setup']);
         $this->data['view_setup']['method_name'] = $method_name;
@@ -336,7 +421,7 @@ $this->output->enable_profiler(TRUE);
         $this->load->view($this->custom_or_default_file('common', 'footer'), $this->data);
     }
     
-    
+    */
       function custom_or_default_file($dir, $filename, $containing_dir = 'view', $file_ext = 'php') {
         //looks in views/custom/DATAOWNER_ID/dir for filename first then, if it is
         //not found, it looks in views/default/dir
