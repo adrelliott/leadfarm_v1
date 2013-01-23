@@ -1,1 +1,1 @@
-<p>this is dewfault   MODAL footer</p>
+<?php print_array($this->data); ?>

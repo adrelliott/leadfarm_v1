@@ -498,7 +498,7 @@ class MY_Table extends CI_Table {
 		}
 
 		$this->temp = $this->_default_template();
-		foreach (array('anchor_uri','anchor_attr','primary_key_fieldname','checkbox_flag','checkbox_class','checkbox_name','table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
+		foreach (array('anchor_uri','anchor_uri_append','anchor_attr','primary_key_fieldname','checkbox_flag','checkbox_class','checkbox_name','table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
 		{
 			if ( ! isset($this->template[$val]))
 			{
@@ -519,6 +519,7 @@ class MY_Table extends CI_Table {
 	{
 		return  array (
 			'anchor_uri'                   => '',
+			'anchor_uri_append'           => '',
 			'anchor_attr'                 => '',    //e.g class="iframe"
 			'primary_key_fieldname'       => 'Id',    //this is usually 'Id' or '__Id'
 			'checkbox_flag'                 => '',    // set to TRUE for checkboxes
@@ -565,7 +566,7 @@ class MY_Table extends CI_Table {
                 {
                     $attr = $this->template['anchor_attr'];
                 }
-                $retval['start'] = '<a href="' . base_url() . DATAOWNER_ID . '/' . $this->template['anchor_uri'] . '/' . $id['data'] . '" ' . $attr . ' >';
+                $retval['start'] = '<a href="' . base_url() . DATAOWNER_ID . '/' . $this->template['anchor_uri'] . '/' . $id['data'] . '/' . $this->template['anchor_uri_append'] . '" ' . $attr . ' >';
                 $retval['end'] = '</a>';
             }
             return $retval;

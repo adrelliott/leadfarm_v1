@@ -12,9 +12,9 @@
                             <span class="notification undone">
                                 MOT is Overdue (01-01-13)
                             </span>
-                            <?php //echo form_open('contactaction/add/') ; ?>
-                                <?php echo display_field($fields['__Id'], array('type' => 'hidden'));  ?>
-                                <?php echo display_field($fields['__ContactId'], array('type' => 'hidden'));  ?>                                
+                            <?php echo form_open(DATAOWNER_ID . "/vehicles/add/$rID/$ContactId/edit") ; ?>
+                                <?php //echo display_field($fields['__Id'], array('type' => 'hidden'));  ?>
+                                <?php //echo display_field($fields['__ContactId'], array('type' => 'hidden', 'value' => $ContactId));  ?>                                
                                 <?php echo display_field($fields['__Make']); ?>
                                 <?php echo display_field($fields['__Model']); ?>  
                                 <?php echo display_field($fields['__ActiveYN']); ?>                                
@@ -26,7 +26,7 @@
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
                                 </div>                            
-                            <?php //echo form_close(); ?>
+                            <?php echo form_close(); ?>
                         </div>
                     </div>
                 </div>                

@@ -21,6 +21,17 @@ class Vehicle_model extends MY_Model {
         }
     }
     
+     function add($input, $rID) {
+        //mimic infusionsoft creation of record
+       if ($rID == 'new')
+       {
+          //$input['Id'] = rand(7000, 8000);
+          $rID = NULL;
+       }      
+       
+       return $this->save($input, $rID);
+    }
+    
    /* 
     
     public function get_all_records($where = NULL) {

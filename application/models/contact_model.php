@@ -21,7 +21,7 @@ class Contact_model extends MY_Model {
     
     function add($input, $rID) {
         //mimic infusionsoft creation of record
-       if ($rID == 'ind' OR $rID == 'org')
+       if ($rID == 'new')
        {
           $input['Id'] = rand(7000, 8000);
           $rID = NULL;

@@ -49,12 +49,21 @@ function clean_data($input, $cleanse_type = NULL){
         
         foreach ($input as $key => $val)
         {
-            if ($key == 'submit')   
+            $position = strpos($key, '.');
+            switch ($key)
             {
-                unset($input[$key]);
+                case $key == 'submit':
+                    unset($input[$key]);
+                    break;
+               
+                default:
+                    $retval[$key] = $val;
+                        
             }
+            
         }
-        $retval = $input;
+        //$retval = $input;
+        
         
         
     /*

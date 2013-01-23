@@ -18,7 +18,6 @@ class Contactjoin extends T_Contactjoin {
     }
     
   public function index() {     
-        //$this->data['view_setup']['view_file'] = '????filename?????';
        parent::index();
    }
    

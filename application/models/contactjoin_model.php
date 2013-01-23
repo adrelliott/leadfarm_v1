@@ -22,20 +22,35 @@ class Contactjoin_model extends MY_Model {
 
     }
     
+     function add($input, $rID) {
+        //mimic infusionsoft creation of record
+       if ($rID == 'new')
+       {
+          //$input['Id'] = rand(7000, 8000);
+          $rID = NULL;
+       }      
+       
+       return $this->save($input, $rID);
+    }
+    
     
      public function joinon_ContactJoin($where = NULL) {
         //get all relationship records where ID1 or ID2 = current Id
         $this->db->where('__ContactId', $this->current_ContactId);
         $this->db->or_where('__ContactId2', $this->current_ContactId);
-        if ($where != NULL) { $this->db->where($where); }        
-        
+        if ($where != NULL) { $this->db->where($where); }   
         $this->db->join(
                 'Contact', 
-                'Contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
+                'Contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname ,
                 'left outer'
-                );        
-        
+                );       
+                
         return $this->get();
+        //print_array($query, 1);
+        
+        //Not convinced this is completely right
+        
+       
     }
     
     

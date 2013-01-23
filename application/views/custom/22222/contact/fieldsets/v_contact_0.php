@@ -19,4 +19,3 @@
     <div class="clearfix">
         <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
     </div>
-<?php echo form_close(); ?>

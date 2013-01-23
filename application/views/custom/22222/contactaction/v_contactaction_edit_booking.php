@@ -9,9 +9,9 @@
                     <div id="tab-1"><!-- Start of tab 1 -->
                         <h3>Create/edit a booking for this contact</h3>
                         <div class="form">
-                            <?php //echo form_open('contactaction/add/') ; ?>
-                                <?php echo display_field($fields['Id'], array('type' => 'hidden'));  ?>
-                                <?php echo display_field($fields['ContactId'], array('type' => 'hidden'));  ?>
+                            <?php echo form_open(DATAOWNER_ID . "/contactaction/add/$rID/$ContactId/edit_booking") ; ?>
+                                <?php //echo display_field($fields['Id'], array('type' => 'hidden'));  ?>
+                                <?php //echo display_field($fields['ContactId'], array('type' => 'hidden', 'value' => $ContactId));  ?>
                                 <?php echo display_field($fields['ActionType'], array('type' => 'hidden', 'value' => 'Booking')); ?>
                                 <?php echo display_field($fields['ActionDescription'], array('label' => 'Booking Type', 'type' => 'select', 'options' => array('' => '', 'MOT' => 'MOT', 'Service' => 'Service', 'Interim service' => 'Interim service', 'Diagnosis' => 'Diagnosis'))); ?>
                                 <?php echo display_field($fields['CreationNotes']); ?>
@@ -23,7 +23,7 @@
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
                                 </div>                            
-                            <?php //echo form_close(); ?>
+                            <?php echo form_close(); ?>
                         </div>
                     </div>
                 </div>                

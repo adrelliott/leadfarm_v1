@@ -50,7 +50,11 @@ $config['database']['swap_pre'] = '';
 $config['database']['autoinit'] = TRUE;
 $config['database']['stricton'] = FALSE;
 
-
+/* leadfarm-staging.co.uk db details 
+$config['database']['username'] = 'leadfar_admin';
+$config['database']['password'] = 'DMmanch35';
+$config['database']['database'] = 'leadfar2_22222';
+*/
 
 /*
 |--------------------------------------------------------------------------
@@ -296,7 +300,7 @@ $config['contact'] = Array
                         ),
                     'fields' => array 
                     (
-                        'Id' => '',
+                        'Id' => '#',
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
                         'PostalCode' => 'Postcode',
@@ -403,8 +407,8 @@ $config['contact'] = Array
                         'Contact.LastName' => 'Last Name',
                         '__ContactJoin.__Id' => 'Realtionship Id',
                         '__ContactJoin.__Reason' => 'reason',
-                        '__ContactJoin.__ContactId' => 'reason',
-                        '__ContactJoin.__ContactId2' => 'reason',
+                        //'__ContactJoin.__ContactId' => 'reason',
+                        '__ContactJoin.__ContactId2' => 'CId 2',
                     ),
                 ),
                 'users' => array
@@ -1001,6 +1005,32 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
+                     '_Optin_Newsletter' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Opt into Newsletter?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '_Optin_Newsletter',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                          (
+                            'Yes' => 1,
+                            'No' => 0,
+                          ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
                      '_Optin_Pref_Method' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
@@ -1137,7 +1167,7 @@ $config['booking'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => 'ContactAction.Id',
+                        'name' => 'Id',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -1158,7 +1188,7 @@ $config['booking'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => 'ContactAction.ActionType',
+                        'name' => 'ActionType',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
@@ -1179,7 +1209,7 @@ $config['booking'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => 'ContactAction.ActionDescription',
+                        'name' => 'ActionDescription',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
@@ -1316,7 +1346,7 @@ $config['contactaction'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => 'ContactAction.Id',
+                        'name' => 'Id',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -1337,7 +1367,7 @@ $config['contactaction'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
-                        'name' => 'ContactAction.ActionType',
+                        'name' => 'ActionType',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -1364,7 +1394,7 @@ $config['contactaction'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => 'ContactAction.ActionDescription',
+                        'name' => 'ActionDescription',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -1410,7 +1440,7 @@ $config['contactaction'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => 'ContactAction.ContactId',
+                        'name' => 'ContactId',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
@@ -1431,7 +1461,7 @@ $config['contactaction'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => 'ContactAction.ActionDate',
+                        'name' => 'ActionDate',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
@@ -1452,7 +1482,7 @@ $config['contactaction'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
-                        'name' => 'ContactAction.ActionDate',
+                        'name' => 'ActionDate',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -1477,7 +1507,7 @@ $config['contactaction'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'radio',
-                        'name' => 'ContactAction._CompletedYN',
+                        'name' => '_CompletedYN',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -1489,7 +1519,7 @@ $config['contactaction'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),
-                ),                
+                ),
             ),
         ),
     );
@@ -1571,7 +1601,8 @@ $config['contactjoin'] = Array
             (
                 'model_name' => 'contactjoin_model',
                 'model_method' => 'get_single_record',
-                'model_params' => NULL,                         
+                'model_params' => NULL, 
+                'dropdowns' => NULL,
                 'fields' => array 
                 (
                     '__Id' => array
@@ -1588,7 +1619,7 @@ $config['contactjoin'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__ContactJoin.__Id',
+                        'name' => '__Id',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -1602,14 +1633,14 @@ $config['contactjoin'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Record Type',                  
+                        'label' => 'Id 1',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__ContactJoin.__ContactId',
+                        'name' => '__ContactId',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
@@ -1623,14 +1654,14 @@ $config['contactjoin'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Record Type',                  
+                        'label' => 'Id 2',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__ContactJoin.__ContactId2',
+                        'name' => '__ContactId2',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
@@ -1651,7 +1682,7 @@ $config['contactjoin'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__ContactJoin.__Reason',
+                        'name' => '__Reason',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
@@ -1788,7 +1819,7 @@ $config['vehicles'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__Vehicles.__Id',
+                        'name' => '__Id',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -1809,7 +1840,7 @@ $config['vehicles'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__Vehicles.__ContactId',
+                        'name' => '__ContactId',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -1836,7 +1867,7 @@ $config['vehicles'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__Vehicles.__Registration',
+                        'name' => '__Registration',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -1863,7 +1894,7 @@ $config['vehicles'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'radio',
-                        'name' => '__Vehicles.__ActiveYN',
+                        'name' => '__ActiveYN',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -1889,7 +1920,7 @@ $config['vehicles'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
-                        'name' => '__Vehicles.__Make',
+                        'name' => '__Make',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -1919,7 +1950,7 @@ $config['vehicles'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__Vehicles.__Model',
+                        'name' => '__Model',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -1949,7 +1980,7 @@ $config['vehicles'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__Vehicles.__MOT_expiry',
+                        'name' => '__MOT_expiry',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -1979,7 +2010,7 @@ $config['vehicles'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__Vehicles.__Service_expiry',
+                        'name' => '__Service_expiry',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array

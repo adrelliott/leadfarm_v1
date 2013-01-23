@@ -69,22 +69,21 @@ $this->output->enable_profiler(TRUE);
         extract($this->data['controller_setup']);
         
          // 2. prepare the model_setup array (this controls the queries)
-        $this->data['model_setup'] = $this->prepare_model($config, $method_name);
-        
+        $this->data['model_setup'] = $this->prepare_model($config, $method_name);        
         
         // 3. Do the datasets query & hand over to the controller_setup to post-process data
         $this->data['controller_setup']['datasets'] = 
                 $this->generate_datasets($this->data['model_setup']['datasets']);
         unset($this->data['model_setup']); //Tidy up...
         
-         // 4. Create the dropdown menus & table
+         // 4. Create the datasets for the table(s)
         $datasets = $this->data['controller_setup']['datasets'];
         //$dropdowns = $this->data['config']['record'][$method_name]['dropdowns'];
-        $table_headers =  $this->data['config']['datasets'][$method_name];//daataset['fields']
         
             //Create the table headers & table data
         if (isset($datasets))
         {
+            $table_headers =  $this->data['config']['datasets'][$method_name];
             foreach ($datasets as $dataset => $array)
             {
                $this->data['view_setup']['tables'][$dataset]['table_headers'] = 
@@ -110,11 +109,11 @@ $this->output->enable_profiler(TRUE);
     
     
     
-    public function view($rID, $fieldset = NULL) {
+    //public function view($rID, $fieldset = NULL) {
+    public function view($rID) {
         // 1. Set up the vars for this method
         extract($this->data); 
         extract($this->data['controller_setup']); 
-        $this->data['view_setup']['fieldset'] = $fieldset;
         
         // 2. prepare the model_setup array (this controls the queries)
         $this->data['model_setup'] = $this->prepare_model($config, $method_name);        
@@ -124,7 +123,7 @@ $this->output->enable_profiler(TRUE);
                 $this->data['model_setup']['datasets']
                 );
         
-        // 4. Now do the record query (data goes in ['controller_setup']['results']['record']
+        // 4. Now do the record query. store in ['controller_setup']['results']['record']
         // (This is the query that gets all the data for this record        
         $this->data['controller_setup']['record'] = $this->retrieve_record(
                 $rID, 
@@ -135,11 +134,10 @@ $this->output->enable_profiler(TRUE);
          // 5. Create the dropdown menus & table
         $datasets = $this->data['controller_setup']['datasets'];
         $dropdowns = $this->data['config']['record'][$method_name]['dropdowns'];
-        $table_headers =  $this->data['config']['datasets'][$method_name];//daataset['fields']
         
             //Feed the dropdown config and the data to this method to generate an array of options
         if (isset($dropdowns))
-        {
+        {            
             foreach ($dropdowns as $dropdown => $config)
             {
                 $this->data['view_setup']['dropdowns'][$dropdown] = $this->create_dropdown(
@@ -151,7 +149,8 @@ $this->output->enable_profiler(TRUE);
         
             //Create the table headers & table data
         if (isset($datasets))
-        {
+        {            
+            $table_headers =  $this->data['config']['datasets'][$method_name];
             foreach ($datasets as $dataset => $array)
             {
                $this->data['view_setup']['tables'][$dataset]['table_headers'] = 
@@ -174,71 +173,10 @@ $this->output->enable_profiler(TRUE);
        
     }
     
-    public function view_backup($rID) {
-        // 1. Set up the vars for this method
-        extract($this->data); 
-        extract($this->data['controller_setup']); 
-        
-        // 2. prepare the model_setup array (this controls the queries)
-        $this->data['model_setup'] = $this->prepare_model($config, $method_name);        
-        
-        // 3. Do the datasets query & hand over to the controller_setup to post-process data
-        $this->data['controller_setup']['datasets'] = $this->generate_datasets(
-                $this->data['model_setup']['datasets']
-                );
-        
-        // 4. Now do the record query (data goes in ['controller_setup']['results']['record']
-        // (This is the query that gets all the data for this record        
-        $this->data['controller_setup']['record'] = $this->retrieve_record(
-                $rID, 
-                $this->data['model_setup']['record']
-                );
-        unset($this->data['model_setup']); //Tidy up...
-        
-         // 5. Create the dropdown menus & table
-        $datasets = $this->data['controller_setup']['datasets'];
-        $dropdowns = $this->data['config']['record'][$method_name]['dropdowns'];
-        $table_headers =  $this->data['config']['datasets'][$method_name];//daataset['fields']
-        
-            //Feed the dropdown config and the data to this method to generate an array of options
-        if (isset($dropdowns))
-        {
-            foreach ($dropdowns as $dropdown => $config)
-            {
-                $this->data['view_setup']['dropdowns'][$dropdown] = $this->create_dropdown(
-                    $dropdowns[$dropdown], 
-                    $datasets[$dropdown]
-                    );
-            }
-        }
-        
-            //Create the table headers & table data
-        if (isset($datasets))
-        {
-            foreach ($datasets as $dataset => $array)
-            {
-               $this->data['view_setup']['tables'][$dataset]['table_headers'] = 
-                        $this->generate_table_headings($table_headers[$dataset]['fields']);
-               $this->data['view_setup']['tables'][$dataset]['table_data'] = $array;
-            }
-        }
-        
-        // 6. Now add the fields to view set up, tidy up & generate the view        
-        $this->data['view_setup']['fields'] = $this->data['controller_setup']['record'];
-        $this->data['view_setup']['method_name'] = $method_name;
-        $this->data['view_setup']['controller_name'] = $controller_name;        
-        
-               //Tidy up 
-        unset($this->data['config']);       
-        unset($this->data['controller_setup']);
-        
-            // Generate the view!
-        $this->generate_view($this->data);
-       
-    }
     
     
-    public function add($rID) {
+    
+    /*public function add($rID) {
         // 1. Set up the vars for this method
         extract($this->data); 
         extract($this->data['controller_setup']); 
@@ -267,7 +205,7 @@ $this->output->enable_profiler(TRUE);
         // 4. Generate the view!
        $this->generate_view($this->data);
        
-    }
+    }*/
                
     /*
     |--------------------------------------------------------------------------
@@ -406,10 +344,10 @@ $this->output->enable_profiler(TRUE);
             foreach ($query as $col_name => $value)
             {
                 $results[$col_name]['value'] = $value;
-                if ($col_name == '_IsOrganisation' AND $value == 1)
+                /*if ($col_name == '_IsOrganisation' AND $value == 1)
                 {
                     $this->data['view_setup']['fieldset'] = 'v_contact_organisation';
-                }
+                }*/
             }
         }
         else
@@ -468,38 +406,7 @@ $this->output->enable_profiler(TRUE);
         $this->load->view($this->custom_or_default_file('common', $footer_file), $data);
     }
     
-    /*public function generate_view_backup($view_array = NULL) {
-        // 1 . Set up the variables
-        extract($this->data['controller_setup']);
-        $this->data['view_setup']['method_name'] = $method_name;
-        $this->data['view_setup']['controller_name'] = $controller_name;
-        //This method talkes the view array and generates the header/navbar/body/footer
-
-        // 2. Generate the navbar and output as HTML
-        $navbar_setup = $this->data['view_setup']['navbar'];
-            //Loop through each of the navbar setup properties and generate html <li>
-        $html = '';
-        foreach ( $navbar_setup as $navbar_item => $array )
-        {
-            if ($array['controller'] == $this->controller_name)
-            {
-                $array['css'] .= ' active';    //Sets CSS for current page
-            }
-            $html .= '<li class="' .$array['css'] . ' ">';
-            $html .= '<a href="' . base_url() . DATAOWNER_ID . '/' . $array['controller'];
-            $html .= '"><span>' . $array['icon'] . $array['pagename'] . '</span></a></li>';
-        }
-            //This is the HTML for the navbar
-        $this->data['view_setup']['navbar'] = $html;
-        
-        // 3. Load the views & pass the data
-        extract($this->data['view_setup']);
-        $this->load->view($this->custom_or_default_file('common', 'header'), $this->data);
-        $this->load->view($this->custom_or_default_file($controller_name, $view_file), $this->data);
-        $this->load->view($this->custom_or_default_file('common', 'footer'), $this->data);
-    }
-    
-    */
+  
       function custom_or_default_file($dir, $filename, $containing_dir = 'view', $file_ext = 'php') {
         //looks in views/custom/DATAOWNER_ID/dir for filename first then, if it is
         //not found, it looks in views/default/dir
@@ -522,75 +429,6 @@ $this->output->enable_profiler(TRUE);
     
     
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     public function populate_placeholders ($array) {
@@ -644,6 +482,116 @@ $this->output->enable_profiler(TRUE);
              redirect('login/');
          }
      }
+     
+     
+     
+     ////////////delete me!!!!!///////////////////// /*
+     /*
+      * methods we THINK we no longer need
+      * 
+      * 
+     public function view_backup($rID) {
+        // 1. Set up the vars for this method
+        extract($this->data); 
+        extract($this->data['controller_setup']); 
+        
+        // 2. prepare the model_setup array (this controls the queries)
+        $this->data['model_setup'] = $this->prepare_model($config, $method_name);        
+        
+        // 3. Do the datasets query & hand over to the controller_setup to post-process data
+        $this->data['controller_setup']['datasets'] = $this->generate_datasets(
+                $this->data['model_setup']['datasets']
+                );
+        
+        // 4. Now do the record query (data goes in ['controller_setup']['results']['record']
+        // (This is the query that gets all the data for this record        
+        $this->data['controller_setup']['record'] = $this->retrieve_record(
+                $rID, 
+                $this->data['model_setup']['record']
+                );
+        unset($this->data['model_setup']); //Tidy up...
+        
+         // 5. Create the dropdown menus & table
+        $datasets = $this->data['controller_setup']['datasets'];
+        $dropdowns = $this->data['config']['record'][$method_name]['dropdowns'];
+        $table_headers =  $this->data['config']['datasets'][$method_name];//daataset['fields']
+        
+            //Feed the dropdown config and the data to this method to generate an array of options
+        if (isset($dropdowns))
+        {
+            foreach ($dropdowns as $dropdown => $config)
+            {
+                $this->data['view_setup']['dropdowns'][$dropdown] = $this->create_dropdown(
+                    $dropdowns[$dropdown], 
+                    $datasets[$dropdown]
+                    );
+            }
+        }
+        
+            //Create the table headers & table data
+        if (isset($datasets))
+        {
+            foreach ($datasets as $dataset => $array)
+            {
+               $this->data['view_setup']['tables'][$dataset]['table_headers'] = 
+                        $this->generate_table_headings($table_headers[$dataset]['fields']);
+               $this->data['view_setup']['tables'][$dataset]['table_data'] = $array;
+            }
+        }
+        
+        // 6. Now add the fields to view set up, tidy up & generate the view        
+        $this->data['view_setup']['fields'] = $this->data['controller_setup']['record'];
+        $this->data['view_setup']['method_name'] = $method_name;
+        $this->data['view_setup']['controller_name'] = $controller_name;        
+        
+               //Tidy up 
+        unset($this->data['config']);       
+        unset($this->data['controller_setup']);
+        
+            // Generate the view!
+        $this->generate_view($this->data);
+       
+    }
+         
+           /*public function generate_view_backup($view_array = NULL) {
+        // 1 . Set up the variables
+        extract($this->data['controller_setup']);
+        $this->data['view_setup']['method_name'] = $method_name;
+        $this->data['view_setup']['controller_name'] = $controller_name;
+        //This method talkes the view array and generates the header/navbar/body/footer
+
+        // 2. Generate the navbar and output as HTML
+        $navbar_setup = $this->data['view_setup']['navbar'];
+            //Loop through each of the navbar setup properties and generate html <li>
+        $html = '';
+        foreach ( $navbar_setup as $navbar_item => $array )
+        {
+            if ($array['controller'] == $this->controller_name)
+            {
+                $array['css'] .= ' active';    //Sets CSS for current page
+            }
+            $html .= '<li class="' .$array['css'] . ' ">';
+            $html .= '<a href="' . base_url() . DATAOWNER_ID . '/' . $array['controller'];
+            $html .= '"><span>' . $array['icon'] . $array['pagename'] . '</span></a></li>';
+        }
+            //This is the HTML for the navbar
+        $this->data['view_setup']['navbar'] = $html;
+        
+        // 3. Load the views & pass the data
+        extract($this->data['view_setup']);
+        $this->load->view($this->custom_or_default_file('common', 'header'), $this->data);
+        $this->load->view($this->custom_or_default_file($controller_name, $view_file), $this->data);
+        $this->load->view($this->custom_or_default_file('common', 'footer'), $this->data);
+    }
+    
+    
+         
+         
+        
+         *     
+         */
+        
+        
 }
 /* End of file MY_Controller.php */
 /* Location: ./application/core */

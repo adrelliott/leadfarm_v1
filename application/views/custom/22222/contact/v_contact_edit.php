@@ -23,11 +23,24 @@
                 <div class="widget_inside">
                     <div id="tab-1">
                         <div class="form">
-                            <?php include("fieldsets/$fieldset.php"); ?>
+                            <?php include("fieldsets/v_contact_$fieldset.php");
+                                //v_contact_0 = contact, ..._1  org ?>
+                             <div class="clearfix">
+                                <h4>Opt-in Settings:</h4>
+                            </div>
+                            <?php display_field($fields['_Optin_Email']); ?>
+                            <?php display_field($fields['_Optin_SMS']); ?>
+                            <?php display_field($fields['_Optin_SurfaceMail']); ?>
+                            <?php display_field($fields['_Optin_Newsletter']); ?>
+                            <?php display_field($fields['_Optin_Pref_Method']); ?>
+                            <div class="clearfix">
+                                <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
+                            </div>
+                            <?php echo form_close(); ?>
                         </div>
                     </div>
                     <div id="tab-2">
-                        <?php echo form_open(DATAOWNER_ID . '/contact/append_note/' . $ContactId); ?>
+                        <?php echo form_open(DATAOWNER_ID . '/contact/append_note/' . $rID . '/' . $fieldset); ?>
                             <p>These are the notes for this record.</p>
                             <?php echo display_field($fields['ContactNotes']); ?>
                            <!-- Start field "Add a Note:" -->
@@ -38,29 +51,29 @@
                                </div>
                            </div>
                            <!-- End field "Add a Note:" -->	
-                           <div class="clearfix">
+                           <div class="clearfix margin_top_15">
                                <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
                            </div>
                         <?php echo form_close(); ?>	
                     </div>
                     <div id="tab-3">
                         <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactjoin/view/edit', 'anchor_attr' => 'class="iframe"'));    
+                            $this->table->set_template_custom(array ('anchor_uri' => 'contactjoin/view/edit', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"' ,'primary_key_fieldname' => '__Id'));    
                             $this->table->set_heading_custom($tables['relationships']['table_headers']);
                             echo $this->table->generate_custom($tables['relationships']['table_data']); 
                         ?>
-                        <div class="clearfix">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/new/<?php echo $rID; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
+                        <div class="clearfix margin_top_15">
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
                        </div>
                     </div>
                     <div id="tab-4">
                         <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'vehicles/view/edit', 'anchor_attr' => 'class="iframe"', 'primary_key_fieldname' => '__Id'));    
+                            $this->table->set_template_custom(array ('anchor_uri' => 'vehicles/view/edit', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"', 'primary_key_fieldname' => '__Id'));    
                             $this->table->set_heading_custom($tables['vehicles']['table_headers']);
                             echo $this->table->generate_custom($tables['vehicles']['table_data']); 
                         ?>
-                        <div class="clearfix">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/view/new/<?php echo $rID; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
+                        <div class="clearfix margin_top_15">
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
                        </div>
                     </div>
                 </div>
@@ -81,27 +94,27 @@
                 <div class="widget_inside">
                     <div id="tab-1">
                         <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit_action', 'anchor_attr' => 'class="iframe"'));    
+                            $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit_action', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"'));    
                             $this->table->set_heading_custom($tables['all_actions']['table_headers']);
                             echo $this->table->generate_custom($tables['all_actions']['table_data']); 
                         ?> 
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_action/new/<?php echo $rID; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_action/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
                        </div>
                     </div>
                     <div id="tab-2">
                         <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit_booking', 'anchor_attr' => 'class="iframe"'));    
+                            $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit_booking', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"'));    
                             $this->table->set_heading_custom($tables['bookings']['table_headers']);
                             echo $this->table->generate_custom($tables['bookings']['table_data']); 
                         ?>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_booking/new/<?php echo $rID; ?>" class="large blue button right iframe"><span>Create New Booking</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_booking/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Booking</span></a>
                        </div>
                     </div>
                     <div id="tab-3">
                         <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactjoin/view/edit', 'anchor_attr' => 'class="iframe"'));    
+                            $this->table->set_template_custom(array ('anchor_uri' => 'contactjoin/view/edit', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"'));    
                             $this->table->set_heading_custom($tables['relationships']['table_headers']);
                             echo $this->table->generate_custom($tables['relationships']['table_data']); 
                         ?>
@@ -126,29 +139,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class='row'>
-             <div class="widget clearfix  form">
-                 <h2>Preferences</h2>
-                 <div class="clearfix">
-                     <div class="form no-border ">
-                         <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . '/contact/add/' . $ContactId); ?>
-                            <div class="clearfix">
-                                <h4>Opt-in Settings:</h4>
-                            </div>
-                                <?php display_field($fields['_Optin_Email']); ?>
-                                <?php display_field($fields['_Optin_SMS']); ?>
-                                <?php display_field($fields['_Optin_SurfaceMail']); ?>
-                                <?php display_field($fields['_Optin_Pref_Method']); ?>
-                             <div class="clearfix">
-                                <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
-                            </div>
-                            <?php echo form_close(); ?>
-                        </div>
-                     </div>
-                 </div>
-             </div>											
-         </div>
+        </div>        
     </div>
 </div>

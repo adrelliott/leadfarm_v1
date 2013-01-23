@@ -18,15 +18,12 @@ class Contactaction extends T_Contactaction {
     }
     
   public function index() {     
-        //$this->data['view_setup']['view_file'] = '????filename?????';
        parent::index();
    }
    
   public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
-        $this->data['view_setup']['view_file'] = 'v_contactaction_' . $view_file;
-        //$this->table_list = array('contacts', 'organisations');   //these are names of the datasets
+        $this->data['view_setup']['view_file'] = 'v_contactaction_' . $view_file;        
         parent::view($rID, $ContactId);
-        //print_array($this->data);
     }
     
 }

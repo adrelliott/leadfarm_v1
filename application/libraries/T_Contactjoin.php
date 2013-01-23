@@ -27,5 +27,17 @@ class T_Contactjoin extends MY_Controller {
        parent::view($rID);
    }
    
+    public function add($rID, $ContactId, $view_file = 'view') {    //false = create new record
+       //clean the input
+       $input = clean_data($this->input->post()); 
+       $input['__ContactId'] = $ContactId;
+       
+       $this->load->model('contactjoin_model');
+       $rID = $this->contactjoin_model->add($input, $rID);
+       //redirect(DATAOWNER_ID . "/contactaction/$view_file/$rID/$ContactId" );
+       $this->view($view_file, $rID, $ContactId);
+       
+   }
+   
 }
    
