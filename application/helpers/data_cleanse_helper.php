@@ -32,20 +32,8 @@ function if_exists($data, $type = 'array') {
 
 
 function clean_data($input, $cleanse_type = NULL){
-        //
-        //  NOTE: Hidden fields are prepended with 'hidden_' 
         $retval = $input;
         
-        /*foreach ($retval as $key => $value)
-        {
-            if ($key == 'submit')
-            {
-                unset($retval($key));
-            }
-            elseif ()
-        }*/
-        
-  //print_array($retval, 0, 'this si the array going in :'. $cleanse_type);
         if (isset($retval['submit']))   //remove the 'submit' key
         {
             unset($retval['submit']);
@@ -54,29 +42,53 @@ function clean_data($input, $cleanse_type = NULL){
         switch ($cleanse_type)
         {
             
-            case 'infusionsoft':
+            case 'infusionsoft':    //remove fields prepended with double underscore
                 foreach ($retval as $key => $value)
                 {
-                    if (substr($key, 0, 2) == '__') //prepended with double underscore?
+                    if (substr($key, 0, 2) == '__')
                     {
                         unset($retval[$key]);
                     }
                 }
                 break;
-            case NULL:
+            case NULL:  //Re-write timestamps
+                foreach ($retval as $key => $value)
+                {
+                    if (substr($key, 0, 3) == ':::') //prepended with double underscore?
+                    {
+                                         
+                        $array = explode(':', substr($key, 3));
+                        //gives us [0] = colname, [1]= filedname piece
+                        if (isset($value))
+                        {
+                            $retval['timestamps'][$array[0]][$array[1]] = $value; 
+                        }
+                        
+                        unset($retval[$key]);
+                    }
+                }
+                
+                //now convert any timestamp arrays into a timestamp
+                if (isset($retval['timestamps']))
+                {
+                    foreach ($retval['timestamps'] as $timestamp => $array)
+                    {
+                        $retval[$timestamp] = cleanse_timestamps($array);
+                    }
+                    unset($retval['timestamps']);
+                }
+                
                 break;   
         }
-        
- //print_array($retval, 0, 'this is retval for cleanstyp:'.$cleanse_type);
-    
+ //print_array($retval, 1, 'here is data to be inserted');    
         return $retval;
     }
     
-    function cleanse_timestamps($data) {    //converts timestamps to 3 fields (date, hours, mins) and does the opposite when sent an array of these values
+    function cleanse_timestamps($data) {   
         
-        $retval = array();        
-        if (! is_array($data))
+        if (! is_array($data))  //Turn separate fields into a timestamp!
         {
+            $retval = array();
             $data = explode(' ', $data); 
                 //...creates $data[0]=YYYY-MM-DD, $data[1]=HH:MM:SS
             
@@ -93,11 +105,10 @@ function clean_data($input, $cleanse_type = NULL){
             
             unset($retval['time']); //Tidy up
         }
-        else
-        {
-            //combine into a timestamp of this format: YYYY-MM-DD HH:MM:SS
-            $data['date'] = explode('/', $data['date']);
-                //creates $retval['date'][0]=DD, [1]=MM, [2]=YYYY
+        else   //Turn a timestamp into separate fields
+        {    
+            
+            $data['date'] = explode('/', $data['date']); //creates $retval['date'][0]=DD, [1]=MM, [2]=YYYY
             $retval = $data['date'][2] . '-' . $data['date'][1] . '-' . $data['date'][0];
             $retval .= ' ' . $data['hours'] . ':' . $data['mins'] . ':00';
         }
@@ -170,13 +181,45 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
                 $retval .= '<textarea class=" ' . $attributes['cssClassInput'] . '" id=" ' . $attributes['cssIdInput'] . '" type="textarea"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['extraHTMLInput'] . '  />' . $attributes['value'] . '</textarea>';
                 break;
                 case 'timestamp': 
-                //$attributes['value'] = convert_timestamp($attributes['value'],'statement');
                 $timestamp_array = cleanse_timestamps($attributes['value']);
-                print_array($timestamp_array, 1);    
-                    
-                $attributes['value'] = convert_timestamp($attributes['value'],'statement');
-                 $retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . '" type="text"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $attributes['value'] . '"  />';
-                 //$retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . '" type="text"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $attributes['value'] . '"  />';
+                //set up the date field   
+                $retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . ' datepicker" type="text"  name=":::' . $attributes['name'] . ':date" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $timestamp_array['date'] . '"  />';
+                
+                //set up the hours drop down (the value are taken form the attr for this field in XXXXX_Config
+                $retval .= '<select class="' . $attributes['cssClassInput'] . '" id=" ' . $attributes['cssIdInput'] . '" name=":::' . $attributes['name'] . ':hours">';
+                foreach ($attributes['options'] as $k => $v)
+                {
+                    $selected = ''; 
+                    if ($v == $timestamp_array['hours']) 
+                    {
+                        $selected = 'selected="selected"';
+                    }
+                    $retval .= '<option value="' . $v . '" ' . $selected . '>' . $k . '</option>';
+                }
+                $retval .= '</select>';
+                
+                //Set up minutes drop down
+                $retval .= '<select class="' . $attributes['cssClassInput'] . '" id=" ' . $attributes['cssIdInput'] . '" name=":::' . $attributes['name'] . ':mins">';
+                $attributes['options'] = array
+                (
+                    '00' => '00',
+                    '15' => '15',
+                    '30' => '30',
+                    '45' => '45',
+                );
+                foreach ($attributes['options'] as $k => $v)
+                {
+                    $selected = ''; 
+                    if ($v == $timestamp_array['mins']) 
+                    {
+                        $selected = 'selected="selected"';
+                    }
+                    $retval .= '<option value="' . $v . '" ' . $selected . '>' . $k . '</option>';
+                }
+                $retval .= '</select>';
+                
+                /*$retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . '" type="text"  name=":::' . $attributes['name'] . ':hours" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $timestamp_array['hours'] . '"  />';*/
+                /*$retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . '" type="text"  name=":::' . $attributes['name'] . ':mins" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $timestamp_array['mins'] . '"  />';*/
                 break;
             case 'hidden':
                     //NOTE The first defition of $retval is not a concatenation, like the others, 
