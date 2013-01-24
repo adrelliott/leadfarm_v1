@@ -11,11 +11,14 @@ class Booking extends T_Booking {
 	 */
 
     public function __construct()    {
+        
+        $this->data['view_setup']['header_file'] = 'header_modal'; 
          parent::__construct();
     }
     
   public function index($view_file = 'index') {   
       $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
+      //$this->data['view_setup']['header_file'] = 'header_modal';
       parent::index();
    }
    

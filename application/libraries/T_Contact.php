@@ -33,7 +33,7 @@ class T_Contact extends MY_Controller {
        $this->load->model('contact_model');
        $rID = $this->contact_model->add($input, $rID);  
        
-       $fieldset = $input['_IsOrganisation'];
+       $fieldset = $input['_IsOrganisationYN'];
        redirect(DATAOWNER_ID . '/contact/view/edit/' . $rID . '/' . $fieldset );
        
    }

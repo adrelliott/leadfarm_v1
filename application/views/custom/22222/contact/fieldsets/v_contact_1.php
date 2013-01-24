@@ -13,7 +13,7 @@
     <?php display_field($fields['Phone2'], array('label' => 'Alt Phone')); ?>
     <?php display_field($fields['Leadsource']); ?>
     <div style="<?php echo $display_none; ?>"">
-        <?php echo display_field($fields['_IsOrganisation'], array('value' => 1)); ?>
+        <?php echo display_field($fields['_IsOrganisationYN'], array('value' => 1)); ?>
     </div>
     <div class="clearfix">
         <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>

@@ -45,26 +45,34 @@ function swap_placeholders($array) {
 function clean_data($input, $cleanse_type = NULL){
         //
         //  NOTE: Hidden fields are prepended with 'hidden_' 
-        $retval = array();
+        $retval = $input;
         
-        foreach ($input as $key => $val)
+  //print_array($retval, 0, 'this si the array going in :'. $cleanse_type);
+        if (isset($retval['submit']))   //remove the 'submit' key
         {
-            $position = strpos($key, '.');
-            switch ($key)
-            {
-                case $key == 'submit':
-                    unset($input[$key]);
-                    break;
-               
-                default:
-                    $retval[$key] = $val;
-                        
-            }
-            
+            unset($retval['submit']);
         }
-        //$retval = $input;
         
+        switch ($cleanse_type)
+        {
+            
+            case 'infusionsoft':
+                foreach ($retval as $key => $value)
+                {
+                    if (substr($key, 0, 2) == '__') //prepended with double underscore?
+                    {
+                        unset($retval[$key]);
+                    }
+                }
+                break;
+            case NULL:
+                break;   
+        }
         
+ //print_array($retval, 0, 'this is retval for cleanstyp:'.$cleanse_type);
+    
+        return $retval;
+    }
         
     /*
         $field_cleansing = array //list all fields that have timestamps here
@@ -178,6 +186,4 @@ function clean_data($input, $cleanse_type = NULL){
                 break;
             }
      * */
-        return $retval;
-    }
 

@@ -28,11 +28,11 @@
                              <div class="clearfix">
                                 <h4>Opt-in Settings:</h4>
                             </div>
-                            <?php display_field($fields['_Optin_Email']); ?>
-                            <?php display_field($fields['_Optin_SMS']); ?>
-                            <?php display_field($fields['_Optin_SurfaceMail']); ?>
-                            <?php display_field($fields['_Optin_Newsletter']); ?>
-                            <?php display_field($fields['_Optin_Pref_Method']); ?>
+                            <?php display_field($fields['_OptinEmailYN']); ?>
+                            <?php display_field($fields['_OptinSmsYN']); ?>
+                            <?php display_field($fields['_OptinSurfaceMailYN']); ?>
+                            <?php display_field($fields['_OptinNewsletterYN']); ?>
+                            <?php display_field($fields['_OptinPref']); ?>
                             <div class="clearfix">
                                 <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
                             </div>
@@ -63,7 +63,7 @@
                             echo $this->table->generate_custom($tables['relationships']['table_data']); 
                         ?>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Relationship</span></a>
                        </div>
                     </div>
                     <div id="tab-4">

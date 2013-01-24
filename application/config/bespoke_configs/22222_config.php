@@ -155,7 +155,7 @@ $config['dashboard'] = Array
                     'model_method' => 'get_all_records',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisation !=' => 1, 
+                            '_IsOrganisationYN !=' => 1, 
                         ),
                     'fields' => array 
                     (
@@ -163,7 +163,7 @@ $config['dashboard'] = Array
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
                         'PostalCode' => 'Postcode',
-                        '_IsOrganisation' => '',
+                        '_IsOrganisationYN' => '',
                     ),
                 ),            
                 'organisations' => array
@@ -174,7 +174,7 @@ $config['dashboard'] = Array
                     'model_method' => 'get_all_records',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisation =' => 1, 
+                            '_IsOrganisationYN =' => 1, 
                         ), 
                     'fields' => array 
                     (
@@ -183,7 +183,7 @@ $config['dashboard'] = Array
                         'StreetAddress1' => 'Address',
                         'FirstName' => 'Contact',
                         'LastName' => '',
-                        '_IsOrganisation' => '',
+                        '_IsOrganisationYN' => '',
                         
                     ),
                 ), 
@@ -296,7 +296,7 @@ $config['contact'] = Array
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisation !=' => 1, 
+                            '_IsOrganisationYN !=' => 1, 
                         ),
                     'fields' => array 
                     (
@@ -314,7 +314,7 @@ $config['contact'] = Array
                     'model_method' => 'get_all_records',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisation =' => 1, 
+                            '_IsOrganisationYN =' => 1, 
                         ), 
                     'fields' => array 
                     (
@@ -323,7 +323,7 @@ $config['contact'] = Array
                         'StreetAddress1' => 'Address',
                         'FirstName' => 'Contact',
                         'LastName' => '',
-                        '_IsOrganisation' => '',
+                        '_IsOrganisationYN' => '',
                     ),
                 ),            
             ),
@@ -419,7 +419,7 @@ $config['contact'] = Array
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsUserYN =' => 1, 
+                            '_IsCrmUserYN =' => 1, 
                         ),
                     'fields' => array 
                     (
@@ -479,7 +479,7 @@ $config['contact'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),
-                    '_IsOrganisation' => array        //DO **NOT** REMOVE OR EDIT THIS FIELD!!!!!!
+                    '_IsOrganisationYN' => array        //DO **NOT** REMOVE OR EDIT THIS FIELD!!!!!!
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -493,12 +493,38 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'title="tooltip" rel="Defaults to Individual',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'radio',
-                        'name' => '_IsOrganisation',
+                        'name' => '_IsOrganisationYN',
                         'helpText' => '',
                         'options' => array
                          (
                              'Individual' => '0',    //label => value
                              'Organisation' => '1',
+                         ),
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__AdverseCreditYN' => array        //DO **NOT** REMOVE OR EDIT THIS FIELD!!!!!!
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Adverse Credit?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'title="tooltip" rel="Defaults to Individual',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__AdverseCreditYN',
+                        'helpText' => '',
+                        'options' => array
+                         (
+                             'Yes' => '0',    //label => value
+                             'No' => '1',
                          ),
                         'length' => '',
                         'HTML_before' => '',
@@ -864,7 +890,7 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
-                      '_facebookName' => array
+                      '_FacebookUrl' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -878,7 +904,7 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '_facebookName',
+                        'name' => '_FacebookUrl',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -927,7 +953,7 @@ $config['contact'] = Array
                         'HTML_after' => '',
                         'value' => '',       
                     ),
-                      '_Optin_Email' => array
+                      '_OptinEmailYN' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -941,7 +967,7 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'radio',
-                        'name' => '_Optin_Email',
+                        'name' => '_OptinEmailYN',
                         'helpText' => '',
                         'length' => '',
                         'options' => array
@@ -953,7 +979,7 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
-                     '_Optin_SMS' => array
+                     '_OptinSmsYN' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -967,7 +993,7 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'radio',
-                        'name' => '_Optin_SMS',
+                        'name' => '_OptinSmsYN',
                         'helpText' => '',
                         'length' => '',
                         'options' => array
@@ -979,7 +1005,7 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
-                     '_Optin_SurfaceMail' => array
+                     '_OptinSurfaceMailYN' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -993,7 +1019,7 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'radio',
-                        'name' => '_Optin_SurfaceMail',
+                        'name' => '_OptinSurfaceMailYN',
                         'helpText' => '',
                         'length' => '',
                         'options' => array
@@ -1005,7 +1031,7 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
-                     '_Optin_Newsletter' => array
+                     '_OptinNewsletterYN' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -1019,7 +1045,7 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'radio',
-                        'name' => '_Optin_Newsletter',
+                        'name' => '_OptinNewsletterYN',
                         'helpText' => '',
                         'length' => '',
                         'options' => array
@@ -1031,7 +1057,7 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
-                     '_Optin_Pref_Method' => array
+                     '_OptinPref' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -1045,7 +1071,7 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'radio',
-                        'name' => '_Optin_Pref_Method',
+                        'name' => '_OptinPref',
                         'helpText' => '',
                         'length' => '',
                         'options' => array
@@ -1112,7 +1138,7 @@ $config['booking'] = Array
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsUserYN =' => 1, 
+                            '_IsCrmUserYN =' => 1, 
                         ),
                     'fields' => array 
                     (
@@ -1120,7 +1146,7 @@ $config['booking'] = Array
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
                         'Username' => 'Username',
-                        'Password' => 'Password',
+                        //'Password' => 'Password',
                     ),
                 ),
                 'bookings_join' => array
@@ -1274,7 +1300,7 @@ $config['contactaction'] = Array
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsUserYN =' => 1, 
+                            '_IsCrmUserYN =' => 1, 
                         ),
                     'fields' => array 
                     (
@@ -1282,7 +1308,7 @@ $config['contactaction'] = Array
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
                         'Username' => 'Username',
-                        'Password' => 'Password',
+                        //'Password' => 'Password',
                     ),
                 ),
                 /*'tasks_join' => array
@@ -1561,7 +1587,7 @@ $config['contactjoin'] = Array
                     'model_method' => 'get_all_records',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisation !=' => 1, 
+                            '_IsOrganisationYN !=' => 1, 
                         ),
                     'fields' => array 
                     (
@@ -1569,7 +1595,7 @@ $config['contactjoin'] = Array
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
                         'PostalCode' => 'Postcode',
-                        '_IsOrganisation' => '',
+                        '_IsOrganisationYN' => '',
                     ),
                 ),            
                 'organisations' => array
@@ -1580,7 +1606,7 @@ $config['contactjoin'] = Array
                     'model_method' => 'get_all_records',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisation =' => 1, 
+                            '_IsOrganisationYN =' => 1, 
                         ), 
                     'fields' => array 
                     (
@@ -1589,7 +1615,7 @@ $config['contactjoin'] = Array
                         'StreetAddress1' => 'Address',
                         'FirstName' => 'Contact',
                         'LastName' => '',
-                        '_IsOrganisation' => '',
+                        '_IsOrganisationYN' => '',
                         
                     ),
                 ), 
@@ -1747,7 +1773,7 @@ $config['vehicles'] = Array
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsUserYN =' => 1, 
+                            '_IsCrmUserYN =' => 1, 
                         ),
                     'fields' => array 
                     (
@@ -1755,7 +1781,7 @@ $config['vehicles'] = Array
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
                         'Username' => 'Username',
-                        'Password' => 'Password',
+                        //'Password' => 'Password',
                     ),
                 ),
                 /*'tasks_join' => array
