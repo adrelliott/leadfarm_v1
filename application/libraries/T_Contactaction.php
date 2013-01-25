@@ -31,10 +31,8 @@ class T_Contactaction extends MY_Controller {
        //clean the input
        $input = clean_data($this->input->post()); 
        $input['ContactId'] = $ContactId;
-       //print_array($input, 1);
        $this->load->model('contactaction_model');
-       $rID = $this->contactaction_model->add($input, $rID);
-       //redirect(DATAOWNER_ID . "/contactaction/$view_file/$rID/$ContactId" );
+       $rID = $this->contactaction_model->add($input, $rID);;
        $this->view($view_file, $rID, $ContactId);
        
    }
