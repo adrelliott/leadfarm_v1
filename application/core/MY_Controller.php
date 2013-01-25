@@ -101,8 +101,9 @@ $this->output->enable_profiler(TRUE);
         unset($this->data['config']);       
         unset($this->data['controller_setup']);
         
+        
             // Generate the view!
-        $this->generate_view($this->data);       
+        //$this->generate_view($this->data);       
         
     }
     
@@ -169,7 +170,7 @@ $this->output->enable_profiler(TRUE);
         unset($this->data['controller_setup']);
         
             // Generate the view!
-        $this->generate_view($this->data);
+        //$this->generate_view($this->data);
        
     }
     

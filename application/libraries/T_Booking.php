@@ -15,20 +15,26 @@ class T_Booking extends MY_Controller {
          parent::__construct($this->controller_name);
     }
     
-  public function index() {
-       $this->data['controller_setup']['method_name'] = 'index';
-       $this->data['view_setup']['header_file'] .= '_modal';  //add '_modal' for modal
-       parent::index();
-   }
+    public function index() {
+        $this->data['controller_setup']['method_name'] = 'index';
+        $this->data['view_setup']['header_file'] .= '_modal';  //add '_modal' for modal
+        parent::index();
+       
+          // Generate the view!
+        $this->generate_view($this->data);
+    }
    
-  public function view($rID, $ContactId = NULL) {    //false = create new record
-       $this->data['controller_setup']['method_name'] = 'view';
-       $this->data['view_setup']['header_file'] .= '_modal';  //add '_modal' for modal
-       $this->data['view_setup']['footer_file'] .= '';  //add '_modal' for modal       
-       $this->data['view_setup']['rID'] = $rID;
-       $this->data['view_setup']['ContactId'] = $rID;   //in this context, $rID == ContactId
-       parent::view($rID);
-   }
+    public function view($rID, $ContactId = NULL) {    //false = create new record
+        $this->data['controller_setup']['method_name'] = 'view';
+        $this->data['view_setup']['header_file'] .= '_modal';  //add '_modal' for modal
+        $this->data['view_setup']['footer_file'] .= '';  //add '_modal' for modal       
+        $this->data['view_setup']['rID'] = $rID;
+        $this->data['view_setup']['ContactId'] = $rID;   //in this context, $rID == ContactId
+        parent::view($rID);
+        
+          // Generate the view!
+        $this->generate_view($this->data);
+    }
    
 }
    

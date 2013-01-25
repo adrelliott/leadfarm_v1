@@ -15,15 +15,12 @@ class T_Dashboard extends MY_Controller {
          parent::__construct($this->controller_name);
     }
     
-  public function index() {
-       $this->data['controller_setup']['method_name'] = 'index'; 
-       
-       parent::index();
-       
-       
-       
-      // print_array($this->data);
-   }
+    public function index() {
+        $this->data['controller_setup']['method_name'] = 'index';        
+        parent::index();
+          // Generate the view!
+        $this->generate_view($this->data);
+    }
    
 }
    
