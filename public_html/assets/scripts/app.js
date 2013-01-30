@@ -67,6 +67,15 @@ $(function() {
 
     // Datepicker
     $('.datepicker').datepicker().children().show();
+    
+    //Date & time picker (from http://trentrichardson.com/examples/timepicker/)
+    $('.datetimepicker').datetimepicker({
+	timeFormat: "hh:mm:ss",
+        dateFormat: 'yy-mm-dd',
+        stepHour: 1,
+	stepMinute: 10
+        });
+    
 
     // Horizontal Slider
     $('#horizSlider').slider({
