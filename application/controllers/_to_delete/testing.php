@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Testing extends MY_Controller {
+class Testing extends CI_Controller { 
 
 	/**
 	 * Index Page for this controller.
@@ -21,6 +21,10 @@ class Testing extends MY_Controller {
 	{
 		//$this->load->view('welcome_message');
 	}
+        
+        function date_time(){
+            $this->load->view('_to_delete/datetime');
+        }
 }
 
 /* End of file welcome.php */
