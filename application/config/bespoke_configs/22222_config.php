@@ -1328,9 +1328,9 @@ $config['booking'] = Array
                         'label' => 'Date created',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'datetimepicker',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'date',
                         'name' => 'CreationDate',
                         'helpText' => '',                        
@@ -1566,106 +1566,17 @@ $config['contactaction'] = Array
                         'label' => 'Date created',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'datetimepicker',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'timestamp',
+                        'extraHTMLInput' => ' readonly',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
                         'name' => 'CreationDate',
                         'helpText' => '',                        
-                        'length' => '',
-                        'options' => array  //what hours do we want to show in dropdown? 
-                        (
-                            //'01' => '01',
-                            //'02' => '02',
-                            //'03' => '03',
-                            //'04' => '04',
-                           // '05' => '05',
-                            //'06' => '06',
-                            //'07' => '07',
-                            '08' => '08',
-                            '09' => '09',
-                            '10' => '10',
-                            '11' => '11',
-                            '12' => '12',
-                            '13' => '13',
-                            '14' => '14',
-                            '15' => '15',
-                            '16' => '16',
-                            '17' => '17',
-                            '18' => '18',
-                            //'19' => '19',
-                            //'20' => '20',
-                            //'21' => '21',
-                            //'22' => '22',
-                            //'23' => '23',
-                        ),
+                        'length' => '',                        
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
-                    ),
-                    /*'CreationDate_date' => array       
-                    (
-                        'on' => FALSE,    //TRUE/FALSE to include/exclude from query
-                        'cssClassContainingDiv' => '',
-                        'cssIdContainingDiv' => '',
-                        'cssClassLabel' => '',
-                        'cssIdLabel' => '',
-                        'label' => 'Date created',                  
-                        'cssClassInputDiv' => '',
-                        'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'date',
-                        'name' => '&&CreationDate_date',
-                        'helpText' => '',                        
-                        'length' => '',
-                        'HTML_before' => '',
-                        'HTML_after' => '',
-                        'value' => '', 
-                    ),
-                    'CreationDate_hours' => array       
-                    (
-                        'on' => FALSE,    //TRUE/FALSE to include/exclude from query
-                        'cssClassContainingDiv' => '',
-                        'cssIdContainingDiv' => '',
-                        'cssClassLabel' => '',
-                        'cssIdLabel' => '',
-                        'label' => 'Date created',                  
-                        'cssClassInputDiv' => '',
-                        'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'time',
-                        'name' => '&&CreationDate_hours',
-                        'helpText' => '',                        
-                        'length' => '',
-                        'HTML_before' => '',
-                        'HTML_after' => '',
-                        'value' => '', 
-                    ), 
-                    'CreationDate_mins' => array       
-                    (
-                        'on' => FALSE,    //TRUE/FALSE to include/exclude from query
-                        'cssClassContainingDiv' => '',
-                        'cssIdContainingDiv' => '',
-                        'cssClassLabel' => '',
-                        'cssIdLabel' => '',
-                        'label' => 'Date created',                  
-                        'cssClassInputDiv' => '',
-                        'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'time',
-                        'name' => '&&CreationDate_mins',
-                        'helpText' => '',                        
-                        'length' => '',
-                        'HTML_before' => '',
-                        'HTML_after' => '',
-                        'value' => '', 
-                    ),   */                 
+                    ),                
                     'ContactId' => array       
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
@@ -1697,9 +1608,9 @@ $config['contactaction'] = Array
                         'label' => 'Completion Date',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'datepicker',
-                        'cssIdInput' => 'datepicker',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'cssClassInput' => 'datetimepicker',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'ActionDate',
                         'helpText' => '',                        
@@ -2253,22 +2164,14 @@ $config['vehicles'] = Array
                         'label' => 'MOT Due:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'datepicker',
+                        'cssClassInput' => 'datetimepicker',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => '__MOT_expiry',
                         'helpText' => '',                        
                         'length' => '',
-                        'options' => array
-                        (
-                            '' => '',
-                            'Audi' => 'Audi',
-                            'BMW' => 'BMW',
-                            'Chevrolet' => 'Chevrolet',
-                            'Datsun' => 'Datsun',
-                            'Ford' => 'Ford',
-                        ),
+                        'options' => NULL,
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -2283,22 +2186,14 @@ $config['vehicles'] = Array
                         'label' => 'Service Due:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'datepicker',
+                        'cssClassInput' => 'datetimepicker',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' readonly', //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => '__Service_expiry',
                         'helpText' => '',                        
                         'length' => '',
-                        'options' => array
-                        (
-                            '' => '',
-                            'Audi' => 'Audi',
-                            'BMW' => 'BMW',
-                            'Chevrolet' => 'Chevrolet',
-                            'Datsun' => 'Datsun',
-                            'Ford' => 'Ford',
-                        ),
+                        'options' => NULL,
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -2313,9 +2208,9 @@ $config['vehicles'] = Array
                         'label' => 'Healthcheck Date:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'datepicker',
+                        'cssClassInput' => 'datetimepicker',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => '__Date_of_healthcheck',
                         'helpText' => '',                        
