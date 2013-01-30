@@ -3,7 +3,6 @@ $display_none = '';
 ?>
 
 <div class="col_6"><!-- Start Column 1-->	
-    <?php foreach($notifications as $n => $html) { echo $html; } ?>
     <div class="row clearfix">
         <div class="row"><!-- Tabs begin -->
             <div class="widget clearfix tabs">
@@ -22,7 +21,7 @@ $display_none = '';
                 <div class="widget_inside">
                     <div id="tab-1">
                         <div class="form">
-                            <?php //echo form_open('vehicles/add'); ?>
+                            <?php echo form_open(DATAOWNER_ID . "/vehicles/add/$rID/$ContactId/edit"); ?>
                             <?php display_field($fields['__Registration']); ?>
                             <?php display_field($fields['__Make']); ?>
                             <?php display_field($fields['__Model']); ?>
@@ -36,14 +35,14 @@ $display_none = '';
                         </div>
                     </div>
                     <div id="tab-2">
-                        <?php echo form_open(DATAOWNER_ID . '/contact/append_note/' . $rID . '/' . $fieldset); ?>
+                        <?php echo form_open(DATAOWNER_ID . '/vehicles/append_note/' . $rID . '/' . $ContactId); ?>
                             <p>These are the notes for this record.</p>
-                            <?php //echo display_field($fields['ContactNotes']); ?>
+                            <?php echo display_field($fields['__VehicleNotes']); ?>
                            <!-- Start field "Add a Note:" -->
                            <div class="clearfix">
                                <h4>Add your new note below</h4>
                                <div class="input">
-                                   <textarea class="xxlarge" type="text"  name="add_a_note" rows="5" placeholder="Your note will be automatically datestamped & appended to the notes above" /></textarea>
+                                   <textarea class="xxxxlarge" type="text"  name="add_a_note" rows="5" placeholder="Your note will be automatically datestamped & appended to the notes above" /></textarea>
                                </div>
                            </div>
                            <!-- End field "Add a Note:" -->	
@@ -127,46 +126,28 @@ $display_none = '';
 <span class="notification information">
     <h4><strong>Discussing</strong> this Vehicle? Quote Vehicle Id <strong><?php echo $rID; ?></strong></h4>
 </span>
-    <div class="row clearfix">
-        <div class='row'>
-            <div class="widget clearfix  form">
-                <h2>Other Vehicles</h2>
-                <div class="clearfix">
-                    
-                    <div class="clearfix margin_top_15">
-                        <a href="" class="large blue button right iframe">
-                        <span>Create New Vehicle</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>  
-        <div class="row"><!-- Tabs begin -->
-            
-            <div class="widget clearfix tabs">
-                <ul>
-                    <li><h2><a href='#tab-1'>Actions</a></h2></li>
-                    <li><h2><a href='#tab-2'>Bookings</a></h2></li>
-                    <li><h2><a href='#tab-3'>Other Vehicles</a></h2></li>
-                </ul>
-                <div class="widget_inside">
-                    <div id="tab-1">
-                        
-                        <div class="clearfix margin_top_15">
-                           <a href="" class="large blue button right iframe"><span>Create New Action</span></a>
-                       </div>
-                    </div>
-                    <div id="tab-2">
-                        
-                        <div class="clearfix margin_top_15">
-                           <a href="" class="large blue button right iframe"><span>Create New Booking</span></a>
-                       </div>
-                    </div>
-                    <div id="tab-3">
-                       
-                        <code>This section shows details of emails/texts & letters sent to this contact</code>
-                    </div>
-                </div>
+    <div class="row clearfix"> 
+        <div class="row">            
+            <div class="widget clearfix">
+                <h2>Related Vehicles</h2>
+                    <div class="
+                <?php foreach($notifications as $n => $html) { echo $html; } ?>
+                <?php 
+                    $this->table->set_template_custom(array (
+                        'anchor_uri' => 'vehicles/view/edit', 
+                        'ContactId_name' => '__ContactId' ,
+                        'primary_key_fieldname' => '__Id'
+                        ));    
+                    $this->table->set_heading_custom(
+                            $tables['vehicles']['table_headers']
+                            );
+                    echo $this->table->generate_custom(
+                            $tables['vehicles']['table_data']
+                            ); 
+                ?>
+                <div class="clearfix margin_top_15">
+                   <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Add New Vehicle</span></a>
+               </div>
             </div>
         </div>
         <div class='row'>

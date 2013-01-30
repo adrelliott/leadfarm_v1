@@ -354,7 +354,8 @@ class MY_Table extends CI_Table {
                                             }
                                             //Now add in our custom function that wraps the lines in <a> tag
                                             $Id_fieldname = $this->template['primary_key_fieldname'];
-                                            $anchor = $this->_generate_anchor($row[$Id_fieldname]);
+                                            //$anchor = $this->_generate_anchor($row[$Id_fieldname]);
+                                            $anchor = $this->_generate_anchor($row, $Id_fieldname);
                                             $cell = isset($cell['data']) ? $anchor['start'] . $cell['data'] . $anchor['end'] : '';
                                             $out .= $temp;
 
@@ -379,6 +380,8 @@ class MY_Table extends CI_Table {
                                        
 				}
 				
+                                $Id_fieldname = $this->template['primary_key_fieldname'];
+                                $anchor = $this->_generate_anchor($row, $Id_fieldname);
                                 $out .= $this->_generate_checkboxes('td',$row[$Id_fieldname]);  
                                 $out .= $this->_generate_radio_buttons('td',$row[$Id_fieldname]);  
                                    //This inserts checkboxes If rqd
@@ -500,7 +503,7 @@ class MY_Table extends CI_Table {
 		}
 
 		$this->temp = $this->_default_template();
-		foreach (array('anchor_uri','anchor_uri_append','anchor_attr','primary_key_fieldname','checkbox_flag','checkbox_class','checkbox_name','checkbox_value_is_id','table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
+		foreach (array('anchor_uri','ContactId_name','anchor_uri_append','anchor_attr','primary_key_fieldname','checkbox_flag','checkbox_class','checkbox_name','checkbox_value_is_id','table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
 		{
 			if ( ! isset($this->template[$val]))
 			{
@@ -521,6 +524,7 @@ class MY_Table extends CI_Table {
 	{
 		return  array (
 			'anchor_uri'                   => '',
+			'ContactId_name'             => '',
 			'anchor_uri_append'           => '',
 			'anchor_attr'                 => '',    //e.g class="iframe"
 			'primary_key_fieldname'       => 'Id',    //this is usually 'Id' or '__Id'
@@ -562,8 +566,10 @@ class MY_Table extends CI_Table {
         
         // This method inserts a link if one has been passed via set_template(anchor => 1)
         
-        function _generate_anchor($id)
-        {         
+        function _generate_anchor($row, $Id_fieldname)
+        {       
+        $id = $row[$Id_fieldname];
+        
 //first check to see if there is a value for $this->template('anchor_uri')
             $retval = array('start' => '', 'end' => '');
             if ( isset($this->template['anchor_uri']) && $this->template['anchor_uri'] != '' )
@@ -573,7 +579,12 @@ class MY_Table extends CI_Table {
                 {
                     $attr = $this->template['anchor_attr'];
                 }
-                $retval['start'] = '<a href="' . base_url() . DATAOWNER_ID . '/' . $this->template['anchor_uri'] . '/' . $id['data'] . '/' . $this->template['anchor_uri_append'] . '" ' . $attr . ' >';
+                $cid = '';  //make this '0/' to standardise all URLs
+                if ( isset($this->template['ContactId_name']) && isset($row[$this->template['ContactId_name']]) )
+                {
+                    $cid = $row[$this->template['ContactId_name']]['data'] . '/';
+                }
+                $retval['start'] = '<a href="' . base_url() . DATAOWNER_ID . '/' . $this->template['anchor_uri'] . '/' . $id['data'] . '/' . $cid . $this->template['anchor_uri_append'] . '" ' . $attr . ' >';
                 $retval['end'] = '</a>';
             }
             return $retval;

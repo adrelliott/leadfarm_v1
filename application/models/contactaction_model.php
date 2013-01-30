@@ -62,6 +62,6 @@ class Contactaction_model extends MY_Model {
                 );        
         return $this->get($rID);
     }
-
+     
 
 }

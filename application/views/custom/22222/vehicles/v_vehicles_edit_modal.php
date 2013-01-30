@@ -9,21 +9,20 @@
                     <div id="tab-1"><!-- Start of tab 1 -->
                         <h3>Create/edit a vehicles for this contact</h3>
                         <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . "/vehicles/add_modal/$rID/$ContactId/edit") ; ?>
+                            <?php echo form_open(DATAOWNER_ID . "/vehicles/add_new/$rID/$ContactId/edit") ; ?>
                                 <?php //echo display_field($fields['__Id'], array('type' => 'hidden'));  ?>
                                 <?php //echo display_field($fields['__ContactId'], array('type' => 'hidden', 'value' => $ContactId));  ?>                                
                                 <?php echo display_field($fields['__Make']); ?>
                                 <?php echo display_field($fields['__Model']); ?>  
-                                <?php echo display_field($fields['__ActiveYN']); ?>                                
-                                <?php echo display_field($fields['__MOT_expiry']); ?>                                
-                                <?php echo display_field($fields['__Service_expiry']); ?>                                                          
-                                
-                                <?php //echo display_field($this->data['results']['EndDate']) ?>
+                                <?php echo display_field($fields['__ActiveYN']); ?>
+                                <?php echo display_field($fields['__MOT_expiry']); ?>
+                                <?php echo display_field($fields['__Service_expiry']); ?>
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
                                 </div>                            
                             <?php echo form_close(); ?>
                         </div>
+                        <span class="notification information margin_top_25">NOTE: More details available by clicking 'Vehicles' menu button or on the vehicle list on Contact's page</span>
                     </div>
                 </div>                
             </div>

@@ -1919,7 +1919,7 @@ $config['vehicles'] = Array
                     'fields' => array 
                     (
                         '__Id' => '#',
-                        '__ContactId' => 'Contact Id of vehicle owner',
+                        '__ContactId' => '',
                         '__Make' => 'Make',
                         '__Model' => 'model',
                         '__Registration' => 'Reg',
@@ -1927,6 +1927,41 @@ $config['vehicles'] = Array
                         '__Service_expiry' => 'Service Expires',
                     ),
                 ), 
+                /*'all_actions' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'all_actions', //The dataset name defined above
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'get_all_vehicles_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            'ActionType !=' => 'Booking', 
+                        ),     
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        'ActionType' => 'Type',
+                        'ActionDescription' => 'Description',
+                    ),
+                ),     
+                'bookings' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => 'all_actions', //The dataset name defined above
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'get_all_contacts_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            //'ContactId =' => '??ContactId', 
+                            'ActionType =' => 'Booking', 
+                        ),                  
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        'ActionType' => 'Type',
+                        'ActionDescription' => 'Description',
+                    ),
+                ), */   
                 'users' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
@@ -2053,7 +2088,7 @@ $config['vehicles'] = Array
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => '  onblur="javascript:this.value=this.value.toUpperCase(); "',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => '__Registration',
                         'helpText' => '',                        
@@ -2064,6 +2099,28 @@ $config['vehicles'] = Array
                             'Meeting' => 'Meeting',
                             'Phone Call' => 'Phone Call',
                         ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__VehicleNotes' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Notes on this Vehicle',                  
+                        'cssClassInputDiv' => '',
+                        'cssClassInput' => 'xxxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'rows="20" readonly',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'cssIdInputDiv' => '',
+                        'name' => '__VehicleNotes',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => NULL,
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -2226,10 +2283,10 @@ $config['vehicles'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Service Due:',                  
+                        'label' => 'Current Mileage',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'datepicker',
+                        'cssClassInput' => 'validate[required,custom[integer]]',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',

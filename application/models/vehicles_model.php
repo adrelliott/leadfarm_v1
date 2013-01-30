@@ -45,6 +45,18 @@ class Vehicles_model extends MY_Model {
         return $this->get($rID);
     }
     
+    public function get_single_record($rID, $where = NULL) {
+        //get the record with rID. $where set up in dataset['model_params']
+        if ($where != NULL) { $this->db->where($where); }
+        $query = $this->get($rID);
+        
+        if (isset($query['__ContactId']))
+        {
+            $this->current_ContactId = $query['__ContactId'];
+        }
+        return $query;
+    }
+    
    /* 
     
     public function get_all_records($where = NULL) {
@@ -60,11 +72,7 @@ class Vehicles_model extends MY_Model {
         return $this->get();
     }
     
-     public function get_single_record($rID, $where = NULL) {
-        //get the record with rID. $where set up in dataset['model_params']
-        if ($where != NULL) { $this->db->where($where); }
-        return $this->get($rID);
-    }
+     
     
     
     

@@ -75,7 +75,7 @@
                             echo $this->table->generate_custom($tables['vehicles']['table_data']); 
                         ?>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/add_new/edit_modal/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Vehicle</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/create_new/edit_modal/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Vehicle</span></a>
                        </div>
                     </div>
                 </div>

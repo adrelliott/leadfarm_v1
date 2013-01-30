@@ -25,7 +25,7 @@ class Garage extends MY_Controller {
 
                          if ($timestamp - time() <= $countdown)
                          {
-                             $n[] =  '<span class="notification warning">The MOT is expired, or about to expire, for <a href="' . site_url() . DATAOWNER_ID . '/vehicles/view/edit/' . $data['__Id'] . '/' . $ContactId . '" class="iframe">' . $identifier . '</a>.(Expiry date recorded is <strong>' . $date . '</strong>)</span>';
+                             $n[] =  '<span class="notification warning">The MOT is expired, or about to expire, for <a href="' . site_url() . DATAOWNER_ID . '/vehicles/view/edit/' . $data['__Id'] . '/' . $ContactId . '" class="">' . $identifier . '</a>.(Expiry date recorded is <strong>' . $date . '</strong>)</span>';
                          }
                          break;
                     case '__Service_expiry':
@@ -36,7 +36,7 @@ class Garage extends MY_Controller {
 
                          if ($timestamp - time() <= $countdown)
                          {
-                            $n[] =  '<span class="notification warning">The SERVICE is expired, or about to expire, for <a href="' . site_url() . DATAOWNER_ID . '/vehicles/view/edit/' . $data['__Id'] . '/' . $ContactId . '" class="iframe">' . $identifier . '</a>. (Expiry date recorded is <strong>' . $date . '</strong>)</span>';
+                            $n[] =  '<span class="notification warning">The SERVICE is expired, or about to expire, for <a href="' . site_url() . DATAOWNER_ID . '/vehicles/view/edit/' . $data['__Id'] . '/' . $ContactId . '" class="">' . $identifier . '</a>. (Expiry date recorded is <strong>' . $date . '</strong>)</span>';
                          }
                          break;
                 }

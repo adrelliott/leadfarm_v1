@@ -32,12 +32,11 @@ class Contactaction extends T_Contactaction {
     
   
     
-    //function add_booking ($rID, $ContactId, $view_file = 'view') {
-    //    $this->view_booking($view_file, $rID, $ContactId);
-   // }
+    function add_booking ($rID, $ContactId, $view_file = 'view') {
+        $this->add($rID, $ContactId, $view_file = 'edit_booking');
+    }
     
-    
-    
+        
     
 }
    

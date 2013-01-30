@@ -25,7 +25,7 @@ class Vehicles extends T_Vehicles {
     public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
         $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;  
         parent::view($rID, $ContactId);
-   
+        
             //check for expirations of MOT & service
         $this->load->library('garages/garage');
         $this->data['view_setup']['notifications'] = array();
@@ -42,7 +42,7 @@ class Vehicles extends T_Vehicles {
         $this->generate_view($this->data);
     }
     
-    public function add_new($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
+    public function create_new($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
         $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file; 
         
         $this->data['view_setup']['modal'] = TRUE;
@@ -53,6 +53,19 @@ class Vehicles extends T_Vehicles {
              // Generate the view!
         $this->generate_view($this->data);
     }
+    
+    public function add_new($rID, $ContactId, $view_file = 'view') {    //false = create new record
+         //clean the input
+         $input = clean_data($this->input->post()); 
+         $input['__ContactId'] = $ContactId;
+
+         $this->load->model('vehicles_model');
+         $rID = $this->vehicles_model->add($input, $rID);
+         redirect(DATAOWNER_ID . "/vehicles/create_new/edit_modal/$rID/$ContactId" );
+         
+         //$this->create_new($view_file, $rID, $ContactId);
+
+     }
     
 }
    
