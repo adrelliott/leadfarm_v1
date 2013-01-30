@@ -12,8 +12,6 @@ class T_Contact extends MY_Controller {
         $this->data['controller_setup']['method_name'] = 'index';
         parent::index();
         
-          // Generate the view!
-        $this->generate_view($this->data);
     }
    
     public function view($rID, $fieldset) {    //false = create new record
@@ -22,17 +20,14 @@ class T_Contact extends MY_Controller {
         $this->data['view_setup']['footer_file'] .= '';  //add '_modal' for modal       
         $this->data['view_setup']['rID'] = $rID;
         $this->data['view_setup']['ContactId'] = $rID;   //in this context, $rID == ContactId
-        $this->data['view_setup']['display_none'] = '';
+        $this->data['view_setup']['display_none'] = '';       
+        parent::view($rID);
+        
         $this->data['view_setup']['fieldset'] = $fieldset;
        
-        parent::view($rID);
-       
-          // Generate the view!
-        $this->generate_view($this->data);
-       
-    }       
+    }    
      
-    public function add($rID, $input = NULL) {    //false = create new record
+    public function add($rID, $input = NULL, $action = 'contact') {    //false = create new record
         //clean the input
         $input = clean_data($this->input->post()); 
 
@@ -40,9 +35,22 @@ class T_Contact extends MY_Controller {
         $rID = $this->contact_model->add($input, $rID);  
 
         $fieldset = $input['_IsOrganisationYN'];
-        redirect(DATAOWNER_ID . '/contact/view/edit/' . $rID . '/' . $fieldset );
+        $result = $this->start_action($action);   //sstarts any follow ups/ and applies tags
+        
+        redirect(DATAOWNER_ID . '/' . $action . '/view/edit/' . $rID . '/' . $fieldset );
        
     }
+    
+    function start_action($view) {
+        switch ($view)
+        {
+            case 'contact':
+                break;
+            case 'booking':
+                break;
+        }
+    }
+    
     public function append_note($rID, $fieldset) {
         $input = clean_data($this->input->post()); 
 
@@ -59,7 +67,7 @@ class T_Contact extends MY_Controller {
         $rID = $this->contact_model->save($input, $rID);
 
         //Refresh view       
-        redirect(DATAOWNER_ID . '/contact/view/edit/' . $rID . '/' . $fieldset .'#tab-2' );
+        redirect(DATAOWNER_ID . '/contact/view/edit/' . $rID . '/' . $fieldset );
 
         //Can this method be made prettier? or moving some of it back to the 'add' method?
     }

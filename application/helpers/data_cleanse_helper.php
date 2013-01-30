@@ -119,7 +119,9 @@ function clean_data($input, $cleanse_type = NULL){
     //generate HTML when passed config & value
 function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
         //Override configred attributes of field with the passed array
-        if ($new_attributes && is_array($new_attributes))
+    $attributes['before_field'] = '';  
+    $attributes['after_field'] = '';  
+    if ($new_attributes && is_array($new_attributes))
         {
             foreach ($new_attributes as $key => $new_value)
             {
@@ -138,6 +140,7 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
         
         $retval = "\n" . '<!-- Start field "' . $attributes['name'] . '" -->' . "\n" . $attributes['HTML_before'];
         $retval .= '<div class="clearfix' . $attributes['cssClassContainingDiv'] . '" id="' . $attributes['cssIdContainingDiv'] . '"><label class="' . $attributes['cssClassLabel'] . '" id="' . $attributes['cssIdLabel'] . '">' . $attributes['label'] . '</label>';
+         $retval .= $attributes['before_field'];
          $retval .= '<div class="input ' . $attributes['cssClassInputDiv'] . '" id="' . $attributes['cssIdInputDiv'] . '">';
         //switch each type of input
         switch ($attributes['type'])
@@ -231,7 +234,9 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
                 $retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . '" type="text"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $attributes['value'] . '"  />';
                 break;
         }
-       $retval .= '</div>';
+      
+        $retval .= $attributes['after_field'];
+        $retval .= '</div>';
         
         
         $retval .= '</div>' . $attributes['HTML_after'];

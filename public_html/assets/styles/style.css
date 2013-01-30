@@ -304,6 +304,7 @@ textarea {font-size: 1em}
 
 .form .green-highlight {background:#E1FCDD}
 .form .green-highlight input[type='text'] {border: 1px solid #74A75A}
+.form textarea .green-highlight {border: 1px solid #74A75A; background:#E1FCDD}
 
 .form .grey-highlight {background:#E8E8E8}
 .form .grey-highlight input[type='text'] {border: 1px solid #ababab}
@@ -324,10 +325,13 @@ input.mini, textarea.mini, select.mini {width: 60px;}
 input.small, textarea.small, select.small {width: 90px;}
 input.medium, textarea.medium, select.medium {width: 150px;}
 input.large, textarea.large, select.large {width: 210px;}
+input.larger, textarea.larger, select.larger {width: 225px;}
 input.xlarge, textarea.xlarge, select.xlarge {width: 270px;}
 input.500large, textarea.500large, select.500large {width: 500px}
-input.xxlarge, textarea.xxlarge, select.xxlarge {width: 530px}
-input.xxxlarge, textarea.xxxlarge, select.xxxlarge {width: 730px}
+input.xxlarge, textarea.xxlarge, select.xxlarge {width: 330px}
+input.xxxlarge, textarea.xxxlarge, select.xxxlarge {width: 370px}
+input.xxxxlarge, textarea.xxxxlarge, select.xxxxlarge {width: 550px}
+input.xxxxxlarge, textarea.xxxxxlarge, select.xxxxxlarge {width: 730px}
 textarea.xxlarge {overflow-y: auto;}
 textarea {max-width: 500px; min-height: 50px}
 textarea.500large {max-width:500px}
@@ -649,8 +653,7 @@ a.custom_link {color:#3780de; }
 #selectable li { margin: 3px; padding: 15px 10px 10px 10px; float: left; width: 110px; height: 110px; text-align: center; }
 
 /* CSS for the sliding/toggled elements on homepage */
-h3.index {
-	background: url('../images/buttons/plus.png') no-repeat 10px 5px;
+h3.index {	
 	color: #444444;
 	font-family:acta-display, Georgia, Times, serif;
 	font-size:2.75em;
@@ -659,6 +662,14 @@ h3.index {
 	line-height:1.25em;
 	margin:0 25px 0.5em;
 	text-indent: 50px;  
+}
+h3.toggle_icon {
+	background: url('../images/buttons/plus.png') no-repeat 10px 5px;
+	
+}
+h3.speech_icon {
+	background: url('../images/buttons/balloon.png') no-repeat 10px 5px;
+	
 }
 .hide_toggle {
 	display:none;

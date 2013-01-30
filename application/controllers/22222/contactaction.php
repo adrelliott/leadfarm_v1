@@ -17,14 +17,27 @@ class Contactaction extends T_Contactaction {
         parent::__construct();
     }
     
-  public function index() {     
-       parent::index();
-   }
+    public function index() {     
+        parent::index();
+            // Generate the view!
+        $this->generate_view($this->data);
+    }
    
   public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
         $this->data['view_setup']['view_file'] = 'v_contactaction_' . $view_file;        
         parent::view($rID, $ContactId);
+            // Generate the view!
+        $this->generate_view($this->data);
     }
+    
+  
+    
+    //function add_booking ($rID, $ContactId, $view_file = 'view') {
+    //    $this->view_booking($view_file, $rID, $ContactId);
+   // }
+    
+    
+    
     
 }
    

@@ -12,27 +12,52 @@ class Booking extends T_Booking {
 
     public function __construct()    {
         
-        $this->data['view_setup']['header_file'] = 'header_modal'; 
-         parent::__construct();
+        //$this->data['view_setup']['header_file'] = 'header_modal'; 
+        parent::__construct();
     }
     
-  public function index($view_file = 'index') {   
-      $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
-      //$this->data['view_setup']['header_file'] = 'header_modal';
-      parent::index();
-   }
+    public function index($view_file = 'index') {   
+        $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
+        //$this->data['view_setup']['header_file'] = 'header_modal';
+        parent::index();
+      
+          // Generate the view!
+        $this->generate_view($this->data);
+    }
    
-  public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
-       $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
-       parent::view($rID, $ContactId);
-   }
+    public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
+        $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
+        parent::view($rID, $ContactId);
+        
+            //check for expirations of MOT & service
+        $this->load->library('garages/garage');
+        $this->data['view_setup']['notifications'] = array();
+        if (isset($this->data['view_setup']['tables']['vehicles']['table_data'][0]))
+        {
+            $this->data['view_setup']['notifications'] = 
+                    $this->garage->check_vehicle_expiry 
+                    (
+                    $this->data['view_setup']['tables']['vehicles'],
+                    $this->data['view_setup']['ContactId']
+                    );
+        }
+          // Generate the view!
+        $this->generate_view($this->data);
+    }
    
-   public function get_bookings() {
-       //get all the booking data
-       $year = date('Y');
-	$month = date('m');
+    
+    
+    
+    
+    
+    
+    
+    public function get_bookings() {
+        //get all the booking data
+        $year = date('Y');
+        $month = date('m');
 
-	echo json_encode(array(
+        echo json_encode(array(
 
 		array(
 			'id' => 111,
@@ -98,6 +123,29 @@ class Booking extends T_Booking {
             }
          */
 
+   }
+    public function get_booking_array() {
+       $results = array ();
+
+        $title = 'Title with some <strong>HTML</strong> in';
+        $description = '';
+        $start_ts = mktime (8, 0, 0, 1, 1, 2013);
+        $url = '';
+
+        $results[] = array (
+          'id' => 1,                      /* ID of the event */
+          'title' => strip_tags ($title), /* Title that has been made HTML-safe */
+          'htmlTitle' => $title,          /* Original title */
+          'description' => $description,  /* HTML description */
+          'start' => date ('Y-m-d', $start_ts),
+          'allDay' => false,
+          'url' => $url,
+          'color' => '#000000'          /* Hex-code for background-colour */
+        );
+
+        header ('Content-Type: text/json');
+        echo json_encode ($results);
+        exit;
    }
    
    

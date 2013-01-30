@@ -12,7 +12,8 @@ class Contact_model extends MY_Model {
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = 'Contact';
-        $this->order_by = 'LastName ASC';    
+        $this->order_by = 'LastName ASC';   
+        $this->contactId_fieldname = 'Id'; 
         if (isset($this->data['view_setup']['ContactId']))
         {
             $this->current_ContactId = $this->data['view_setup']['ContactId'];
@@ -45,14 +46,18 @@ class Contact_model extends MY_Model {
     }
    
         
-    /*
-    public function get_all_records($where = NULL) {
+    public function master_search() {
         //get all records. $where set up in dataset['model_params']
-        if ($where != NULL) { $this->db->where($where); }
+        $this->db->join(
+                '__Vehicles', 
+                '__Vehicles.__ContactId = ' . $this->table_name. '.' . $this->contactId_fieldname ,
+                'left outer'
+                );   
         return $this->get();
     }
     
-    public function get_single_record($rID, $where = NULL) {
+    
+    /*public function get_single_record($rID, $where = NULL) {
         //get the record with rID. $where set up in dataset['model_params']
         if ($where != NULL) { $this->db->where($where); }
         return $this->get($rID);

@@ -16,7 +16,7 @@
                 <div class="clearfix">
                     <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contact/view/edit/new/0" class="large blue button right"><span>Create New Contact</span></a>
                 </div>
-            <h3 class="index" id="option1_toggle">Looking for an Organisation?</h3>
+            <h3 class="index toggle_icon" id="option1_toggle">Looking for an Organisation?</h3>
                 <div class="hide_toggle" id="option1">
                     <?php 
                     $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '1'));    

@@ -6,7 +6,7 @@
  * @author Al Elliott
  */
 
-class Vehicle_model extends MY_Model {
+class Vehicles_model extends MY_Model {
 
     function __construct (){
         //parent::__construct();
@@ -30,6 +30,19 @@ class Vehicle_model extends MY_Model {
        }      
        
        return $this->save($input, $rID);
+    }
+    
+    public function joinon_ContactJoin_single($rID, $where = NULL) {
+        //get all vehcile records where __ContactId = current Id
+        $this->db->where('__ContactId', $this->current_ContactId);
+        if ($where != NULL) { $this->db->where($where); }   
+        $this->db->join(
+                'Contact', 
+                'Contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname ,
+                'left outer'
+                );       
+                
+        return $this->get($rID);
     }
     
    /* 

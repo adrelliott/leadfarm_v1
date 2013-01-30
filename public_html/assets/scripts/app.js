@@ -66,7 +66,7 @@ $(function() {
     });
 
     // Datepicker
-    $('#datepicker').datepicker().children().show();
+    $('.datepicker').datepicker().children().show();
 
     // Horizontal Slider
     $('#horizSlider').slider({
@@ -143,6 +143,20 @@ $(function() {
             //AE 21-06-12	Next line added apply modalbox to whole table no matter how you 'redraw' it (redraw=re-sort) 
             "fnDrawCallback": function(  ) {
                     $(".iframe").colorbox({iframe:true, width:"80%", height:"90%", escKey: false, overlayClose: false });
+            }
+    });
+    
+    //Unselects all checkboxes if they have been checked
+    $(".dataTable tbody tr").click(function(e) {
+            $(".dataTable tbody tr").removeClass("selected");
+            var $checkbox = $(this).find(':checkbox');
+            $(".dataTable :checkbox").not($checkbox).removeAttr("checked");
+            if (e.target.type == "checkbox") {
+                    // stop the bubbling to prevent firing the row's click event
+                    e.stopPropagation();
+            } else {        
+                    $checkbox.attr('checked', !$checkbox.attr('checked'));
+                    $(this).filter(':has(:checkbox)').toggleClass('selected');
             }
     });
 
@@ -234,7 +248,16 @@ $(function() {
             }
         }
     });
+    
+    
 
+});
+
+//Set up Nickname to cha ge when first name is changed.
+$(function() {
+    $('#FirstName').change(function() {
+       $('#NickName').val(this.value);
+    });
 });
 
 
@@ -253,10 +276,7 @@ $(function() {
 
 
 
-
-
-
-
+/* hopefully we can delete all of this below
 
 
 
@@ -448,3 +468,5 @@ function changePreset(){
     $("body").css("backgroundImage", "url(assets/images/background/" + presets[4] + ")");
     createCookie('bodyBG', presets[4]);
 }
+
+*/

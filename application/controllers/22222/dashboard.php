@@ -14,11 +14,13 @@ class Dashboard extends T_Dashboard {
          parent::__construct();
     }
     
-  public function index() {  
-      $this->data['view_setup']['view_file'] = 'v_dashboard';
-      $this->table_list = array('contacts', 'organisations');   //these are names of the datasets
-      parent::index();
-   }
+    public function index() {  
+        $this->data['view_setup']['view_file'] = 'v_dashboard';
+        $this->table_list = array('contacts', 'organisations');   //these are names of the datasets
+        parent::index();
+          // Generate the view!
+        $this->generate_view($this->data);
+    }
    
    
 }

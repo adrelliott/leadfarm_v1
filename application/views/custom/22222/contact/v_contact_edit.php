@@ -1,7 +1,5 @@
-<div class="col_6"><!-- Start Column 1-->								
-    <span class="notification undone">
-        MOT is Overdue (01-01-13)
-    </span>
+<div class="col_6"><!-- Start Column 1-->	
+    <?php foreach($notifications as $n => $html) { echo $html; } ?>
     <div class="row clearfix">
         <div class="row"><!-- Tabs begin -->
             <div class="widget clearfix tabs">
@@ -25,16 +23,20 @@
                         <div class="form">
                             <?php include("fieldsets/v_contact_$fieldset.php");
                                 //v_contact_0 = contact, ..._1  org ?>
-                             <div class="clearfix">
-                                <h4>Opt-in Settings:</h4>
-                            </div>
-                            <?php display_field($fields['_OptinEmailYN']); ?>
-                            <?php display_field($fields['_OptinSmsYN']); ?>
-                            <?php display_field($fields['_OptinSurfaceMailYN']); ?>
-                            <?php display_field($fields['_OptinNewsletterYN']); ?>
-                            <?php display_field($fields['_OptinPref']); ?>
-                            <div class="clearfix">
-                                <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
+                        </div><!-- End of form div-->
+                        <p id="option1_toggle" class="button right">
+                            <span>View Opt In Settings</span>
+                        </p> 
+                        <div class="hide_toggle" id="option1">
+                            <div class="form margin_top_30">
+                                <?php display_field($fields['_OptinEmailYN']); ?>
+                                <?php display_field($fields['_OptinSmsYN']); ?>
+                                <?php display_field($fields['_OptinSurfaceMailYN']); ?>
+                                <?php display_field($fields['_OptinNewsletterYN']); ?>
+                                <?php display_field($fields['_OptinPref']); ?>
+                                <div class="clearfix">
+                                    <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+                                </div>
                             </div>
                             <?php echo form_close(); ?>
                         </div>
@@ -47,7 +49,7 @@
                            <div class="clearfix">
                                <h4>Add your new note below</h4>
                                <div class="input">
-                                   <textarea class="xxlarge" type="text"  name="add_a_note" rows="5" placeholder="Your note will be automatically datestamped & appended to the notes above" /></textarea>
+                                   <textarea class="xxxxlarge green-highlight" type="text"  name="add_a_note" rows="5" placeholder="Your note will be automatically datestamped & appended to the notes above" /></textarea>
                                </div>
                            </div>
                            <!-- End field "Add a Note:" -->	
@@ -68,12 +70,12 @@
                     </div>
                     <div id="tab-4">
                         <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'vehicles/view/edit', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"', 'primary_key_fieldname' => '__Id'));    
+                            $this->table->set_template_custom(array ('anchor_uri' => 'vehicles/view/edit', 'anchor_uri_append' => $ContactId, 'primary_key_fieldname' => '__Id'));    
                             $this->table->set_heading_custom($tables['vehicles']['table_headers']);
                             echo $this->table->generate_custom($tables['vehicles']['table_data']); 
                         ?>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/add_new/edit_modal/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Vehicle</span></a>
                        </div>
                     </div>
                 </div>
@@ -83,8 +85,13 @@
 </div>
 <!-- Start Column 2-->
 <div class="col_6 last" style="<?php echo $display_none; ?>">
+    
+<span class="notification information">
+    <h4><strong>Transferring</strong> this contact? Quote Contact Id <strong><?php echo $ContactId; ?></strong></h4>
+</span>
     <div class="row clearfix"> 
         <div class="row"><!-- Tabs begin -->
+            
             <div class="widget clearfix tabs">
                 <ul>
                     <li><h2><a href='#tab-1'>Actions</a></h2></li>

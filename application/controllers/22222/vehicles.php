@@ -11,19 +11,47 @@ class Vehicles extends T_Vehicles {
 	 */
     
     public function __construct()    {
+        parent::__construct();
+        
+    }
+    
+    public function index($view_file = 'index') {     
+        parent::index();
+        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;
+          // Generate the view!
+        $this->generate_view($this->data);
+    }
+   
+    public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
+        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;  
+        parent::view($rID, $ContactId);
+   
+            //check for expirations of MOT & service
+        $this->load->library('garages/garage');
+        $this->data['view_setup']['notifications'] = array();
+        if (isset($this->data['view_setup']['tables']['vehicles']['table_data'][0]))
+        {
+            $this->data['view_setup']['notifications'] = 
+                    $this->garage->check_vehicle_expiry 
+                    (
+                    $this->data['view_setup']['tables']['vehicles'],
+                    $this->data['view_setup']['ContactId']
+                    );
+        }
+            // Generate the view!
+        $this->generate_view($this->data);
+    }
+    
+    public function add_new($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
+        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file; 
+        
         $this->data['view_setup']['modal'] = TRUE;
         $this->data['view_setup']['header_file'] = 'header_modal'; 
         $this->data['view_setup']['footer_file'] = 'footer_modal'; 
-        parent::__construct();
-    }
-    
-  public function index() {     
-       parent::index();
-   }
-   
-  public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
-        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;        
         parent::view($rID, $ContactId);
+        
+             // Generate the view!
+        $this->generate_view($this->data);
     }
     
 }

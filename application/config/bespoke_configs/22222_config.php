@@ -10,7 +10,12 @@
 | and upload to /assets/includes/custom/XXXXX where 'XXXXX' is dID. (must be called logo.png)
 */
 define('OPT_IN_REASON', "This is my opt in reason");  //Added to Infusionsoft
-//$config['base_url']	= 'http://localhost/projects/_leadfarm/leadfarm_v2.0/' . DATAOWNER_ID;
+define('COUNTDOWN', 45);  //Notifies the user {45 days {VALUE} days before MOT/Service expires. see libraries/garages/garages.php
+
+//
+//
+//
+//$config['base_url']	= 'http://leadfarm-staging.co.uk/' . DATAOWNER_ID;
 
 
 /*
@@ -97,6 +102,16 @@ $config['navbar_setup'] = Array
             'css'	=> '',	
             'view' => '@viewtable',				
          ), 
+        'vehicles' => Array	//do not change this value - this is what the directory should be called too
+        (
+            'pagename' => 'Vehicles',
+            'controller' => 'vehicles',
+            'method' => '',
+            'param' => '',
+            'icon'	=> '',
+            'css'	=> '',	
+            'view' => '@viewtable',				
+         ), 
         'campaign' => Array	//do not change this value - this is what the directory should be called too
         (
             'pagename' => 'Campaigns',
@@ -147,7 +162,31 @@ $config['dashboard'] = Array
         (
             'index' => array 
             (
-                'contacts' => array
+                'master_search' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'contacts', //The dataset name defined in this file
+                    'model_name' => 'contact_model',
+                    'model_method' => 'master_search',
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            //'__Vehicles.__ActiveYN =' => 1, 
+                        ),
+                    'fields' => array 
+                    (
+                        'Contact.Id' => '#',
+                        'Contact.FirstName' => 'First Name',
+                        'Contact.LastName' => 'Last Name',
+                        'Contact.PostalCode' => 'Postcode',
+                        'Contact.Phone1' => 'Phone',
+                        'Contact.Phone2' => 'Mobile',
+                        'Contact._OrganisationName' => 'Company Name',
+                        '__Vehicles.__Registration' => 'Registration',
+                        '__Vehicles.__Model' => 'Model',
+                        
+                    ),
+                ),   
+                /*'contacts' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
                     'data_source' => 'contacts', //The dataset name defined in this file
@@ -187,7 +226,7 @@ $config['dashboard'] = Array
                         
                     ),
                 ), 
-                /*'actions' => array
+                'actions' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
                     'data_source' => 'actions', //The dataset name defined in this file
@@ -202,7 +241,7 @@ $config['dashboard'] = Array
                         //'PostalCode' => 'Postcode',
                     ),
                 ), */
-                'tasks' => array
+                /*'tasks' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
                     'data_source' => 'actions', //The dataset name defined in this file
@@ -242,7 +281,7 @@ $config['dashboard'] = Array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
                     'data_source' => 'vehicles', //The dataset name defined in this file
-                    'model_name' => 'vehicle_model',
+                    'model_name' => 'vehicles_model',
                     'model_method' => 'get_all_records',
                     'model_params' => NULL,
                     'fields' => array 
@@ -254,7 +293,7 @@ $config['dashboard'] = Array
                         //'LastName' => 'Last Name',
                         //'PostalCode' => 'Postcode',
                     ),
-                ),
+                ),*/
             ),
         ),
         'record' => array
@@ -368,9 +407,12 @@ $config['contact'] = Array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
                     'data_source' => 'vehicles', //The dataset name defined above
-                    'model_name' => 'vehicle_model',
+                    'model_name' => 'vehicles_model',
                     'model_method' => 'get_all_contacts_records', 
-                    'model_params' => NULL,        
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            '__ActiveYN !=' => 0, 
+                        ),                      
                     'fields' => array 
                     (
                         '__Id' => '#',
@@ -378,6 +420,9 @@ $config['contact'] = Array
                         '__Make' => 'Make',
                         '__Model' => 'model',
                         '__Registration' => 'Reg',
+                        '__MOT_expiry' => 'MOT Exp',
+                        '__Service_expiry' => 'Service Exp',
+                        '__ActiveYN' => 'Active?',
                     ),
                 ),     
                 /*'communications' => array
@@ -541,7 +586,7 @@ $config['contact'] = Array
                         'label' => 'Organisation Name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'xxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -592,9 +637,9 @@ $config['contact'] = Array
                         'label' => 'First Name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => ' onpropertychange="updatenickname(event)" oninput="OnInput(event)" ',  //eg. title="tooltip" rel="tooltips"
+                        'cssClassInput' => 'large',
+                        'cssIdInput' => 'FirstName',
+                        'extraHTMLInput' => '',//' onpropertychange="updatenickname(event)" oninput="OnInput(event)" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'FirstName',
                         'helpText' => '',
@@ -613,7 +658,7 @@ $config['contact'] = Array
                         'label' => 'Last Name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'large',
                         'cssIdInput' => 'LastName',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -634,8 +679,8 @@ $config['contact'] = Array
                         'label' => 'Nickname',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
-                        'cssIdInput' => '',
+                        'cssClassInput' => 'large grey-highlight',
+                        'cssIdInput' => 'NickName',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Nickname',
@@ -655,7 +700,7 @@ $config['contact'] = Array
                         'label' => 'Email',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'xxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -702,7 +747,7 @@ $config['contact'] = Array
                         'label' => 'Address 1',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -723,7 +768,7 @@ $config['contact'] = Array
                         'label' => 'Address 2',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -765,7 +810,7 @@ $config['contact'] = Array
                         'label' => 'County',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => 'State',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -786,7 +831,7 @@ $config['contact'] = Array
                         'label' => 'Country',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'medium',
                         'cssIdInput' => 'Country',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -891,7 +936,7 @@ $config['contact'] = Array
                         'label' => 'Where did you hear of us?',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'xxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
@@ -963,7 +1008,7 @@ $config['contact'] = Array
                         'label' => '',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xxxxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'rows="20" readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -1143,14 +1188,24 @@ $config['booking'] = Array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
                     'data_source' => 'vehicles', //The dataset name defined above
-                    'model_name' => 'vehicle_model',
+                    'model_name' => 'vehicles_model',
                     'model_method' => 'get_all_contacts_records', 
-                    'model_params' => NULL,        
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            '__ActiveYN !=' => 0, 
+                        ),                      
                     'fields' => array 
                     (
                         '__Id' => '#',
+                        '__ContactId' => 'Contact Id of vehicle owner',
+                        '__Make' => 'Make',
+                        '__Model' => 'model',
+                        '__Registration' => 'Reg',
+                        '__MOT_expiry' => 'MOT Exp',
+                        '__Service_expiry' => 'Service Exp',
+                        '__ActiveYN' => 'Active?',
                     ),
-                ), 
+                ),   
                 'users' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
@@ -1322,9 +1377,12 @@ $config['contactaction'] = Array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
                     'data_source' => 'vehicles', //The dataset name defined above
-                    'model_name' => 'vehicle_model',
+                    'model_name' => 'vehicles_model',
                     'model_method' => 'get_all_contacts_records', 
-                    'model_params' => NULL,        
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            '__ActiveYN !=' => 0, 
+                        ),                      
                     'fields' => array 
                     (
                         '__Id' => '#',
@@ -1332,8 +1390,11 @@ $config['contactaction'] = Array
                         '__Make' => 'Make',
                         '__Model' => 'model',
                         '__Registration' => 'Reg',
+                        '__MOT_expiry' => 'MOT Exp',
+                        '__Service_expiry' => 'Service Exp',
+                        '__ActiveYN' => 'Active?',
                     ),
-                ), 
+                ),   
                 'users' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
@@ -1440,6 +1501,7 @@ $config['contactaction'] = Array
                         'length' => '',
                         'options' => array
                         (
+                            'Enquiry' => 'Enquiry',
                             'Task' => 'Task',
                             'Meeting' => 'Meeting',
                             'Phone Call' => 'Phone Call',
@@ -1636,7 +1698,7 @@ $config['contactaction'] = Array
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'datepicker',
-                        'cssIdInput' => '',
+                        'cssIdInput' => 'datepicker',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'ActionDate',
@@ -1739,7 +1801,7 @@ $config['contactjoin'] = Array
                     'model_method' => 'get_all_records',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisationYN !=' => 1, 
+                            //'_IsOrganisationYN !=' => 1, 
                         ),
                     'fields' => array 
                     (
@@ -1750,27 +1812,24 @@ $config['contactjoin'] = Array
                         '_IsOrganisationYN' => '',
                     ),
                 ),            
-                'organisations' => array
+                'relationships' => array
                 (
-                    'include_in_query' => TRUE, //TRUE or FALSE,
-                    'data_source' => 'contacts', //The dataset name defined in this file
-                    'model_name' => 'contact_model',
-                    'model_method' => 'get_all_records',
-                    'model_params' => array 
-                        (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisationYN =' => 1, 
-                        ), 
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => 'relationships', //The dataset name defined above
+                    'model_name' => 'contactjoin_model',
+                    'model_method' => 'joinon_ContactJoin', 
+                    'model_params' => NULL, 
                     'fields' => array 
                     (
-                        'Id' => '#',
-                        '_OrganisationName' => 'Org Name',
-                        'StreetAddress1' => 'Address',
-                        'FirstName' => 'Contact',
-                        'LastName' => '',
-                        '_IsOrganisationYN' => '',
-                        
+                        'Contact.Id' => 'contact Id',
+                        'Contact.FirstName' => 'First Name',
+                        'Contact.LastName' => 'Last Name',
+                        '__ContactJoin.__Id' => 'Realtionship Id',
+                        '__ContactJoin.__Reason' => 'reason',
+                        //'__ContactJoin.__ContactId' => 'reason',
+                        '__ContactJoin.__ContactId2' => 'CId 2',
                     ),
-                ), 
+                ),
             ),
         ),
         'record' => array
@@ -1853,16 +1912,53 @@ $config['contactjoin'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'ActionDescription',                  
+                        'label' => 'Reason for Realtionship',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'text',
+                        'type' => 'select',
                         'name' => '__Reason',
                         'helpText' => '',                        
                         'length' => '',
+                        'options' => array
+                         (
+                            'Spouse' => 'Spouse',
+                            'Partner' => 'Partner',
+                            'Employee' => 'Employee',
+                            'Colleague' => 'Colleague',
+                            'Business Partner'=> 'Business Partner',
+                            'Friend' => 'Friend',    //label => value
+                            'Sibling' => 'Sibling',
+                            'Neighbour' => 'Neighbour', 
+                         ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                    
+                    '__ActiveYN' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Relationship Active?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__ActiveYN',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                         (
+                             'Active' => '1',    //label => value
+                             'Inactive' => '0',
+                         ),
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -1878,26 +1974,27 @@ $config['vehicles'] = Array
         (
             'index' => array 
             (
-                /*'bookings_join' => array
+                'vehicles' => array
                 (
-                    'include_in_query' => TRUE, //TRUE or FALSE,                    
-                    'data_source' => 'bookings_join', //The dataset name defined above
-                    'model_name' => 'contactaction_model',
-                    'model_method' => 'joinon_Contact_and_Vehicle', 
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'vehicles', //The dataset name defined above
+                    'model_name' => 'vehicles_model',
+                    'model_method' => 'get_all_records', 
                     'model_params' => array 
-                        (   //These are chained with 'AND'
-                            'ActionType =' => 'Booking', 
-                        ),           
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            //'_IsOrganisationYN !=' => 1, 
+                        ),    
                     'fields' => array 
                     (
-                        'Contact.Id' => 'contact Id',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        'ContactAction.Id' => 'booking Id',
-                        'ContactAction.ActionDescription' => 'ActionDescription',
-                        '__Vehicles.__Registration' => 'Reg',
+                        '__Id' => '#',
+                        '__ContactId' => 'Contact Id of vehicle owner',
+                        '__Make' => 'Make',
+                        '__Model' => 'model',
+                        '__Registration' => 'Reg',
+                        '__MOT_expiry' => 'MOT Expires',
+                        '__Service_expiry' => 'Service Expires',
                     ),
-                ),*/ 
+                ), 
             ),
             'view' => array 
             (                
@@ -1905,7 +2002,7 @@ $config['vehicles'] = Array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
                     'data_source' => 'vehicles', //The dataset name defined above
-                    'model_name' => 'vehicle_model',
+                    'model_name' => 'vehicles_model',
                     'model_method' => 'get_all_contacts_records', 
                     'model_params' => NULL,        
                     'fields' => array 
@@ -1915,6 +2012,8 @@ $config['vehicles'] = Array
                         '__Make' => 'Make',
                         '__Model' => 'model',
                         '__Registration' => 'Reg',
+                        '__MOT_expiry' => 'MOT Expires',
+                        '__Service_expiry' => 'Service Expires',
                     ),
                 ), 
                 'users' => array
@@ -1961,7 +2060,7 @@ $config['vehicles'] = Array
         (
             'view' => array
             (
-                'model_name' => 'vehicle_model',
+                'model_name' => 'vehicles_model',
                 'model_method' => 'get_single_record',
                 'model_params' => NULL,
                 'dropdowns' => array    //or NULL
@@ -2203,7 +2302,979 @@ $config['vehicles'] = Array
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
-                    )
+                    ),
+                    '__Date_of_healthcheck' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Healthcheck Date:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'datepicker',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Date_of_healthcheck',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Mileage' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Service Due:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'datepicker',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Mileage',
+                        'helpText' => '',                        
+                        'length' => '',                        
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Tyre_osf' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Tyres - O/S/F',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '__Tyre_osf',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            '' => '',
+                            '12mm' => '12',
+                            '11mm' => '11',
+                            '10mm' => '10',
+                            '9mm' => '9',
+                            '8mm' => '8',
+                            '7mm' => '7',
+                            '6mm' => '6',
+                            '5mm' => '5',
+                            '4mm' => '4',
+                            '3mm' => '3',
+                            '2mm' => '2',
+                            '1mm' => '1',
+                            '0mm' => '0',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Tyre_nsf' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Tyres - N/S/F',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '__Tyre_nsf',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            '' => '',
+                            '12mm' => '12',
+                            '11mm' => '11',
+                            '10mm' => '10',
+                            '9mm' => '9',
+                            '8mm' => '8',
+                            '7mm' => '7',
+                            '6mm' => '6',
+                            '5mm' => '5',
+                            '4mm' => '4',
+                            '3mm' => '3',
+                            '2mm' => '2',
+                            '1mm' => '1',
+                            '0mm' => '0',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Tyre_osr' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Tyres - O/S/R',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '__Tyre_osr',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            '' => '',
+                            '12mm' => '12',
+                            '11mm' => '11',
+                            '10mm' => '10',
+                            '9mm' => '9',
+                            '8mm' => '8',
+                            '7mm' => '7',
+                            '6mm' => '6',
+                            '5mm' => '5',
+                            '4mm' => '4',
+                            '3mm' => '3',
+                            '2mm' => '2',
+                            '1mm' => '1',
+                            '0mm' => '0',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Tyre_nsr' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Tyres - N/S/R',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '__Tyre_nsr',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            '' => '',
+                            '12mm' => '12',
+                            '11mm' => '11',
+                            '10mm' => '10',
+                            '9mm' => '9',
+                            '8mm' => '8',
+                            '7mm' => '7',
+                            '6mm' => '6',
+                            '5mm' => '5',
+                            '4mm' => '4',
+                            '3mm' => '3',
+                            '2mm' => '2',
+                            '1mm' => '1',
+                            '0mm' => '0',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Tyre_pressure_osf' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => '',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'text',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Tyre_pressure_osf',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Tyre_pressure_nsf' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => '',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'text',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Tyre_pressure_nsf',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Tyre_pressure_osr' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => '',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'text',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Tyre_pressure_osr',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Tyre_pressure_nsr' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => '',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'text',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Tyre_pressure_nsr',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Tyre_notes' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Notes for Tyres:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'textarea xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => '__Tyre_notes',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_lights' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Lights',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_lights',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_horn_wipers_washers' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Horn/wipers/washers',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_horn_wipers_washers',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_aircon' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Aircon',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_aircon',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Electric_notes' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Notes for Electrics:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'textarea xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => '__Electric_notes',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_brakes' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Brakes (Noise & Feel)',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_brakes',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_clutch' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Clutch/Transmission',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_clutch',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_engine_noise' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Engine Noise & Smoke',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_engine_noise',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_glass' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Glass/mirros/wiper blades',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_glass',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_seat_belts' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Seat belts',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_seat_belts',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Internal_notes' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Notes:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'textarea xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => '__Internal_notes',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_fluid_levels' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Oil/Water/Coolant/Scr Wash',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_fluid_levels',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_fluid_leaks' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Oil/Water Leaks',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_fluid_leaks',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_battery' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Battery levels',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_battery',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_drive_belts' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Drive Belts',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_drive_belts',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Bonnet_notes' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Notes:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'textarea xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => '__Bonnet_notes',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_brake_fluid' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Brake Fluid Condition/Temp',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_brake_fluid',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_master_cylinder' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Master Cylinder/Servo',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_master_cylinder',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_linings' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Linings - Pads/shoes',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_linings',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_disc_drums' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Discs/Drums',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_disc_drums',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_hoses' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Hoses/Pipes/Cables/Wheel Bearings',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_hoses',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Brakes_notes' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Notes:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'textarea xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => '__Brakes_notes',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_exhaust' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Exhaust/Catalyst',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_exhaust',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_steering' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Steering/Suspension',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_steering',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_drive_shafts' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Driveshafts/Gaiters',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_drive_shafts',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Check_oil' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Oil leaks',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__Check_oil',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Green' => '0',
+                            'Amber' => '1',
+                            'Red' => '2',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Underside_notes' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Notes:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'textarea xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => '__Underside_notes',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                
                 ),                
             ),
         ),

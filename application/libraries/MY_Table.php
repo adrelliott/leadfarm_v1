@@ -312,6 +312,7 @@ class MY_Table extends CI_Table {
 				$out .= $this->template['heading_cell_end'];
 			}
                         $out .= $this->_generate_checkboxes('th');    //This inserts <th></th> if checkboxes rqd
+                        $out .= $this->_generate_radio_buttons('th');    //This inserts <th></th> if checkboxes rqd
 			$out .= $this->template['heading_row_end'];
 			$out .= $this->newline;
                         $out .= $this->template['thead_close'];
@@ -379,6 +380,7 @@ class MY_Table extends CI_Table {
 				}
 				
                                 $out .= $this->_generate_checkboxes('td',$row[$Id_fieldname]);  
+                                $out .= $this->_generate_radio_buttons('td',$row[$Id_fieldname]);  
                                    //This inserts checkboxes If rqd
 				$out .= $this->template['row_'.$name.'end'];  
 				$out .= $this->newline;
@@ -498,7 +500,7 @@ class MY_Table extends CI_Table {
 		}
 
 		$this->temp = $this->_default_template();
-		foreach (array('anchor_uri','anchor_uri_append','anchor_attr','primary_key_fieldname','checkbox_flag','checkbox_class','checkbox_name','table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
+		foreach (array('anchor_uri','anchor_uri_append','anchor_attr','primary_key_fieldname','checkbox_flag','checkbox_class','checkbox_name','checkbox_value_is_id','table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
 		{
 			if ( ! isset($this->template[$val]))
 			{
@@ -525,6 +527,11 @@ class MY_Table extends CI_Table {
 			'checkbox_flag'                 => '',    // set to TRUE for checkboxes
 			'checkbox_class'                 => '',    // can be blank for no class
 			'checkbox_name'                 => '',    // <input name="XXX"
+                        'checkbox_value_is_id'          => '',  //do we use row[ID] as value for checkbox?
+			'radio_flag'                 => '',    // set to TRUE for checkboxes
+			'radio_class'                 => '',    // can be blank for no class
+			'radio_name'                 => '',    // <input name="XXX"
+                        'radio_value_is_id'          => '',  //do we use row[ID] as value for checkbox?
                         'table_open'			=> '<table class="dataTable">',
                         'link_controller'		=> 'contact',
 
@@ -594,7 +601,45 @@ class MY_Table extends CI_Table {
                     {
                         $name = $this->template['checkbox_name'];
                     }
-                    $retval = '<td><input name="' . $name . '[' . $id['data'] . ']" class="' . $class . '" type="checkbox"></td>'; 
+                    if (isset($this->template['checkbox_value_is_id']) && $this->template['checkbox_value_is_id'] != '')
+                    {
+                        $value = $id['data'];
+                    }
+                    //$retval = '<td><input name="' . $name . '[' . $id['data'] . ']" class="' . $class . '" type="checkbox" value="' . $value . '"></td>'; 
+                    $retval = '<td><input name="' . $name . '" class="' . $class . '" type="checkbox" value="' . $value . '"></td>'; 
+                }
+            }
+            return $retval;
+        }
+        
+        function _generate_radio_buttons($type, $id = NULL)
+        {         
+            $retval = '';
+            $class = '';
+            $name = '';
+            if (isset($this->template['radio_flag']) && $this->template['radio_flag'] != '')
+            {
+                
+                if ($type == 'th')
+                {
+                    $retval = '<th></th>';
+                }
+                else
+                {
+                    if (isset($this->template['radio_class']) && $this->template['radio_class'] != '')
+                    {
+                        $class = $this->template['radio_class'];
+                    }
+                    if (isset($this->template['radio_name']) && $this->template['radio_name'] != '')
+                    {
+                        $name = $this->template['radio_name'];
+                    }
+                    if (isset($this->template['radio_value_is_id']) && $this->template['radio_value_is_id'] != '')
+                    {
+                        $value = $id['data'];
+                    }
+                    //$retval = '<td><input name="' . $name . '[' . $id['data'] . ']" class="' . $class . '" type="checkbox" value="' . $value . '"></td>'; 
+                    $retval = '<td><input name="' . $name . '" class="' . $class . '" type="radio" value="' . $value . '"></td>'; 
                 }
             }
             return $retval;

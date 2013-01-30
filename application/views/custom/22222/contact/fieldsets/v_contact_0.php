@@ -4,10 +4,12 @@
     <?php display_field($fields['LastName']); ?>
     <?php display_field($fields['Nickname']); ?>
     <?php display_field($fields['Email']); ?>
+</div><!-- End of form div-->
+<div class="form margin_top_15">
     <div class="clearfix" id="">
         <label class="" id="">Postcode</label>
         <div class="input " id="">
-            <input class="mini" id="" type="text" name="PostalCode" length="" value="">
+            <input class="small green-highlight" style="text-transform: uppercase" "id="" type="text" name="PostalCode" length="" value="">
             <SCRIPT LANGUAGE=JAVASCRIPT SRC="http://services.postcodeanywhere.co.uk/popups/javascript.aspx?account_code=charl11150&license_key=pw65-jx54-fz99-jx75"></SCRIPT> 
         </div>
     </div>
@@ -18,6 +20,8 @@
     <?php display_field($fields['Country']); ?>
     <?php display_field($fields['Phone1']); ?>
     <?php display_field($fields['Phone2']); ?>
+</div><!-- End of form div-->
+<div class="form margin_top_15">
     <?php display_field($fields['Leadsource']); ?>
     <?php display_field($fields['_Gender']); ?>
     <div style="<?php echo $display_none; ?>"">

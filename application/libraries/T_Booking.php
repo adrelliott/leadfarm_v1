@@ -17,11 +17,9 @@ class T_Booking extends MY_Controller {
     
     public function index() {
         $this->data['controller_setup']['method_name'] = 'index';
-        $this->data['view_setup']['header_file'] .= '_modal';  //add '_modal' for modal
+        //$this->data['view_setup']['header_file'] .= '_modal';  //add '_modal' for modal
         parent::index();
        
-          // Generate the view!
-        $this->generate_view($this->data);
     }
    
     public function view($rID, $ContactId = NULL) {    //false = create new record
@@ -32,8 +30,6 @@ class T_Booking extends MY_Controller {
         $this->data['view_setup']['ContactId'] = $rID;   //in this context, $rID == ContactId
         parent::view($rID);
         
-          // Generate the view!
-        $this->generate_view($this->data);
     }
    
 }

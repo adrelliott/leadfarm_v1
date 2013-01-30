@@ -7,14 +7,12 @@
                 </ul>							
                 <div class="widget_inside">
                     <div id="tab-1"><!-- Start of tab 1 -->
-                        <h3>Create/edit a Task for this contact</h3>
+                        <h3>Create a New Relationship</h3>
                         <div class="form">
                             <?php echo form_open(DATAOWNER_ID . "/contactjoin/add/$rID/$ContactId/edit") ; ?>
-                                <?php //echo display_field($fields['Id'], array('type' => 'hidden'));  ?>
-                                <?php //echo display_field($fields['ContactId'], array('type' => 'hidden', 'value' => $ContactId));  ?>
-                                <?php echo display_field($fields['__ContactId']); ?>
-                                <?php echo display_field($fields['__ContactId2']); ?>
+                            <?php if($rID == 'new') {include('fieldsets/v_contact_join_table.php');} ?>
                                 <?php echo display_field($fields['__Reason']); ?> 
+                                <?php echo display_field($fields['__ActiveYN']); ?> 
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
                                 </div>                            

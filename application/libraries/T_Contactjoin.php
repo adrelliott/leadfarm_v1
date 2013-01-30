@@ -19,8 +19,6 @@ class T_Contactjoin extends MY_Controller {
         $this->data['controller_setup']['method_name'] = 'index';
         parent::index();
 
-            // Generate the view!
-        $this->generate_view($this->data);
      }
    
     public function view($rID, $ContactId) {       //$rID=new => create new record
@@ -30,12 +28,11 @@ class T_Contactjoin extends MY_Controller {
         
         parent::view($rID);
         
-          // Generate the view!
-        $this->generate_view($this->data);
      }
    
     public function add($rID, $ContactId, $view_file = 'view') {    //false = create new record
-       //clean the input
+       //print_array($this->input->post(), 1);
+        //clean the input
        $input = clean_data($this->input->post()); 
        $input['__ContactId'] = $ContactId;
        
