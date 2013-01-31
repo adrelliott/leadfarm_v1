@@ -1,5 +1,8 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+    
+
+
 //generate HTML when passed config & value
 function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
         //Override configred attributes of field with the passed array

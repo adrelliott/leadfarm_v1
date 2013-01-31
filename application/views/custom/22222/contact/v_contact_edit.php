@@ -1,5 +1,5 @@
 <div class="col_6"><!-- Start Column 1-->	
-    <?php foreach($notifications as $n => $html) { echo $html; } ?>
+    <?php foreach($notifications as $vehicle) { foreach ($vehicle as $n => $html) { echo $html; }} ?>
     <div class="row clearfix">
         <div class="row"><!-- Tabs begin -->
             <div class="widget clearfix tabs">

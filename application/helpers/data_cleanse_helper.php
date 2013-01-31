@@ -245,3 +245,53 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
    }
         
     
+   function get_notifications($notifications, $rID, $output = 'all') {
+    //output can be 'all' (every notification), 'this' (just notirifcations for this vehicle) and 'related' (notitifcations for related cars only)
+
+        $html = array();
+        $retval = '';
+        switch ($output)
+        {
+            case 'all':                                    
+                foreach ($notifications as $VehicleId => $array) 
+                { 
+                    foreach ($array as $n => $h) 
+                    { 
+                        $html[] = $h;                            
+                    }                            
+                }
+                break;
+            case 'this':
+                foreach($notifications as $VehicleId => $array) 
+                {
+                    if ($VehicleId == $rID)
+                    {
+                        foreach ($array as $n => $h) 
+                        { 
+                            $html[] = $h;                            
+                        }
+                    }
+                }
+                break;
+            case 'related':
+                foreach($notifications as $VehicleId => $array) 
+                {
+                    if ($VehicleId != $rID)
+                    {
+                        foreach ($array as $n => $h) 
+                        { 
+                            $html[] = $h;                            
+                        }
+                    }
+                }
+                break;                                    
+        }    
+
+        //force all notificatiosn into one html block
+        foreach ($html as $row => $value)
+        {
+            $retval .= $value;
+        }
+        echo $retval;
+
+    }

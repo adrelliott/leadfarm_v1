@@ -21,6 +21,7 @@ $(function() {
 
     // Tabs
     $('.tabs').tabs();
+   
     
     // toggling of divd
     $("#option1_toggle").click(function(){

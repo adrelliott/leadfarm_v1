@@ -20,6 +20,7 @@ $display_none = '';
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-1">
+                        <?php get_notifications($notifications, $rID, 'this'); ?>
                         <div class="form">
                             <?php echo form_open(DATAOWNER_ID . "/vehicles/add/$rID/$ContactId/edit"); ?>
                             <?php display_field($fields['__Registration']); ?>
@@ -129,28 +130,30 @@ $display_none = '';
     <div class="row clearfix"> 
         <div class="row">            
             <div class="widget clearfix">
-                <h2>Related Vehicles</h2>
-                    <div class="
-                <?php foreach($notifications as $n => $html) { echo $html; } ?>
-                <?php 
-                    $this->table->set_template_custom(array (
-                        'anchor_uri' => 'vehicles/view/edit', 
-                        'ContactId_name' => '__ContactId' ,
-                        'primary_key_fieldname' => '__Id'
-                        ));    
-                    $this->table->set_heading_custom(
-                            $tables['vehicles']['table_headers']
-                            );
-                    echo $this->table->generate_custom(
-                            $tables['vehicles']['table_data']
-                            ); 
-                ?>
-                <div class="clearfix margin_top_15">
-                   <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Add New Vehicle</span></a>
-               </div>
+                <h2>All Vehicles</h2>
+                <div class="widget_inside">
+                    <h3>A list of all vehicles owned by this contact:</h3>
+                    <?php get_notifications($notifications, $rID, 'related'); ?>
+                    <?php 
+                        $this->table->set_template_custom(array (
+                            'anchor_uri' => 'vehicles/view/edit', 
+                            'ContactId_name' => '__ContactId' ,
+                            'primary_key_fieldname' => '__Id'
+                            ));    
+                        $this->table->set_heading_custom(
+                                $tables['vehicles']['table_headers']
+                                );
+                        echo $this->table->generate_custom(
+                                $tables['vehicles']['table_data']
+                                ); 
+                    ?>
+                    <div class="clearfix margin_top_15">
+                       <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Add New Vehicle</span></a>
+                   </div>
+                </div>
             </div>
         </div>
-        <div class='row'>
+        <!--<div class='row'>
             <div class="widget clearfix  form">
                 <h2>Quick Actions</h2>
                 <div class="clearfix">
@@ -166,6 +169,6 @@ $display_none = '';
                     </div>
                 </div>
             </div>
-        </div>        
+        </div> -->       
     </div>
 </div>
