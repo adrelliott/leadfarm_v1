@@ -68,7 +68,6 @@
     <!-- All the js used in the demo -->
     <script src="<?php echo site_url(); ?>assets/scripts/app.js"></script>
 
-        
 
 </head>
 <body>
@@ -77,16 +76,11 @@
         <header class="container">
             <div class="row clearfix">
                 <div class="left">
-                    <a href="<?php echo site_url(); ?>" id="logo" style="height: 100px; 
-			background: url('<?php echo site_url() . 'assets/images/logo/logo.png'; ?>) no-repeat; 
-			text-indent: -9999em; 
-			display: block; 
-			float: left}"></a>
+                    <a href="<?php echo site_url() . '/' . DATAOWNER_ID . '/dashboard'; ?>"><img src="<?php echo site_url() . '/' . PATH_TO_LOGO ?>" /></a>
                 </div>                
                 <div class="right">
                     <ul id="toolbar">
-                       <li><strong>Logged in as 
-                            <?php //echo anchor('user/view/' . $this->session->userdata('UserId'), $this->session->userdata('FirstName') . ' ' . $this->session->userdata('LastName'));  ?></strong> (<?php// echo anchor('/login/log_out', 'Log out?'); ?>)</li>
+                       <li>Logged in as XX</li>
                         <li><?php echo anchor('settings', 'Settings', 'id="settings"'); ?></li>
                     </ul>
                 </div>

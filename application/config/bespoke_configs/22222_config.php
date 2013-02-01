@@ -31,13 +31,14 @@ define('COUNTDOWN', 45);  //Notifies the user {45 days {VALUE} days before MOT/S
  * define('PATH_TO_LOGO', '/assets/includes/default/logo.png');
 */
 //define('PATH_TO_LOGO', 'assets/includes/custom/' . DATAOWNER_ID . '/logo.png');
-define('PATH_TO_LOGO', 'assets/includes/default/logo.png');
+define('PATH_TO_LOGO', 'assets/includes/logos/' . DATAOWNER_ID . '/logo.png');
 /*
 |--------------------------------------------------------------------------
 | Define the connection details for the database
 |--------------------------------------------------------------------------
-|
-| 
+|   NOTE: Each dataowner has thier own database
+|   Firstly, get the username and password for *this* user's database...
+|   Then get the general config details for the database from global_database.php
 */
 include(DATAOWNER_ID . '_database.php');
 include('global_database.php');

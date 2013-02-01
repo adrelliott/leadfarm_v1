@@ -55,9 +55,7 @@ class MY_Controller extends CI_Controller {
         // 6. Finally set up last minute vars
         $this->data['controller_setup']['controller_name'] = $this->controller_name;
         
-        
-///#/#/#/#/#/#/#/#/#/#CHANGE THIS TO **FALSE** WHEN IN PRODUCTION!/'/#/#/#/#
-$this->output->enable_profiler(TRUE);
+        if (ENVIRONMENT == 'development') $this->output->enable_profiler(TRUE);
     }
     
     
@@ -469,12 +467,7 @@ $this->output->enable_profiler(TRUE);
     */
     private function _is_logged_in() {  //used as a test to see if all is well
          $status = $this->session->userdata('is_logged_in');
-         /*$_dID = $this->session->userdata('_dID');
-         
-         if (!isset($_dID))
-         {
-             $status = FALSE;   //re-login if session data lost
-         }*/
+         echo "status= $status";die;
          if (!isset($status) || $status !== TRUE)
          {
              //kick them out
