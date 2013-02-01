@@ -1,5 +1,23 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
+ * 
+ * ###NOTE: This file is replaced by bespoke_configs/global_database.php #####
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
 | -------------------------------------------------------------------
@@ -45,9 +63,9 @@
 | the active record class
 */
 
-$active_group = ENVIRONMENT;
-$active_record = TRUE;
-
+//$active_group = ENVIRONMENT;
+//$active_record = TRUE;
+/*
 $db['production']['hostname'] = 'localhost';
 $db['production']['username'] = 'leadfarm_user';
 $db['production']['password'] = 'DMmanch35';
@@ -81,6 +99,6 @@ $db['development']['swap_pre'] = '';
 $db['development']['autoinit'] = TRUE;
 $db['development']['stricton'] = FALSE;
 
-
+*/
 /* End of file database.php */
 /* Location: ./application/config/database.php */

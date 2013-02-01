@@ -1,0 +1,34 @@
+[16-Jan-2013 01:33:28 UTC] PHP Fatal error:  Class 'User_controller' not found in /home/leadfarm/application/controllers/testing.php on line 3
+[16-Jan-2013 01:33:58 UTC] PHP Fatal error:  Class 'User_controller' not found in /home/leadfarm/application/controllers/testing.php on line 3
+[16-Jan-2013 01:34:01 UTC] PHP Fatal error:  Class 'User_controller' not found in /home/leadfarm/application/controllers/testing.php on line 3
+[16-Jan-2013 01:34:52 UTC] PHP Fatal error:  Class 'User_Controller' not found in /home/leadfarm/application/controllers/testing.php on line 3
+[16-Jan-2013 01:35:08 UTC] PHP Fatal error:  Class 'User_Controller' not found in /home/leadfarm/application/controllers/testing.php on line 3
+[16-Jan-2013 01:36:11 UTC] PHP Fatal error:  Class 'User_Controller' not found in /home/leadfarm/application/controllers/welcome.php on line 3
+[16-Jan-2013 01:37:05 UTC] PHP Fatal error:  Class 'User_Controller' not found in /home/leadfarm/application/controllers/welcome.php on line 3
+[16-Jan-2013 01:37:49 UTC] PHP Fatal error:  Class 'My_Controller' not found in /home/leadfarm/application/controllers/welcome.php on line 3
+[16-Jan-2013 01:41:45 UTC] PHP Fatal error:  Class 'My_Controller' not found in /home/leadfarm/application/controllers/welcome.php on line 3
+[16-Jan-2013 01:42:17 UTC] PHP Fatal error:  Class 'My_Controller' not found in /home/leadfarm/application/controllers/welcome.php on line 3
+[16-Jan-2013 01:42:29 UTC] PHP Fatal error:  Class 'My_Controller' not found in /home/leadfarm/application/controllers/welcome.php on line 3
+[16-Jan-2013 01:46:16 UTC] PHP Fatal error:  Class 'MY_Controller' not found in /home/leadfarm/application/controllers/welcome.php on line 3
+[29-Jan-2013 11:55:58 UTC] PHP Fatal error:  Cannot redeclare __autoload() (previously declared in /home/leadfar2/application/config/config.php:4) in /home/leadfar2/application/config/config.php on line 12
+[29-Jan-2013 11:55:59 UTC] PHP Fatal error:  Cannot redeclare __autoload() (previously declared in /home/leadfar2/application/config/config.php:4) in /home/leadfar2/application/config/config.php on line 12
+[29-Jan-2013 11:56:55 UTC] PHP Notice:  Use of undefined constant DATAOWNER_ID - assumed 'DATAOWNER_ID' in /home/leadfar2/application/config/config.php on line 48
+[29-Jan-2013 11:56:55 UTC] PHP Fatal error:  Class 'T_Dashboard' not found in /home/leadfar2/application/controllers/22222/dashboard.php on line 3
+[29-Jan-2013 11:56:55 UTC] PHP Notice:  Use of undefined constant DATAOWNER_ID - assumed 'DATAOWNER_ID' in /home/leadfar2/application/config/config.php on line 48
+[29-Jan-2013 11:58:51 UTC] PHP Fatal error:  Cannot redeclare __autoload() (previously declared in /home/leadfar2/application/config/config.php:5) in /home/leadfar2/application/config/config.php on line 13
+[29-Jan-2013 11:58:51 UTC] PHP Fatal error:  Cannot redeclare __autoload() (previously declared in /home/leadfar2/application/config/config.php:5) in /home/leadfar2/application/config/config.php on line 13
+[29-Jan-2013 12:00:04 UTC] PHP Fatal error:  Cannot redeclare __autoload() (previously declared in /home/leadfar2/application/config/config.php:5) in /home/leadfar2/application/config/config.php on line 13
+[29-Jan-2013 12:00:04 UTC] PHP Fatal error:  Cannot redeclare __autoload() (previously declared in /home/leadfar2/application/config/config.php:5) in /home/leadfar2/application/config/config.php on line 13
+[29-Jan-2013 12:00:23 UTC] PHP Fatal error:  Cannot redeclare __autoload() (previously declared in /home/leadfar2/application/config/config.php:5) in /home/leadfar2/application/config/config.php on line 13
+[29-Jan-2013 12:00:23 UTC] PHP Fatal error:  Cannot redeclare __autoload() (previously declared in /home/leadfar2/application/config/config.php:5) in /home/leadfar2/application/config/config.php on line 13
+[29-Jan-2013 12:00:44 UTC] PHP Fatal error:  Cannot redeclare __autoload() (previously declared in /home/leadfar2/application/config/config.php:5) in /home/leadfar2/application/config/config.php on line 13
+[29-Jan-2013 12:00:45 UTC] PHP Fatal error:  Cannot redeclare __autoload() (previously declared in /home/leadfar2/application/config/config.php:5) in /home/leadfar2/application/config/config.php on line 13
+[31-Jan-2013 15:40:16 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/leadfar2/application/config/bespoke_configs/22222_config.php on line 61
+[31-Jan-2013 15:40:16 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/leadfar2/application/config/bespoke_configs/22222_config.php on line 61
+[31-Jan-2013 15:41:20 UTC] PHP Warning:  Unterminated comment starting line 1623 in /home/leadfar2/application/config/bespoke_configs/22222_config.php on line 1623
+[31-Jan-2013 15:41:20 UTC] PHP Parse error:  syntax error, unexpected $end, expecting ')' in /home/leadfar2/application/config/bespoke_configs/22222_config.php on line 1661
+[31-Jan-2013 15:41:21 UTC] PHP Warning:  Unterminated comment starting line 1790 in /home/leadfar2/application/config/bespoke_configs/22222_config.php on line 1790
+[31-Jan-2013 15:41:21 UTC] PHP Parse error:  syntax error, unexpected $end, expecting ')' in /home/leadfar2/application/config/bespoke_configs/22222_config.php on line 1802
+[31-Jan-2013 15:42:23 UTC] PHP Parse error:  syntax error, unexpected $end, expecting ')' in /home/leadfar2/application/config/bespoke_configs/22222_config.php on line 1831
+[31-Jan-2013 15:42:24 UTC] PHP Parse error:  syntax error, unexpected $end, expecting ')' in /home/leadfar2/application/config/bespoke_configs/22222_config.php on line 1831
+[31-Jan-2013 15:47:15 UTC] PHP Parse error:  syntax error, unexpected $end, expecting ')' in /home/leadfar2/application/config/bespoke_configs/22222_config.php on line 690

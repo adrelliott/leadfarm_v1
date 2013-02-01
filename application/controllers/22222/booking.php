@@ -49,7 +49,33 @@ class Booking extends T_Booking {
     
     
     
-    
+      public function get_booking_array() {
+       $results = array ();
+
+        $title = 'Title with some <strong>HTML</strong> in';
+        $description = '';
+        $start_ts = mktime (8, 0, 0, 1, 30, 2013);
+        $end_ts = mktime (10, 0, 0, 1, 30, 2013);
+        $url = 'http://leadfarm-staging.co.uk/22222/booking';
+
+        $results[] = array (
+          'id' => 1,                      /* ID of the event */
+          'title' => strip_tags ($title), /* Title that has been made HTML-safe */
+          'htmlTitle' => $title,          /* Original title */
+          'description' => $description,  /* HTML description */
+          'start' => date ('Y-m-d H:i:s', $start_ts),
+          //'start' => date ('Y-m-d', $start_ts),
+          'end' => date ('Y-m-d H:i:s', $end_ts),
+          //'end' => date ('Y-m-d', $end_ts),
+          'allDay' => false,
+          'url' => $url,
+          'color' => '#cdcdcd'          /* Hex-code for background-colour */
+        );
+
+        header ('Content-Type: text/json');
+        echo json_encode ($results);
+        exit;
+   }
     
     
     public function get_bookings() {
@@ -124,30 +150,6 @@ class Booking extends T_Booking {
          */
 
    }
-    public function get_booking_array() {
-       $results = array ();
-
-        $title = 'Title with some <strong>HTML</strong> in';
-        $description = '';
-        $start_ts = mktime (8, 0, 0, 1, 1, 2013);
-        $url = '';
-
-        $results[] = array (
-          'id' => 1,                      /* ID of the event */
-          'title' => strip_tags ($title), /* Title that has been made HTML-safe */
-          'htmlTitle' => $title,          /* Original title */
-          'description' => $description,  /* HTML description */
-          'start' => date ('Y-m-d', $start_ts),
-          'allDay' => false,
-          'url' => $url,
-          'color' => '#000000'          /* Hex-code for background-colour */
-        );
-
-        header ('Content-Type: text/json');
-        echo json_encode ($results);
-        exit;
-   }
-   
-   
+      
 }
    

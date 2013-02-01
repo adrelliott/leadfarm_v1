@@ -186,11 +186,14 @@ $(function() {
     //Uses formvalidator
     //$("#form0, #form1, #form2").validationEngine();
 
-    //Calendar
+   
+   //Calendar
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
+    var pathname = window.location.pathname+"/get_booking_array";
+    
 
     $('#calendar').fullCalendar({
         header: {
@@ -201,43 +204,39 @@ $(function() {
         editable: true,
         theme: true,
         defaultView: 'agendaWeek',
-        events: [
-            
-            
-           
-            {
-                id: 999,
-                title: 'Interim Service',
-                start: new Date(y, m, d + 4, 16, 0),
-                allDay: false,
-                url: 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html/22222/contactaction/view/edit_action/1352'
-            },
-            {
-                title: 'MOT - YG02 YTR',
-                start: new Date(y, m, d, 10, 30),
-                allDay: false,
-                url: 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html/22222/contactaction/view/edit_booking_main/1352'
-            },
-            {
-                title: 'Extended Service - X678 TRY',
-                start: new Date(y, m, d, 12, 0),
-                end: new Date(y, m, d, 14, 0),
-                allDay: false
-            },
-            {
-                title: 'Diagnosis - MM07 YTR',
-                start: new Date(y, m, d + 2, 14, 0),
-                end: new Date(y, m, d + 1, 22, 30),
-                allDay: false
-            },
-            {
-                title: 'Diagnosis - MM07 YTR',
-                start: new Date(y, m, d + 1, 08, 0),
-                end: new Date(y, m, d + 1, 10, 30),
-                allDay: false
-            },
-        ]
+        disableDragging: true,
+        disableResizing: true,
+		
+        events: pathname,  
+        
+        eventClick: function (calEvent, jsEvent, view) {
+
+            if ($.colorbox) {
+                $.colorbox({href:calEvent.url, iframe:true, width:'80%', height:'80%'});
+            } else {
+                window.open(calEvent.url, '_blank');
+            }
+
+            return false;
+
+        },
+        eventRender: function(event, element, view) {
+
+            if (typeof event.htmlTitle === 'string') {
+                element.find('.fc-event-title').html (event.htmlTitle);
+            }
+
+            if (typeof event.description === 'string') {
+                element.find('.fc-event-title').append ('<br/>' + event.description);
+            }
+
+        },
+        viewDisplay: function (element) {
+
+        }
+
     });
+
 
     $('#gcalendar').fullCalendar({
         // US Holidays

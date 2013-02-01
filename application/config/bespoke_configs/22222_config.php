@@ -40,6 +40,7 @@ define('PATH_TO_LOGO', 'assets/includes/default/logo.png');
 | 
 */
 include(DATAOWNER_ID . '_database.php');
+include('global_database.php');
 
 /*
 |--------------------------------------------------------------------------

@@ -1,0 +1,3 @@
+Disk quotas for user leadfar2 (uid 572): 
+     Filesystem  blocks   quota   limit   grace   files   quota   limit   grace
+      /dev/root   10928  1024000 1024000             900       0       0        

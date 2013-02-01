@@ -1,7 +1,15 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-echo "environment=".ENVIRONMENT;
-$config['database']['hostname'] = 'localhost';
+/*
+|--------------------------------------------------------------------------
+| Define database settings for this user
+|--------------------------------------------------------------------------
+|
+| We define standard DB settings here. This ifile is 'included' by the main 
+| XXXXX_config.php file and is set up to serve both dev, staging and prod environs
+*/
+
+
 
 switch (ENVIRONMENT) 
 {
@@ -11,7 +19,7 @@ case 'development':
 		$config['database']['database'] = '22222_leadfarm_data';
 		break;
 	
-case 'testing': //????? depends on the test!
+case 'staging': //????? depends on the test!
 		$config['database']['username'] = 'leadfar2_admin';
 		$config['database']['password'] = 'DMmanch35';
 		$config['database']['database'] = 'leadfar2_22222_1';
@@ -26,14 +34,6 @@ case 'production':
 			exit('The application environment is not set correctly.');
 }
 
-$config['database']['dbdriver'] = 'mysql';
-$config['database']['dbprefix'] = '';
-$config['database']['pconnect'] = TRUE;
-$config['database']['db_debug'] = TRUE;
-$config['database']['cache_on'] = FALSE;
-$config['database']['cachedir'] = '';
-$config['database']['char_set'] = 'utf8';
-$config['database']['dbcollat'] = 'utf8_general_ci';
-$config['database']['swap_pre'] = '';
-$config['database']['autoinit'] = TRUE;
-$config['database']['stricton'] = FALSE;
+
+/* End of file xxxx_database.php */
+/* Location: ./application/config/bespoke_config/ */

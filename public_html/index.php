@@ -18,6 +18,8 @@
  *
  */
 define('ENVIRONMENT', 'development');
+//define('ENVIRONMENT', 'staging');
+
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING & PATHS
@@ -34,14 +36,16 @@ if (defined('ENVIRONMENT'))
 		case 'development':
                     error_reporting(E_ALL);
                     $root = '../';
-		break;
-	
-		case 'testing': //????? depends on the test!
-                    $root = '/home/leadfarm/';
+			break;
+		case 'staging': 
+                    //$root = '/home/leadfarm/';
+                    error_reporting(E_ALL);
+                    $root = '../';
+			break;
 		case 'production':
                     error_reporting(0);
                     $root = '/home/leadfarm/';
-		break;
+			break;
 
 		default:
 			exit('The application environment is not set correctly.');
