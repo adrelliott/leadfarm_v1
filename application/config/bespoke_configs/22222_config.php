@@ -1207,7 +1207,7 @@ $config['booking'] = Array
                         //'Password' => 'Password',
                     ),
                 ),
-                'bookings_join' => array
+                /*'bookings_join' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => 'bookings_join', //The dataset name defined above
@@ -1225,7 +1225,7 @@ $config['booking'] = Array
                         'ContactAction.Id' => 'booking Id',
                         'ContactAction.ActionDescription' => 'ActionDescription',
                     ),
-                ), 
+                ), */
             ),
         ),
         'record' => array
@@ -1233,8 +1233,25 @@ $config['booking'] = Array
             'view' => array
             (
                 'model_name' => 'contactaction_model',
-                'model_method' => 'joinon_Contact_and_Vehicle_singlerecord',
-                'model_params' => NULL,                         
+                'model_method' => 'get_single_record',
+                'model_params' => NULL,
+                'dropdowns' => array    //or NULL
+                (
+                    'users' => array
+                    (
+                        'source' => 'users',    //which dataset are we using?
+                        'label' => array ('FirstName', 'LastName'),
+                        'label_separator' => ' ',
+                        'value' => 'Id',
+                    ),
+                    'vehicles' => array
+                    (
+                        'source' => 'vehicles',    //which dataset are we using?
+                        'label' => array ('__Make', '__Model', '__Registration'),
+                        'label_separator' => ' ',
+                        'value' => '__Id',
+                    ),
+                ),
                 'fields' => array 
                 (
                     'Id' => array
@@ -1258,23 +1275,53 @@ $config['booking'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),
-                    'ActionType' => array      
+                    'CreationNotes' => array      
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Record Type',                  
+                        'label' => 'Notes on the job',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' rows=10',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => 'CreationNotes',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '_ActionSubtype' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Type of Booking',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'text',
-                        'name' => 'ActionType',
+                        'type' => 'select',
+                        'name' => '_ActionSubtype',
                         'helpText' => '',                        
                         'length' => '',
+                        'options' => array
+                        (
+                            'MOT' => 'MOT',
+                            'Diagnostic' => 'Diagnostic',
+                            'Interim service' => 'Interim Service',
+                            'Full Service' => 'Full Service',
+                            'Electrical Fault' => 'Electrical Fault',
+                            'Accident Damage' => 'Accident Damage',
+                        ),
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -1286,37 +1333,195 @@ $config['booking'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'ActionDescription',                  
+                        'label' => 'Description of Work',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'large',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'text',
+                        'extraHTMLInput' => ' rows=8',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
                         'name' => 'ActionDescription',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
-                    ),
-                    'CreationDate' => array       
+                    ),                    
+                    'ActionDate' => array       
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Date created',                  
+                        'label' => 'Date of Booking',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'datetimepicker',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'date',
-                        'name' => 'CreationDate',
+                        'name' => 'ActionDate',
                         'helpText' => '',                        
                         'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '_EstimatedDuration' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Estimated Job Duration',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '_EstimatedDuration',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            '1 hour' => '60',
+                            '2 hours' => '120',
+                            '3 hours' => '180',
+                            '4 hours' => '240',
+                            '5 hours' => '300',
+                            '6 hours' => '360',
+                            '7 hours' => '420',
+                            '8 hours' => '480',
+                            '1.5 Days' => '2160',
+                            '2 Days' => '2880',
+                            '3 Days' => '4320',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '_VehicleId' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Vehicle',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '_VehicleId',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '_NotificationDetails' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'How do we get in touch with you?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '_NotificationDetails',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                    
+                    '_Status' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Job Status',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '_Status',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            //'Awaiting Check-In',
+                            //'Checked-In: Awaiting Mechanic',
+                            //'Mechnic Assigned: Awaiting Check-In',
+                            'Awaiting Check In' => 0,
+                            'Checked In' => 1,
+                            'In Progress' => 2,
+                            'Paused - Awaiting Parts' => 3.1,
+                            'Paused - Awaiting Clent Sign Off' => 3.2,
+                            'Paused - Awaiting Manager Sign Off' => 3.2,
+                            'Paused - Awaiting re-booking' => 3.3,
+                            'Abandoned' => 4,
+                            'Completed' => 5,
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'EndDate' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'End Date',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'datetimepicker',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' readonly',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'date',
+                        'name' => 'EndDate',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'UserID' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Mechanic Assigned',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => 'UserID',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => '',
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 

@@ -30,7 +30,7 @@ class Booking extends T_Booking {
         parent::view($rID, $ContactId);
         
             //check for expirations of MOT & service
-        $this->load->library('garages/garage');
+        /*$this->load->library('garages/garage');
         $this->data['view_setup']['notifications'] = array();
         if (isset($this->data['view_setup']['tables']['vehicles']['table_data'][0]))
         {
@@ -40,7 +40,15 @@ class Booking extends T_Booking {
                     $this->data['view_setup']['tables']['vehicles'],
                     $this->data['view_setup']['ContactId']
                     );
-        }
+        }*/
+          // Generate the view!
+        $this->generate_view($this->data);
+    }
+    
+    public function view_single($view_file = 'view', $rID = 'new', $ContactId = FALSE) {           $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
+            $this->data['view_setup']['header_file'] = 'header';
+        parent::view($rID, $ContactId);
+      
           // Generate the view!
         $this->generate_view($this->data);
     }
@@ -52,11 +60,12 @@ class Booking extends T_Booking {
       public function get_booking_array() {
        $results = array ();
 
-        $title = 'Title with some <strong>HTML</strong> in';
+        $title = '<strong>MOT</strong> (Ford Fiesta, YG02 YTR)';
         $description = '';
         $start_ts = mktime (8, 0, 0, 1, 30, 2013);
         $end_ts = mktime (10, 0, 0, 1, 30, 2013);
-        $url = 'http://leadfarm-staging.co.uk/22222/booking';
+        //$url = 'http://leadfarm-staging.co.uk/22222/booking';
+        $url = 'booking/view_single/edit/8/0';
 
         $results[] = array (
           'id' => 1,                      /* ID of the event */
@@ -69,7 +78,7 @@ class Booking extends T_Booking {
           //'end' => date ('Y-m-d', $end_ts),
           'allDay' => false,
           'url' => $url,
-          'color' => '#cdcdcd'          /* Hex-code for background-colour */
+          'color' => '#70B437'          /* Hex-code for background-colour */
         );
 
         header ('Content-Type: text/json');

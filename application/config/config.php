@@ -3,10 +3,10 @@
 
 function __autoload ($class)
 {
-    $file = APPPATH . 'libraries/' . $class . EXT;
+    $file = APPPATH . 'libraries/controller_templates/' . $class . EXT;
     if (strpos($class, 'CI_') !== 0) {
         if (file_exists($file) && is_file($file)) {
-            @include_once (APPPATH . 'libraries/' . $class . EXT);
+            @include_once (APPPATH . 'libraries/controller_templates/' . $class . EXT);
         }
     }
 }

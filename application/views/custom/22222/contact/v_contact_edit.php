@@ -136,13 +136,15 @@
                 <div class="clearfix">
                     <div class="input">
                         <label>Choose an action:</label>
-                        <select>
-                            <option class="large">Send Email</option>
-                            <option>Send membership Enquiry Pack</option>
-                            <option>Send membership pack</option>
-                            <option>Send service pack (via email)</option>
+                        <select id="quick_action">
+                            <option value=""></option>
+                            <option value="1">Send Email</option>
+                            <option value="2">Send membership Enquiry Pack</option>
+                            <option value="3">Send membership pack</option>
+                            <option value="4">Send service pack (via email)</option>
                         </select>
-                        <a href="#" class="large blue button iframe">GO!</a>
+                        <input type="hidden" id="quick_action_url" value="<?php echo site_url() . DATAOWNER_ID; ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/" />
+                        <a id="quick_action_button" href="<?php echo site_url() . DATAOWNER_ID; ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/0" class="large blue button iframe">GO!</a>
                     </div>
                 </div>
             </div>

@@ -431,6 +431,21 @@ button:active, input[type="submit"]:active, input[type="button"]:active, input[t
 
 .button.red:hover {box-shadow:0 1px 1px #FF0000  inset, 0 0 2px #4D4D4D}
 .button.red:active {box-shadow: 0 0 5px #232323 inset}
+
+.button.green {border: 1px solid #0e5a39; box-shadow:inset 0 1px 0px #0e5a39 ; color: #fff;
+    background: #;
+    background: -moz-linear-gradient(top, #6fb437 0%, #3f7512 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6fb437), color-stop(100%,#3f7512));
+    background: -webkit-linear-gradient(top, #6fb437 0%,#3f7512 100%);
+    background: -o-linear-gradient(top, #6fb437 0%,#3f7512 100%);
+    background: -ms-linear-gradient(top, #6fb437 0%,#3f7512 100%);
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6fb437', endColorstr='#3f7512',GradientType=0 );
+    background: linear-gradient(top, #6fb437 0%,#3f7512 100%);
+}
+
+.button.green:hover {box-shadow:0 1px 1px #fff  inset, 0 0 2px #3f7512}
+.button.green:active {box-shadow: 0 0 5px #3f7512 inset}
+
 .small.button {font-size:0.8em; padding: 3px 5px}
 .large.button {font-size:1.3em; padding: 7px 10px}
 
