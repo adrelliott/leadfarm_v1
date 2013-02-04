@@ -10,7 +10,7 @@
  */
 
   
-class Login extends MY_Controller {
+class Login extends CI_Controller {
     
     public $controller_name = 'login';
     

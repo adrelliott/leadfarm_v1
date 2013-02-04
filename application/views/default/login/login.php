@@ -63,6 +63,7 @@
                                                     <input type="password" class="xlarge" name="password" />
                                                 </div>
                                             </div>
+                                        <?php echo form_hidden('dID', $this->uri->segment(1));?>
                                             <div class="clearfix grey-highlight">
                                                 <div class="input no-label ">
                                                     <input type='submit' name='submit' class='button large blue right' value='Login' />
