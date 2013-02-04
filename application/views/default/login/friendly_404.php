@@ -44,33 +44,18 @@
             <div id="main">
                 <div class="container">
                     <div class="row">
-                        <div class="col_6 pre_3 padding_top_120">
+                        <div class="col_8 pre_2 padding_top_120">
                             <div class="widget clearfix">
-                                <h2>Login to LeadFarm.co.uk</h2>
+                                <h2>Uh oh...</h2>
                                 <div class="widget_inside">
-                                    <?php  //echo $this->data['view_setup']['message']; ?>
-                                    <div class="form">
-                                        <?php echo form_open($this->uri->segment(1) . '/login/validate/' . $this->uri->segment(1)); ?>
-                                            <div class="clearfix">
-                                                <label>Username</label>
-                                                <div class="input">
-                                                    <input type="text" class="xlarge" name="username" />
-                                                </div>
-                                            </div>
-                                            <div class="clearfix">
-                                                <label>Password</label>
-                                                <div class="input">
-                                                    <input type="password" class="xlarge" name="password" />
-                                                </div>
-                                            </div>
-                                            <?php //echo form_hidden('dID', $this->uri->segment(1));?>
-                                            <div class="clearfix grey-highlight">
-                                                <div class="input no-label ">
-                                                    <input type='submit' name='submit' class='button large blue right' value='Login' />
-                                                </div>
-                                            </div>
-                                       <?php echo form_close(); ?>
-                                    </div>
+                                    <h3>Well this is embarrassing...</h3>
+                                    <h4>Seeing this page means either:</h4>
+                                    <ul>
+                                        <li><h4>- We've messed up and given you a link that doesn't work. (Please let us know if we have),</h4></li>
+                                        <li><h4>- ...Or, you've entered a link into your browser that doesn't exist, (Its OK - we all like to try new things from time to time)</h4></li>
+                                    </ul>
+                                    <br/>
+                                    <h4>Either way, <strong>just press the back button on your browser</strong> and see time magically travel backwards as you find yourself in the same place you were before this while sorry incident ever happened.</h4>
                                 </div>
                             </div>
                         </div>

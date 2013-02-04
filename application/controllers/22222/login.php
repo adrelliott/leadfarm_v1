@@ -17,52 +17,76 @@ class Login extends CI_Controller {
     public function __construct()    {
          parent::__construct();
          
+         
     }
 
-    public function index($message = NULL)
-    {      
-        if ($message == NULL)
+    public function index($message = NULL) {      
+        if ($this->session->userdata('is_logged_in'))       //show friendly 404 page
         {
-            $message = '<span class="notification information">Please log in below</span>';
+            $this->load->view('default/login/friendly_404');            
         }
-        $this->data['page_setup']['message'] = $message;  
-        $this->load->view('default/login/login');
+        else
+        {
+            if ($message == NULL)
+            {
+                $message = '<span class="notification information">Please log in below</span>';
+            }
+            $this->data['page_setup']['message'] = $message;  
+            $this->load->view('default/login/login', $this->data);
+        }
     }
 
    
-    public function validate()
+    public function validate($dID)
     {
-        $this->load->model('login_model');    
-        $query = $this->login_model->validate_user(); 
-        if ($query['result']) //Tests to see if anything was returned (TRUE if result is found)
+        //first, test and see if there is config file for this dID exists
+        if(! file_exists(APPPATH . '/config/bespoke_configs/' . $dID . '_config.php'))
         {
-            $row = $query['data']->row(); //allows access to the results          
-            if ($row->_suspendedReason == '' || $row->_suspendedReason == NULL )
+            show_error ('Have you got the right URL?');
+        }
+        
+        //Load the settings to do the query
+        define('DATAOWNER_ID', $dID);        
+        $this->config->load('bespoke_configs/' . DATAOWNER_ID . '_database');
+        $this->config->load('bespoke_configs/' . DATAOWNER_ID . '_config');
+        $this->load->model('login_model');    
+        
+        //do the query
+        $query = $this->login_model->validate_user(); 
+        //print_array($query, 1);
+        if ($query['result']) //Tests returned array(TRUE if result is found)
+        {
+            extract($query['data']);
+            if ( $_SuspendedReason == '' || $_SuspendedReason == NULL )
             {
+                //No suspension! Yeah!
                 $sessionData = array
                   (
-                      'Username' => $this->input->post('username'),
+                      'Username' => $Username,
                       'is_logged_in' => TRUE,
-                      'FirstName' => $row->FirstName,
-                      'LastName' => $row->LastName,
-                      'Company' => $row->Company,
-                      'UserId' => $row->UserId,
-                      '_dID' => $row->_dID
-                      //add more info using the format $row->NAME, where NAME = database col name
+                      'FirstName' => $FirstName,
+                      'LastName' => $LastName,
+                      'Company' => $Company,
+                      'UserId' => $Id,
+                      '_dID' => DATAOWNER_ID
                   );
                 $this->session->set_userdata($sessionData);
-                redirect($sessionData['_dID'] . '/dashboard');
+                redirect( DATAOWNER_ID . '/dashboard');
+                //echo "success!";                
             }
             else
             {
-                $message = '<span class="notification undone"><h4>I\'m sorry. There\'s a problem with your account.</h4><br/> Please call 0161 375 4444 and quote code ' . $row->_suspendedReason . '</span>';
+                //Naughty boy. Been suspended....
+                $message = '<span class="notification undone"><h4>I\'m sorry. There\'s a problem with your account.</h4><br/> Please call 0161 375 4444 and quote: ' . $_SuspendedReason . '(Id = ' . $Id . ')</span>';
                 $this->force_log_out($message );
-            }          
+                //echo "Suspension!";
+            }
         }
-         else
+        else
         {
             $message = '<span class="notification undone"><h4>I\'m sorry - username/password not recognised.</h4></span>';
             $this->index($message);
+            //echo "username/pass not recognised!";
         }
     }
 
@@ -70,7 +94,10 @@ class Login extends CI_Controller {
     {
         $this->session->sess_destroy();
         $message = '<span class="notification warning">You\'ve been logged out.</span>';
+        //redirect( DATAOWNER_ID . '/login/index');
         $this->index($message);
+        //echo "logged out";
+        //print_array($this->session->all_userdata());
     }
 
     function force_log_out($message = NULL)

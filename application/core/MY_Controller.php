@@ -36,10 +36,10 @@ class MY_Controller extends CI_Controller {
         // Put code here that is to be called before any other controller
         
         // 1. Test is_logged_in. This Redirects to login if not.
-        //$this->_is_logged_in();
+        $this->_is_logged_in();
         
         // 2. Define dID
-        define('DATAOWNER_ID', 22222);    //this needs to be taken from the URL 
+        define('DATAOWNER_ID', $this->session->userdata('_dID'));    //this needs to be taken from the URL 
         
         // 3. Load the bespoke config
         $this->config->load('bespoke_configs/' . DATAOWNER_ID . '_config');
@@ -467,7 +467,7 @@ class MY_Controller extends CI_Controller {
     */
     private function _is_logged_in() {  //used as a test to see if all is well
          $status = $this->session->userdata('is_logged_in');
-         echo "status= $status";die;
+         //echo "status= $status";die;
          if (!isset($status) || $status !== TRUE)
          {
              //kick them out

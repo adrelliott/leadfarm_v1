@@ -80,8 +80,8 @@
                 </div>                
                 <div class="right">
                     <ul id="toolbar">
-                       <li>Logged in as XX</li>
-                        <li><?php echo anchor('settings', 'Settings', 'id="settings"'); ?></li>
+                       <li>Logged in as <?php echo $this->session->userdata('FirstName') . ' ' . $this->session->userdata('LastName');?> (<?php echo anchor(DATAOWNER_ID . '/login/log_out', 'Log out?');?>) </li>
+                        <li><?php echo anchor(DATAOWNER_ID . '/settings', 'Settings', 'id="settings"'); ?></li>
                     </ul>
                 </div>
             </div>
