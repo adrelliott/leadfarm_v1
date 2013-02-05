@@ -48,7 +48,7 @@
                             <div class="widget clearfix">
                                 <h2>Login to LeadFarm.co.uk</h2>
                                 <div class="widget_inside">
-                                    <?php  //echo $this->data['view_setup']['message']; ?>
+                                    <?php  echo $this->data['page_setup']['message']; ?>
                                     <div class="form">
                                         <?php echo form_open($this->uri->segment(1) . '/login/validate/' . $this->uri->segment(1)); ?>
                                             <div class="clearfix">
@@ -90,3 +90,4 @@
         </footer>
     </body>
 </html>
+<?php print_array($this->data);?>

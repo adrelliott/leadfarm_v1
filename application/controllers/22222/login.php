@@ -77,7 +77,7 @@ class Login extends CI_Controller {
             else
             {
                 //Naughty boy. Been suspended....
-                $message = '<span class="notification undone"><h4>I\'m sorry. There\'s a problem with your account.</h4><br/> Please call 0161 375 4444 and quote: ' . $_SuspendedReason . '(Id = ' . $Id . ')</span>';
+                $message = '<span class="notification undone"><h4>I\'m sorry. There\'s a problem with your account.</h4><br/> Please call 0161 375 4444 and quote: ' . $_SuspendedReason . ' (Id = ' . $Id . ')</span>';
                 $this->force_log_out($message );
                 //echo "Suspension!";
             }
@@ -103,7 +103,6 @@ class Login extends CI_Controller {
     function force_log_out($message = NULL)
     {
         $this->session->sess_destroy();
-        session_destroy();
          if ($message == NULL)
         {
             $message = '<span class="notification information">You\'ve been logged out. (Maximum login time is 2 hours)</span>';
