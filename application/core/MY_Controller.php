@@ -39,7 +39,7 @@ class MY_Controller extends CI_Controller {
         $this->_is_logged_in();
         
         // 2. Define dID
-        define('DATAOWNER_ID', $this->session->userdata('_dID'));    //this needs to be taken from the URL 
+        define('DATAOWNER_ID', $this->session->userdata('_dID'));    
         
         // 3. Load the bespoke config
         $this->config->load('bespoke_configs/' . DATAOWNER_ID . '_config');
@@ -61,114 +61,76 @@ class MY_Controller extends CI_Controller {
     
    
     
-    public function index() {
-        // 1. Set up the vars for this method
-        extract($this->data); 
-        extract($this->data['controller_setup']);
-        
-         // 2. prepare the model_setup array (this controls the queries)
-        $this->data['model_setup'] = $this->prepare_model($config, $method_name);        
-        
-        // 3. Do the datasets query & hand over to the controller_setup to post-process data
-        $this->data['controller_setup']['datasets'] = 
-                $this->generate_datasets($this->data['model_setup']['datasets']);
-        unset($this->data['model_setup']); //Tidy up...
-        
-         // 4. Create the datasets for the table(s)
-        $datasets = $this->data['controller_setup']['datasets'];
-        //$dropdowns = $this->data['config']['record'][$method_name]['dropdowns'];
-        
-            //Create the table headers & table data
-        if (isset($datasets))
-        {
-            $table_headers =  $this->data['config']['datasets'][$method_name];
-            foreach ($datasets as $dataset => $array)
-            {
-               $this->data['view_setup']['tables'][$dataset]['table_headers'] = 
-                        $this->generate_table_headings($table_headers[$dataset]['fields']);
-               $this->data['view_setup']['tables'][$dataset]['table_data'] = $array;
-            }
-        }
-              
-        // 5. Now add the fields to view set up, tidy up & generate the view        
-        $this->data['view_setup']['method_name'] = $method_name;
-        $this->data['view_setup']['controller_name'] = $controller_name;
-        $this->data['view_setup']['display_none'] = '';
-        
-               //Tidy up 
-        unset($this->data['config']);       
-        unset($this->data['controller_setup']);
-        
-        
-            // Generate the view!
-        //$this->generate_view($this->data);       
-        
-    }
+    //protected function index() {
+                
+    //}
     
     
     
     
-    //public function view($rID, $fieldset = NULL) {
-    public function view($rID) {
+   
+    protected function _load_view_data($rID = NULL) {
         // 1. Set up the vars for this method
         extract($this->data); 
         extract($this->data['controller_setup']); 
         
         // 2. prepare the model_setup array (this controls the queries)
-        $this->data['model_setup'] = $this->prepare_model($config, $method_name);        
-        
+        $this->data['model_setup'] = $this->_prepare_model($config, $method_name);        
+       
         // 3. Do the datasets query & hand over to the controller_setup to post-process data
-        $this->data['controller_setup']['datasets'] = $this->generate_datasets(
-                $this->data['model_setup']['datasets']
-                );
-        
-        // 4. Now do the record query. store in ['controller_setup']['results']['record']
-        // (This is the query that gets all the data for this record        
-        $this->data['controller_setup']['record'] = $this->retrieve_record(
-                $rID, 
-                $this->data['model_setup']['record']
-                );
-        unset($this->data['model_setup']); //Tidy up...
-        
-         // 5. Create the dropdown menus & table
-        $datasets = $this->data['controller_setup']['datasets'];
-        $dropdowns = $this->data['config']['record'][$method_name]['dropdowns'];
-        
-            //Feed the dropdown config and the data to this method to generate an array of options
-        if (isset($dropdowns))
-        {            
-            foreach ($dropdowns as $dropdown => $config)
-            {
-                $this->data['view_setup']['dropdowns'][$dropdown] = $this->create_dropdown(
-                    $dropdowns[$dropdown], 
-                    $datasets[$dropdown]
+        if (isset($this->data['model_setup']['datasets']))
+        { 
+            //do all querues for dropdowns and tables
+            $this->data['controller_setup']['datasets'] = $this->_generate_datasets(
+                    $this->data['model_setup']['datasets']
                     );
-            }
-        }
-        
-            //Create the table headers & table data
-        if (isset($datasets))
-        {            
+            
             $table_headers =  $this->data['config']['datasets'][$method_name];
+            $datasets = $this->data['controller_setup']['datasets'];
+            
+            //set up table data array
             foreach ($datasets as $dataset => $array)
             {
                $this->data['view_setup']['tables'][$dataset]['table_headers'] = 
-                        $this->generate_table_headings($table_headers[$dataset]['fields']);
+                        $this->_generate_table_headings($table_headers[$dataset]['fields']);
                $this->data['view_setup']['tables'][$dataset]['table_data'] = $array;
+            }
+                  
+            //Generate an array of options for dropdown
+            if (isset($this->data['config']['record'][$method_name]['dropdowns']))
+            {            
+                $dropdowns = $this->data['config']['record'][$method_name]['dropdowns']; 
+                foreach ($dropdowns as $dropdown => $config)
+                {
+                    $this->data['view_setup']['dropdowns'][$dropdown] = $this->_create_dropdown(
+                        $dropdowns[$dropdown], 
+                        $datasets[$dropdown]
+                        );
+                }
             }
         }
         
+        // 4. Now do the record query. store in ['controller_setup']['results']['record']
+        // (This is the query that gets all the data for this record        
+        if (isset($this->data['model_setup']['record']) && $rID != NULL)
+        { 
+            $this->data['view_setup']['fields'] = $this->_retrieve_record(
+                   $rID, 
+                   $this->data['model_setup']['record']
+                   );
+           
+        }
+        
         // 6. Now add the fields to view set up, tidy up & generate the view        
-        $this->data['view_setup']['fields'] = $this->data['controller_setup']['record'];
         $this->data['view_setup']['method_name'] = $method_name;
         $this->data['view_setup']['controller_name'] = $controller_name;
         
                //Tidy up 
+        unset($this->data['model_setup']); //Tidy up...
         unset($this->data['config']);       
         unset($this->data['controller_setup']);
         
-            // Generate the view!
-        //$this->generate_view($this->data);
+        //Now let the individual controllers take over and fetch view
        
     }
     
@@ -186,7 +148,7 @@ class MY_Controller extends CI_Controller {
     |
     */
        
-    function create_dropdown($config, $data, $direction = NULL) {
+    protected function _create_dropdown($config, $data, $direction = NULL) {
         //converts table results to a dropdown as defined in $config['controller_name']['dropdowns']
         $retval = array();
         extract($config);
@@ -206,7 +168,7 @@ class MY_Controller extends CI_Controller {
         return $retval;
     } 
     
-     function generate_table_headings($fields) {
+    protected function _generate_table_headings($fields) {
         $retval = array();
         foreach ($fields as $fieldName => $tableHeading)
         {
@@ -237,7 +199,7 @@ class MY_Controller extends CI_Controller {
     | Methods for CRUD   
     |
     */
-    public function prepare_model($config, $method_name) {
+   protected function _prepare_model($config, $method_name) {
          if (isset($config['datasets'][$method_name]))
         {
             $model_setup['datasets'] = 
@@ -252,7 +214,7 @@ class MY_Controller extends CI_Controller {
         return $model_setup;
     }
     
-    public function generate_datasets($datasets) {
+     protected function _generate_datasets($datasets) {
         $results = array(); 
         foreach ($datasets as $dataset => $config)
         {
@@ -274,10 +236,9 @@ class MY_Controller extends CI_Controller {
         return $results;        
     }
     
-    function retrieve_record ($rID, $config) {
+    protected function _retrieve_record ($rID, $config) {
         $results = $config['fields'];        
         //now either get the record or leave it as blank
-        //if ($rID != 'new')
         if (is_numeric($rID))
         {
             $model_name = $config['model_name'];
@@ -298,11 +259,7 @@ class MY_Controller extends CI_Controller {
                 $model_method($rID, if_exists($config['model_params']));
             foreach ($query as $col_name => $value)
             {
-                $results[$col_name]['value'] = $value;
-                /*if ($col_name == '_IsOrganisation' AND $value == 1)
-                {
-                    $this->data['view_setup']['fieldset'] = 'v_contact_organisation';
-                }*/
+                $results[$col_name]['value'] = $value;                
             }
         }
         else
@@ -328,7 +285,7 @@ class MY_Controller extends CI_Controller {
     |
     */
     
-     public function generate_view($data, $view_array = NULL) {
+     protected function _generate_view($data, $view_array = NULL) {
         // 1 . Set up the variables
         /*extract($data['controller_setup']);
         $data['view_setup']['method_name'] = $method_name;
@@ -356,13 +313,13 @@ class MY_Controller extends CI_Controller {
         
         // 3. Load the views & pass the data
         extract($data['view_setup']);
-        $this->load->view($this->custom_or_default_file('common', $header_file), $data);
-        $this->load->view($this->custom_or_default_file($controller_name, $view_file), $data['view_setup']);
-        $this->load->view($this->custom_or_default_file('common', $footer_file), $data);
+        $this->load->view($this->_custom_or_default_file('common', $header_file), $data);
+        $this->load->view($this->_custom_or_default_file($controller_name, $view_file), $data['view_setup']);
+        $this->load->view($this->_custom_or_default_file('common', $footer_file), $data);
     }
     
   
-      function custom_or_default_file($dir, $filename, $containing_dir = 'view', $file_ext = 'php') {
+     protected  function _custom_or_default_file($dir, $filename, $containing_dir = 'view', $file_ext = 'php') {
         //looks in views/custom/DATAOWNER_ID/dir for filename first then, if it is
         //not found, it looks in views/default/dir
         //This allows us to over-ride deafult views with cutom ones
@@ -386,32 +343,7 @@ class MY_Controller extends CI_Controller {
         
     
     
-    public function populate_placeholders ($array) {
-        if (! is_array($array))
-        {
-            $array = array($array);
-        }
-        
-         foreach ($array as $column => $value)
-        {
-            if (substr($value, 0, 2) == '??')
-            {
-                switch (substr($value, 2))  //remove the first 2 '??'
-                {
-                    case 'rID':
-                        $array[$column] = $this->rID;
-                        break;
-                    //add more placeholders here
-                    default:
-                        break;
-                }
-            }            
-        }
-        
-        return $array;
-     }
-    
-    
+  
     
    
       /*
@@ -458,6 +390,33 @@ class MY_Controller extends CI_Controller {
         
         return $results;     
     }*/
+     
+      /*public function populate_placeholders ($array) {
+        if (! is_array($array))
+        {
+            $array = array($array);
+        }
+        
+         foreach ($array as $column => $value)
+        {
+            if (substr($value, 0, 2) == '??')
+            {
+                switch (substr($value, 2))  //remove the first 2 '??'
+                {
+                    case 'rID':
+                        $array[$column] = $this->rID;
+                        break;
+                    //add more placeholders here
+                    default:
+                        break;
+                }
+            }            
+        }
+        
+        return $array;
+     }
+    
+    */
       /*
      public function view_backup($rID) {
         // 1. Set up the vars for this method

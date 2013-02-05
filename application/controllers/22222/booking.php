@@ -22,7 +22,7 @@ class Booking extends T_Booking {
         parent::index();
       
           // Generate the view!
-        $this->generate_view($this->data);
+        $this->_generate_view($this->data);
     }
    
     public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
@@ -42,7 +42,7 @@ class Booking extends T_Booking {
                     );
         }*/
           // Generate the view!
-        $this->generate_view($this->data);
+        $this->_generate_view($this->data);
     }
     
     public function view_single($view_file = 'view', $rID = 'new', $ContactId = FALSE) {           $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
@@ -50,7 +50,7 @@ class Booking extends T_Booking {
         parent::view($rID, $ContactId);
       
           // Generate the view!
-        $this->generate_view($this->data);
+        $this->_generate_view($this->data);
     }
    
     
@@ -87,7 +87,7 @@ class Booking extends T_Booking {
    }
     
     
-    public function get_bookings() {
+   /*public function get_bookings() {
         //get all the booking data
         $year = date('Y');
         $month = date('m');
@@ -111,8 +111,7 @@ class Booking extends T_Booking {
 
 	));
         
-        /*
-         * {
+         {
                 title: 'All Day Event',
                 start: new Date(y, m, 1)
             },
@@ -156,9 +155,9 @@ class Booking extends T_Booking {
                 end: new Date(y, m, 29),
                 url: 'http://google.com/'
             }
-         */
+         
 
-   }
+   }*/
       
 }
    

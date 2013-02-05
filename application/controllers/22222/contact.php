@@ -15,13 +15,8 @@ class Contact extends T_Contact {
     }
     
   public function index($view_file = 'index') {   
-        $this->data['view_setup']['view_file'] = 'v_contact_' . $view_file;
-        $this->table_list = array('contacts', 'organisations');   
-            //these are names of the datasets required for this view
-        parent::index();
-        
-          // Generate the view!
-        $this->generate_view($this->data);
+        parent::index($view_file);
+        $this->_generate_view($this->data);
    }
    
   public function view($view_file = 'view', $rID, $fieldset = NULL) {     
@@ -42,7 +37,7 @@ class Contact extends T_Contact {
         }
         
           // Generate the view!
-        $this->generate_view($this->data);
+        $this->_generate_view($this->data);
     }
     
   

@@ -17,7 +17,7 @@ class T_Dashboard extends MY_Controller {
     
     public function index() {
         $this->data['controller_setup']['method_name'] = 'index';        
-        parent::index();
+        $this->_load_view_data();
     }
    
 }

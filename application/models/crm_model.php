@@ -20,7 +20,7 @@
  * @author Al Elliott
  */
 
-class Crm_model  extends Infusionsoft { //extends libraries/Infusionsoft
+class Crm_model extends Infusionsoft { //extends libraries/Infusionsoft
     
     public function __construct (){
         parent::__construct();  //this forms a connection with Infusion   

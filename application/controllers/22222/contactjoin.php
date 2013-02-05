@@ -21,7 +21,7 @@ class Contactjoin extends T_Contactjoin {
        parent::index();
             
         // Generate the view!        
-       $this->generate_view($this->data);
+       $this->_generate_view($this->data);
    }
    
   public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
@@ -29,7 +29,7 @@ class Contactjoin extends T_Contactjoin {
        parent::view($rID, $ContactId);   
             
         // Generate the view!        
-       $this->generate_view($this->data);
+       $this->_generate_view($this->data);
 
   }
 

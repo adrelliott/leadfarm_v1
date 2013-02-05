@@ -19,7 +19,7 @@ class Vehicles extends T_Vehicles {
         parent::index();
         $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;
           // Generate the view!
-        $this->generate_view($this->data);
+        $this->_generate_view($this->data);
     }
    
     public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
@@ -39,7 +39,7 @@ class Vehicles extends T_Vehicles {
                     );
         }
             // Generate the view!
-        $this->generate_view($this->data);
+        $this->_generate_view($this->data);
     }
     
     public function create_new($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
@@ -51,7 +51,7 @@ class Vehicles extends T_Vehicles {
         parent::view($rID, $ContactId);
         
              // Generate the view!
-        $this->generate_view($this->data);
+        $this->_generate_view($this->data);
     }
     
     public function add_new($rID, $ContactId, $view_file = 'view') {    //false = create new record
