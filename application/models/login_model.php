@@ -38,9 +38,10 @@
             
             if ($query->num_rows == 1)
             {
+                $data = $query->result_array();
                 $retval = array(
                     'result' => TRUE,
-                    'data' => $query->result_array()[0],
+                    'data' => $data[0],
                 );                
             }
             
