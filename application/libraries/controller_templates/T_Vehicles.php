@@ -8,16 +8,23 @@ class T_Vehicles extends MY_Controller {
          parent::__construct($this->controller_name);         
     }
     
-    public function index() {
+    public function index($view_file) {
         $this->data['controller_setup']['method_name'] = 'index';
-        parent::index();
+        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;
+        
+        $this->_load_view_data();    //retrieves and process all data for view
      }
 
-    public function view($rID, $ContactId) {    //$rID=new => create new record
-        $this->data['controller_setup']['method_name'] = 'view';
-        $this->data['view_setup']['rID'] = $rID;
-        $this->data['view_setup']['ContactId'] = $ContactId;   
-        parent::view($rID);
+    public function view($view_file, $rID, $ContactId) {    //$rID=new => create new record
+        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;
+        $this->data['controller_setup']['method_name'] = 'view';  
+        $this->data['view_setup']['header_file'] .= '';  //add '_modal' for modal
+        $this->data['view_setup']['footer_file'] .= '';  //add '_modal' for modal       
+        $this->data['view_setup']['rID'] = $rID;        
+        $this->data['view_setup']['ContactId'] = $ContactId; ;   
+        $this->data['view_setup']['display_none'] = '';
+        
+        $this->_load_view_data($rID);    //retrieves and process all data for view    
      }
 
      public function add($rID, $ContactId, $view_file = 'view') {    //false = create new record

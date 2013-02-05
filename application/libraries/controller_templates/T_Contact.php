@@ -11,11 +11,12 @@ class T_Contact extends MY_Controller {
     public function index($view_file) {
         $this->data['controller_setup']['method_name'] = 'index';
         $this->data['view_setup']['view_file'] = 'v_contact_' . $view_file;
-        $this->_load_view_data();
         
+        $this->_load_view_data();   //retrieves and process all data for view        
     }
    
-    public function view($rID, $fieldset) {    //false = create new record
+    public function view($view_file, $rID, $fieldset) {    //false = create new record
+        $this->data['view_setup']['view_file'] = 'v_contact_' . $view_file;        
         $this->data['controller_setup']['method_name'] = 'view';
         $this->data['view_setup']['header_file'] .= '';  //add '_modal' for modal
         $this->data['view_setup']['footer_file'] .= '';  //add '_modal' for modal       
@@ -24,7 +25,7 @@ class T_Contact extends MY_Controller {
         $this->data['view_setup']['display_none'] = ''; 
         $this->data['view_setup']['fieldset'] = $fieldset;
         
-        $this->_load_view_data($rID);               
+        $this->_load_view_data($rID);    //retrieves and process all data for view              
     }    
      
     public function add($rID, $input = NULL, $action = 'contact') {    //false = create new record

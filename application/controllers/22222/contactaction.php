@@ -11,21 +11,18 @@ class Contactaction extends T_Contactaction {
 	 */
     
     public function __construct()    {
-        $this->data['view_setup']['modal'] = TRUE;
-        $this->data['view_setup']['header_file'] = 'header_modal'; 
-        $this->data['view_setup']['footer_file'] = 'footer_modal'; 
         parent::__construct();
     }
     
-    public function index() {     
-        parent::index();
-            // Generate the view!
+   public function index($view_file = 'index') {   
+        parent::index($view_file);
+      
+          // Generate the view!
         $this->_generate_view($this->data);
     }
    
-  public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
-        $this->data['view_setup']['view_file'] = 'v_contactaction_' . $view_file;        
-        parent::view($rID, $ContactId);
+  public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {          
+        parent::view($view_file, $rID, $ContactId);
             // Generate the view!
         $this->_generate_view($this->data);
     }

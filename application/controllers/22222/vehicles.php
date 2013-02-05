@@ -12,19 +12,15 @@ class Vehicles extends T_Vehicles {
     
     public function __construct()    {
         parent::__construct();
-        
     }
     
     public function index($view_file = 'index') {     
-        parent::index();
-        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;
-          // Generate the view!
+        parent::index($view_file);
         $this->_generate_view($this->data);
     }
    
     public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
-        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;  
-        parent::view($rID, $ContactId);
+        parent::view($view_file, $rID, $ContactId);
         
             //check for expirations of MOT & service
         $this->load->library('garages/garage');

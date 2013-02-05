@@ -58,16 +58,7 @@ class MY_Controller extends CI_Controller {
         if (ENVIRONMENT == 'development') $this->output->enable_profiler(TRUE);
     }
     
-    
-   
-    
-    //protected function index() {
-                
-    //}
-    
-    
-    
-    
+    //Is there any need for an index() function here?
    
     protected function _load_view_data($rID = NULL) {
         // 1. Set up the vars for this method

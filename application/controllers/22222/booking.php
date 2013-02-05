@@ -11,23 +11,18 @@ class Booking extends T_Booking {
 	 */
 
     public function __construct()    {
-        
-        //$this->data['view_setup']['header_file'] = 'header_modal'; 
         parent::__construct();
     }
     
     public function index($view_file = 'index') {   
-        $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
-        //$this->data['view_setup']['header_file'] = 'header_modal';
-        parent::index();
+        parent::index($view_file);
       
           // Generate the view!
         $this->_generate_view($this->data);
     }
    
-    public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
-        $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
-        parent::view($rID, $ContactId);
+    public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {  
+        parent::view($view_file, $rID, $ContactId);
         
             //check for expirations of MOT & service
         /*$this->load->library('garages/garage');
@@ -45,13 +40,13 @@ class Booking extends T_Booking {
         $this->_generate_view($this->data);
     }
     
-    public function view_single($view_file = 'view', $rID = 'new', $ContactId = FALSE) {           $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
+    /*public function view_single($view_file = 'view', $rID = 'new', $ContactId = FALSE) {           $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
             $this->data['view_setup']['header_file'] = 'header';
         parent::view($rID, $ContactId);
       
           // Generate the view!
         $this->_generate_view($this->data);
-    }
+    }*/
    
     
     
@@ -65,7 +60,7 @@ class Booking extends T_Booking {
         $start_ts = mktime (8, 0, 0, 1, 30, 2013);
         $end_ts = mktime (10, 0, 0, 1, 30, 2013);
         //$url = 'http://leadfarm-staging.co.uk/22222/booking';
-        $url = 'booking/view_single/edit/8/0';
+        $url = 'booking/view/edit/8/0';
 
         $results[] = array (
           'id' => 1,                      /* ID of the event */

@@ -15,16 +15,24 @@ class T_Contactaction extends MY_Controller {
          parent::__construct($this->controller_name);
     }
     
-    public function index() {
-        $this->data['controller_setup']['method_name'] = 'index';
-        parent::index();
-     }
+    public function index($view_file) {
+        $this->data['controller_setup']['method_name'] = 'index'; 
+        $this->data['view_setup']['view_file'] = 'v_contactaction_' . $view_file;
+       
+        $this->_load_view_data($rID);    //retrieves and process all data for view
+       
+    }
    
-    public function view($rID, $ContactId) {    //$rID=new => create new record
+    public function view($view_file, $rID, $ContactId) {    //$rID=new => create new record
+        $this->data['view_setup']['view_file'] = 'v_contactjoin_' . $view_file;
         $this->data['controller_setup']['method_name'] = 'view';
+        $this->data['view_setup']['modal'] = TRUE;
+        $this->data['view_setup']['header_file'] = 'header_modal'; 
+        $this->data['view_setup']['footer_file'] = 'footer_modal'; 
         $this->data['view_setup']['rID'] = $rID;
         $this->data['view_setup']['ContactId'] = $ContactId;   
-        parent::view($rID);
+        
+        $this->_load_view_data($rID);    //retrieves and process all data for view    
     }
    
    public function add($rID, $ContactId, $view_file = 'view') {    //false = create new record

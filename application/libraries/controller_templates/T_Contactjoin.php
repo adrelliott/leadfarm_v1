@@ -1,28 +1,27 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class T_Contactjoin extends MY_Controller {
-
-	/**
-	 * This acts as a template for every controller.
-	 *
-	 * Define methods/vars here in the construct (to run before anything else) 
-	 * and/or define methods here that can be extended in other controllers
-	 * 
-	 */
+	
     public $controller_name = 'contactjoin';
     
     public function __construct()    {
          parent::__construct($this->controller_name);
     }
     
-    public function index() {
-        $this->data['controller_setup']['method_name'] = 'index';
-        parent::index();
+    public function index($view_file) {
+        //$this->data['controller_setup']['method_name'] = 'index'; 
+        //$this->data['view_setup']['view_file'] = 'v_contactjoin_' . $view_file;
+       
+        //$this->_load_view_data($rID);    //retrieves and process all data for view
 
      }
    
-    public function view($rID, $ContactId) {       //$rID=new => create new record
+    public function view($view_file, $rID, $ContactId) {       //$rID=new => create new record        
+        $this->data['view_setup']['view_file'] = 'v_contact_' . $view_file;  
         $this->data['controller_setup']['method_name'] = 'view';
+        $this->data['view_setup']['modal'] = TRUE;
+        $this->data['view_setup']['header_file'] = 'header_modal'; 
+        $this->data['view_setup']['footer_file'] = 'footer_modal'; 
         $this->data['view_setup']['rID'] = $rID;
         $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
         

@@ -14,9 +14,9 @@ class Dashboard extends T_Dashboard {
          parent::__construct();
     }
     
-    public function index() {  
-        $this->data['view_setup']['view_file'] = 'v_dashboard';
-        parent::index();
+    public function index($view_file = 'index') {   
+        parent::index($view_file); 
+        
           // Generate the view!
         $this->_generate_view($this->data);
     }
