@@ -175,36 +175,7 @@ class MY_Controller extends CI_Controller {
     
     
     
-    /*public function add($rID) {
-        // 1. Set up the vars for this method
-        extract($this->data); 
-        extract($this->data['controller_setup']); 
-        
-        // 2. process the input
-        
-        // 3. Prepare the query (if rID = new then its insert)
-
-        // 4. set up the message and prepare the view
-        //if its new, then 
-        $this->data['view_setup']['display_none'] = 'display:none';
-        $this->data['view_setup']['org_flag'] = '1 OR 0'; //depedns on the typ of record
-
-        // 2. prepare the model_setup array (this controls the queries)
-        $this->data['model_setup'] = $this->prepare_model($config, $method_name);
-        unset($this->data['config']);   //Tidy up
-        
-        // 3. Do the datasets query & hand over to the controller_setup to post-process data
-        $this->data['controller_setup']['datasets'] = $this->generate_datasets($this->data['model_setup']['datasets']);
-        
-        // 4. Now do the record query (data goes in ['controller_setup']['results']['record']
-        // (This is the query that gets all the data for this record        
-        $this->data['controller_setup']['record'] = $this->retrieve_record($rID, $this->data['model_setup']['record']);
-        unset($this->data['model_setup']); //Tidy up...
-       
-        // 4. Generate the view!
-       $this->generate_view($this->data);
-       
-    }*/
+    
                
     /*
     |--------------------------------------------------------------------------
@@ -255,22 +226,7 @@ class MY_Controller extends CI_Controller {
     }
     
     
-     /*function process_datasets ($datasets) {
-        $results = array(); 
-        foreach ($datasets as $dataset => $config)
-        {
-            if (isset($config['include_in_query']))
-            {
-                //go through the data set and 
-            }
-            else
-            {
-                //$results[$dataset] = $config;
-            }            
-        }
-        
-        return $results;     
-    }*/
+     
    
     
     
@@ -486,6 +442,23 @@ class MY_Controller extends CI_Controller {
       * methods we THINK we no longer need
       * 
       * 
+       /*function process_datasets ($datasets) {
+        $results = array(); 
+        foreach ($datasets as $dataset => $config)
+        {
+            if (isset($config['include_in_query']))
+            {
+                //go through the data set and 
+            }
+            else
+            {
+                //$results[$dataset] = $config;
+            }            
+        }
+        
+        return $results;     
+    }*/
+      /*
      public function view_backup($rID) {
         // 1. Set up the vars for this method
         extract($this->data); 
@@ -586,7 +559,36 @@ class MY_Controller extends CI_Controller {
         
          *     
          */
+        /*public function add($rID) {
+        // 1. Set up the vars for this method
+        extract($this->data); 
+        extract($this->data['controller_setup']); 
         
+        // 2. process the input
+        
+        // 3. Prepare the query (if rID = new then its insert)
+
+        // 4. set up the message and prepare the view
+        //if its new, then 
+        $this->data['view_setup']['display_none'] = 'display:none';
+        $this->data['view_setup']['org_flag'] = '1 OR 0'; //depedns on the typ of record
+
+        // 2. prepare the model_setup array (this controls the queries)
+        $this->data['model_setup'] = $this->prepare_model($config, $method_name);
+        unset($this->data['config']);   //Tidy up
+        
+        // 3. Do the datasets query & hand over to the controller_setup to post-process data
+        $this->data['controller_setup']['datasets'] = $this->generate_datasets($this->data['model_setup']['datasets']);
+        
+        // 4. Now do the record query (data goes in ['controller_setup']['results']['record']
+        // (This is the query that gets all the data for this record        
+        $this->data['controller_setup']['record'] = $this->retrieve_record($rID, $this->data['model_setup']['record']);
+        unset($this->data['model_setup']); //Tidy up...
+       
+        // 4. Generate the view!
+       $this->generate_view($this->data);
+       
+    }*/
         
 }
 /* End of file MY_Controller.php */
