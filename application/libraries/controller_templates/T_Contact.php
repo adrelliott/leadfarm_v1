@@ -15,14 +15,17 @@ class T_Contact extends MY_Controller {
         $this->_load_view_data();   //retrieves and process all data for view        
     }
    
-    public function view($view_file, $rID, $fieldset) {    //false = create new record
+    public function view($view_file, $rID, $ContactId, $fieldset) {    //false = create new record
         $this->data['view_setup']['view_file'] = 'v_contact_' . $view_file;        
-        $this->data['controller_setup']['method_name'] = 'view';
+        $this->data['controller_setup']['method_name'] = 'view';        
+        $this->data['view_setup']['modal'] = FALSE;
         $this->data['view_setup']['header_file'] .= '';  //add '_modal' for modal
         $this->data['view_setup']['footer_file'] .= '';  //add '_modal' for modal       
         $this->data['view_setup']['rID'] = $rID;
-        $this->data['view_setup']['ContactId'] = $rID;   //in this context, $rID == ContactId
+        $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
         $this->data['view_setup']['display_none'] = ''; 
+        
+        //What record fieldset do we show? Org, ind or unknonw?
         $this->data['view_setup']['fieldset'] = $fieldset;
         
         $this->_load_view_data($rID);    //retrieves and process all data for view              

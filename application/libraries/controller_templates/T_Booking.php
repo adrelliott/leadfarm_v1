@@ -12,13 +12,13 @@ class T_Booking extends MY_Controller {
         $this->data['controller_setup']['method_name'] = 'index'; 
         $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
        
-        $this->_load_view_data();    //retrieves and process all data for view
-       
+        $this->_load_view_data();    //retrieves and process all data for view       
     }
    
-    public function view($view_file, $rID, $ContactId = NULL) {    
+    public function view($view_file, $rID, $ContactId = NULL) { 
         $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;  
-        $this->data['controller_setup']['method_name'] = 'view';
+        $this->data['controller_setup']['method_name'] = 'view';        
+        $this->data['view_setup']['modal'] = FALSE;
         $this->data['view_setup']['header_file'] .= '';  //add '_modal' for modal
         $this->data['view_setup']['footer_file'] .= '';  //add '_modal' for modal       
         $this->data['view_setup']['rID'] = $rID;        
@@ -28,6 +28,8 @@ class T_Booking extends MY_Controller {
         $this->_load_view_data($rID);    //retrieves and process all data for view    
         
     }
+    
+   
    
 }
    

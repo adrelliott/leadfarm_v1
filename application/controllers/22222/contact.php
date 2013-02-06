@@ -19,8 +19,8 @@ class Contact extends T_Contact {
         $this->_generate_view($this->data);
    }
    
-  public function view($view_file = 'view', $rID, $fieldset = NULL) {  
-        parent::view($view_file, $rID, $fieldset);
+  public function view($view_file = 'view', $rID, $ContactId = FALSE, $fieldset = NULL) {  
+        parent::view($view_file, $rID, $ContactId, $fieldset);
         
             //check for expirations of MOT & service
         $this->load->library('garages/garage');

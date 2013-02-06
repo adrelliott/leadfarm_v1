@@ -40,13 +40,7 @@ class Booking extends T_Booking {
         $this->_generate_view($this->data);
     }
     
-    /*public function view_single($view_file = 'view', $rID = 'new', $ContactId = FALSE) {           $this->data['view_setup']['view_file'] = 'v_booking_' . $view_file;
-            $this->data['view_setup']['header_file'] = 'header';
-        parent::view($rID, $ContactId);
-      
-          // Generate the view!
-        $this->_generate_view($this->data);
-    }*/
+   
    
     
     

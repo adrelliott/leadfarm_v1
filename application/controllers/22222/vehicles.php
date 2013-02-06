@@ -1,14 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Vehicles extends T_Vehicles {
-
-	/**
-	 * This acts as a template for every controller.
-	 *
-	 * Define methods/vars here in the construct (to run before anything else) 
-	 * and/or define methods here that can be extended in other controllers
-	 * 
-	 */
     
     public function __construct()    {
         parent::__construct();
@@ -34,6 +26,12 @@ class Vehicles extends T_Vehicles {
                     $this->data['view_setup']['ContactId']
                     );
         }
+            // Generate the view!
+        $this->_generate_view($this->data);
+    }
+    
+    public function view_modal($view_file = 'view', $rID = 'new', $ContactId = FALSE) {    
+        parent::view_modal($view_file, $rID, $ContactId);
             // Generate the view!
         $this->_generate_view($this->data);
     }

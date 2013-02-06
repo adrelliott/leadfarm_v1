@@ -7,7 +7,7 @@
                 <h4>"Can we take your <em>Registration</em>, or <em>Name</em>, or <em>Postcode</em>, or <em>Company Name</em>, or <em>Phone Number</em> please...?"</h4>
                 <div class="margin_top_15"></div>
                 <?php 
-                    $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => 'unknown'));    
+                    $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => 'unknown', 'ContactId_name' => 'Id'));    
                     $this->table->set_heading_custom($tables['master_search']['table_headers']);
                     echo $this->table->generate_custom($tables['master_search']['table_data']); 
                 ?> 
@@ -53,7 +53,7 @@
 <div class="row clearfix">
     <div class="col_12">
         <?php 
-            $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => 'unknown'));    
+            $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => 'unknown', 'ContactId_name' => 'Id'));    
             $this->table->set_heading_custom($tables['master_search']['table_headers']);
             echo $this->table->generate_custom($tables['master_search']['table_data']); 
         ?> 
