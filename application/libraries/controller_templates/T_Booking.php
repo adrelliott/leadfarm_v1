@@ -29,6 +29,19 @@ class T_Booking extends MY_Controller {
         
     }
     
+    public function add($view_file, $rID, $ContactId) {       
+        //clean input
+        $input = clean_data($this->input->post());
+        $input['ContactId'] = $ContactId;
+        
+        //save record
+        $this->add_record($input, $rID);
+        
+        //refresh page
+        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
+       
+    }
+    
    
    
 }

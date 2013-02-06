@@ -22,7 +22,7 @@ $display_none = '';
                     <div id="tab-1">
                         <?php get_notifications($notifications, $rID, 'this'); ?>
                         <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . "/vehicles/add/$rID/$ContactId/edit"); ?>
+                            <?php echo form_open(DATAOWNER_ID . "/vehicles/add/edit/$rID/$ContactId"); ?>
                             <?php display_field($fields['__Registration']); ?>
                             <?php display_field($fields['__Make']); ?>
                             <?php display_field($fields['__Model']); ?>
@@ -36,7 +36,8 @@ $display_none = '';
                         </div>
                     </div>
                     <div id="tab-2">
-                        <?php echo form_open(DATAOWNER_ID . '/vehicles/append_note/' . $rID . '/' . $ContactId); ?>
+                        <?php echo form_open(DATAOWNER_ID . '/vehicles/append_note/0/' . $rID . '/' . $ContactId ); ?>
+                            <?php //echo form_open(DATAOWNER_ID . '/vehicles/append_note/' . $rID . '/' . $ContactId); ?>
                             <p>These are the notes for this record.</p>
                             <?php echo display_field($fields['__VehicleNotes']); ?>
                            <!-- Start field "Add a Note:" -->
@@ -54,12 +55,13 @@ $display_none = '';
                     </div>
                     <div id="tab-3">
                          <div class="form">
+                             <?php echo form_open(DATAOWNER_ID . "/vehicles/add/edit/$rID/$ContactId"); ?>
                             <?php display_field($fields['__Date_of_healthcheck']); ?>
                             <?php display_field($fields['__Mileage']); ?>
-                            <?php display_field($fields['__Tyre_osf'], array('after_field' => '<input class="small" id="" type="text" name="__Tyre_pressure_osf" length="" value="" placeholder="Tyre Press.">')); ?>
-                            <?php display_field($fields['__Tyre_nsf'], array('after_field' => '<input class="small" id="" type="text" name="__Tyre_pressure_nsf" length="" value="" placeholder="Tyre Press.">')); ?>
-                            <?php display_field($fields['__Tyre_osf'], array('after_field' => '<input class="small" id="" type="text" name="__Tyre_pressure_osf" length="" value="" placeholder="Tyre Press.">')); ?>
-                            <?php display_field($fields['__Tyre_osf'], array('after_field' => '<input class="small" id="" type="text" name="__Tyre_pressure_osf" length="" value="" placeholder="Tyre Press.">')); ?>
+                            <?php display_field($fields['__Tyre_osf'], array('after_field' => '<input class="small" id="" type="text" name="__Tyre_pressure_osf" length="" value="" placeholder="Tyre Press.">(tyre press dont work)')); ?>
+                            <?php display_field($fields['__Tyre_nsf'], array('after_field' => '<input class="small" id="" type="text" name="__Tyre_pressure_nsf" length="" value="" placeholder="Tyre Press.">(tyre press dont work)')); ?>
+                            <?php display_field($fields['__Tyre_osr'], array('after_field' => '<input class="small" id="" type="text" name="__Tyre_pressure_osr" length="" value="" placeholder="Tyre Press.">(tyre press dont work)')); ?>
+                            <?php display_field($fields['__Tyre_nsr'], array('after_field' => '<input class="small" id="" type="text" name="__Tyre_pressure_nsr" length="" value="" placeholder="Tyre Press.">(tyre press dont work)')); ?>
                             <?php display_field($fields['__Tyre_notes']); ?>
                              <div class="clearfix"">
                                 <input name='submit' type='submit' class='button right' style='float:right' value='Save'></input>
@@ -116,6 +118,7 @@ $display_none = '';
                                 <input name='submit' type='submit' class='button right' style='float:right' value='Save'></input>
                              </div>
                          </div>
+                        <?php echo form_close(); ?>
                     </div>
                 </div>
             </div>
@@ -147,9 +150,6 @@ $display_none = '';
                                 $tables['vehicles']['table_data']
                                 ); 
                     ?>
-                    <div class="clearfix margin_top_15">
-                       <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Add New Vehicle</span></a>
-                   </div>
                 </div>
             </div>
         </div>

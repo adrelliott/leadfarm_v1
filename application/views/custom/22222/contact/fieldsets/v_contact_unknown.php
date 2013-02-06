@@ -1,5 +1,5 @@
 <?php //This fieldset is called when users click on the dashboard table link. ther eis no way to know what _IsOrganisationYN flag is set, so we just load all fields here ?>
-<?php echo form_open(DATAOWNER_ID . '/contact/add/' . $rID); ?>
+
     <?php display_field($fields['Title'], array('label' => 'Main Contact Title')); ?>
     <?php display_field($fields['FirstName'], array('label' => 'Main Contact First Name')); ?>
         <?php display_field($fields['LastName'], array('label' => 'Main Contact Last Name')); ?>

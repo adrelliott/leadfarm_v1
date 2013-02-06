@@ -39,7 +39,6 @@ class Contact_model extends MY_Model {
            $input['Id'] = $rID;
        }
        
-       //print_array($input, 0, "here is arrya for rID=$rID");
        $this->save($input, $rID);
        
        return $input['Id'];

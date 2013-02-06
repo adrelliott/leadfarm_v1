@@ -2,13 +2,7 @@
 
 class Contact extends T_Contact {
 
-	/**
-	 * This acts as a template for every controller.
-	 *
-	 * Define methods/vars here in the construct (to run before anything else) 
-	 * and/or define methods here that can be extended in other controllers
-	 * 
-	 */
+	
 
     public function __construct()    {
          parent::__construct();
@@ -19,7 +13,7 @@ class Contact extends T_Contact {
         $this->_generate_view($this->data);
    }
    
-  public function view($view_file = 'view', $rID, $ContactId = FALSE, $fieldset = NULL) {  
+  public function view($view_file, $rID, $ContactId, $fieldset) {  
         parent::view($view_file, $rID, $ContactId, $fieldset);
         
             //check for expirations of MOT & service
@@ -38,6 +32,7 @@ class Contact extends T_Contact {
           // Generate the view!
         $this->_generate_view($this->data);
     }
+    
     
   
    

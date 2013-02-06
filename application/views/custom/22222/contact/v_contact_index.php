@@ -14,7 +14,7 @@
                 ?> 
                 <div class="margin_top_15"></div>
                 <div class="clearfix">
-                    <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contact/view/edit/new/0" class="large blue button right"><span>Create New Contact</span></a>
+                    <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contact/view/edit/new/new/0" class="large blue button right"><span>Create New Contact</span></a>
                 </div>
             <h3 class="index toggle_icon" id="option1_toggle">Looking for an Organisation?</h3>
                 <div class="hide_toggle" id="option1">
@@ -25,7 +25,7 @@
                 ?> 
                 <div class="margin_top_15"></div>
                 <div class="clearfix">
-                    <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contact/view/edit/new/1" class="large blue button right"><span>Create New Organisation</span></a>
+                    <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contact/view/edit/new/new/1" class="large blue button right"><span>Create New Organisation</span></a>
                 </div>
                     </div>
                 </div>

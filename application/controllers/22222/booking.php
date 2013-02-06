@@ -1,15 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Booking extends T_Booking {
-
-	/**
-	 * This acts as a template for every controller.
-	 *
-	 * Define methods/vars here in the construct (to run before anything else) 
-	 * and/or define methods here that can be extended in other controllers
-	 * 
-	 */
-
+	
     public function __construct()    {
         parent::__construct();
     }
@@ -18,36 +10,37 @@ class Booking extends T_Booking {
         parent::index($view_file);
       
           // Generate the view!
-        $this->_generate_view($this->data);
+        $this->_generate_view($this->data);       
+       
     }
    
     public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {  
         parent::view($view_file, $rID, $ContactId);
         
-            //check for expirations of MOT & service
-        /*$this->load->library('garages/garage');
-        $this->data['view_setup']['notifications'] = array();
-        if (isset($this->data['view_setup']['tables']['vehicles']['table_data'][0]))
-        {
-            $this->data['view_setup']['notifications'] = 
-                    $this->garage->check_vehicle_expiry 
-                    (
-                    $this->data['view_setup']['tables']['vehicles'],
-                    $this->data['view_setup']['ContactId']
-                    );
-        }*/
           // Generate the view!
-        $this->_generate_view($this->data);
+       $this->_generate_view($this->data);
+        
     }
     
+    public function get_booking_array() {
+       
+       $this->load->model('booking_model');
+       $results = $this->booking_model->get_all_bookings();
+        header ('Content-Type: text/json');
+        echo json_encode ($results);
+        exit;
+   }
+    
    
-   
     
     
     
     
-      public function get_booking_array() {
-       $results = array ();
+      public function get_booking_array2() {
+       
+       
+          
+          $results = array ();
 
         $title = '<strong>MOT</strong> (Ford Fiesta, YG02 YTR)';
         $description = '';

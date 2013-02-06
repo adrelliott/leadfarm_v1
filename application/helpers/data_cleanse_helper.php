@@ -161,6 +161,11 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
             case 'radio':                
                 foreach ($attributes['options'] as $k => $v)
                 {
+                    if ($attributes['value'] == NULL && isset($attributes['defaultvalue']))   //set default val
+                    {
+                        $attributes['value'] = $attributes['defaultvalue'];
+                    }
+                    
                     $checked = '';
                     if ($v == $attributes['value']) 
                     {

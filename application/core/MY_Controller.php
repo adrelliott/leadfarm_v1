@@ -230,6 +230,7 @@ class MY_Controller extends CI_Controller {
         return $results;        
     }
     
+    
     protected function _retrieve_record ($rID, $config) {
         $results = $config['fields'];        
         //now either get the record or leave it as blank
@@ -264,6 +265,13 @@ class MY_Controller extends CI_Controller {
         return $results;
     }
     
+    function add_record($input, $rID) {        
+        $model_name = $this->controller_name . '_model';
+        $this->load->model($model_name);
+        $rID = $this->$model_name->add($input, $rID); 
+        
+        return $rID;
+    }
     
     
     

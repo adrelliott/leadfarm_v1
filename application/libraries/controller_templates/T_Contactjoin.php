@@ -27,15 +27,13 @@ class T_Contactjoin extends MY_Controller {
         
      }
    
-    public function add($rID, $ContactId, $view_file = 'view') {    //false = create new record
-       //print_array($this->input->post(), 1);
+    public function add($rID, $ContactId, $view_file) { 
         //clean the input
        $input = clean_data($this->input->post()); 
        $input['__ContactId'] = $ContactId;
        
        $this->load->model('contactjoin_model');
        $rID = $this->contactjoin_model->add($input, $rID);
-       //redirect(DATAOWNER_ID . "/contactaction/$view_file/$rID/$ContactId" );
        $this->view($view_file, $rID, $ContactId);
        
    }

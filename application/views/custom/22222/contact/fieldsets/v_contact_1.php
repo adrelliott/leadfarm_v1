@@ -1,5 +1,4 @@
-<?php echo form_open(DATAOWNER_ID . '/contact/add/' . $rID); ?>
-   <div class="clearfix" id="">
+    <div class="clearfix" id="">
         <label class="" id="">Postcode</label>
         <div class="input " id="">
             <input class="small" style="text-transform: uppercase; background-color: #CDFAC1"  id="" type="text" name="PostalCode" length="" value="">

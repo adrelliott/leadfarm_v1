@@ -19,6 +19,7 @@
                     <div id="tab-1">
                         <div class="col_5">
                             <div class="form">
+                                <?php echo form_open(DATAOWNER_ID . '/booking/add/edit/' . $rID . '/' . $ContactId ); ?>
                                 <?php display_field($fields['_ActionSubtype']); ?>
                                 <?php display_field($fields['ActionDescription']); ?>
                                 <?php display_field($fields['_EstimatedDuration']); ?>
@@ -29,6 +30,7 @@
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
                                 </div>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                         <div class="col_7 last">
@@ -38,6 +40,7 @@
                     <div id="tab-2">
                         <div class="col_8">
                             <div class="form">
+                                <?php echo form_open(DATAOWNER_ID . '/booking/add/edit/' . $rID . '/' . $ContactId ); ?>
                                 <?php display_field($fields['_Status']); ?>
                                 <?php display_field($fields['_ActionSubtype']); ?>
                                 <?php display_field($fields['ActionDescription']); ?>
@@ -47,6 +50,7 @@
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
                                 </div>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                         <div class="col_4 last">
@@ -67,6 +71,7 @@
                     <div id="tab-3">
                         <div class="col_8">
                             <div class="form">
+                                <?php echo form_open(DATAOWNER_ID . '/booking/add/edit/' . $rID . '/' . $ContactId ); ?>
                                 <?php display_field($fields['_Status']); ?>
                                 <?php display_field($fields['UserID'], array( 'options' => array('George' => 1, 'Martin' => 2, 'Jason' => 3, 'Amanda' => 4))); ?>
                                 <?php display_field($fields['CreationNotes']); ?>
@@ -77,6 +82,7 @@
                                     <input name='submit' type='submit' class='button green right larger' style='float:right; margin-right: 20px' value='Job Complete'>
                                     <input name='submit' type='submit' class='button red right larger' style='float:right; margin-right: 20px' value='Job Paused'>                                    
                                 </div>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                         <div class="col_4 last">

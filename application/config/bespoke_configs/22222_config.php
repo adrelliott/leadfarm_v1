@@ -398,13 +398,13 @@ $config['contact'] = Array
                     'fields' => array 
                     (
                         '__Id' => '#',
-                        '__ContactId' => 'Contact Id of vehicle owner',
+                        //'__ContactId' => 'Contact Id of vehicle owner',
                         '__Make' => 'Make',
                         '__Model' => 'model',
                         '__Registration' => 'Reg',
                         '__MOT_expiry' => 'MOT Exp',
                         '__Service_expiry' => 'Service Exp',
-                        '__ActiveYN' => 'Active?',
+                        //'__ActiveYN' => 'Active?',
                     ),
                 ),     
                 /*'communications' => array
@@ -429,13 +429,13 @@ $config['contact'] = Array
                     'model_params' => NULL, 
                     'fields' => array 
                     (
-                        'Contact.Id' => 'contact Id',
+                        'Contact.Id' => '',
                         'Contact.FirstName' => 'First Name',
                         'Contact.LastName' => 'Last Name',
-                        '__ContactJoin.__Id' => 'Realtionship Id',
-                        '__ContactJoin.__Reason' => 'reason',
-                        //'__ContactJoin.__ContactId' => 'reason',
-                        '__ContactJoin.__ContactId2' => 'CId 2',
+                        '__ContactJoin.__Id' => '',
+                        '__ContactJoin.__Reason' => 'Reason',
+                        '__ContactJoin.__ContactId' => '',
+                        '__ContactJoin.__ContactId2' => '',
                     ),
                 ),
                 'users' => array
@@ -1481,6 +1481,7 @@ $config['booking'] = Array
                         ),
                         'HTML_before' => '',
                         'HTML_after' => '',
+                        'defaultvalue' => 0,
                         'value' => '', 
                     ),
                     'EndDate' => array       
@@ -2054,12 +2055,14 @@ $config['contactjoin'] = Array
                         'length' => '',
                         'options' => array
                          (
-                             'Active' => '1',    //label => value
                              'Inactive' => '0',
+                             'Active' => '1',    //label => value
+                             
                          ),
                         'HTML_before' => '',
                         'HTML_after' => '',
-                        'value' => '', 
+                        'defaultvalue' => 'Yes',
+                        'value' => '1', 
                     ),                    
                 ),                
             ),
@@ -2336,6 +2339,7 @@ $config['vehicles'] = Array
                         ),
                         'HTML_before' => '',
                         'HTML_after' => '',
+                        'defaultvalue' => 1,
                         'value' => '', 
                     ),
                     '__Make' => array      

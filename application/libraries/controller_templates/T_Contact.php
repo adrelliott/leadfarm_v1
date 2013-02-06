@@ -15,7 +15,7 @@ class T_Contact extends MY_Controller {
         $this->_load_view_data();   //retrieves and process all data for view        
     }
    
-    public function view($view_file, $rID, $ContactId, $fieldset) {    //false = create new record
+    public function view($view_file='view', $rID, $ContactId=NULL, $fieldset='unknown'){
         $this->data['view_setup']['view_file'] = 'v_contact_' . $view_file;        
         $this->data['controller_setup']['method_name'] = 'view';        
         $this->data['view_setup']['modal'] = FALSE;
@@ -25,55 +25,41 @@ class T_Contact extends MY_Controller {
         $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
         $this->data['view_setup']['display_none'] = ''; 
         
-        //What record fieldset do we show? Org, ind or unknonw?
+        //What record fieldset do we show? Org, ind or unknown?
         $this->data['view_setup']['fieldset'] = $fieldset;
         
         $this->_load_view_data($rID);    //retrieves and process all data for view              
     }    
      
-    public function add($rID, $input = NULL, $action = 'contact') {    //false = create new record
-        //clean the input
-        $input = clean_data($this->input->post()); 
-
-        $this->load->model('contact_model');
-        $rID = $this->contact_model->add($input, $rID);  
-
-        $fieldset = $input['_IsOrganisationYN'];
-        $result = $this->start_action($action);   //sstarts any follow ups/ and applies tags
+    public function add($view_file, $rID, $ContactId, $fieldset) {       
+        //clean input
+        $input = clean_data($this->input->post());
         
-        redirect(DATAOWNER_ID . '/' . $action . '/view/edit/' . $rID . '/' . $fieldset );
+        //save record
+        $rID = $this->add_record($input, $rID);
+        if ($ContactId = 'new') $ContactId = $rID;
+        
+        //refresh page
+        $fieldset = $input['_IsOrganisationYN'];
+        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId . '/' . $fieldset );
        
     }
     
-    function start_action($view) {
-        switch ($view)
-        {
-            case 'contact':
-                break;
-            case 'booking':
-                break;
-        }
-    }
-    
-    public function append_note($rID, $fieldset) {
-        $input = clean_data($this->input->post()); 
-
+    public function append_note($view_file, $rID, $ContactId, $fieldset) {
         //Concatenate the new note ready for updating
-        $input['ContactNotes'] .= "\n:::: On " . date('d-m-Y H:i') . ', ';
-        $input['ContactNotes'] .= $this->session->userdata('FirstName') . ' ' . $this->session->userdata('LastName');
-        $input['ContactNotes'] .= " wrote:::: \n";
-        $input['ContactNotes'] .= $input['add_a_note'];  //add the new note details
+        $input = clean_data($this->input->post()); 
+        $input['ContactNotes'] .= "\n:::: On " . date('d-m-Y H:i') . ', ' . 
+                $this->session->userdata('FirstName') . ' ' . 
+                $this->session->userdata('LastName') . " wrote:::: \n" . 
+                $input['add_a_note'];  //add the new note details
         unset($input['add_a_note']); //tidy up        
+        
+        //save record
+        $this->add_record($input, $rID);
+        
+        //refresh page
+        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId . '/' . $fieldset );
 
-        //Now update the record
-        $this->load->model('contact_model');
-        $this->db->from('Contact');
-        $rID = $this->contact_model->save($input, $rID);
-
-        //Refresh view       
-        redirect(DATAOWNER_ID . '/contact/view/edit/' . $rID . '/' . $fieldset );
-
-        //Can this method be made prettier? or moving some of it back to the 'add' method?
     }
    
    //create a remove method

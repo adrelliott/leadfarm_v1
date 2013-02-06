@@ -1,4 +1,4 @@
-<?php echo form_open(DATAOWNER_ID . '/contact/add/' . $rID); ?>
+
     <?php display_field($fields['Title']); ?>
     <?php display_field($fields['FirstName']); ?>
     <?php display_field($fields['LastName']); ?>

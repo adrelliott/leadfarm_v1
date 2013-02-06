@@ -28,14 +28,14 @@ class T_Vehicles extends MY_Controller {
         $this->_load_view_data($rID);     //retrieves and process all data for view    
      }
      
-      public function view_modal($view_file, $rID, $ContactId = NULL) {    
+      public function view_modal($view_file, $rID, $ContactId) {    
         $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;  
         $this->data['controller_setup']['method_name'] = 'view';        
         $this->data['view_setup']['modal'] = TRUE;
         $this->data['view_setup']['header_file'] .= '_modal';  
         $this->data['view_setup']['footer_file'] .= '_modal';  
         $this->data['view_setup']['rID'] = $rID;        
-        $this->data['view_setup']['ContactId'] = $rID;   //in this context, $rID == ContactId
+        $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
         $this->data['view_setup']['display_none'] = '';
         //print_array($this->data, 1);
         $this->_load_view_data($rID);    //retrieves and process all data for view    
@@ -43,7 +43,44 @@ class T_Vehicles extends MY_Controller {
        
     }
 
-     public function add($rID, $ContactId, $view_file = 'view') {    //false = create new record
+    
+     public function add($view_file, $rID, $ContactId) {       
+        //clean input
+        $input = clean_data($this->input->post());
+        $input['__ContactId'] = $ContactId;
+        
+        //save record
+        $rID = $this->add_record($input, $rID);
+        if(strpos($view_file, '_modal') === FALSE)
+        {
+            redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
+        }
+        else
+        {
+            $this->view_modal($view_file, $rID, $ContactId);
+        }
+       
+    }
+    
+     public function append_note($view_file, $rID, $ContactId) {
+        //Concatenate the new note ready for updating
+        $input = clean_data($this->input->post()); 
+        $input['__VehicleNotes'] .= "\n:::: On " . date('d-m-Y H:i') . ', ' . 
+                $this->session->userdata('FirstName') . ' ' . 
+                $this->session->userdata('LastName') . " wrote:::: \n" . 
+                $input['add_a_note'];  //add the new note details
+        unset($input['add_a_note']); //tidy up        
+        
+        //save record
+        $this->add_record($input, $rID);
+        
+        //refresh page
+        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId );
+
+    }
+     
+    /*
+    public function add($rID, $ContactId, $view_file = 'view') {    //false = create new record
          //clean the input
          $input = clean_data($this->input->post()); 
          $input['__ContactId'] = $ContactId;
@@ -54,7 +91,10 @@ class T_Vehicles extends MY_Controller {
          //$this->view($view_file, $rID, $ContactId);
 
      }
-     
+     */
+    
+    
+    /*
       public function append_note($rID, $ContactId) {
         $input = clean_data($this->input->post()); 
 
@@ -74,7 +114,7 @@ class T_Vehicles extends MY_Controller {
         redirect(DATAOWNER_ID . '/vehicles/view/edit/' . $rID . '/' . $ContactId );
 
         //Can this method be made prettier? or moving some of it back to the 'add' method?
-    }
+    }*/
      
      /*
      public function add_modal($rID, $ContactId, $view_file = 'view') {    //false = create new record
