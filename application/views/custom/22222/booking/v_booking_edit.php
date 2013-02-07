@@ -20,7 +20,7 @@
                         <div class="col_5">
                             <div class="form">
                                 <?php echo form_open(DATAOWNER_ID . '/booking/add/edit/' . $rID . '/' . $ContactId ); ?>
-                                <?php display_field($fields['_ActionSubtype']); ?>
+                                <?php display_field($fields['ActionType']); ?>
                                 <?php display_field($fields['ActionDescription']); ?>
                                 <?php display_field($fields['_EstimatedDuration']); ?>
                                 <?php display_field($fields['ActionDate']); ?>
@@ -42,7 +42,7 @@
                             <div class="form">
                                 <?php echo form_open(DATAOWNER_ID . '/booking/add/edit/' . $rID . '/' . $ContactId ); ?>
                                 <?php display_field($fields['_Status']); ?>
-                                <?php display_field($fields['_ActionSubtype']); ?>
+                                <?php display_field($fields['ActionType']); ?>
                                 <?php display_field($fields['ActionDescription']); ?>
                                 <?php display_field($fields['_EstimatedDuration']); ?>
                                 <?php display_field($fields['EndDate']); ?>
