@@ -36,7 +36,11 @@ class Booking extends T_Booking {
     
     
     
-      public function get_booking_array2() {
+      
+    
+    
+   /*
+    * public function get_booking_array2() {
        
        
           
@@ -51,25 +55,23 @@ class Booking extends T_Booking {
 
         $results[] = array (
           'id' => 1,                      /* ID of the event */
-          'title' => strip_tags ($title), /* Title that has been made HTML-safe */
-          'htmlTitle' => $title,          /* Original title */
-          'description' => $description,  /* HTML description */
-          'start' => date ('Y-m-d H:i:s', $start_ts),
+         // 'title' => strip_tags ($title), /* Title that has been made HTML-safe */
+          //'htmlTitle' => $title,          /* Original title */
+         // 'description' => $description,  /* HTML description */
+        //  'start' => date ('Y-m-d H:i:s', $start_ts),
           //'start' => date ('Y-m-d', $start_ts),
-          'end' => date ('Y-m-d H:i:s', $end_ts),
+       //   'end' => date ('Y-m-d H:i:s', $end_ts),
           //'end' => date ('Y-m-d', $end_ts),
-          'allDay' => false,
-          'url' => $url,
-          'color' => '#70B437'          /* Hex-code for background-colour */
-        );
+      //    'allDay' => false,
+      //    'url' => $url,
+     //     'color' => '#70B437'          /* Hex-code for background-colour */
+     //   );
 
-        header ('Content-Type: text/json');
-        echo json_encode ($results);
-        exit;
-   }
-    
-    
-   /*public function get_bookings() {
+      //  header ('Content-Type: text/json');
+      //  echo json_encode ($results);
+       // exit;
+  // }
+    /* public function get_bookings() {
         //get all the booking data
         $year = date('Y');
         $month = date('m');

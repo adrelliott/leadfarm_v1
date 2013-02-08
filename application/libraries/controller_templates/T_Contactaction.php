@@ -25,16 +25,19 @@ class T_Contactaction extends MY_Controller {
         $this->_load_view_data($rID);    //retrieves and process all data for view    
     }
    
-   public function add($rID, $ContactId, $view_file) {    //false = create new record
-       //clean the input
-       $input = clean_data($this->input->post()); 
-       $input['ContactId'] = $ContactId;
+   
+    public function add($view_file, $rID, $ContactId) {       
+        //clean input
+        $input = clean_data($this->input->post());
+        $input['ContactId'] = $ContactId;
+        
+        //save record
+        $rID = $this->add_record($input, $rID);
+        
+        //refresh page
+        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
        
-       $this->load->model('contactaction_model');
-       $rID = $this->contactaction_model->add($input, $rID);;
-       $this->view($view_file, $rID, $ContactId);
-       
-   }
+    }
    
 }
    

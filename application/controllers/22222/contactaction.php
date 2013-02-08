@@ -29,9 +29,9 @@ class Contactaction extends T_Contactaction {
     
   
     
-    function add_booking ($rID, $ContactId, $view_file = 'view') {
-        $this->add($rID, $ContactId, $view_file = 'edit_booking');
-    }
+    //function add_booking ($rID, $ContactId, $view_file = 'edit_booking') {
+     //   $this->add($rID, $ContactId, $view_file);
+   // }
     
         
     

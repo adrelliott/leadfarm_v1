@@ -9,7 +9,7 @@
                     <div id="tab-1"><!-- Start of tab 1 -->
                         <h3>Create/edit a Task for this contact</h3>
                         <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . "/contactaction/add/$rID/$ContactId/edit_action") ; ?>
+                            <?php echo form_open(DATAOWNER_ID . "/contactaction/add/edit_action/$rID/$ContactId") ; ?>
                                 <?php echo display_field($fields['ActionType']); ?>
                                 <?php echo display_field($fields['ActionDescription'], array('label' => 'Task title')); ?>
                                 <?php echo display_field($fields['CreationNotes']); ?>

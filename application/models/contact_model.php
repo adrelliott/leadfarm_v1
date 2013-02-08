@@ -12,7 +12,7 @@ class Contact_model extends MY_Model {
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = 'Contact';
-        $this->order_by = 'LastName ASC';   
+        $this->order_by = 'LastName ASC';   //why isnt;' this reflected in datatable? 
         $this->contactId_fieldname = 'Id'; 
         if (isset($this->data['view_setup']['ContactId']))
         {

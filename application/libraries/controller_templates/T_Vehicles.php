@@ -51,6 +51,8 @@ class T_Vehicles extends MY_Controller {
         
         //save record
         $rID = $this->add_record($input, $rID);
+        
+        
         if(strpos($view_file, '_modal') === FALSE)
         {
             redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );

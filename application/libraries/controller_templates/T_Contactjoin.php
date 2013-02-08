@@ -27,7 +27,20 @@ class T_Contactjoin extends MY_Controller {
         
      }
    
-    public function add($rID, $ContactId, $view_file) { 
+    public function add($view_file, $rID, $ContactId) {       
+        //clean input
+        $input = clean_data($this->input->post());
+        $input['__ContactId'] = $ContactId;
+        
+        //save record
+        $rID = $this->add_record($input, $rID);
+        
+        //refresh page
+        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
+       
+    }
+    
+     /*public function add_OLDVERSION($rID, $ContactId, $view_file) { 
         //clean the input
        $input = clean_data($this->input->post()); 
        $input['__ContactId'] = $ContactId;
@@ -36,7 +49,7 @@ class T_Contactjoin extends MY_Controller {
        $rID = $this->contactjoin_model->add($input, $rID);
        $this->view($view_file, $rID, $ContactId);
        
-   }
+   }*/
    
 }
    

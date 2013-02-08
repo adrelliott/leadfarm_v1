@@ -381,8 +381,9 @@ $config['contact'] = Array
                     'fields' => array 
                     (
                         'Id' => '#',
-                        'ActionType' => 'Type',
-                        'ActionDescription' => 'Description',
+                        'ActionDescription' => 'Type of Booking',
+                        //'ActionDescription' => 'Description',
+                        'ActionDate' => 'Date',
                     ),
                 ),     
                 'vehicles' => array
