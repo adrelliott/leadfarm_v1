@@ -25,7 +25,7 @@
                             <?php include("fieldsets/v_contact_$fieldset.php");
                                 //v_contact_0 = contact, ..._1  org ?>
                         </div><!-- End of form div-->
-                        <p id="option1_toggle" class="button right">
+                        <p id="option1_toggle" class="button left">
                             <span>View Opt In Settings</span>
                         </p> 
                         <div class="hide_toggle" id="option1">
