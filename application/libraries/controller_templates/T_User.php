@@ -85,6 +85,26 @@ class T_User extends MY_Controller {
 
     }
    
+    public function append_note_ajax() {
+        //Concatenate the new note ready for updating
+        //echo "<h1>hello</h1>";die;
+        
+        $input = clean_data($this->input->post()); 
+        $input['ContactNotes'] .= "\n:::: On " . date('d-m-Y H:i') . ', ' . 
+                $this->session->userdata('FirstName') . ' ' . 
+                $this->session->userdata('LastName') . " wrote:::: \n" . 
+                $input['add_a_note'];  //add the new note details
+        unset($input['add_a_note']); //tidy up        
+        
+        //save record
+        $this->add_record($input, $rID);
+        
+        $this->view($view_file, $rID, $ContactId);
+        //print_array($input);
+        
+
+    }
+   
    //create a remove method
    // does it actually delete or does it just add a tag/switch to say its deleted?
    

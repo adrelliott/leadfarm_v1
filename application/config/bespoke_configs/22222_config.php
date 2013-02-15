@@ -3875,7 +3875,7 @@ $config['user'] = Array
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'xxxxlarge',
-                        'cssIdInput' => '',
+                        'cssIdInput' => 'contact_notes',
                         'extraHTMLInput' => 'rows="20" readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
                         'name' => 'ContactNotes',

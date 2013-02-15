@@ -13,6 +13,9 @@
                     <li>
                         <h2><a href="#tab-3">Password</a></h2>
                     </li>
+                    <li>
+                        <h2><a href="#tab-4">Notes - test</a></h2>
+                    </li>
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-1">
@@ -95,6 +98,28 @@
                             </div>
                             <?php echo form_close(); ?>
                         </div><!-- End of form div-->
+                    </div>
+                </div>
+                <div class="widget_inside">
+                    <div id="tab-4">
+                         <?php echo form_open(DATAOWNER_ID . '/user/append_note/0/' . $rID . '/' . $ContactId ); ?>
+                            <p>These are the notes for this record.</p>
+                            <?php echo display_field($fields['ContactNotes']); ?>
+                           <!-- Start field "Add a Note:" -->
+                           <div class="clearfix">
+                               <h4>Add your new note below</h4>
+                               <div class="input">
+                                   <textarea class="xxxxlarge green-highlight" id="add_a_note" type="text"  name="add_a_note" rows="5" placeholder="Your note will be automatically datestamped & appended to the notes above" /></textarea>
+                               </div>
+                           </div>
+                           <!-- End field "Add a Note:" -->	
+                           <div class="clearfix margin_top_15">
+                               <input name='submit' type='submit' id="submit" class='button blue right large' style='float:right' value='Save'></input>
+                           </div>
+                        <?php echo form_close(); ?>
+                    </div>
+                    <div id="main_content">
+                        <p>content</p>
                     </div>
                 </div>
             </div>
