@@ -18,6 +18,12 @@ class Contactaction_model extends MY_Model {
         {
             $this->current_ContactId = $this->data['view_setup']['ContactId'];
         }
+        $this->current_UserId = '9999999';
+        //We can maybe move htis MY_MODEL?
+        if (isset($this->data['view_setup']['user_data']['UserId']))
+        {
+            $this->current_UserId = $this->data['view_setup']['user_data']['UserId'];
+        }
     }
     
     function add($input, $rID) {
@@ -60,6 +66,17 @@ class Contactaction_model extends MY_Model {
                 );        
         return $this->get($rID);
     }
+    
+    function get_all_users_records($where = NULL){
+        if ($where != NULL) { $this->db->where($where); }
+        $this->db->where(
+                'UserID', 
+                $this->current_UserId
+                );
+        return $this->get();
+    }
      
+   
+    
 
 }

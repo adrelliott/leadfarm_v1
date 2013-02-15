@@ -52,7 +52,10 @@ header .right li li {padding: 10px}
 #messages {background: url(../images/header/topnav/mailicon.png) no-repeat center center}
 #settings {background: url(../images/header/topnav/settingsicon.png) no-repeat center center}
 #search {background: url(../images/header/topnav/searchicon.png) no-repeat center center}
-#help {background: url(../images/header/topnav/helpicon.png) no-repeat center center}
+#user {background: url(../images/header/topnav/user.png) no-repeat center center}
+
+/*#help {background: url(../images/header/topnav/helpicon.png) no-repeat center center}*/
+#help {background: url(../images/buttons/lifebuoy.png) no-repeat center center}
 #searchdrop, #logindrop {background: #FFFFFF;box-shadow: 0 0 5px #212121; z-index: 99999;display: none; position: absolute;}
 
 #logindrop {  height:380px;  padding:10px 15px 20px;  right:0px;  top:32px;  width:350px;}

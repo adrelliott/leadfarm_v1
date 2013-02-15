@@ -40,6 +40,34 @@ class T_User extends MY_Controller {
        
     }
     
+    public function change_password($rID, $ContactId) {       
+        //clean input
+        $input = clean_data($this->input->post());
+        //print_array($input, 1);
+        
+        //Do some checks
+        if ($input['PasswordCheck'] != $input['Password'])
+        {
+            //$this->session->set_flashdata('message', 'Ooops. Passwords do not match');
+            //print_array($this->data);
+            
+        }
+        
+        else{
+        
+        //Does the original password match the new password?
+        
+        //if its all good, then change the password
+        
+        //save record
+        $rID = $this->add_record($input, $rID);
+        
+        //refresh page
+        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId);
+        }
+       
+    }
+    
     public function append_note($view_file, $rID, $ContactId, $fieldset) {
         //Concatenate the new note ready for updating
         $input = clean_data($this->input->post()); 

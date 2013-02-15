@@ -533,32 +533,6 @@ $config['contact'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),
-                    '__AdverseCreditYN' => array        //DO **NOT** REMOVE OR EDIT THIS FIELD!!!!!!
-                    (
-                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
-                        'cssClassContainingDiv' => '',
-                        'cssIdContainingDiv' => '',
-                        'cssClassLabel' => '',
-                        'cssIdLabel' => '',
-                        'label' => 'Adverse Credit?',                  
-                        'cssClassInputDiv' => '',
-                        'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => 'title="tooltip" rel="Defaults to Individual',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'radio',
-                        'name' => '__AdverseCreditYN',
-                        'helpText' => '',
-                        'options' => array
-                         (
-                             'Yes' => '0',    //label => value
-                             'No' => '1',
-                         ),
-                        'length' => '',
-                        'HTML_before' => '',
-                        'HTML_after' => '',
-                        'value' => '', 
-                    ),
                      '_OrganisationName' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
@@ -3456,16 +3430,14 @@ $config['user'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE,
                     'data_source' => 'all_actions', //The dataset name defined above
                     'model_name' => 'contactaction_model',
-                    'model_method' => 'get_all_contacts_records', 
-                    'model_params' => array 
-                        (   //These are chained with 'AND'. To define an 'OR'...???
-                            'ActionType =' => 'Booking', 
-                        ),     
+                    'model_method' => 'get_all_users_records', 
+                    'model_params' => NULL,
                     'fields' => array 
                     (
                         'Id' => '#',
                         'ActionType' => 'Type',
                         'ActionDescription' => 'Description',
+                        'UserID' => '',
                     ),
                 ),      
                 /*'communications' => array

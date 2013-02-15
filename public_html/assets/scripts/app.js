@@ -195,7 +195,17 @@ $(function() {
     });
 
     //WYSIWYG Editor
-    $(".cleditor").cleditor();
+    $(".cleditor").cleditor({
+         controls:     
+           // controls to add to the toolbar. 
+           //see http://premiumsoftware.net/cleditor/docs/GettingStarted.html#optionalParameters for options
+            "bold italic underline strikethrough | font size " +
+            "| color highlight | bullets numbering | " +
+            "| alignleft center alignright justify | " +
+            "rule image link unlink "
+    });
+    //
+    
 
     //HTML5 Placeholder for lesser browsers. Uses jquery.placeholder.1.2.min.shrink.js
     $.Placeholder.init();

@@ -5,18 +5,23 @@
             <div class="widget clearfix tabs">
                 <ul>
                     <li>
-                        <h2><a href="#tab-1">Details</a></h2>
+                        <h2><a href="#tab-1">Me</a></h2>
                     </li>
                     <li>
                         <h2><a href="#tab-2">My Profile</a></h2>
                     </li>
                     <li>
-                        <h2><a href="#tab-3">Login</a></h2>
+                        <h2><a href="#tab-3">Password</a></h2>
                     </li>
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-1">
-                        
+                        <h4>Tasks assigned to me:</h4>
+                        <?php 
+                            $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit_action', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"'));    
+                            $this->table->set_heading_custom($tables['all_actions']['table_headers']);
+                            echo $this->table->generate_custom($tables['all_actions']['table_data']); 
+                        ?> 
                     </div>
                 </div>
                 <div class="widget_inside">
@@ -28,6 +33,7 @@
                                 <?php display_field($fields['FirstName']); ?>
                                 <?php display_field($fields['LastName']); ?>
                                 <?php display_field($fields['Nickname']); ?>
+                                <?php display_field($fields['Username']); ?>
                                 <?php display_field($fields['Email']); ?>
                                 <?php display_field($fields['_Signature']); ?>
                                  <div class="clearfix">
@@ -64,8 +70,14 @@
                 <div class="widget_inside">
                     <div id="tab-3">
                         <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . '/user/add_password/0/' . $rID . '/0'); ?>
-                            <?php display_field($fields['Username']); ?>
+                            <?php echo form_open(DATAOWNER_ID . '/user/change_password/view/' . $rID . '/0'); ?>
+                            
+                            <div class="clearfix" id=""> 
+                                <label class="" id="">Enter your existing password:</label>
+                                <div class="input " id="">
+                                    <input class="" id="" type="text" name="ExistingPassword" length="" value="">
+                                </div>
+                            </div>
                              <div class="clearfix" id="">
                                 <label class="" id="">Enter new password:</label>
                                 <div class="input " id="">
@@ -75,7 +87,7 @@
                              <div class="clearfix" id="">
                                 <label class="" id="">Enter it again:</label>
                                 <div class="input " id="">
-                                    <input class="" id="" type="text" name="Password" length="" value="">
+                                    <input class="validate[required,equals[Password]]" id="" type="text" name="PasswordCheck" length="" value="">
                                 </div>
                             </div>
                              <div class="clearfix">

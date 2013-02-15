@@ -33,8 +33,12 @@ class MY_Controller extends CI_Controller {
     
     public function __construct($controller_name) {
         parent::__construct();
-        // Put code here that is to be called before any other controller
+        //Allow the use of query strings as well as trad CI URL paras
+        parse_str(str_replace($_SERVER['QUERY_STRING'],'',$_SERVER['REQUEST_URI']),$_GET);
         
+        // Put any code here that is to be called before any other controller
+        
+         
         // 1. Test is_logged_in. This Redirects to login if not.
         $this->_is_logged_in();
         
@@ -47,6 +51,7 @@ class MY_Controller extends CI_Controller {
         // 4. Now start to set up the $data[config] array for the View_template
         $this->data['view_setup']['navbar'] = $this->config->item('navbar_setup');
         $this->data['config'] = $this->config->item($controller_name);
+        $this->data['view_setup']['user_data'] = $this->session->all_userdata();
         
         // 5. now load the database settings
         $dbConn = $this->config->item('database');     //these are different for each dID       
@@ -340,6 +345,11 @@ class MY_Controller extends CI_Controller {
         
         return $retval; //returns path & filename
         }
+        
+    protected function getQueryStringParams() {
+        parse_str($_SERVER['QUERY_STRING'], $params);
+        return $params;
+    }
     
     
         
