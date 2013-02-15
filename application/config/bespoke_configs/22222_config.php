@@ -1301,6 +1301,36 @@ $config['booking'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),
+                    'ActionType' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Type of Booking',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => 'ActionType',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'MOT' => 'MOT',
+                            'Diagnostic' => 'Diagnostic',
+                            'Interim service' => 'Interim Service',
+                            'Full Service' => 'Full Service',
+                            'Electrical Fault' => 'Electrical Fault',
+                            'Accident Damage' => 'Accident Damage',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
                     'ActionDescription' => array       
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
