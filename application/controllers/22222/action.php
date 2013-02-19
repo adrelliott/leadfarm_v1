@@ -21,6 +21,57 @@ class Action extends CI_Controller {
     function view() {
         echo "this is view ";
     }
+    
+    function start_campaign($ContactId, $TemplateId, $Step = 1) {
+        //find the campaign
+        
+        //find the first step
+        
+        //send it to the actioner method
+        
+        //
+    }
+    
+    function actioner($ContactId, $Method, $TemplateId = NULL, $TagId = NULL) {
+        //if %method = tag then apply the tag to the __Tags table as a new record
+        
+        //else  switch the method (or do method $this->send_$method)
+    }
+    
+    function send_email($ContactId, $TemplateId) {
+        //send $templateId as an email to Contact Id
+        $this->load->library('email');
+
+        $this->email->from('noreply@leadfarm.co.uk', 'Al');
+        $this->email->to('al@dallasmatthews.co.uk'); 
+        //$this->email->cc('another@another-example.com'); 
+        //$this->email->bcc('them@their-example.com'); 
+
+        $this->email->subject('Email Test');
+        $this->email->message('Testing the email class.');	
+
+        $this->email->send();
+
+        echo $this->email->print_debugger();
+    }
+    
+    function send_text($ContactId, $TemplateId) {
+        //send $templateId as a SMS text to Contact Id
+    }
+    
+    function send_letter($ContactId, $TemplateId) {
+        //send $templateId as a letter via docmail to Contact Id
+    }
+    
+    function send_postcard($ContactId, $TemplateId) {
+        //send $templateId as a postcard via docmail to Contact Id
+    }
+    
+    function add_tag($ContactId, $TagId) {
+        //apply $tagId to $ContactId
+    }
+    
+    
    
     //a cron job runsd and queries the campaignee table for all records that have duedate of now or past du that have a status of FALSE (as in not run)
     
@@ -30,15 +81,7 @@ class Action extends CI_Controller {
     
     function action($array) {
         //this is sent the entire row of the next camapgin step due
-        $array = //this si the result from 
-        (
-                'Id' => 1,
-                'Status' => FALSE,   //TRUE = done, FALSE = UNDONE
-                'ContactId' => 23548,   //TRUE = done, FALSE = UNDONE
-                'CampaignId' => 4,   //
-                //'DateDue' => '2013/08/02 12:01:00',   //dont need this
-                'CampaignStep' => 4
-        );
+        
         
         //First, run the step identified above
             //look up the campaign step
@@ -64,7 +107,7 @@ class Action extends CI_Controller {
             'CampaignId' => 4,   //
             'DateDue' => $dateDue,   //dont need this
             'CampaignStep' => 4
-        )
+        );
         
         
         
@@ -78,7 +121,7 @@ class Action extends CI_Controller {
         );
         
     }
-    }
+    
     
     var $Campaign_Step = array
     (
