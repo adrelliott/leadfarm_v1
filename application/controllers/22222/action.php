@@ -108,7 +108,6 @@ class Action extends CI_Controller {
                         $model = $this->_set_up_db_conn('NextSteps'); 
                         $input = array('__CompletedYN' => TRUE);
                         $result = $this->$model->save($input, $__Id);
-                        //echo "<p>the task has been marked as complete: " . $result;
 
                         //now create the next task (if there is a next step)
                         $nextstep = $__StepNumber + 1;
@@ -126,7 +125,7 @@ class Action extends CI_Controller {
     function send_email($ContactId, $TemplateId) {
         //send $templateId as an email to Contact Id
         
-        /*
+        
         $this->load->library('email');
 
         $this->email->from('noreply@leadfarm.co.uk', 'Al');
@@ -139,8 +138,7 @@ class Action extends CI_Controller {
 
         $this->email->send();
 
-        echo $this->email->print_debugger();
-        */
+        //echo $this->email->print_debugger();
         
         return $result;
     }
