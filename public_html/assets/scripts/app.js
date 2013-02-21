@@ -162,18 +162,57 @@ $(function() {
       //  "sPaginationType": "full_numbers",
       //  "bJQueryUI": true
     //});
-    
+
+    var onOverlayClosedCallback = function () {
+        var container = $(this);
+        var tableId = container.data ('table-id');
+        var tableSource = container.data ('table-source');
+
+        if (typeof tableId === 'undefined' || typeof tableSource === 'undefined') {
+            console.log ('No table ID or source');
+            return;
+        }
+
+        var container = $('#' + tableId + ' .dataTable-container');
+
+        if (container.length !== 1) {
+            console.log ('No container');
+            return;
+        }
+
+        var table = $('.dataTable', container);
+
+        if (table.length !== 1) {
+            console.log ('No table');
+            return;
+        }
+
+        $.get (tableSource, function (response) {
+
+            table.dataTable ().fnDestroy ();
+            container.html (response);
+
+            $('.dataTable', container).dataTable (dataTableOptions);
+
+            console.log ('Updated');
+
+        }, 'json');
+
+    };
+
+    var dataTableOptions = {
+        "sPaginationType": "full_numbers",
+        "bJQueryUI": true,
+        "iDisplayLength": 5,
+        //AE 21-06-12	Next line added apply modalbox to whole table no matter how you 'redraw' it (redraw=re-sort) 
+        "fnDrawCallback": function(  ) {
+            $(".iframe").colorbox({iframe:true, width:"80%", height:"90%", escKey: false, overlayClose: false,onClosed: onOverlayClosedCallback });
+        }
+    };
+
     //Datatable
-    $('.dataTable').dataTable({
-    "sPaginationType": "full_numbers",
-    "bJQueryUI": true,
-            "iDisplayLength": 5,
-            //AE 21-06-12	Next line added apply modalbox to whole table no matter how you 'redraw' it (redraw=re-sort) 
-            "fnDrawCallback": function(  ) {
-                    $(".iframe").colorbox({iframe:true, width:"80%", height:"90%", escKey: false, overlayClose: false });
-            }
-    });
-    
+    $('.dataTable').dataTable(dataTableOptions);
+
     //Unselects all checkboxes if they have been checked
     $(".dataTable tbody tr").click(function(e) {
             $(".dataTable tbody tr").removeClass("selected");

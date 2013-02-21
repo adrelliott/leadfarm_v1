@@ -29,6 +29,9 @@ function __autoload ($class)
 
 switch (ENVIRONMENT)
 {
+    case 'hn-development':
+        $base_url = 'http://leadfarm.hndev.co.uk';
+        break;
     case 'development':
         $base_url = 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html';
         break;

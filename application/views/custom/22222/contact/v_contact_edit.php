@@ -60,23 +60,19 @@
                         <?php echo form_close(); ?>	
                     </div>
                     <div id="tab-3">
-                        <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactjoin/view/edit', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"' ,'primary_key_fieldname' => '__Id'));    
-                            $this->table->set_heading_custom($tables['relationships']['table_headers']);
-                            echo $this->table->generate_custom($tables['relationships']['table_data']); 
-                        ?>
+                        <div class="dataTable-container">
+                        <?php $this->load->view ('custom/22222/contact/v_contact_edit/relationships') ?>
+                        </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Relationship</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-3" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/relationships') ?>"><span>Create New Relationship</span></a>
                        </div>
                     </div>
                     <div id="tab-4">
-                        <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'vehicles/view/edit', 'anchor_uri_append' => $ContactId, 'primary_key_fieldname' => '__Id'));    
-                            $this->table->set_heading_custom($tables['vehicles']['table_headers']);
-                            echo $this->table->generate_custom($tables['vehicles']['table_data']); 
-                        ?>
+                        <div class="dataTable-container">
+                        <?php $this->load->view ('custom/22222/contact/v_contact_edit/vehicles') ?>
+                        </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/view_modal/edit_modal/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Vehicle</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/view_modal/edit_modal/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-4" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/vehicles') ?>"><span>Create New Vehicle</span></a>
                        </div>
                     </div>
                 </div>
@@ -95,37 +91,35 @@
             
             <div class="widget clearfix tabs">
                 <ul>
-                    <li><h2><a href='#tab-1'>Actions</a></h2></li>
-                    <li><h2><a href='#tab-2'>Bookings</a></h2></li>
-                    <li><h2><a href='#tab-3'>Comms</a></h2></li>
+                    <li><h2><a href='#tab-5'>Actions</a></h2></li>
+                    <li><h2><a href='#tab-6'>Bookings</a></h2></li>
+                    <li><h2><a href='#tab-7'>Comms</a></h2></li>
                 </ul>
                 <div class="widget_inside">
-                    <div id="tab-1">
-                        <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit_action', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"'));    
-                            $this->table->set_heading_custom($tables['all_actions']['table_headers']);
-                            echo $this->table->generate_custom($tables['all_actions']['table_data']); 
-                        ?> 
+                    <div id="tab-5">
+                        <div class="dataTable-container">
+                            <?php $this->load->view ('custom/22222/contact/v_contact_edit/all_actions') ?>
+                        </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_action/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Action</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_action/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-5" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_actions') ?>"><span>Create New Action</span></a>
                        </div>
                     </div>
-                    <div id="tab-2">
-                        <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit_booking', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"'));    
-                            $this->table->set_heading_custom($tables['bookings']['table_headers']);
-                            echo $this->table->generate_custom($tables['bookings']['table_data']); 
-                        ?>
+                    <div id="tab-6">
+                        <div class="dataTable-container">
+                            <?php $this->load->view ('custom/22222/contact/v_contact_edit/bookings') ?>
+                        </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_booking/new/<?php echo $ContactId; ?>" class="large blue button right iframe"><span>Create New Booking</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_booking/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-6" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/bookings') ?>"><span>Create New Booking</span></a>
                        </div>
                     </div>
-                    <div id="tab-3">
-                        <?php 
+                    <div id="tab-7">
+                        <div class="dataTable-container">
+                        <?php
                             $this->table->set_template_custom(array ('anchor_uri' => 'contactjoin/view/edit', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"'));    
                             $this->table->set_heading_custom($tables['relationships']['table_headers']);
                             echo $this->table->generate_custom($tables['relationships']['table_data']); 
                         ?>
+                        </div>
                         <code>This section shows details of emails/texts & letters sent to this contact</code>
                     </div>
                 </div>
