@@ -10,6 +10,8 @@ class Action extends CI_Controller {
 	 * 
 	 */
 
+    protected $dID = '';
+    
     public function __construct()    {
          parent::__construct();
          $this->output->enable_profiler(TRUE);
@@ -18,14 +20,10 @@ class Action extends CI_Controller {
     public function index() {  
         echo "this is index";
     }
+           
     
-     
-    
-                        
-    
-    function set_campaign_step($dID, $ContactId, $CampaignId, $Step = 1) {       
-        $this->_set_DATAOWNER($dID);
-        
+    function set_campaign_step($dID, $ContactId, $CampaignId, $Step = 1) {
+        $this->dID = $dID;
          //find the $Step in the sequence
         $arg = array
         (
@@ -34,24 +32,29 @@ class Action extends CI_Controller {
         );        
         $model = $this->_set_up_db_conn('Steps');        
         $results = $this->$model->get_by($arg);
+        //print_array($results, 0, 'this is line 35 - results)');
         
         //send it to NextSteps table
-        $newTime = time() + $results[0]['__Delay'];
-        $input = array
-        (
-            '__ContactId' => $ContactId,
-            '__CampaignId' => $CampaignId,
-            '__StepNumber' => $Step,
-            '__TaskDue' => $newTime,
-            '__CompletedYN' => FALSE
-        );
+        if ($results)
+        {
+            $newTime = time() + $results[0]['__Delay'];
+            $input = array
+            (
+                '__ContactId' => $ContactId,
+                '__CampaignId' => $CampaignId,
+                '__StepNumber' => $Step,
+                '__TaskDue' => $newTime,
+                '__CompletedYN' => FALSE
+            );
+
+            $model = $this->_set_up_db_conn('NextSteps');        
+            $result = $this->$model->save($input);
+        }
         
-        $model = $this->_set_up_db_conn('NextSteps');        
-        $result = $this->$model->save($input);
     }
     
     function check_for_tasks($dID) {
-        $this->_set_DATAOWNER($dID);
+        $this->dID = $dID;
         
         //get all outstanding tasks
         $time = time();
@@ -60,6 +63,8 @@ class Action extends CI_Controller {
         
         //If there are outstanding task, then do them
         if ($results) $this->_actioner($results);
+        
+        $this->view_tasks($dID);
     }
     
     protected function _actioner($data) {
@@ -160,8 +165,10 @@ class Action extends CI_Controller {
     }
     
     
+    
+    
     protected function _set_up_db_conn($ModelName) {
-        
+        $this->_set_DATAOWNER();
         $this->config->load('bespoke_configs/' . DATAOWNER_ID . '_config');
         $dbConn = $this->config->item('database');     //these are different for each dID       
         $this->load->database($dbConn, FALSE, TRUE); //load this dID's database 
@@ -173,8 +180,8 @@ class Action extends CI_Controller {
         return $ModelName;
     }
     
-    private function _set_DATAOWNER($dID) {
-        if ( ! defined('DATAOWNER_ID')) define('DATAOWNER_ID', $dID);
+    private function _set_DATAOWNER() {
+        if ( ! defined('DATAOWNER_ID')) define('DATAOWNER_ID', $this->dID);
     }
     
     
@@ -194,7 +201,7 @@ class Action extends CI_Controller {
     
     
     
-    //==========================================================
+    //==============delete me - debug only============================================
     
     function view_steps($dID, $ModelName = 'Steps') { 
         echo "lets look at all steps ";
@@ -207,72 +214,18 @@ class Action extends CI_Controller {
         print_array($results);
 
     }
-                        
-                        
-   
-    //a cron job runsd and queries the campaignee table for all records that have duedate of now or past du that have a status of FALSE (as in not run)
-    
-    //this creates a list of all campagin steps that are due to be run
-    
-    //then we cycle through each of those campaginee records and run the step, marking it as done, and then creating a rtecord with the next step
-    
-    function action($array) {
-        //this is sent the entire row of the next camapgin step due
-        
-        
-        //First, run the step identified above
-            //look up the campaign step
-            //now run $this->$Action_Type($array);
-            //the mthod is defined here ($action_type can be email, text, directmail, tag)
-                
-        //Next mark the status as done
-        
-        //now, look up the next step from CampaignStep(need Id and delay)
-        $next_step = array 
-        (
-            'f',
-        );
-        
-        //now work out when the next step is due (check direction of countdown)
-        
-        //now write a new record to Campaignee like:
-        $new_record = array 
-        (
-            //'Id' => , //autogen
-            'Status' => FALSE,   //TRUE = done, FALSE = UNDONE
-            'ContactId' => 23548,   //TRUE = done, FALSE = UNDONE
-            'CampaignId' => 4,   //
-            'DateDue' => $dateDue,   //dont need this
-            'CampaignStep' => 4
-        );
-        
-        
-        
-        echo "action id is $ActionId";
-        
-        $array = array
-        (
-            'TemplateId' => '',
-            'TagId' => '',
-            'TemplateId' => '',
-        );
-        
+    function view_tasks($dID, $ModelName = 'NextSteps') { 
+        echo "lets look at all scheduled tasks";
+        $this->_set_DATAOWNER($dID);
+
+        //get the steps records
+        $Model = $this->_set_up_db_conn($ModelName);        
+        $results = $this->$Model->get_scheduled_tasks(time());
+
+        print_array($results, 0, 'current time is ' . time());
+
     }
     
-    
-    var $Campaign_Step = array
-    (
-        'Id' => 1,
-        'Type' => '1',    //type of action, either email(1), tag(2), SMS(3), letter(4) etc
-        'Step' => 1,    //sequence step number
-        'TemplateId' => 1,  //Id of template if its an email/SMS/letter
-        'TagId' => 1,  //Id(s) of tags
-        'Delay' => 1,  //No of seconds delay between sequences
-        'TriggerTimestamp' => '2013/08/02 12:01:00',  //timestamp working from or to
-        'CountdownDirection' => 1,  //1 for countdown *FROM* trigger date, 0 = countdown *TO*
-        'ActiveYN' => TRUE,
-        
-    );
    
    
 }

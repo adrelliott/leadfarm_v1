@@ -22,6 +22,14 @@ class Nextsteps_model extends MY_Model {
         $this->db->where('__CompletedYN !=', TRUE);
         return $this->get_assoc();
     }
+    
+    
+    
+    function get_scheduled_tasks($time) {
+        $this->db->where('__TaskDue >=', $time);
+        $this->db->where('__CompletedYN !=', TRUE);
+        return $this->get_assoc();
+    }
    
     
     
