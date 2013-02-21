@@ -188,13 +188,19 @@ $(function() {
         }
 
         $.get (tableSource, function (response) {
+            var settings;
+            var customOptions;
+
+            settings = table.dataTable ().fnSettings ();
+            customOptions = dataTableOptions;
+            customOptions.aaSorting = settings.aaSorting;
+            customOptions.iDisplayStart = settings._iDisplayStart;
 
             table.dataTable ().fnDestroy ();
             container.html (response);
 
-            $('.dataTable', container).dataTable (dataTableOptions);
-
-            console.log ('Updated');
+            table = $('.dataTable', container);
+            table.dataTable (customOptions);
 
         }, 'json');
 
