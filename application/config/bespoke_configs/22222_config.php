@@ -3428,6 +3428,214 @@ $config['vehicles'] = Array
         ),
     );
 
+$config['campaign'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                /*'bookings_join' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => 'bookings_join', //The dataset name defined above
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'joinon_Contact_and_Vehicle', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'
+                            'ActionType =' => 'Booking', 
+                        ),           
+                    'fields' => array 
+                    (
+                        'Contact.Id' => 'contact Id',
+                        'Contact.FirstName' => 'First Name',
+                        'Contact.LastName' => 'Last Name',
+                        'ContactAction.Id' => 'booking Id',
+                        'ContactAction.ActionDescription' => 'ActionDescription',
+                        '__Vehicles.__Registration' => 'Reg',
+                    ),
+                ),*/ 
+            ),
+            'view' => array 
+            (  
+               /*'contacts' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'contacts', //The dataset name defined in this file
+                    'model_name' => 'contact_model',
+                    'model_method' => 'get_all_records',
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            //'_IsOrganisationYN !=' => 1, 
+                        ),
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        'FirstName' => 'First Name',
+                        'LastName' => 'Last Name',
+                        'PostalCode' => 'Postcode',
+                        '_IsOrganisationYN' => '',
+                    ),
+                ),            
+                'relationships' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => 'relationships', //The dataset name defined above
+                    'model_name' => 'contactjoin_model',
+                    'model_method' => 'joinon_ContactJoin', 
+                    'model_params' => NULL, 
+                    'fields' => array 
+                    (
+                        'Contact.Id' => 'contact Id',
+                        'Contact.FirstName' => 'First Name',
+                        'Contact.LastName' => 'Last Name',
+                        '__ContactJoin.__Id' => 'Realtionship Id',
+                        '__ContactJoin.__Reason' => 'reason',
+                        //'__ContactJoin.__ContactId' => 'reason',
+                        '__ContactJoin.__ContactId2' => 'CId 2',
+                    ),
+                ),
+                */ 
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'contactjoin_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL, 
+                'dropdowns' => NULL,
+                'fields' => array 
+                (
+                    '__Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__ContactId' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id 1',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__ContactId',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__ContactId2' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id 2',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__ContactId2',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Reason' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Reason for Realtionship',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '__Reason',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                         (
+                            'Spouse' => 'Spouse',
+                            'Partner' => 'Partner',
+                            'Employee' => 'Employee',
+                            'Colleague' => 'Colleague',
+                            'Business Partner'=> 'Business Partner',
+                            'Friend' => 'Friend',    //label => value
+                            'Sibling' => 'Sibling',
+                            'Neighbour' => 'Neighbour', 
+                         ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                    
+                    '__ActiveYN' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Relationship Active?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__ActiveYN',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                         (
+                             'Inactive' => '0',
+                             'Active' => '1',    //label => value
+                             
+                         ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'defaultvalue' => 'Yes',
+                        'value' => '1', 
+                    ),                    
+                ),                
+            ),
+        ),
+    );
+
+/*
 $config['user'] = Array
     (
     'datasets' => array 
@@ -3483,7 +3691,7 @@ $config['user'] = Array
                         'Id' => '#',
                     ),
                 ),   */  
-                'users' => array
+/*                'users' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
                     'data_source' => 'users', //The dataset name defined above
@@ -4113,7 +4321,7 @@ $config['user'] = Array
             ),
         ),
     );
-
+*/
 
 /* End of file */
 
