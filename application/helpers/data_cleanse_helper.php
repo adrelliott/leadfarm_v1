@@ -116,6 +116,24 @@ function clean_data($input, $cleanse_type = NULL){
         return $retval;
     }
     
+    function generate_dropdown($options, $value = NULL) {
+        $html = '';
+        
+        foreach ($options as $k => $v)
+        {
+            $selected = ''; 
+            if ($v == $value) 
+            {
+                $selected = 'selected="selected"';
+            }
+            $html .= '<option value="' . $v . '" ' . $selected . '>' . $k . '</option>';
+        }
+        
+        return $html;
+    }
+    
+    
+    
     //generate HTML when passed config & value
 function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
         //Override configred attributes of field with the passed array
@@ -147,15 +165,7 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
         {
             case 'select':
                 $retval .= '<select class="' . $attributes['cssClassInput'] . '" id=" ' . $attributes['cssIdInput'] . '" name="' . $attributes['name'] . '">';
-                foreach ($attributes['options'] as $k => $v)
-                {
-                    $selected = ''; 
-                    if ($v == $attributes['value']) 
-                    {
-                        $selected = 'selected="selected"';
-                    }
-                    $retval .= '<option value="' . $v . '" ' . $selected . '>' . $k . '</option>';
-                }
+                $retval .= generate_dropdown($attributes['options'], $attributes['value']);
                 $retval .= '</select>';
                 break;
             case 'radio':                

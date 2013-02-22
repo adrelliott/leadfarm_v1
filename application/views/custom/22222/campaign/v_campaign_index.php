@@ -7,7 +7,11 @@
         <div class="widget clearfix">
             <h2>Find Campaigns</h2>
             <div class="widget_inside">   
-                table of campaigns go here
+                 <?php 
+                    $this->table->set_template_custom(array ('anchor_uri' => 'campaign/view/edit'));    
+                    $this->table->set_heading_custom($tables['campaigns']['table_headers']);
+                    echo $this->table->generate_custom($tables['campaigns']['table_data']); 
+                ?> 
             </div>
         </div>
     </div>

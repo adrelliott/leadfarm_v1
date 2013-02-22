@@ -3434,80 +3434,116 @@ $config['campaign'] = Array
         (
             'index' => array 
             (
-                /*'bookings_join' => array
+                'campaigns' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
-                    'data_source' => 'bookings_join', //The dataset name defined above
-                    'model_name' => 'contactaction_model',
-                    'model_method' => 'joinon_Contact_and_Vehicle', 
-                    'model_params' => array 
-                        (   //These are chained with 'AND'
-                            'ActionType =' => 'Booking', 
-                        ),           
+                    //'data_source' => '', //The dataset name defined above
+                    'model_name' => 'campaign_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
                     'fields' => array 
                     (
-                        'Contact.Id' => 'contact Id',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        'ContactAction.Id' => 'booking Id',
-                        'ContactAction.ActionDescription' => 'ActionDescription',
-                        '__Vehicles.__Registration' => 'Reg',
+                        'Id' => 'Id',
+                        'Name' => 'Campaign Name',
+                        'Status' => 'Campaign Status',
                     ),
-                ),*/ 
+                ), 
             ),
             'view' => array 
             (  
-               /*'contacts' => array
+               'steps' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
-                    'data_source' => 'contacts', //The dataset name defined in this file
-                    'model_name' => 'contact_model',
-                    'model_method' => 'get_all_records',
-                    'model_params' => array 
-                        (   //These are chained with 'AND'. To define an 'OR'...???
-                            //'_IsOrganisationYN !=' => 1, 
-                        ),
+                    'data_source' => '', //The dataset name defined in this file
+                    'model_name' => 'steps_model',
+                    'model_method' => 'get_campaign_steps',
+                    'model_params' => NULL,
                     'fields' => array 
                     (
-                        'Id' => '#',
-                        'FirstName' => 'First Name',
-                        'LastName' => 'Last Name',
-                        'PostalCode' => 'Postcode',
-                        '_IsOrganisationYN' => '',
+                        '__Steps.__Id' => '#',
+                        '__Steps.__CampaignId' => 'Camp ID',
+                        '__Steps.__StepName' => 'Last Name',
+                        '__Steps.__ActionType' => 'Postcode',
+                        '__Steps.__TemplateTagId' => 'Template Id',
+                        
+                        '__Steps.__StepNo' => 'StepNo',
+                        '__Steps.__Delay' => 'Delay',
+                        '__Template.__Id' => 'templ id',
+                        '__Template.__Name' => 'temp name',
                     ),
                 ),            
-                'relationships' => array
+                'get_all_templates' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
-                    'data_source' => 'relationships', //The dataset name defined above
-                    'model_name' => 'contactjoin_model',
-                    'model_method' => 'joinon_ContactJoin', 
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'template_model',
+                    'model_method' => 'template_dropdown', 
                     'model_params' => NULL, 
                     'fields' => array 
                     (
-                        'Contact.Id' => 'contact Id',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        '__ContactJoin.__Id' => 'Realtionship Id',
-                        '__ContactJoin.__Reason' => 'reason',
-                        //'__ContactJoin.__ContactId' => 'reason',
-                        '__ContactJoin.__ContactId2' => 'CId 2',
+                        '__Id' => 'Id',
+                        '__Name' => 'Name',                       
+                        '__ActionType' => 'Action type',                       
                     ),
                 ),
-                */ 
+                'tag_dropdown' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'contactgroup_model',
+                    'model_method' => 'tag_dropdown', 
+                    'model_params' => NULL, 
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'GroupName' => 'Tag Name',                       
+                        '__ActiveYN' => 'Active',                       
+                    ),
+                ),
+                'template_dropdown' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'template_model',
+                    'model_method' => 'template_dropdown', 
+                    'model_params' => NULL, 
+                    'fields' => array 
+                    (
+                        '__Id' => 'Id',
+                        '__Name' => 'Name',                       
+                        '__ActionType' => 'Action type',                       
+                    ),
+                ),
             ),
         ),
         'record' => array
         (
             'view' => array
             (
-                'model_name' => 'contactjoin_model',
+                'model_name' => 'campaign_model',
                 'model_method' => 'get_single_record',
                 'model_params' => NULL, 
-                'dropdowns' => NULL,
+                'dropdowns' => array    //or NULL
+                (
+                    'tag_dropdown' => array
+                    (
+                        'source' => 'tag_dropdown',    //which dataset are we using?
+                        'label' => array ('tag_dropdown'),
+                        'label_separator' => '',
+                        'value' => 'Id',
+                    ),
+                    'template_dropdown' => array
+                    (
+                        'source' => 'template_dropdown',    //which dataset are we using?
+                        'label' => array ('template_dropdown'),
+                        'label_separator' => '',
+                        'value' => '__Id',
+                    ),
+                    
+                ),
                 'fields' => array 
                 (
-                    '__Id' => array
+                    'Id' => array
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -3521,115 +3557,55 @@ $config['campaign'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__Id',
+                        'name' => 'Id',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
                     ),
-                    '__ContactId' => array      
+                    'Name' => array      
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Id 1',                  
+                        'label' => 'Campaign name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__ContactId',
+                        'name' => 'Name',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
                     ),
-                    '__ContactId2' => array      
+                    'Status' => array      
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Id 2',                  
+                        'label' => 'Status',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__ContactId2',
+                        'name' => 'Status',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
-                    ),
-                    '__Reason' => array       
-                    (
-                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
-                        'cssClassContainingDiv' => '',
-                        'cssIdContainingDiv' => '',
-                        'cssClassLabel' => '',
-                        'cssIdLabel' => '',
-                        'label' => 'Reason for Realtionship',                  
-                        'cssClassInputDiv' => '',
-                        'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'select',
-                        'name' => '__Reason',
-                        'helpText' => '',                        
-                        'length' => '',
-                        'options' => array
-                         (
-                            'Spouse' => 'Spouse',
-                            'Partner' => 'Partner',
-                            'Employee' => 'Employee',
-                            'Colleague' => 'Colleague',
-                            'Business Partner'=> 'Business Partner',
-                            'Friend' => 'Friend',    //label => value
-                            'Sibling' => 'Sibling',
-                            'Neighbour' => 'Neighbour', 
-                         ),
-                        'HTML_before' => '',
-                        'HTML_after' => '',
-                        'value' => '', 
-                    ),                    
-                    '__ActiveYN' => array       
-                    (
-                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
-                        'cssClassContainingDiv' => '',
-                        'cssIdContainingDiv' => '',
-                        'cssClassLabel' => '',
-                        'cssIdLabel' => '',
-                        'label' => 'Relationship Active?',                  
-                        'cssClassInputDiv' => '',
-                        'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'radio',
-                        'name' => '__ActiveYN',
-                        'helpText' => '',                        
-                        'length' => '',
-                        'options' => array
-                         (
-                             'Inactive' => '0',
-                             'Active' => '1',    //label => value
-                             
-                         ),
-                        'HTML_before' => '',
-                        'HTML_after' => '',
-                        'defaultvalue' => 'Yes',
-                        'value' => '1', 
-                    ),                    
+                    ),                 
                 ),                
             ),
         ),

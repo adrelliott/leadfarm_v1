@@ -15,18 +15,15 @@ class T_Campaign extends MY_Controller {
         $this->_load_view_data();   //retrieves and process all data for view        
     }
    
-    public function view($view_file='view', $rID, $ContactId=NULL){
+    public function view($view_file='view', $rID){
         $this->data['view_setup']['view_file'] = 'v_campaign_' . $view_file;        
         $this->data['controller_setup']['method_name'] = 'view';        
         $this->data['view_setup']['modal'] = FALSE;
         $this->data['view_setup']['header_file'] .= '';  //add '_modal' for modal
         $this->data['view_setup']['footer_file'] .= '';  //add '_modal' for modal       
         $this->data['view_setup']['rID'] = $rID;
-        $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
+        //$this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
         $this->data['view_setup']['display_none'] = ''; 
-        
-        //What record fieldset do we show? Org, ind or unknown?
-        //$this->data['view_setup']['fieldset'] = $fieldset;
         
         $this->_load_view_data($rID);    //retrieves and process all data for view              
     }    
@@ -40,7 +37,7 @@ class T_Campaign extends MY_Controller {
         if ($ContactId = 'new') $ContactId = $rID;
         
         //refresh page
-        $fieldset = $input['_IsOrganisationYN'];
+        
         redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId . '/' . $fieldset );
        
     }
