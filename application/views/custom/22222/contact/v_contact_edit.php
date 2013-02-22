@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div id="tab-2">
-                         <?php echo form_open(DATAOWNER_ID . '/contact/append_note/0/' . $rID . '/' . $ContactId . '/' . $fieldset); ?>
+                         <?php echo form_open(DATAOWNER_ID . '/contact/append_note/0/' . $rID . '/' . $ContactId . '/' . $fieldset, 'class="ajax"'); ?>
                             <p>These are the notes for this record.</p>
                             <?php echo display_field($fields['ContactNotes']); ?>
                            <!-- Start field "Add a Note:" -->
@@ -60,19 +60,19 @@
                         <?php echo form_close(); ?>	
                     </div>
                     <div id="tab-3">
-                        <div class="dataTable-container">
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/relationships') ?>">
                         <?php $this->load->view ('custom/22222/contact/v_contact_edit/relationships') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-3" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/relationships') ?>"><span>Create New Relationship</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-3"><span>Create New Relationship</span></a>
                        </div>
                     </div>
                     <div id="tab-4">
-                        <div class="dataTable-container">
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/vehicles') ?>">
                         <?php $this->load->view ('custom/22222/contact/v_contact_edit/vehicles') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/view_modal/edit_modal/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-4" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/vehicles') ?>"><span>Create New Vehicle</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/view_modal/edit_modal/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-4"><span>Create New Vehicle</span></a>
                        </div>
                     </div>
                 </div>
@@ -97,19 +97,19 @@
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-5">
-                        <div class="dataTable-container">
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_actions') ?>">
                             <?php $this->load->view ('custom/22222/contact/v_contact_edit/all_actions') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_action/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-5" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_actions') ?>"><span>Create New Action</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_action/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-5"><span>Create New Action</span></a>
                        </div>
                     </div>
                     <div id="tab-6">
-                        <div class="dataTable-container">
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/bookings') ?>">
                             <?php $this->load->view ('custom/22222/contact/v_contact_edit/bookings') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_booking/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-6" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/bookings') ?>"><span>Create New Booking</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_booking/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-6"><span>Create New Booking</span></a>
                        </div>
                     </div>
                     <div id="tab-7">
