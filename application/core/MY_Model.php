@@ -292,6 +292,15 @@ class MY_Model extends CI_Model {
         return $this->get();
     } 
     
+    function add($input, $rID) {
+       if ($rID == 'new')
+       {
+          $rID = NULL;
+       }      
+       
+       return $this->save($input, $rID);
+    }
+    
     
     
     

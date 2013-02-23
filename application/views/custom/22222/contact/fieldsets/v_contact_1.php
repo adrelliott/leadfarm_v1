@@ -27,6 +27,4 @@
     <div style="<?php echo $display_none; ?>"">
         <?php echo display_field($fields['_IsOrganisationYN'], array('value' => 1)); ?>
     </div>
-    <div class="clearfix">
-        <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
-    </div>
+    

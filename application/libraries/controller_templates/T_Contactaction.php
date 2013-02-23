@@ -33,7 +33,6 @@ class T_Contactaction extends MY_Controller {
         
         //save record
         $rID = $this->add_record($input, $rID);
-        
         //refresh page
         redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
        

@@ -16,11 +16,5 @@ class Campaign_model extends MY_Model {
         $this->contactId_fieldname = 'Id';
     }
     
-    function add($input, $rID) {
-       $input['Id'] = $rID;
-       
-       $this->save($input, $rID);
-       
-       return $input['Id'];
-    }
+    
 }

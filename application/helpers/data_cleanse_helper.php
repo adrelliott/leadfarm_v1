@@ -118,7 +118,6 @@ function clean_data($input, $cleanse_type = NULL){
     
     function generate_dropdown($options, $value = NULL) {
         $html = '';
-        
         foreach ($options as $k => $v)
         {
             $selected = ''; 

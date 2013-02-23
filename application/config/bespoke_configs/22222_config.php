@@ -3445,7 +3445,6 @@ $config['campaign'] = Array
                     (
                         'Id' => 'Id',
                         'Name' => 'Campaign Name',
-                        'Status' => 'Campaign Status',
                     ),
                 ), 
             ),
@@ -3464,11 +3463,11 @@ $config['campaign'] = Array
                         '__Steps.__CampaignId' => 'Camp ID',
                         '__Steps.__StepName' => 'Last Name',
                         '__Steps.__ActionType' => 'Postcode',
-                        '__Steps.__TemplateTagId' => 'Template Id',
-                        
+                        '__Steps.__TemplateId' => 'Template Id',
+                        '__Steps.__TagId' => 'Tag Id',                        
                         '__Steps.__StepNo' => 'StepNo',
                         '__Steps.__Delay' => 'Delay',
-                        '__Template.__Id' => 'templ id',
+                        //'__Template.__Id' => 'templ id',
                         '__Template.__Name' => 'temp name',
                     ),
                 ),            
@@ -3477,13 +3476,30 @@ $config['campaign'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => '', //The dataset name defined above
                     'model_name' => 'template_model',
-                    'model_method' => 'template_dropdown', 
-                    'model_params' => NULL, 
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array
+                    (
+                        '__ActionType !=' => 'TAG'
+                    ), 
                     'fields' => array 
                     (
                         '__Id' => 'Id',
                         '__Name' => 'Name',                       
                         '__ActionType' => 'Action type',                       
+                    ),
+                ),
+                'get_all_tags' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'contactgroup_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'GroupName' => 'GroupName',                       
+                        'GroupCategoryId' => 'GroupCategoryId',                         
                     ),
                 ),
                 'tag_dropdown' => array
@@ -3511,7 +3527,7 @@ $config['campaign'] = Array
                     (
                         '__Id' => 'Id',
                         '__Name' => 'Name',                       
-                        '__ActionType' => 'Action type',                       
+                        '__ActionType' => 'Action type',                        
                     ),
                 ),
             ),
@@ -3537,7 +3553,7 @@ $config['campaign'] = Array
                         'source' => 'template_dropdown',    //which dataset are we using?
                         'label' => array ('template_dropdown'),
                         'label_separator' => '',
-                        'value' => '__Id',
+                        'value' => 'template_dropdown',
                     ),
                     
                 ),
@@ -3574,7 +3590,7 @@ $config['campaign'] = Array
                         'label' => 'Campaign name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'xxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -3600,6 +3616,27 @@ $config['campaign'] = Array
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Status',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    '__CampaignDescription' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Description',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' rows=2',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => '__CampaignDescription',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',

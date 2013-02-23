@@ -36,7 +36,7 @@ class T_Contact extends MY_Controller {
         $input = clean_data($this->input->post());
         
         //save record
-        $rID = $this->add_record($input, $rID);
+        $rID = $this->add($input, $rID);
         if ($ContactId = 'new') $ContactId = $rID;
         
         //refresh page

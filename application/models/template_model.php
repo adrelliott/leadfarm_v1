@@ -24,17 +24,28 @@ class Template_model extends MY_Model {
     
     function template_dropdown() {
         //get all axctive templates
-        $this->db->where('__ActiveYN =', 1);
+        //$this->db->where('__ActiveYN =', 1);  no need for this complexity
         $this->order_by = '__ActionType ASC';  
         $results = $this->get();
         
-        //create dropdown        
+        //create dropdown 
+        $retval = array();
+        $retval[0] = array  //add a blank option
+        (
+            '__Id' => 0,
+            '__Name' => '',
+            '__ActionType' => '',
+            'template_dropdown' => ''
+        );
+        
+        //combine to make the dropdown
         foreach ($results as $key => $array)
         {
-            $results[$key]['template_dropdown'] = '[' . $array['__ActionType'] . ' ' . $array['__Id'] .'] ' . $array['__Name'];
+            $array['template_dropdown'] = '[' . $array['__ActionType'] . ' ' . $array['__Id'] .'] ' . $array['__Name'];
+            $retval[$key+2] = $array;
         }
         
-        return $results;
+        return $retval;
     }
     
     

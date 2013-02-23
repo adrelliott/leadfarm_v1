@@ -26,7 +26,7 @@ class Contactaction_model extends MY_Model {
         }
     }
     
-    function add($input, $rID) {
+    /*function add($input, $rID) {
        if ($rID == 'new')
        {
           $rID = NULL;
@@ -34,6 +34,8 @@ class Contactaction_model extends MY_Model {
        
        return $this->save($input, $rID);
     }
+     * moved this to MY_MOdel
+     */
     
     function joinon_Contact_and_Vehicle($where = NULL) {
         //get all records $where joined on contact (ie get fields from contact table too)

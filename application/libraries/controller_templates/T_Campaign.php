@@ -28,39 +28,19 @@ class T_Campaign extends MY_Controller {
         $this->_load_view_data($rID);    //retrieves and process all data for view              
     }    
      
-    public function add($view_file, $rID, $ContactId, $fieldset) {       
+    public function add($view_file, $rID) {       
         //clean input
         $input = clean_data($this->input->post());
         
         //save record
-        $rID = $this->add_record($input, $rID);
-        if ($ContactId = 'new') $ContactId = $rID;
+         $rID = $this->add_record($input, $rID);
         
-        //refresh page
-        
-        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId . '/' . $fieldset );
+        //refresh page        
+        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID );
        
     }
     
-    public function append_note($view_file, $rID, $ContactId, $fieldset) {
-        //Concatenate the new note ready for updating
-        $input = clean_data($this->input->post()); 
-        $input['ContactNotes'] .= "\n:::: On " . date('d-m-Y H:i') . ', ' . 
-                $this->session->userdata('FirstName') . ' ' . 
-                $this->session->userdata('LastName') . " wrote:::: \n" . 
-                $input['add_a_note'];  //add the new note details
-        unset($input['add_a_note']); //tidy up        
-        
-        //save record
-        $this->add_record($input, $rID);
-        
-        //refresh page
-        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId . '/' . $fieldset );
-
-    }
-   
-   //create a remove method
-   // does it actually delete or does it just add a tag/switch to say its deleted?
+    
    
 }
    

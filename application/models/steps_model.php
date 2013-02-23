@@ -13,7 +13,7 @@ class Steps_model extends MY_Model {
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = '__Steps';
         $this->order_by = '__StepNo ASC';   //why isnt;' this reflected in datatable? 
-        $this->templateId_fieldname = '__TemplateTagId'; 
+        $this->templateId_fieldname = '__TemplateId'; 
         $this->primary_key = '__Id';
         if (isset($this->data['view_setup']['rID']))
         {
@@ -26,7 +26,9 @@ class Steps_model extends MY_Model {
         $this->db->where('__CampaignId >=', $CampaignId);
         $this->db->where('__StepNo =', $__StepNumber);
         $this->db->or_where('__StepNo =', $__StepNumber + 1); //gest this and next step
-        return $this->get_assoc();
+        $result = $this->get_assoc();
+        
+        return $result;
     }
     
     function get_campaign_steps() {
@@ -37,15 +39,38 @@ class Steps_model extends MY_Model {
                 '__Template.__Id = ' . $this->table_name. '.' . $this->templateId_fieldname, 
                 'left outer'
                 );          
-        $results = $this->get_assoc();
+        $results = $this->get();
+        
+        //print_array($results,1);
         
         //now set up the dropdown array
+        $retval = array();
         foreach ($results as $key => $array)
         {
-            $results[$key]['action_dropdown'] = '[' . $array['__ActionType'] . ' ' . $array['__TemplateTagId'] . '] - ' . $array['__Name'] ;
+            $array['action_dropdown'] = '[' . $array['__ActionType'] . ' ' . $array['__TemplateId'] . '] - ' . $array['__Name'] ;
+            $retval[$key + 1] = $array;
         }
         
-        return $results;
+         //if there's no results set up a blank step ready to be duplicated
+        if ( !$retval)
+        {
+            $retval = Array();
+            $retval[1] = Array
+            (
+                '__Id' => '',
+                '__CampaignId' => $this->current_rID,
+                '__StepName' => '',
+                '__ActionType' => '',
+                '__TemplateId' => 0,
+                '__TagId' => 0,
+                '__StepNo' => 1,
+                '__Delay' => 0,
+                '__Name' => '',
+                'action_dropdown' => ''
+            );
+        }
+        
+        return $retval;
     }
     
     function get_all_steps() {
