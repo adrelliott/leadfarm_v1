@@ -5,6 +5,7 @@
     </div>
 </div>
 <div class="clearfix" id="">
+    <?php echo form_open(DATAOWNER_ID . '/contact/add/0/' . $rID); ?>
     <table id="never_ending_table">
     <thead>
       <tr>
@@ -52,6 +53,8 @@
     </tbody>
   </table>
   <button id="add_row">Add Row</button>
+  <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+   <?php echo form_close(); ?>
 </div>
 
 <script>

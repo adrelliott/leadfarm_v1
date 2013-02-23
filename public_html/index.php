@@ -17,8 +17,8 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-define('ENVIRONMENT', 'hn-development');
-//define('ENVIRONMENT', 'development');
+//define('ENVIRONMENT', 'hn-development');
+define('ENVIRONMENT', 'development');
 //define('ENVIRONMENT', 'staging');
 
 /*

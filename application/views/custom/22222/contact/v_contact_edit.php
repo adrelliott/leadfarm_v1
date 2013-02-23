@@ -21,7 +21,7 @@
                 <div class="widget_inside">
                     <div id="tab-1">
                         <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . '/contact/add/0/' . $rID . '/' . $ContactId . '/0'); ?>
+                            <?php echo form_open(DATAOWNER_ID . '/contact/add/0/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
                             <?php include("fieldsets/v_contact_$fieldset.php");
                                 //v_contact_0 = contact, ..._1  org ?>
                         </div><!-- End of form div-->
@@ -37,6 +37,7 @@
                                 <?php display_field($fields['_OptinPref']); ?>
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+                                     
                                 </div>
                             </div>
                             <?php echo form_close(); ?>

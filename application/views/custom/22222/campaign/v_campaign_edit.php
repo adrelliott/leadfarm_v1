@@ -16,9 +16,10 @@
                             <?php echo form_open(DATAOWNER_ID . '/contact/add/0/' . $rID); ?>
                             <?php display_field($fields['Name']); ?>
                             <?php display_field($fields['Status']); ?>
+                             <?php echo form_close(); ?>
                             
                             <?php $this->load->view ('custom/' . DATAOWNER_ID . '/campaign/v_campaign_edit/steps') ?>
-                            <?php echo form_close(); ?>
+                           
                         </div>
                     </div>
                     <div id="tab-2">
