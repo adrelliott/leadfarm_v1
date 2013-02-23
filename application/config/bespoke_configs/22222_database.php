@@ -13,6 +13,12 @@
 
 switch (ENVIRONMENT) 
 {
+case 'hn-development':
+		$config['database']['username'] = 'root';
+		$config['database']['password'] = '';
+		$config['database']['database'] = 'leadfarm';
+		break;
+	
 case 'development':
 		$config['database']['username'] = 'leadfarm_22222';
 		$config['database']['password'] = 'DMmanch35';

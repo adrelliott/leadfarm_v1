@@ -56,7 +56,17 @@ class T_Contact extends MY_Controller {
         
         //save record
         $this->add_record($input, $rID);
-        
+
+        if ($this->input->is_ajax_request()) {
+            $response = array(
+                'success' => true,
+                'data' => array ('ContactNotes' => $input['ContactNotes'])
+            );
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode($response));
+            return;
+        }
+
         //refresh page
         redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId . '/' . $fieldset );
 

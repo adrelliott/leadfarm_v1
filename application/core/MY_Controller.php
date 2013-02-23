@@ -217,25 +217,29 @@ class MY_Controller extends CI_Controller {
         $results = array(); 
         foreach ($datasets as $dataset => $config)
         {
-            if (isset($config['include_in_query']) && $config['include_in_query'])
-            {
-                $model_name = $config['model_name'];
-                $model_method = $config['model_method'];
-                $this->load->model($model_name );
-                $this->db->select(array_keys($config['fields']));
-                $results[$dataset] = $this->$model_name->
-                    $model_method(if_exists($config['model_params']));
-            }
-            else
-            {
-                $results[$dataset] = $config;
-            }            
+            $results[$dataset] = $this->_generate_dataset ($config);
         }
         
         return $results;        
     }
     
-    
+
+    protected function _generate_dataset ($config) {
+
+        if (isset($config['include_in_query']) && $config['include_in_query'])
+        {
+            $model_name = $config['model_name'];
+            $model_method = $config['model_method'];
+            $this->load->model($model_name );
+            $this->db->select(array_keys($config['fields']));
+            return $this->$model_name->$model_method(if_exists($config['model_params']));
+        }
+        else
+        {
+            return $config;
+        }
+    }
+
     protected function _retrieve_record ($rID, $config) {
         $results = $config['fields'];        
         //now either get the record or leave it as blank

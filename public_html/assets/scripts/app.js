@@ -21,7 +21,14 @@ $(function() {
           });
 
     // Tabs
-    $('.tabs').tabs();
+    $('.tabs').tabs({
+        create : function (event, ui) {
+            $(this).data ('lastPanelSelector', ui.panel.selector);
+        },
+        activate : function (event, ui) {
+            $(this).data ('lastPanelSelector', ui.oldPanel.selector);
+        }
+    });
    
     
     // toggling of divd
@@ -55,10 +62,10 @@ $(function() {
     .change();*/
     $("#quick_action").change(function () {
         //var selected_item = $("#quick_action_button").attr("href") + $(this).val()
-        var selected_item = $("#quick_action_url").attr("value") + $(this).val()
+        var selected_item = $("#quick_action_url").attr("value") + $(this).val();
         
         $("#quick_action_button").attr("href", selected_item);
-    })
+    });
     
 
     
@@ -100,11 +107,11 @@ $(function() {
     $('#horizSlider').slider({
         range: true,
         values: [17, 67]
-    })
+    });
 
     // Vertical Slider				
     $("#eq > span").each(function() {
-        var value = parseInt($(this).text());
+        var value = parseInt($(this).text(), 10);
         $(this).empty().slider({
             value: value,
             range: "min",
@@ -162,18 +169,101 @@ $(function() {
       //  "sPaginationType": "full_numbers",
       //  "bJQueryUI": true
     //});
-    
-    //Datatable
-    $('.dataTable').dataTable({
-    "sPaginationType": "full_numbers",
-    "bJQueryUI": true,
-            "iDisplayLength": 5,
-            //AE 21-06-12	Next line added apply modalbox to whole table no matter how you 'redraw' it (redraw=re-sort) 
-            "fnDrawCallback": function(  ) {
-                    $(".iframe").colorbox({iframe:true, width:"80%", height:"90%", escKey: false, overlayClose: false });
+
+    // Adds an overlay to the container which prevents the contents from being
+    // interacted with.
+    var disableTable = function (container) {
+        $('<div/>').addClass ('datatable-updating').css ('width', container.css ('width')).css ('height', container.css ('height')).css ('line-height', container.css ('height')).append ('Updating...').prependTo (container);
+    };
+
+    // Called when the user closes the dialog. Refreshes the datatable
+    // associated with the link that opened it.
+    var onOverlayClosedCallback = function () {
+        var tableId = $(this).data ('table-id');
+
+        if (typeof tableId === 'undefined') {
+            return;
+        }
+
+        var dataTableContainer = $('#' + tableId + ' .dataTable-container');
+
+        if (dataTableContainer.length !== 1) {
+            return;
+        }
+
+        reloadDatatable (dataTableContainer);
+    };
+
+    // Reloads the datatable in the container
+    var reloadDatatable = function (container) {
+
+        if (typeof container.data ('table-source') === 'undefined') {
+            return;
+        }
+
+        var table = $('.dataTable', container);
+
+        if (table.length !== 1) {
+            return;
+        }
+
+        disableTable (container);
+
+        $.get (container.data ('table-source'), function (response) {
+            var settings;
+            var customOptions;
+
+            settings = table.dataTable ().fnSettings ();
+            customOptions = dataTableOptions;
+            customOptions.aaSorting = settings.aaSorting;
+            customOptions.iDisplayStart = settings._iDisplayStart;
+
+            table.dataTable ().fnDestroy ();
+            container.html (response);
+
+            table = $('.dataTable', container);
+            table.dataTable (customOptions);
+
+        }, 'json');
+
+    };
+
+    var dataTableOptions = {
+        "sPaginationType": "full_numbers",
+        "bJQueryUI": true,
+        "iDisplayLength": 5,
+        //AE 21-06-12	Next line added apply modalbox to whole table no matter how you 'redraw' it (redraw=re-sort) 
+        "fnDrawCallback": function(  ) {
+            $(".iframe").colorbox({iframe:true, width:"80%", height:"90%", escKey: false, overlayClose: false,onClosed: onOverlayClosedCallback });
+        }
+    };
+
+    // Reloads the datatables in each of the tabs when they are clicked for a
+    // second time after being focused.
+    $('.tabs').each (function () {
+        var tabContainer = $(this);
+
+        $('a', tabContainer).on ('click.loaddatatables', function () {
+            var href = $(this).attr ('href');
+
+            if (href.substring (0, 1) !== '#') {
+                return;
             }
+
+            if (href === tabContainer.data ('lastPanelSelector')) {
+                var container = $(href + ' .dataTable-container');
+                if (container.length === 1) {
+                    reloadDatatable (container);
+                }
+            }
+
+            tabContainer.data ('lastPanelSelector', href);
+        });
     });
-    
+
+    //Datatable
+    $('.dataTable').dataTable(dataTableOptions);
+
     //Unselects all checkboxes if they have been checked
     $(".dataTable tbody tr").click(function(e) {
             $(".dataTable tbody tr").removeClass("selected");
@@ -186,6 +276,42 @@ $(function() {
                     $checkbox.attr('checked', !$checkbox.attr('checked'));
                     $(this).filter(':has(:checkbox)').toggleClass('selected');
             }
+    });
+
+    // Ajax forms
+    $('form.ajax').on ('submit.ajaxform', function () {
+        var form = $(this);
+        var submit;
+
+        submit = $('input[type="submit"]', form);
+        submit.data ('value', submit.val ()).val ('Saving...').prop ('disabled', true);
+
+        $.post (form.attr ('action'), form.serializeArray (), function (response) {
+            submit.val (submit.data ('value')).prop ('disabled', false);
+
+            if (typeof response !== 'object' || typeof response.success !== 'boolean' || response.success !== true) {
+                return;
+            }
+
+            $.each (response.data, function (name, value) {
+                var input = $('[name="' + name + '"]', form);
+
+                if (input.length !== 1) {
+                    return;
+                }
+
+                input = input.first ();
+                input.val (value);
+
+                if (input.is ('textarea')) {
+                    input.scrollTop (input[0].scrollHeight - input.height());
+                }
+
+            });
+
+        }, 'json');
+
+        return false;
     });
 
     //Tooltips
