@@ -4010,6 +4010,59 @@ $config['template'] = Array
         ),
     );
 
+
+$config['help'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                //no index ever called
+            ),
+            'view' => array 
+            (  
+               //dont; think we need this                
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'help_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL, 
+                'dropdowns' => NULL,
+                'fields' => array 
+                (
+                    //none     
+                ),                
+            ),
+        ),
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 $config['user'] = Array
     (

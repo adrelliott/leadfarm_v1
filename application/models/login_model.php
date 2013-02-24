@@ -31,7 +31,7 @@
                 'Username' => $this->input->post('username'),
                 'Password' => md5($this->input->post('password'))
             );            
-            $this->db->select('FirstName,LastName,Id,Username,Company,_SuspendedReason');
+            $this->db->select('FirstName,LastName,Id,Username,Company,Nickname,Email,Phone1,_SuspendedReason');
             $query = $this->db->get_where('Contact', $condition);
             
             $retval = array('result' => FALSE, 'data' => '');

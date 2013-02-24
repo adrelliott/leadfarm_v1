@@ -73,5 +73,6 @@
 </head>
 <body>
 <div id="wrap">
-    <div id="main">        
-        <div class="container" id="actualbody"><!-- Start body -->
+    <div id="main">
+        <div class="container" id="actualbody_modal"><!-- Start body -->
+            <?php echo anchor(DATAOWNER_ID . '/help/view/edit/___'.uri_string(), 'Help', 'id="help" class="right iframe "'); ?>

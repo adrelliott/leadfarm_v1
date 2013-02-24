@@ -66,6 +66,9 @@ class Login extends CI_Controller {
                       'is_logged_in' => TRUE,
                       'FirstName' => $FirstName,
                       'LastName' => $LastName,
+                      'Nickname' => $Nickname,
+                      'Email' => $Email,
+                      'Phone1' => $Phone1,
                       'Company' => $Company,
                       'UserId' => $Id,
                       '_dID' => DATAOWNER_ID

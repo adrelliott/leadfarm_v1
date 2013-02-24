@@ -83,7 +83,7 @@
                        <li>Logged in as 
                            <?php echo anchor(DATAOWNER_ID . '/user/view/edit/' .  $this->session->userdata('UserId') . '/' . $this->session->userdata('UserId'), $this->session->userdata('FirstName') . ' ' . $this->session->userdata('LastName'));?> (<?php echo anchor(DATAOWNER_ID . '/login/log_out', 'Log out?');?>) </li>
                        <li><?php echo anchor(DATAOWNER_ID . '/settings', 'Settings', 'id="settings" class="iframe"'); ?></li>
-                       <li><?php echo anchor(DATAOWNER_ID . '/help', 'Help', 'id="help" class="iframe"'); ?></li>
+                       <li><?php echo anchor(DATAOWNER_ID . '/help/view/edit/___'.uri_string(), 'Help', 'id="help" class=" iframe "'); ?></li>
                     </ul>
                 </div>
             </div>
