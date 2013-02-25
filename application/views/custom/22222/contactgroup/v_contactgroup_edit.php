@@ -6,7 +6,7 @@
                 <h3>Create/edit a Task for this contact</h3>
                 <div class="form">
                     <?php echo form_open(DATAOWNER_ID . "/contactgroup/add/edit/$rID") ; ?>
-                        <?php echo display_field($fields['Id']); ?>
+                        <?php //echo display_field($fields['Id']); ?>
                         <?php echo display_field($fields['GroupName']); ?>
                         <?php echo display_field($fields['GroupDescription']); ?> 
                         <div class="clearfix">

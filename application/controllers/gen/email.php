@@ -12,20 +12,17 @@ class Email extends CI_Controller {
 
     protected $dID = '';
     
-    public function __construct()    {
-         parent::__construct();
-         $this->output->enable_profiler(TRUE);
-    }
-    
-    public function index() {  
-        echo "this is index";
-    }
-    
-    public function send_mail($ContactId) {
+    function __construct()    {
+        parent::__construct();
+        $this->output->enable_profiler(TRUE);
         $this->load->library('postageapp');
-        
-        
-
+    }
+    
+    function index() {  
+        //echo "this is index";
+    }
+    
+    function send_mail($ContactId) {
         $this->postageapp->from('al@Campaignmanager.co.uk');
         //$this->postageapp->to('al@dallasMatthews.co.uk');
         
@@ -52,8 +49,13 @@ class Email extends CI_Controller {
 
         $result = $this->postageapp->send(); # returns JSON response from the server
         
-        print_array($result);
+        //print_array($result);
         
+        
+        
+    }
+    
+    function get_stats() {
         echo "<h2>Acc info</h2>";
         print_array($this->postageapp->get_account_info());
         
@@ -68,7 +70,6 @@ class Email extends CI_Controller {
         
         echo "<h2>get project info</h2>";
         print_array($this->postageapp->get_project_info());
-        
     }
            
     

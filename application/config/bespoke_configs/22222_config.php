@@ -3445,8 +3445,55 @@ $config['campaign'] = Array
                     (
                         'Id' => 'Id',
                         'Name' => 'Campaign Name',
+                        '_Type' => 'Campaign Type',
                     ),
-                ), 
+                ),
+                'get_all_templates' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'template_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array
+                    (
+                        '__ActionType !=' => 'TAG'
+                    ), 
+                    'fields' => array 
+                    (
+                        '__Id' => 'Id',
+                        '__Name' => 'Name',                       
+                        '__ActionType' => 'Action type',                       
+                    ),
+                ),
+                'get_all_tags' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'contactgroup_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'GroupName' => 'Tag Name',                       
+                        //'GroupCategoryId' => 'Tag Type',                         
+                        //'GroupDescription' => 'Tag Description',                         
+                    ),
+                ),
+                'get_all_links' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'links_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        '__Id' => 'Id',                      
+                        '__LinkName' => 'Name',                         
+                        '__DestinationURL' => 'Destination URL',                         
+                    ),
+                ),
             ),
             'view' => array 
             (  
@@ -3500,6 +3547,20 @@ $config['campaign'] = Array
                         'Id' => 'Id',
                         'GroupName' => 'GroupName',                       
                         'GroupCategoryId' => 'GroupCategoryId',                         
+                    ),
+                ),
+                'get_all_links' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'links_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        '__Id' => 'Id',                      
+                        '__LinkName' => 'Name',                         
+                        '__DestinationURL' => 'Destination URL',                         
                     ),
                 ),
                 'tag_dropdown' => array
@@ -3597,6 +3658,35 @@ $config['campaign'] = Array
                         'name' => 'Name',
                         'helpText' => '',                        
                         'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '_Type' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Campaign Type',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '_Type',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Follow Up' => 'Follow_Up',
+                            'Link Automation' => 'Link_Automation',
+                            'Apply Tag only' => 'Tag_only',
+                            //'Countdown to Date' => 'Countdown_to_date',
+                            //'Countdown from Date' => 'Countdown_from_date',
+                        ),
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -3845,7 +3935,7 @@ $config['template'] = Array
                         'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'readonly',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'text',
+                        'type' => 'hidden',
                         'name' => '__Id',
                         'helpText' => '',
                         'length' => '',
@@ -3866,7 +3956,7 @@ $config['template'] = Array
                         'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'select',
+                        'type' => 'hidden',
                         'name' => '__ActionType',
                         'helpText' => '',                        
                         'length' => '',
@@ -3874,6 +3964,8 @@ $config['template'] = Array
                         (
                             'EMAIL' => 'Email',
                             'SMS' => 'SMS Text',
+                            'LETTER' => 'Direct Mail',
+                            'TWEET' => 'Tweet',
                         ),
                         'HTML_before' => '',
                         'HTML_after' => '',
@@ -3889,9 +3981,9 @@ $config['template'] = Array
                         'label' => 'Template name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'xxxxlarge',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' placeholder="E.g. Email 12-2 - Requesting a meeting" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => '__Name',
                         'helpText' => '',                        
@@ -3910,7 +4002,7 @@ $config['template'] = Array
                         'label' => 'Content',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'cleditor',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' rows=20',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -3928,10 +4020,10 @@ $config['template'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'From:',                  
+                        'label' => 'Sender\'s Email',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xlarge',
+                        'cssClassInput' => 'xxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -3949,7 +4041,7 @@ $config['template'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'From Name',                  
+                        'label' => 'Sender\'s Name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'xxlarge',
@@ -3973,9 +4065,9 @@ $config['template'] = Array
                         'label' => 'Subject',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xxxxlarge',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => 'PLaceholder="Write a short, snappy subject here"',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => '__Subject',
                         'helpText' => '',                        
@@ -3991,13 +4083,13 @@ $config['template'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'temp[late name',                  
+                        'label' => 'name on PA',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'large',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'text',
+                        'type' => 'hidden',
                         'name' => '__TemplateName',
                         'helpText' => '',                        
                         'length' => '',
@@ -4005,6 +4097,171 @@ $config['template'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),                 
+                ),                
+            ),
+        ),
+    );
+
+
+$config['links'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                //no index ever called
+            ),
+            'view' => array 
+            (  
+               //dont; think we need this
+                'campaign_dropdown' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'campaign_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array
+                    (
+                        '_Type =' => 'Link_Automation',
+                    ), 
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'Name' => 'Name',                       
+                        //'ActionType' => 'Action type',                        
+                    ),
+                ),
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'links_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL, 
+                'dropdowns' => array    //or NULL
+                (                    
+                    'campaign_dropdown' => array
+                    (
+                        'source' => 'campaign_dropdown',    //which dataset are we using?
+                        'label' => array ('Name'),
+                        'label_separator' => '',
+                        'value' => 'Id',
+                    ),
+                    
+                ),
+                'fields' => array 
+                (
+                    '__Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'readonly',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__LinkName' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Link Name',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__LinkName',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__LinkDescription' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Link Description',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'rows=2',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => '__LinkDescription',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__SequenceId' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Start a Campaign?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '__SequenceId',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                            (
+                                'test' => 1,
+                            ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__DestinationURL' => array              //prob a dropdown
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Destination URL',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' placeholder="http://" ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__DestinationURL',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),        
                 ),                
             ),
         ),

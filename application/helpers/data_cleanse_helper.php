@@ -148,7 +148,6 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
                 }
             }
         }
-        
         //override the retrieved valuer with a the passed value
         if ($value)
         {

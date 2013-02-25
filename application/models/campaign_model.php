@@ -16,5 +16,7 @@ class Campaign_model extends MY_Model {
         $this->contactId_fieldname = 'Id';
     }
     
+   
+    
     
 }

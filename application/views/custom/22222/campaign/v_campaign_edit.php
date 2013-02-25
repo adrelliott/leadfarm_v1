@@ -6,6 +6,7 @@
                 <h3>Campaign Details:</h3>
                 <div class="form">
                     <?php echo form_open(DATAOWNER_ID . '/campaign/add/edit/' . $rID); ?>
+                        <?php display_field($fields['_Type']); ?>
                         <?php display_field($fields['Name']); ?>
                         <?php display_field($fields['__CampaignDescription']); ?>
                         <div class="clearfix" id="">
@@ -57,13 +58,13 @@
                     </div>
                     <div id="tab-3">
                         <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactgroup/view/edit', 'anchor_attr' => 'class="iframe"'));    
-                            $this->table->set_heading_custom($tables['get_all_tags']['table_headers']);
-                            echo $this->table->generate_custom($tables['get_all_tags']['table_data']); 
+                            $this->table->set_template_custom(array ('anchor_uri' => 'links/view/edit', 'anchor_attr' => 'class="iframe"', 'primary_key_fieldname' => '__Id'));    
+                            $this->table->set_heading_custom($tables['get_all_links']['table_headers']);
+                            echo $this->table->generate_custom($tables['get_all_links']['table_data']); 
                         ?> 
                         <div class="margin_top_15"></div>
                         <div class="clearfix">
-                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactgroup/view/edit/new" class="large blue button right iframe"><span>Create New Link</span></a>
+                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/links/view/edit/new" class="large blue button right iframe"><span>Create New Link</span></a>
                         </div>
                     </div>
                 </div>
