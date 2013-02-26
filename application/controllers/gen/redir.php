@@ -22,12 +22,12 @@ class Redir extends CI_Controller {
     
     function url($dID, $ContactId, $linkId, $Step = 1) {
         $this->dID = $dID;
+        
         //query the __Links table for url and campaign ID
         $model = $this->_set_up_db_conn('Links');        
         $results = $this->$model->get($linkId);
         //print_array($results, 0, 'link found:');
-        
-        
+                
         if ($results)
         {
             extract($results);
@@ -37,8 +37,8 @@ class Redir extends CI_Controller {
             //now redirect to the new link
             redirect($__DestinationURL, 'location');
         }
+        //else  -- redirect to a friendly payment page
         
-        //echo "this  is the fomrwarded. did=$dID, and linkid=$linkId";
     }
     
     function set_campaign_step($dID, $ContactId, $CampaignId, $Step = 1) {

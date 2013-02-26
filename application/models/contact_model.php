@@ -20,30 +20,7 @@ class Contact_model extends MY_Model {
         }
     }
     
-    function add($input, $rID) {
-        //mimic infusionsoft creation of record
-       if ($rID == 'new')
-       {         
-//Clean up the input array and remove non-infusionsoft fields 
-            $input_infusion = clean_data($this->input->post(), 'infusionsoft'); 
-            
-            //set the ID via infusionsoft
-            $this->load->model('crm_model');
-            $input['Id'] = $this->crm_model->infusion_add(
-                    $this->table_name, $input_infusion
-                    );
-            $rID = NULL;
-       }
-       else
-       {
-           $input['Id'] = $rID;
-       }
-       
-       $this->save($input, $rID);
-       
-       return $input['Id'];
-    }
-   
+    
         
     public function master_search() {
         //get all records. $where set up in dataset['model_params']
@@ -67,7 +44,29 @@ class Contact_model extends MY_Model {
     
     
     
-    
+     function add_to_infusionosft($input, $rID) {
+        //mimic infusionsoft creation of record
+       /*if ($rID == 'new')
+       {         
+//Clean up the input array and remove non-infusionsoft fields 
+            $input_infusion = clean_data($this->input->post(), 'infusionsoft'); 
+            
+            //set the ID via infusionsoft
+            $this->load->model('crm_model');
+            $input['Id'] = $this->crm_model->infusion_add(
+                    $this->table_name, $input_infusion
+                    );
+            $rID = NULL;
+       }
+       else
+       {
+           $input['Id'] = $rID;
+       }*/
+       
+       $this->save($input, $rID);
+       
+       return $rID;
+    }
     
     
     

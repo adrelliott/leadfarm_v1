@@ -20,15 +20,15 @@
                             <?php echo display_field($fields['__Content'], array
                                 ('label' => '
                                     <p><strong>Available Tags:</strong></p>
-                                    <p>{{ FirstName }}</p>
-                                    <p>{{ LastName }}</p>
-                                    <p>{{ Id }}</p>
-                                    <p>{{ Email }}</p>
-                                    <p>{{ Phone1 }}</p>
-                                    <p>{{ _TwitterName }}</p>
-                                    <p>{{ _OrganisationName }}</p>
-                                    <p>{{ _PreferredName }}</p>
-                                    <p>{{ Title }}</p>'
+                                    <p>{{ Contact.FirstName }}</p>
+                                    <p>{{ Contact.LastName }}</p>
+                                    <p>{{ Contact.Id }}</p>
+                                    <p>{{ Contact.Email }}</p>
+                                    <p>{{ Contact.Phone1 }}</p>
+                                    <p>{{ Contact._TwitterName }}</p>
+                                    <p>{{ Contact._OrganisationName }}</p>
+                                    <p>{{ Contact._PreferredName }}</p>
+                                    <p>{{ Contact.Title }}</p>'
                                 )
                             ); ?>
                         <div class="clearfix">

@@ -34,13 +34,12 @@ class T_Help extends MY_Controller {
         //print_array($this->input->post(), 1);
 
         //compile email
-        //$to = 'support.4097.de31af2e7f810054@helpscout.net';
-        $to = 'support@dallasmatthews.co.uk';
+        $to = 'support.4097.de31af2e7f810054@helpscout.net';
         $from = $this->input->post('from');
         $name = $this->input->post('name');
         $subject = '[SUPPORT] ' . $this->input->post('problem') . ' (' . date("m-d-y") . ')';
-        $message = "\n\n\n **ORIGINAL MESSAGE: " . $this->input->post('indepth') . "**\n\n";
-        $message .= '[INFO: This user was on this page:' . $this->input->post('url') . ' and ' . $this->input->post('problem') . '. They have asked us to reply via ' . $this->input->post('response') . ' (Tel no is ' . $this->input->post('phone') . ' if we need it).]';
+        $message = $this->input->post('indepth') . "\n\n";
+        $message .= '[INFO: This user was on this page: ' . $this->input->post('url') . "\n and " . $this->input->post('problem') . '. They have asked us to reply via ' . $this->input->post('response') . ' (Tel no is ' . $this->input->post('phone') . ' if we need it).]';
         
         //send email
         $this->load->library('email');

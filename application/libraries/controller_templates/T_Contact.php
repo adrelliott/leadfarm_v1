@@ -36,12 +36,11 @@ class T_Contact extends MY_Controller {
         $input = clean_data($this->input->post());
         
         //save record
-        $rID = $this->add($input, $rID);
-        if ($ContactId = 'new') $ContactId = $rID;
+        $rID = $this->add_record($input, $rID);
         
         //refresh page
         $fieldset = $input['_IsOrganisationYN'];
-        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId . '/' . $fieldset );
+        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $rID . '/' . $fieldset );
        
     }
     

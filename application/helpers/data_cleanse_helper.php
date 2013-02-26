@@ -116,8 +116,8 @@ function clean_data($input, $cleanse_type = NULL){
         return $retval;
     }
     
-    function generate_dropdown($options, $value = NULL) {
-        $html = '';
+    function generate_dropdown($options, $value = NULL, $blank_entry = TRUE) {
+        if ($blank_entry) $html = '<option value=""></option>';
         foreach ($options as $k => $v)
         {
             $selected = ''; 

@@ -42,7 +42,7 @@
                         </div>
                         <div class="clearfix">
                             <label>Can you describe the issue in more depth?</label>
-                            <div class="input"><textarea class="xxxlarge cleditor" name="indepth"></textarea></div>
+                            <div class="input"><textarea class="xxxxxlarge" name="indepth" rows=20 placeholder="Tell us what's on your mind..."></textarea></div>
                         </div>
                         <div class="clearfix">
                             <input name='submit' type='submit' class='button blue right large ' style='float:right' value='Send Help Request'></input>

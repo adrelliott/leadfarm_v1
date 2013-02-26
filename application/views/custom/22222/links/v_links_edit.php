@@ -10,7 +10,7 @@
                         <?php echo display_field($fields['__LinkName']); ?>
                         <?php echo display_field($fields['__LinkDescription']); ?>
                         <?php echo display_field($fields['__SequenceId'], array('options' => $this->data['view_setup']['dropdowns']['campaign_dropdown'])); ?>
-                        <?php echo display_field($fields['__DestinationURL']); ?> 
+                        <?php echo display_field($fields['__DestinationURL']); ?>
                         <div class="clearfix">
                             <input name='submit' type='submit' class='button blue right large ' style='float:right' value='Save'></input>
                         </div>                            

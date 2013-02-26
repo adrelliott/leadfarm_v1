@@ -21,7 +21,7 @@
                 <div class="widget_inside">
                     <div id="tab-1">
                         <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . '/contact/add/0/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
+                            <?php echo form_open(DATAOWNER_ID . '/contact/add/0/' . $rID . '/' . $ContactId . '/0' ); ?>
                             <?php include("fieldsets/v_contact_$fieldset.php");
                                 //v_contact_0 = contact, ..._1  org ?>
                             <div class="clearfix">
