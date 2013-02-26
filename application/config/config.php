@@ -39,7 +39,7 @@ switch (ENVIRONMENT)
         $base_url = 'http://leadfarm-staging.co.uk';//shall we buy another domain for this?
         break;
     case 'production':
-        $base_url = 'http://leadfarm.co.uk/';
+        $base_url = 'http://campaigndashboard.co.uk/';
         break;
     default:
         $base_url = 'http://localhost/projects/';
