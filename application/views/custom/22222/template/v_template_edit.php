@@ -31,7 +31,13 @@
                                     <p>{{ Contact.Title }}</p>'
                                 )
                             ); ?>
-                        <div class="clearfix">
+                    <select name="dropdown" id="list_of_fields">
+                        <option value="hello">Hello</option>
+                        <option value="morning">Morning</option>
+                        <option value="Afternoon">Afternoon</option>
+                    </select>    
+                    <input id="Button1" type="button" value="Submit Selected value" />
+                    <div class="clearfix">
                             <input name='submit' type='submit' class='button blue right large ' style='float:right' value='Save'></input>
                         </div>                            
                     <?php echo form_close(); ?>
@@ -40,3 +46,25 @@
         </div>
     </div>
 </div>
+
+<script>
+    CKEDITOR.replace( '__Content' );
+</script>
+
+<script type="text/javascript" language="javascript">
+       
+    
+    $(document).ready( function (){ 
+    
+        $("#Button1").click( function(){
+        
+          var selectedValue = $("#list_of_fields option:selected").val();
+               
+          alert("Selected Value is: " + selectedValue );
+          
+        
+         });
+                        
+     });
+    
+    </script>

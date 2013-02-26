@@ -234,7 +234,7 @@ $(function() {
         "iDisplayLength": 5,
         //AE 21-06-12	Next line added apply modalbox to whole table no matter how you 'redraw' it (redraw=re-sort) 
         "fnDrawCallback": function(  ) {
-            $(".iframe").colorbox({iframe:true, width:"80%", height:"90%", escKey: false, overlayClose: false,onClosed: onOverlayClosedCallback });
+            $(".iframe").colorbox({iframe:true, width:"80%", height:"90%", escKey: false, overlayClose: false, fixed:true, onClosed: onOverlayClosedCallback });
         }
     };
 
