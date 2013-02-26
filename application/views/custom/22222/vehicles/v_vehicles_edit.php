@@ -137,19 +137,9 @@ $display_none = '';
                 <div class="widget_inside">
                     <h3>A list of all vehicles owned by this contact:</h3>
                     <?php get_notifications($notifications, $rID, 'related'); ?>
-                    <?php 
-                        $this->table->set_template_custom(array (
-                            'anchor_uri' => 'vehicles/view/edit', 
-                            'ContactId_name' => '__ContactId' ,
-                            'primary_key_fieldname' => '__Id'
-                            ));    
-                        $this->table->set_heading_custom(
-                                $tables['vehicles']['table_headers']
-                                );
-                        echo $this->table->generate_custom(
-                                $tables['vehicles']['table_data']
-                                ); 
-                    ?>
+                    <div class="dataTable-container dataTable-container-vehicles" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/vehicles') ?>">    
+                    <?php $this->load->view ('custom/22222/vehicles/v_vehicles_edit/vehicles') ?>
+                    </div>
                 </div>
             </div>
         </div>

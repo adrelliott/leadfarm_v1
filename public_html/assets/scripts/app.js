@@ -352,6 +352,18 @@ $(function() {
                 });
             }
 
+            if (typeof response.updateCalendar === 'boolean' && response.updateCalendar === true) {
+                $('#calendar').fullCalendar ('refetchEvents');
+            }
+
+            if (typeof response.updateDatatable === 'string') {
+                var dataTableContainer = $('div.' + response.updateDatatable);
+
+                if (dataTableContainer.length === 1) {
+                    reloadDatatable (dataTableContainer);
+                }
+            }
+
         }, 'json');
 
         return false;

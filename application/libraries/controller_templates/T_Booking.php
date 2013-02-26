@@ -41,6 +41,7 @@ class T_Booking extends MY_Controller {
         if ($this->input->is_ajax_request()) {
           $response = array (
             'success' => true,
+            'updateCalendar' => true,
           );
 
           $this->output->set_content_type('application/json');

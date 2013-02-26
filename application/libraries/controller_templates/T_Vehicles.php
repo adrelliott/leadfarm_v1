@@ -56,6 +56,7 @@ class T_Vehicles extends MY_Controller {
         if ($this->input->is_ajax_request ()) {
             $response = array (
                 'success' => true,
+                'updateDatatable' => 'dataTable-container-vehicles'
             );
 
             if ($ContactId === 'new') {
