@@ -238,6 +238,33 @@ $(function() {
         }
     };
 
+    // Adds an alert to an element
+    //
+    // @param string type alert type (success, error)
+    // @param string content content to display
+    // @param element element to add the alert to
+    var addAlert = function (type, content, element) {
+        $('<span/>').addClass ('notification').addClass (type).append (content).prependTo (element).delay (5000).fadeOut (500, function () {
+            $(this).remove ()
+        });
+    };
+
+    // Adds a success alert to an element
+    //
+    // @param string content content to display
+    // @param element element to add the alert to
+    var addDoneAlert = function (content, element) {
+      addAlert ('done', content, element);
+    };
+
+    // Adds a error alert to an element
+    //
+    // @param string content content to display
+    // @param element element to add the alert to
+    var addErrorAlert = function (content, element) {
+      addAlert ('error', content, element);
+    };
+
     // Reloads the datatables in each of the tabs when they are clicked for a
     // second time after being focused.
     $('.tabs').each (function () {
@@ -290,8 +317,11 @@ $(function() {
             submit.val (submit.data ('value')).prop ('disabled', false);
 
             if (typeof response !== 'object' || typeof response.success !== 'boolean' || response.success !== true) {
+                addErrorAlert ('There was an error submitting the form', form)
                 return;
             }
+
+            addDoneAlert ('Record saved!', form);
 
             $.each (response.data, function (name, value) {
                 var input = $('[name="' + name + '"]', form);
