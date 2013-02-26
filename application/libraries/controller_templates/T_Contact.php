@@ -31,16 +31,31 @@ class T_Contact extends MY_Controller {
         $this->_load_view_data($rID);    //retrieves and process all data for view              
     }    
      
-    public function add($view_file, $rID, $ContactId, $fieldset) {       
+    public function add($view_file, $rID, $ContactId, $fieldset) {
+
         //clean input
         $input = clean_data($this->input->post());
-        
+
         //save record
         $rID = $this->add_record($input, $rID);
-        
+        $url = site_url (DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $rID . '/' . $input['_IsOrganisationYN']);
+
+        if ($this->input->is_ajax_request ()) {
+            $response = array (
+                'success' => true,
+            );
+
+            if ($ContactId === 'new') {
+                $response['redirect'] = $url;
+            }
+
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode($response));
+            return;
+        }
+
         //refresh page
-        $fieldset = $input['_IsOrganisationYN'];
-        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $rID . '/' . $fieldset );
+        redirect($url);
        
     }
     

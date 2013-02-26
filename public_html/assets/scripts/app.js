@@ -245,7 +245,7 @@ $(function() {
     // @param element element to add the alert to
     var addAlert = function (type, content, element) {
         $('<span/>').addClass ('notification').addClass (type).append (content).prependTo (element).delay (5000).fadeOut (500, function () {
-            $(this).remove ()
+            $(this).remove ();
         });
     };
 
@@ -305,43 +305,70 @@ $(function() {
             }
     });
 
-    // Ajax forms
-    $('form.ajax').on ('submit.ajaxform', function () {
-        var form = $(this);
+    //Submits forms via AJAX
+    var ajaxSubmitForm = function (form, input) {
+        var $form = $(form);
         var submit;
 
-        submit = $('input[type="submit"]', form);
-        submit.data ('value', submit.val ()).val ('Saving...').prop ('disabled', true);
+        if (typeof input !== 'undefined') {
+            $(input).data ('value', $(input).val ()).val ('Saving...').prop ('disabled', true);
+        }
 
         $.post (form.attr ('action'), form.serializeArray (), function (response) {
-            submit.val (submit.data ('value')).prop ('disabled', false);
+            var alertContainer = form;
+
+            if (typeof input !== 'undefined') {
+                $(input).val ($(input).data ('value')).prop ('disabled', false);
+                alertContainer = $(input).parent ();
+            }
 
             if (typeof response !== 'object' || typeof response.success !== 'boolean' || response.success !== true) {
-                addErrorAlert ('There was an error submitting the form', form)
+                addErrorAlert ('There was an error submitting the form', form);
                 return;
             }
 
-            addDoneAlert ('Record saved!', form);
+            addDoneAlert ('Record saved!', alertContainer);
 
-            $.each (response.data, function (name, value) {
-                var input = $('[name="' + name + '"]', form);
+            if (typeof response.redirect === 'string') {
+                window.location.href = response.redirect;
+                return;
+            }
 
-                if (input.length !== 1) {
+            if (typeof response.data === 'object') {
+              $.each (response.data, function (name, value) {
+                  var input = $('[name="' + name + '"]', form);
+
+                  if (input.length !== 1) {
                     return;
-                }
+                  }
 
-                input = input.first ();
-                input.val (value);
+                  input = input.first ();
+                  input.val (value);
 
-                if (input.is ('textarea')) {
+                  if (input.is ('textarea')) {
                     input.scrollTop (input[0].scrollHeight - input.height());
-                }
+                  }
 
-            });
+                });
+            }
 
         }, 'json');
 
         return false;
+
+    };
+
+    // Ajax forms
+    $('form.ajax').each (function (i, form) {
+        var $form = $(form);
+
+        $('input[type="submit"]', form).on ('click.ajaxform', function () {
+            ajaxSubmitForm ($form, this);
+            return false;
+        });
+
+        $form.on ('submit.ajaxform', ajaxSubmitForm);
+
     });
 
     //Tooltips

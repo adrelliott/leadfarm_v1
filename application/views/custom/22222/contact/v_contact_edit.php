@@ -20,33 +20,33 @@
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-1">
-                        <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . '/contact/add/0/' . $rID . '/' . $ContactId . '/0' ); ?>
-                            <?php include("fieldsets/v_contact_$fieldset.php");
-                                //v_contact_0 = contact, ..._1  org ?>
-                            <div class="clearfix">
-                                <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'>
-                                </input>
-                            </div>
-                            <span class="notification done" style="display:none">Record Updated!</span>
-                        </div><!-- End of form div-->
-                        <p id="option1_toggle" class="button left">
-                            <span>View Opt In Settings</span>
-                        </p> 
-                        <div class="hide_toggle" id="option1">
-                            <div class="form margin_top_30">
-                                <?php display_field($fields['_OptinEmailYN']); ?>
-                                <?php display_field($fields['_OptinSmsYN']); ?>
-                                <?php display_field($fields['_OptinSurfaceMailYN']); ?>
-                                <?php display_field($fields['_OptinNewsletterYN']); ?>
-                                <?php display_field($fields['_OptinPref']); ?>
+                        <?php echo form_open(DATAOWNER_ID . '/contact/add/0/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
+                            <div class="form">
+                                <?php include("fieldsets/v_contact_$fieldset.php");
+                                    //v_contact_0 = contact, ..._1  org ?>
                                 <div class="clearfix">
-                                    <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
-                                     
+                                    <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'>
+                                    </input>
+                                </div>
+                                <span class="notification done" style="display:none">Record Updated!</span>
+                            </div><!-- End of form div-->
+                            <p id="option1_toggle" class="button left">
+                                <span>View Opt In Settings</span>
+                            </p> 
+                            <div class="hide_toggle" id="option1">
+                                <div class="form margin_top_30">
+                                    <?php display_field($fields['_OptinEmailYN']); ?>
+                                    <?php display_field($fields['_OptinSmsYN']); ?>
+                                    <?php display_field($fields['_OptinSurfaceMailYN']); ?>
+                                    <?php display_field($fields['_OptinNewsletterYN']); ?>
+                                    <?php display_field($fields['_OptinPref']); ?>
+                                    <div class="clearfix">
+                                        <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+
+                                    </div>
                                 </div>
                             </div>
-                            <?php echo form_close(); ?>
-                        </div>
+                        <?php echo form_close(); ?>
                     </div>
                     <div id="tab-2">
                          <?php echo form_open(DATAOWNER_ID . '/contact/append_note/0/' . $rID . '/' . $ContactId . '/' . $fieldset, 'class="ajax"'); ?>

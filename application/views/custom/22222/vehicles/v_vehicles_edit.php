@@ -22,7 +22,7 @@ $display_none = '';
                     <div id="tab-1">
                         <?php get_notifications($notifications, $rID, 'this'); ?>
                         <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . "/vehicles/add/edit/$rID/$ContactId"); ?>
+                            <?php echo form_open(DATAOWNER_ID . "/vehicles/add/edit/$rID/$ContactId", 'class="ajax"'); ?>
                             <?php display_field($fields['__Registration']); ?>
                             <?php display_field($fields['__Make']); ?>
                             <?php display_field($fields['__Model']); ?>
@@ -36,26 +36,26 @@ $display_none = '';
                         </div>
                     </div>
                     <div id="tab-2">
-                        <?php echo form_open(DATAOWNER_ID . '/vehicles/append_note/0/' . $rID . '/' . $ContactId ); ?>
-                            <?php //echo form_open(DATAOWNER_ID . '/vehicles/append_note/' . $rID . '/' . $ContactId); ?>
-                            <p>These are the notes for this record.</p>
-                            <?php echo display_field($fields['__VehicleNotes']); ?>
-                           <!-- Start field "Add a Note:" -->
-                           <div class="clearfix">
-                               <h4>Add your new note below</h4>
-                               <div class="input">
-                                   <textarea class="xxxxlarge" type="text"  name="add_a_note" rows="5" placeholder="Your note will be automatically datestamped & appended to the notes above" /></textarea>
-                               </div>
-                           </div>
-                           <!-- End field "Add a Note:" -->	
-                           <div class="clearfix margin_top_15">
-                               <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
-                           </div>
+                        <?php echo form_open(DATAOWNER_ID . '/vehicles/append_note/0/' . $rID . '/' . $ContactId, 'class="ajax"'); ?>
+                        <?php //echo form_open(DATAOWNER_ID . '/vehicles/append_note/' . $rID . '/' . $ContactId); ?>
+                        <p>These are the notes for this record.</p>
+                        <?php echo display_field($fields['__VehicleNotes']); ?>
+                        <!-- Start field "Add a Note:" -->
+                        <div class="clearfix">
+                            <h4>Add your new note below</h4>
+                            <div class="input">
+                                <textarea class="xxxxlarge" type="text"  name="add_a_note" rows="5" placeholder="Your note will be automatically datestamped & appended to the notes above" /></textarea>
+                            </div>
+                        </div>
+                        <!-- End field "Add a Note:" -->	
+                        <div class="clearfix margin_top_15">
+                           <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
+                        </div>
                         <?php echo form_close(); ?>	
                     </div>
                     <div id="tab-3">
+                         <?php echo form_open(DATAOWNER_ID . "/vehicles/add/edit/$rID/$ContactId", 'class="ajax"'); ?>
                          <div class="form">
-                             <?php echo form_open(DATAOWNER_ID . "/vehicles/add/edit/$rID/$ContactId"); ?>
                             <?php display_field($fields['__Date_of_healthcheck']); ?>
                             <?php display_field($fields['__Mileage']); ?>
                             <?php display_field($fields['__Tyre_osf'], array('after_field' => '<input class="small" id="" type="text" name="__Tyre_pressure_osf" length="" value="" placeholder="Tyre Press.">(tyre press dont work)')); ?>

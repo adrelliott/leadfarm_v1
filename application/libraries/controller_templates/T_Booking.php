@@ -36,9 +36,21 @@ class T_Booking extends MY_Controller {
         
         //save record
         $this->add_record($input, $rID);
-        
+        $url = site_url (DATAOWNER_ID . '/' . $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId);
+
+        if ($this->input->is_ajax_request()) {
+          $response = array (
+            'success' => true,
+          );
+
+          $this->output->set_content_type('application/json');
+          $this->output->set_output(json_encode($response));
+          return;
+
+        }
+
         //refresh page
-        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
+        redirect($url);
        
     }
     

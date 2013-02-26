@@ -28,15 +28,31 @@ class T_Campaign extends MY_Controller {
         $this->_load_view_data($rID);    //retrieves and process all data for view              
     }    
      
-    public function add($view_file, $rID) {       
+    public function add($view_file, $rID) {
+
         //clean input
         $input = clean_data($this->input->post());
         
         //save record
-         $rID = $this->add_record($input, $rID);
-        
-        //refresh page        
-        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID );
+        $campId = $this->add_record($input, $rID);
+        $url = site_url (DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $campId );
+
+        if ($this->input->is_ajax_request ()) {
+            $response = array (
+                'success' => true,
+            );
+
+            if ($rID === 'new') {
+                $response['redirect'] = $url;
+            }
+
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode($response));
+            return;
+        }
+
+        //refresh page
+        redirect($url);
        
     }
     

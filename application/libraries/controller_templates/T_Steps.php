@@ -16,7 +16,7 @@ class T_Steps extends MY_Controller {
         //clean input
         $input = clean_data($this->input->post());
         
-       print_array($input,0, 'pre work');
+        // print_array($input,0, 'pre work');
         
         //Collate input fields by record 
         $retval = array();
@@ -60,9 +60,21 @@ class T_Steps extends MY_Controller {
         {
             $id = $this->add_record($input, $input['__Id']);
         }
-        
-        //refresh page        
-        redirect(DATAOWNER_ID . '/' . $controller . '/view/' . $view_file . '/' . $rID);       
+
+        $url = site_url (DATAOWNER_ID . '/' . $controller . '/view/' . $view_file . '/' . $rID);
+
+        if ($this->input->is_ajax_request ()) {
+            $response = array (
+                'success' => true,
+            );
+
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode($response));
+            return;
+        }
+
+        //refresh page
+        redirect($url);
     }
     
     

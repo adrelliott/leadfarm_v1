@@ -51,11 +51,25 @@ class T_Vehicles extends MY_Controller {
         
         //save record
         $rID = $this->add_record($input, $rID);
-        
-        
+        $url = site_url (DATAOWNER_ID . '/' . $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId);
+
+        if ($this->input->is_ajax_request ()) {
+            $response = array (
+                'success' => true,
+            );
+
+            if ($ContactId === 'new') {
+                $response['redirect'] = $url;
+            }
+
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode($response));
+            return;
+        }
+
         if(strpos($view_file, '_modal') === FALSE)
         {
-            redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
+            redirect($url);
         }
         else
         {
@@ -75,7 +89,17 @@ class T_Vehicles extends MY_Controller {
         
         //save record
         $this->add_record($input, $rID);
-        
+
+        if ($this->input->is_ajax_request()) {
+            $response = array(
+                'success' => true,
+                'data' => array ('__VehicleNotes' => $input['__VehicleNotes'])
+            );
+            $this->output->set_content_type('application/json');
+            $this->output->set_output(json_encode($response));
+            return;
+        }
+
         //refresh page
         redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId );
 
