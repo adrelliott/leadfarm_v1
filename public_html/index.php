@@ -20,6 +20,7 @@
 //define('ENVIRONMENT', 'hn-development');
 define('ENVIRONMENT', 'development');
 //define('ENVIRONMENT', 'staging');
+//define('ENVIRONMENT', 'production');
 
 /*
  *---------------------------------------------------------------
@@ -46,7 +47,7 @@ if (defined('ENVIRONMENT'))
 			break;
 		case 'production':
                     error_reporting(0);
-                    $root = '/home/leadfarm/';
+                    $root = '/home/campaign/leadfarm/';
 			break;
 
 		default:

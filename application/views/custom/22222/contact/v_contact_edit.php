@@ -119,7 +119,7 @@
                        </div>
                     </div>
                     <div id="tab-7">
-                        <div class="dataTable-container">
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/relationships') ?>">
                         <?php
                             $this->table->set_template_custom(array ('anchor_uri' => 'contactjoin/view/edit', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"'));    
                             $this->table->set_heading_custom($tables['relationships']['table_headers']);

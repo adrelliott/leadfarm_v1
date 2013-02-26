@@ -32,8 +32,9 @@ case 'staging': //????? depends on the test!
 		break;
 					
 case 'production':
-		error_reporting(0);
-		$root = '/home/leadfarm/';
+                $config['database']['username'] = 'campaign_leadfar';
+                $config['database']['password'] = 'DMmanch35';
+                $config['database']['database'] = 'campaign_leadfarm';
 		break;
 
 		default:
