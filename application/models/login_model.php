@@ -20,6 +20,7 @@
             // Load the database settings
             $dbConn = $this->config->item('database');        
             $this->load->database($dbConn, FALSE, TRUE);
+            $this->contactId_fieldname = 'ContactId';
         }
         
         function validate_user()

@@ -31,16 +31,17 @@
                                     <p>{{ Contact.Title }}</p>'
                                 )
                             ); ?>
-                    <select name="dropdown" id="list_of_fields">
-                        <option value="hello">Hello</option>
-                        <option value="morning">Morning</option>
-                        <option value="Afternoon">Afternoon</option>
-                    </select>    
-                    <input id="Button1" type="button" value="Submit Selected value" />
-                    <div class="clearfix">
+                        <div class="clearfix">
                             <input name='submit' type='submit' class='button blue right large ' style='float:right' value='Save'></input>
-                        </div>                            
-                    <?php echo form_close(); ?>
+                        </div>  
+                        <?php 
+                            $this->table->set_template_custom(array( 'checkbox_flag' => true, 'checkbox_name' => '_:_contactId[]', 'checkbox_value_is_id' => true));    
+                            $this->table->set_heading_custom($tables['contacts']['table_headers']);
+                            echo $this->table->generate_custom($tables['contacts']['table_data']); 
+                            echo form_submit('submit', 'Send Test Email', 'class="right"');
+                            echo form_close();
+                        ?>
+                    </div>  
                 </div>
             </div>
         </div>

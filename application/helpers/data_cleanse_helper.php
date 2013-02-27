@@ -34,10 +34,7 @@ function if_exists($data, $type = 'array') {
 function clean_data($input, $cleanse_type = NULL){
         $retval = $input;
         
-        if (isset($retval['submit']))   //remove the 'submit' key
-        {
-            unset($retval['submit']);
-        }
+        if (isset($retval['submit'])) unset($retval['submit']);
         
         switch ($cleanse_type)
         {
@@ -64,6 +61,10 @@ function clean_data($input, $cleanse_type = NULL){
                             $retval['timestamps'][$array[0]][$array[1]] = $value; 
                         }
                         
+                        unset($retval[$key]);
+                    }
+                    elseif (substr($key, 0, 3) == '_:_') //prepended with double underscore?
+                    {
                         unset($retval[$key]);
                     }
                 }

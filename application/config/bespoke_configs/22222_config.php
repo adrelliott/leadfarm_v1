@@ -3900,7 +3900,23 @@ $config['template'] = Array
                         '__ActionType' => 'Action type',                        
                     ),
                 ),
-            ),
+                'contacts' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'contact_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        'FirstName' => 'First Name',
+                        'LastName' => 'Last Name',
+                        'Email' => 'Email Address',
+                        //'Password' => 'Password',
+                    ),
+                ),
+            ),            
         ),
         'record' => array
         (
@@ -4083,19 +4099,21 @@ $config['template'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'name on PA',                  
+                        'label' => 'Template name on PA',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'large',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'hidden',
+                        'type' => 'text',
                         'name' => '__TemplateName',
                         'helpText' => '',                        
                         'length' => '',
+                        //'options +'
                         'HTML_before' => '',
                         'HTML_after' => '',
-                        'value' => '', 
+                        'value' => 'test_basecamp', 
+                        'default_value' => 'test_basecamp', 
                     ),                 
                 ),                
             ),

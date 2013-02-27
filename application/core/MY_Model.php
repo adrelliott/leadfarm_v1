@@ -30,6 +30,14 @@ class MY_Model extends CI_Model {
     
     public $current_ContactId = '';
     
+    
+    /**
+     * Define what the fieldname is for the ContactID.
+     * 
+     * Note: if this is different for a table, then this is defined at model level 
+     */
+    public $contactId_fieldname = 'Id';
+    
     function __construct() {
         parent::__construct();
     }
@@ -268,10 +276,58 @@ class MY_Model extends CI_Model {
         return $this->get();
     }
     
+    public function get_email_fields($recipients, $fields, $template_type = 'Email') {
+        //This is used when we send out emails from a template
+        echo "<p>this si the method in the model for tab;e ".$this->table_name." and the id name ios ".$this->contactId_fieldname;
+        
+        //Ensure that the recipient data is present and first in the array (for assoc)
+        if ($this->table_name == 'Contact')
+        {
+            $key = array_search($template_type, $fields);
+            if ($key) unset($fields[$key]);
+            array_unshift($fields, $template_type);
+        }
+        
+        //Now cycle through the recipents and build query
+        $i = 1;
+        foreach ($recipients as $k => $Id )
+        {
+            if ($i == 1) $this->db->where($this->contactId_fieldname,$Id);
+            else $this->db->or_where($this->contactId_fieldname,$Id);
+            $i++;
+        }
+        
+        //foreach ($recipients as $k => $Id) );
+        $this->db->select($fields);
+        //$results = $this->get_assoc();
+        $results = $this->get();
+        //print_array($recipients, 0, '$recipients from query');
+        //print_array($results, 0, 'results from query, before assoc');
+        
+        //now add the table name back to the results ready for PostageApp
+        $retval = array();
+        foreach ($results as $key => $array)
+        {
+            if ( isset($array['Email']) && $array['Email'] )
+            {
+                $key = $array['Email'];
+                foreach ($array as $k => $v)
+                {
+                    $retval[$key][$this->table_name .'.'.$k] = $v;
+                }
+            }            
+        }
+        
+        print_array($retval, 0, 'results from query, AFTER assoceee');
+        
+        return $retval;
+    }
+    
      public function get_single_record($rID, $where = NULL) {
         //get the record with rID. $where set up in dataset['model_params']
         if ($where != NULL) { $this->db->where($where); }
         return $this->get($rID);
+        
     }
     
     

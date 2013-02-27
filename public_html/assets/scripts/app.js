@@ -265,7 +265,7 @@ $(function() {
     $('.dataTable').dataTable(dataTableOptions);
 
     //Unselects all checkboxes if they have been checked
-    $(".dataTable tbody tr").click(function(e) {
+    /*$(".dataTable tbody tr").click(function(e) {
             $(".dataTable tbody tr").removeClass("selected");
             var $checkbox = $(this).find(':checkbox');
             $(".dataTable :checkbox").not($checkbox).removeAttr("checked");
@@ -276,7 +276,7 @@ $(function() {
                     $checkbox.attr('checked', !$checkbox.attr('checked'));
                     $(this).filter(':has(:checkbox)').toggleClass('selected');
             }
-    });
+    });*/
 
     // Ajax forms
     $('form.ajax').on ('submit.ajaxform', function () {
