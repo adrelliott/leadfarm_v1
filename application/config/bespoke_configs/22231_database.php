@@ -20,11 +20,17 @@ case 'hn-development':
 		break;
 	
 case 'development':
+		$config['database']['username'] = 'p3_user1';
+		$config['database']['password'] = 'DMmanch35';
+		$config['database']['database'] = '22231_leadfarm_data';
+		break;
+	
+/*case 'development': //????? depends on the test!
 		$config['database']['username'] = 'leadfarm_22222';
 		$config['database']['password'] = 'DMmanch35';
 		$config['database']['database'] = '22222_leadfarm_data';
-		break;
-	
+                break;*/
+            
 case 'staging': //????? depends on the test!
 		$config['database']['username'] = 'leadfar2_admin';
 		$config['database']['password'] = 'DMmanch35';
@@ -36,7 +42,7 @@ case 'pre-production':  //automatingmarketing
                 $config['database']['password'] = 'DMmanch35';
                 $config['database']['database'] = 'campaign_leadfarm';
 		break;
-            
+					
 case 'production':
                 $config['database']['username'] = 'campaign_leadfar';
                 $config['database']['password'] = 'DMmanch35';

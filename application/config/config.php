@@ -38,6 +38,9 @@ switch (ENVIRONMENT)
     case 'staging':
         $base_url = 'http://leadfarm-staging.co.uk';//shall we buy another domain for this?
         break;
+    case 'pre-production':
+        $base_url = 'http://automatingmarketing.co.uk/';
+        break;
     case 'production':
         $base_url = 'http://campaigndashboard.co.uk/';
         break;
