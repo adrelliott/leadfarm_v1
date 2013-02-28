@@ -278,7 +278,7 @@ class MY_Model extends CI_Model {
     
     public function get_email_fields($recipients, $fields, $template_type = 'Email') {
         //This is used when we send out emails from a template
-        echo "<p>this si the method in the model for tab;e ".$this->table_name." and the id name ios ".$this->contactId_fieldname;
+        //echo "<p>this si the method in the model for tab;e ".$this->table_name." and the id name ios ".$this->contactId_fieldname;
         
         //Ensure that the recipient data is present and first in the array (for assoc)
         if ($this->table_name == 'Contact')
@@ -297,10 +297,10 @@ class MY_Model extends CI_Model {
             $i++;
         }
         
-        //foreach ($recipients as $k => $Id) );
         $this->db->select($fields);
-        //$results = $this->get_assoc();
         $results = $this->get();
+        
+        
         //print_array($recipients, 0, '$recipients from query');
         //print_array($results, 0, 'results from query, before assoc');
         
@@ -313,12 +313,16 @@ class MY_Model extends CI_Model {
                 $key = $array['Email'];
                 foreach ($array as $k => $v)
                 {
-                    $retval[$key][$this->table_name .'.'.$k] = $v;
+                   //Need to send all data as lowercase to PostageApp
+                    $key = strtolower($key);
+                   $table_name = strtolower($this->table_name);
+                   $k = strtolower($k);
+                    $retval[$key]["$table_name.$k"] = $v;
                 }
             }            
         }
         
-        print_array($retval, 0, 'results from query, AFTER assoceee');
+        //print_array($retval, 0, 'results from query, AFTER assoceee');
         
         return $retval;
     }
