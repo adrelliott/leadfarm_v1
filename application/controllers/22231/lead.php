@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Lead extends T_Help {
+class Lead extends T_Lead {
 
 	/**
 	 * This acts as a template for every controller.
@@ -14,12 +14,16 @@ class Lead extends T_Help {
         parent::__construct();
     }
     
-    function index () {
-        echo "indexpage";
-    }
-    
-    function view () {
-        echo "viewpage";
+   public function index($view_file = 'index') {   
+        parent::index($view_file);
+        $this->_generate_view($this->data);
+   }
+   
+  public function view($view_file, $rID) {  
+        parent::view($view_file, $rID);
+        
+          // Generate the view!
+        $this->_generate_view($this->data);
     }
     
    
