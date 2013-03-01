@@ -155,6 +155,24 @@ $config['dashboard'] = Array
                         'Contact._OrganisationName' => 'Company Name',                        
                     ),
                 ),   
+                'leads' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    //'data_source' => '', //The dataset name defined above
+                    'model_name' => 'lead_model',
+                    'model_method' => 'join_on_contact', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Lead.Id' => 'Id',
+                        'Lead.OpportunityTitle' => 'Name',
+                        'Lead.ContactID' => 'Contact Id',
+                        'Lead.__LeadType' => 'Type',
+                        'Contact.Id' => 'Id',
+                        'Contact.FirstName' => 'First Name',
+                        'Contact.LastName' => 'Last Name',
+                    ),
+                ),     
                 /*'contacts' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,

@@ -115,12 +115,7 @@
                        </div>
                     </div>
                     <div id="tab-6">
-                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/bookings') ?>">
-                            <?php $this->load->view ('custom/22222/contact/v_contact_edit/bookings') ?>
-                        </div>
-                        <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_booking/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-6"><span>Create New Booking</span></a>
-                       </div>
+                        <p>opportunities will be shown here.</p>
                     </div>
                     <div id="tab-7">
                         <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/relationships') ?>">
