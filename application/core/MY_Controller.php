@@ -120,6 +120,10 @@ class MY_Controller extends CI_Controller {
            
         }
         
+        // 5. Any post processing to be done?
+        $method_name = 'post_process_' . $this->controller_name;
+        if (method_exists($this,$method_name)) $this->$method_name($this->data);
+        
         // 6. Now add the fields to view set up, tidy up & generate the view        
         $this->data['view_setup']['method_name'] = $method_name;
         $this->data['view_setup']['controller_name'] = $controller_name;

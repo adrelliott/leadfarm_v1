@@ -31,6 +31,12 @@ case 'staging': //????? depends on the test!
 		$config['database']['database'] = 'leadfar2_22222_1';
 		break;
 					
+case 'pre-production':  //automatingmarketing
+                $config['database']['username'] = 'campaign_leadfar';
+                $config['database']['password'] = 'DMmanch35';
+                $config['database']['database'] = 'campaign_leadfarm';
+		break;
+            
 case 'production':
                 $config['database']['username'] = 'campaign_leadfar';
                 $config['database']['password'] = 'DMmanch35';

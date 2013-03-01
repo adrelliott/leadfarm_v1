@@ -1,5 +1,5 @@
 <?php
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Define constants
@@ -94,7 +94,7 @@ $config['navbar_setup'] = Array
             'css'	=> '',	
             'view' => '@viewtable',				
         ),
-        'report' => Array	//do not change this value - this is what the directory should be called too
+        /*'report' => Array	//do not change this value - this is what the directory should be called too
         (
             'pagename' => 'Reports',
             'controller' => 'report',
@@ -103,7 +103,7 @@ $config['navbar_setup'] = Array
             'icon'	=> '',
             'css'	=> '',	
             'view' => '@viewtable',				
-         ),
+         ),*/
     
         //ADDING MORE PAGES? Read this...
             //You can add pages here, but you MUST follow the structure above,
@@ -155,26 +155,25 @@ $config['dashboard'] = Array
                         'Contact._OrganisationName' => 'Company Name',                        
                     ),
                 ),   
-                /*'contacts' => array
+                'leads' => array
                 (
-                    'include_in_query' => TRUE, //TRUE or FALSE,
-                    'data_source' => 'contacts', //The dataset name defined in this file
-                    'model_name' => 'contact_model',
-                    'model_method' => 'get_all_records',
-                    'model_params' => array 
-                        (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisationYN !=' => 1, 
-                        ),
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    //'data_source' => '', //The dataset name defined above
+                    'model_name' => 'lead_model',
+                    'model_method' => 'join_on_contact', 
+                    'model_params' => NULL,
                     'fields' => array 
                     (
-                        'Id' => '#',
-                        'FirstName' => 'First Name',
-                        'LastName' => 'Last Name',
-                        'PostalCode' => 'Postcode',
-                        '_IsOrganisationYN' => '',
+                        'Lead.Id' => 'Id',
+                        'Lead.OpportunityTitle' => 'Name',
+                        'Lead.ContactID' => 'Contact Id',
+                        'Lead.__LeadType' => 'Type',
+                        'Contact.Id' => 'Id',
+                        'Contact.FirstName' => 'First Name',
+                        'Contact.LastName' => 'Last Name',
                     ),
-                ),            
-                'organisations' => array
+                ),         
+                /*'organisations' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
                     'data_source' => 'contacts', //The dataset name defined in this file
@@ -4006,6 +4005,263 @@ $config['template'] = Array
             'view' => array
             (
                 'model_name' => 'template_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL, 
+                'dropdowns' => array    //or NULL
+                (                    
+                    'template_dropdown' => array
+                    (
+                        'source' => 'template_dropdown',    //which dataset are we using?
+                        'label' => array ('template_dropdown'),
+                        'label_separator' => '',
+                        'value' => 'template_dropdown',
+                    ),
+                    
+                ),
+                'fields' => array 
+                (
+                    '__Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'readonly',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'hidden',
+                        'name' => '__Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__ActionType' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Type of Template',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'hidden',
+                        'name' => '__ActionType',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'EMAIL' => 'Email',
+                            'SMS' => 'SMS Text',
+                            'LETTER' => 'Direct Mail',
+                            'TWEET' => 'Tweet',
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '__Name' => array              //prob a dropdown
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Template name',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' placeholder="E.g. Email 12-2 - Requesting a meeting" ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Name',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    '__Content' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Content',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'cleditor',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' rows=20',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => '__Content',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    '__FromEmail' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Sender\'s Email',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__FromEmail',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    '__FromName' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Sender\'s Name',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__FromName',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    '__Subject' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Subject',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'PLaceholder="Write a short, snappy subject here"',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Subject',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    '__TemplateName' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'name on PA',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'large',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'hidden',
+                        'name' => '__TemplateName',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                ),                
+            ),
+        ),
+    );
+$config['lead'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                'leads' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    //'data_source' => '', //The dataset name defined above
+                    'model_name' => 'lead_model',
+                    'model_method' => 'join_on_contact', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Lead.Id' => 'Id',
+                        'Lead.OpportunityTitle' => 'Name',
+                        'Lead.ContactID' => 'Contact Id',
+                        'Lead.__LeadType' => 'Type',
+                        'Contact.Id' => 'Id',
+                        'Contact.FirstName' => 'First Name',
+                        'Contact.LastName' => 'Last Name',
+                    ),
+                ),
+            ),
+            'view' => array 
+            (
+                'leads' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    //'data_source' => '', //The dataset name defined above
+                    'model_name' => 'lead_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'OpportunityTitle' => 'Name',
+                        'ContactID' => 'Contact Id',
+                    ),
+                ),
+               //dont; think we need this
+                /*'template_dropdown' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'template_model',
+                    'model_method' => 'template_dropdown', 
+                    'model_params' => NULL, 
+                    'fields' => array 
+                    (
+                        '__Id' => 'Id',
+                        '__Name' => 'Name',                       
+                        '__ActionType' => 'Action type',                        
+                    ),
+                ),*/
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'lead_model',
                 'model_method' => 'get_single_record',
                 'model_params' => NULL, 
                 'dropdowns' => array    //or NULL
