@@ -34,10 +34,7 @@ function if_exists($data, $type = 'array') {
 function clean_data($input, $cleanse_type = NULL){
         $retval = $input;
         
-        if (isset($retval['submit']))   //remove the 'submit' key
-        {
-            unset($retval['submit']);
-        }
+        if (isset($retval['submit'])) unset($retval['submit']);
         
         switch ($cleanse_type)
         {
@@ -64,6 +61,10 @@ function clean_data($input, $cleanse_type = NULL){
                             $retval['timestamps'][$array[0]][$array[1]] = $value; 
                         }
                         
+                        unset($retval[$key]);
+                    }
+                    elseif (substr($key, 0, 3) == '_:_') //prepended with double underscore?
+                    {
                         unset($retval[$key]);
                     }
                 }
@@ -117,6 +118,7 @@ function clean_data($input, $cleanse_type = NULL){
     }
     
     function generate_dropdown($options, $value = NULL, $blank_entry = TRUE) {
+        $html = '';
         if ($blank_entry) $html = '<option value=""></option>';
         foreach ($options as $k => $v)
         {
@@ -163,7 +165,8 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
         {
             case 'select':
                 $retval .= '<select class="' . $attributes['cssClassInput'] . '" id=" ' . $attributes['cssIdInput'] . '" name="' . $attributes['name'] . '">';
-                $retval .= generate_dropdown($attributes['options'], $attributes['value']);
+                if ( !isset($attributes['blank_entry'])) $attributes['blank_entry'] = TRUE;
+                $retval .= generate_dropdown($attributes['options'], $attributes['value'],$attributes['blank_entry'] );
                 $retval .= '</select>';
                 break;
             case 'radio':                

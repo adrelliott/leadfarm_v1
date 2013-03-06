@@ -10,7 +10,6 @@
 */
 
 
-
 switch (ENVIRONMENT) 
 {
 case 'hn-development':

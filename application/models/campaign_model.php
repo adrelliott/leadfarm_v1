@@ -13,7 +13,7 @@ class Campaign_model extends MY_Model {
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = 'campaign';
         $this->order_by = 'Id ASC';   //why isnt;' this reflected in datatable? 
-        $this->contactId_fieldname = 'Id';
+        $this->contactId_fieldname = 'ContactId';
     }
     
    

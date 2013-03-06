@@ -1,16 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Email extends CI_Controller {
+class Comms extends CI_Controller {
 
 	/**
-	 * This acts as a template for every controller.
+	 * This controller is for implementing comms based sequence steps and unsubscribes
 	 *
-	 * Define methods/vars here in the construct (to run before anything else) 
-	 * and/or define methods here that can be extended in other controllers
+	 * It is called either by a link (unsubscribe), or by the action 
 	 * 
 	 */
 
     protected $dID = '';
+    public $data = array();  //rqd to simulate the data array of thw app
     
     function __construct()    {
         parent::__construct();
@@ -21,6 +21,87 @@ class Email extends CI_Controller {
     function index() {  
         //echo "this is index";
     }
+    
+    function unsubs($dID, $ContactId ) {
+         $this->dID = $dID;
+        
+        //load db    
+        $model = $this->_set_up_db_conn('Contact'); 
+        
+        //set up fields to query for
+        $this->data['config'] = $this->config->item('contact');
+        $this->data['fields'] = $this->data['config']['record']['view']['fields'];
+        
+        $this->data['results'] = $this->$model->get_subscription_fields($ContactId);
+        //print_array($this->data['results'], 1);
+        foreach ($this->data['results'] as $field => $value)
+        {
+            $this->data['page_setup']['fields'][$field] = $this->data['fields'][$field];
+            $this->data['page_setup']['fields'][$field]['value'] = $value;
+        }
+        
+        if ( !isset($this->data['page_setup']['message']))
+        {
+            $this->data['page_setup']['message'] = '<span class="notification information">Please amend your subscription settings below</span>';
+        }
+        if ( !isset($this->data['page_setup']['display_none']))
+        {
+            $this->data['page_setup']['display_none'] = '';
+        }
+        
+        //tidy up
+        unset($this->data['config']);
+        unset($this->data['fields']);
+        unset($this->data['results']);
+        
+        //load view
+        $this->load->view('default/comms/v_unsubscribe.php', $this->data);
+    }
+    
+    function unsubs_submit($dID, $ContactId ) {
+        $this->dID = $dID;
+         
+        //is it a compete unsubscribe or an update?
+        $input = $this->input->post();
+        if ($input['submit'] == 'Cancel All Subscriptions')
+        {
+            foreach ($input as $key => $value) if ($value == 1) $input[$key] = 0;
+            $this->data['page_setup']['display_none'] = ' display_none';
+            $this->data['page_setup']['message'] = '<span class="notification done"><h4>Updated!<br/>We have removed your name from all lists we own, and you will not get any more mail from us.</h4></span>';
+        }
+        else  $this->data['page_setup']['message'] = '<span class="notification done">Preferences Updated!</span>';
+        unset ($input['submit']);
+        
+        //load db    
+        $model = $this->_set_up_db_conn('Contact');
+        $rID = $this->$model->add($input, $ContactId);
+        
+        //refresh page               
+        //redirect('gen/comms/unsubs/' . $dID . '/' . $ContactId );
+        $this->unsubs($dID, $ContactId);
+        
+    }
+    
+     protected function _set_up_db_conn($ModelName) {
+        $this->_set_DATAOWNER();
+        $this->config->load('bespoke_configs/' . DATAOWNER_ID . '_config');
+        $dbConn = $this->config->item('database');     //these are different for each dID 
+        
+        $this->load->database($dbConn, FALSE, TRUE); //load this dID's database 
+        
+        //Load the model
+        $Model = strtolower($ModelName . '_model');
+        $this->load->model($Model);
+        
+        return $Model;
+    }
+    
+    private function _set_DATAOWNER() {
+        if ( ! defined('DATAOWNER_ID')) define('DATAOWNER_ID', $this->dID);
+    }
+    
+    
+    
     
     function send_mail($ContactId) {
         $this->postageapp->from('al@Campaignmanager.co.uk');
@@ -218,23 +299,7 @@ class Email extends CI_Controller {
     
     
     
-    protected function _set_up_db_conn($ModelName) {
-        $this->_set_DATAOWNER();
-        $this->config->load('bespoke_configs/' . DATAOWNER_ID . '_config');
-        $dbConn = $this->config->item('database');     //these are different for each dID       
-        $this->load->database($dbConn, FALSE, TRUE); //load this dID's database 
-        
-        //get the next steps records
-        $ModelName = $ModelName . '_model';
-        $this->load->model($ModelName);
-        
-        return $ModelName;
-    }
-    
-    private function _set_DATAOWNER() {
-        if ( ! defined('DATAOWNER_ID')) define('DATAOWNER_ID', $this->dID);
-    }
-    
+   
     
     
     

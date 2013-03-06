@@ -234,7 +234,7 @@ $(function() {
         "iDisplayLength": 5,
         //AE 21-06-12	Next line added apply modalbox to whole table no matter how you 'redraw' it (redraw=re-sort) 
         "fnDrawCallback": function(  ) {
-            $(".iframe").colorbox({iframe:true, width:"80%", height:"90%", escKey: false, overlayClose: false,onClosed: onOverlayClosedCallback });
+            $(".iframe").colorbox({iframe:true, width:"80%", height:"90%", escKey: false, overlayClose: false, fixed:true, onClosed: onOverlayClosedCallback });
         }
     };
 
@@ -292,7 +292,7 @@ $(function() {
     $('.dataTable').dataTable(dataTableOptions);
 
     //Unselects all checkboxes if they have been checked
-    $(".dataTable tbody tr").click(function(e) {
+    /*$(".dataTable tbody tr").click(function(e) {
             $(".dataTable tbody tr").removeClass("selected");
             var $checkbox = $(this).find(':checkbox');
             $(".dataTable :checkbox").not($checkbox).removeAttr("checked");
@@ -303,7 +303,7 @@ $(function() {
                     $checkbox.attr('checked', !$checkbox.attr('checked'));
                     $(this).filter(':has(:checkbox)').toggleClass('selected');
             }
-    });
+    });*/
 
     //Submits forms via AJAX
     var ajaxSubmitForm = function (form, input) {

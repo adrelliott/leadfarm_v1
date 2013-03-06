@@ -13,7 +13,8 @@ class Contact_model extends MY_Model {
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = 'Contact';
         $this->order_by = 'LastName ASC';   //why isnt;' this reflected in datatable? 
-        $this->contactId_fieldname = 'Id'; 
+        $this->contactId_fieldname = 'Id';
+        //$this->primary_key = 'Id';
         if (isset($this->data['view_setup']['ContactId']))
         {
             $this->current_ContactId = $this->data['view_setup']['ContactId'];
@@ -40,6 +41,12 @@ class Contact_model extends MY_Model {
     }
     
     */
+    
+    function get_subscription_fields($Id) {
+        $fields = array('Id', 'Email', '_OptinEmailYN', '_OptinSmsYN', '_OptinTwitterYN', '_OptinSurfaceMailYN', '_OptinNewsletterYN', '_OptinPref');
+        $this->db->select($fields);
+        return $this->get($Id);
+    }
     
     
     
