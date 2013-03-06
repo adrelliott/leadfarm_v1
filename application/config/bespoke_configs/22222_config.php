@@ -3547,12 +3547,12 @@ $config['campaign'] = Array
                         '__steps.__CampaignId' => 'Camp ID',
                         '__steps.__StepName' => 'Last Name',
                         '__steps.__ActionType' => 'Postcode',
-                        '__steps.__templateId' => 'Template Id',
+                        '__steps.__TemplateId' => 'Template Id',
                         '__steps.__TagId' => 'Tag Id',                        
                         '__steps.__StepNo' => 'StepNo',
                         '__steps.__Delay' => 'Delay',
-                        //'__template.__Id' => 'templ id',
-                        '__template.__Name' => 'temp name',
+                        //'__Template.__Id' => 'templ id',
+                        '__Template.__Name' => 'temp name',
                     ),
                 ),            
                 'get_all_templates' => array
@@ -4131,7 +4131,7 @@ $config['template'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),                 
-                    '__templateName' => array      
+                    '__TemplateName' => array      
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -4145,7 +4145,7 @@ $config['template'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
-                        'name' => '__templateName',
+                        'name' => '__TemplateName',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
