@@ -9,7 +9,6 @@
 | XXXXX_config.php file and is set up to serve both dev, staging and prod environs
 */
 
-
 switch (ENVIRONMENT) 
 {
 case 'hn-development':
@@ -18,25 +17,25 @@ case 'hn-development':
 		$config['database']['database'] = 'leadfarm';
 		break;
 	
-case 'development':
-		$config['database']['username'] = 'leadfarm_22222';
+case 'al-development':  //on al's Desktop
+		$config['database']['username'] = $config['database']['prefix'] . 'superadmin';//'leadfarm_22222';
 		$config['database']['password'] = 'DMmanch35';
-		$config['database']['database'] = '22222_leadfarm_data';
+		$config['database']['database'] = $config['database']['prefix'] . '22222';
 		break;
 	
-case 'staging': //????? depends on the test!
+case 'staging': //On leadfarm-stagin.co.uk
 		$config['database']['username'] = 'leadfar2_admin';
 		$config['database']['password'] = 'DMmanch35';
 		$config['database']['database'] = 'leadfar2_22222_1';
 		break;
 					
-case 'pre-production':  //automatingmarketing
+case 'demo':  // on automatingmarketing.co.uk
                 $config['database']['username'] = 'campaign_leadfar';
                 $config['database']['password'] = 'DMmanch35';
                 $config['database']['database'] = 'campaign_leadfarm';
 		break;
             
-case 'production':
+case 'production':  //on CampaignDashboard.co.uk
                 $config['database']['username'] = 'campaign_leadfar';
                 $config['database']['password'] = 'DMmanch35';
                 $config['database']['database'] = 'campaign_leadfarm';

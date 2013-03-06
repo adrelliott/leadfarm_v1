@@ -18,8 +18,9 @@
  *
  */
 //define('ENVIRONMENT', 'hn-development');
-define('ENVIRONMENT', 'development');
+define('ENVIRONMENT', 'al-development');
 //define('ENVIRONMENT', 'staging');
+//define('ENVIRONMENT', 'demo');
 //define('ENVIRONMENT', 'production');
 
 /*
@@ -34,25 +35,28 @@ define('ENVIRONMENT', 'development');
 if (defined('ENVIRONMENT'))
 {	
     switch (ENVIRONMENT)
-	{
-		case 'hn-development':
-		case 'development':
-                    error_reporting(E_ALL);
-                    $root = '../';
-			break;
-		case 'staging': 
-                    //$root = '/home/leadfarm/';
-                    error_reporting(E_ALL);
-                    $root = '../';
-			break;
-		case 'production':
-                    error_reporting(0);
-                    $root = '/home/campaign/leadfarm/';
-			break;
+    {
+        case 'hn-development':
+            error_reporting(E_ALL);
+            $root = '../';
+                break;
+        case 'al-development':
+            error_reporting(E_ALL);
+            $root = '../';
+                break;
+        case 'staging': 
+            error_reporting(E_ERROR | E_WARNING | E_PARSE);
+            $root = '../';
+                break;
+        case 'demo': 
+        case 'production':
+            error_reporting(0);
+            $root = '../';
+                break;
 
-		default:
-			exit('The application environment is not set correctly.');
-	}
+        default:
+                exit('The application environment is not set correctly.');
+    }
 }
 
 /*

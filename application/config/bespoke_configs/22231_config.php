@@ -1,5 +1,13 @@
-<?php
- 
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+/*
+|--------------------------------------------------------------------------
+| Define settings for this client
+|--------------------------------------------------------------------------
+|
+| We define all settings for each client's app here.
+*/
+
 /*
 |--------------------------------------------------------------------------
 | Define constants
@@ -9,13 +17,10 @@
 | 100px x 600px, transparent background, and call it 'logo.png' (must be png, and all lowercase)
 | and upload to /assets/includes/custom/XXXXX where 'XXXXX' is dID. (must be called logo.png)
 */
-define('OPT_IN_REASON', "This is my opt in reason");  //Added to Infusionsoft
+define('OPT_IN_REASON', "This is my opt in reason");  
+define('UNSUBSCRIBE_LINK', base_url( 'gen/comms/unsubs/' . DATAOWNER_ID . '/_:_ContactId_:_'));
+define('UNSUBSCRIBE', '<br/><br/><small><a href="' . UNSUBSCRIBE_LINK . '">Unsubscribe from all future emails here</a></small>');
 define('COUNTDOWN', 45);  //Notifies the user {45 days {VALUE} days before MOT/Service expires. see libraries/garages/garages.php
-
-//
-//
-//
-//$config['base_url']	= 'http://leadfarm-staging.co.uk/' . DATAOWNER_ID;
 
 
 /*
@@ -25,14 +30,13 @@ define('COUNTDOWN', 45);  //Notifies the user {45 days {VALUE} days before MOT/S
 |
 | To ensure a customer's logo appears in the top left, create the logo at 
 | 100px x 600px, transparent background, and call it 'logo.png' (must be png, and all lowercase)
-| and upload to /assets/includes/custom/XXXXX where 'XXXXX' is dID. 
- * 
- * If there is no logo, then default it to:
- * define('PATH_TO_LOGO', '/assets/includes/default/logo.png');
+| and upload to /assets/includes/logos/XXXXX where 'XXXXX' is dID.  
 */
-//define('PATH_TO_LOGO', 'assets/includes/custom/' . DATAOWNER_ID . '/logo.png');
+
 define('PATH_TO_LOGO', 'assets/includes/logos/' . DATAOWNER_ID . '/logo.png');
 /*
+
+
 |--------------------------------------------------------------------------
 | Define the connection details for the database
 |--------------------------------------------------------------------------

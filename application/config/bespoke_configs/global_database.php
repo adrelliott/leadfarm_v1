@@ -23,6 +23,29 @@ $config['database']['swap_pre'] = '';
 $config['database']['autoinit'] = TRUE;
 $config['database']['stricton'] = FALSE;
 
+//Each envirnment has a standard prefix for db users and databases
+switch (ENVIRONMENT) 
+{
+case 'hn-development':
+    $config['database']['prefix'] = '';
+    break;	
+case 'al-development':
+    $config['database']['prefix'] = 'local_';
+    break;
+case 'staging':
+    $config['database']['prefix'] = 'leadfar2_';
+    break;
+case 'demo':
+    $config['database']['prefix'] = 'automati_';
+    break;
+case 'production':
+    $config['database']['prefix'] = 'campaign_';
+    break;
+default:
+    exit('The application environment is not set correctly.');
+}
+
+
 
 
 /* End of file global_database.php */
