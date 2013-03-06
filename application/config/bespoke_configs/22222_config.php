@@ -6,6 +6,13 @@
 |--------------------------------------------------------------------------
 |
 | We define all settings for each client's app here.
+| 
+| Also look in:
+| - 22222_database.php
+| - global_database.php
+| - config.php
+| 
+|  ****NOTE****: the environment is set in index.php
 */
 
 /*

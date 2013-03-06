@@ -32,13 +32,13 @@ switch (ENVIRONMENT)
     case 'hn-development':
         $base_url = 'http://leadfarm.hndev.co.uk';
         break;
-    case 'development':
+    case 'al-development':
         $base_url = 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html';
         break;
     case 'staging':
-        $base_url = 'http://leadfarm-staging.co.uk';//shall we buy another domain for this?
+        $base_url = 'http://leadfarm-staging.co.uk';
         break;
-    case 'pre-production':
+    case 'demo':
         $base_url = 'http://automatingmarketing.co.uk/';
         break;
     case 'production':

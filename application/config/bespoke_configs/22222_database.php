@@ -9,6 +9,10 @@
 | XXXXX_config.php file and is set up to serve both dev, staging and prod environs
 */
 
+$default_username = 'admin';
+$default_password = 'DMmanch35';
+$default_prefix = $config['database']['prefix'];
+
 switch (ENVIRONMENT) 
 {
 case 'hn-development':
@@ -18,15 +22,15 @@ case 'hn-development':
 		break;
 	
 case 'al-development':  //on al's Desktop
-		$config['database']['username'] = $config['database']['prefix'] . 'superadmin';//'leadfarm_22222';
-		$config['database']['password'] = 'DMmanch35';
-		$config['database']['database'] = $config['database']['prefix'] . '22222';
+		$config['database']['username'] = $default_prefix . 'superadmin';
+		$config['database']['password'] = $default_password;
+		$config['database']['database'] = $default_prefix . '22222';
 		break;
 	
-case 'staging': //On leadfarm-stagin.co.uk
-		$config['database']['username'] = 'leadfar2_admin';
-		$config['database']['password'] = 'DMmanch35';
-		$config['database']['database'] = 'leadfar2_22222_1';
+case 'staging': //On leadfarm-staging.co.uk
+		$config['database']['username'] = $default_prefix . 'admin';
+		$config['database']['password'] = $default_password;
+		$config['database']['database'] = $default_prefix . '22222';
 		break;
 					
 case 'demo':  // on automatingmarketing.co.uk
