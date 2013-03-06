@@ -966,7 +966,7 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
-                      'contactNotes' => array
+                      'ContactNotes' => array
                     (
                         'on' => TRUE,    //TRUE or FALSE includes/excludes from query
                         'cssClassContainingDiv' => '',
@@ -980,7 +980,7 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'rows="20" readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
-                        'name' => 'contactNotes',
+                        'name' => 'ContactNotes',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',

@@ -44,7 +44,7 @@ class T_Lead extends MY_Controller {
     }
     public function post_process_lead($data) {
         //do some post processing
-        //print_array($data);
+        //print_array($data['view_setup']['tables']);
         
         //sort the leads into lead types
         $retval = array();

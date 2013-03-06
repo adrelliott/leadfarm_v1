@@ -177,7 +177,7 @@ $config['dashboard'] = Array
                         'lead.Id' => 'Id',
                         'lead.OpportunityTitle' => 'Name',
                         'lead.contactID' => 'contact Id',
-                        'lead.__leadType' => 'Type',
+                        'lead.__LeadType' => 'Type',
                         'contact.Id' => 'Id',
                         'contact.FirstName' => 'First Name',
                         'contact.LastName' => 'Last Name',
@@ -951,7 +951,7 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
-                      'contactNotes' => array
+                      'ContactNotes' => array
                     (
                         'on' => TRUE,    //TRUE or FALSE includes/excludes from query
                         'cssClassContainingDiv' => '',
@@ -965,7 +965,7 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'rows="20" readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
-                        'name' => 'contactNotes',
+                        'name' => 'ContactNotes',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -4227,7 +4227,7 @@ $config['lead'] = Array
                         'lead.Id' => 'Id',
                         'lead.OpportunityTitle' => 'Name',
                         'lead.contactID' => 'contact Id',
-                        'lead.__leadType' => 'Type',
+                        'lead.__LeadType' => 'Type',
                         'contact.Id' => 'Id',
                         'contact.FirstName' => 'First Name',
                         'contact.LastName' => 'Last Name',
