@@ -20,27 +20,35 @@
                             <?php echo display_field($fields['__Content'], array
                                 ('label' => '
                                     <p><strong>Available Tags:</strong></p>
-                                    <p>{{ Contact.FirstName }}</p>
-                                    <p>{{ Contact.LastName }}</p>
-                                    <p>{{ Contact.Id }}</p>
-                                    <p>{{ Contact.Email }}</p>
-                                    <p>{{ Contact.Phone1 }}</p>
-                                    <p>{{ Contact._TwitterName }}</p>
-                                    <p>{{ Contact._OrganisationName }}</p>
-                                    <p>{{ Contact._PreferredName }}</p>
-                                    <p>{{ Contact.Title }}</p>'
+                                    <p>{{Contact.FirstName}}</p>
+                                    <p>{{Contact.LastName}}</p>
+                                    <p>{{Contact.Id}}</p>
+                                    <p>{{Contact.Email}}</p>
+                                    <p>{{Contact.Phone1}}</p>
+                                    <p>{{Contact._OrganisationName}}</p>
+                                    <p>{{Contact._PreferredName}}</p>
+                                    <p>{{Contact.Title}}</p>
+                                    <p>{{Link.InsertIdHere}}</p>'
                                 )
                             ); ?>
                         <div class="clearfix">
                             <input name='submit' type='submit' class='button blue right large ' style='float:right' value='Save'></input>
-                        </div>  
+                        </div>
+                        <h3 class="index toggle_icon" id="option2_toggle">Send a Test Email</h3>
+                        <div class="widget_inside hide_toggle" id="option2">
                         <?php 
                             $this->table->set_template_custom(array( 'checkbox_flag' => true, 'checkbox_name' => '_:_contactId[]', 'checkbox_value_is_id' => true));    
                             $this->table->set_heading_custom($tables['contacts']['table_headers']);
-                            echo $this->table->generate_custom($tables['contacts']['table_data']); 
-                            echo form_submit('submit', 'Send Test Email', 'class="right"');
-                            echo form_close();
-                        ?>
+                            echo $this->table->generate_custom($tables['contacts']['table_data']); ?>
+                             <div class="col_4 last clearfix margin_top_15 right">
+                                <input name='submit' type='submit' class='button blue right large' style='float:right' value='Send Test Email'></input>
+                            </div>
+                            <?php echo form_close(); ?>
+                            <div class="clearfix"></div>
+                            <div class="margin_top_15">
+                                <span class="notification information">Can't find your contact? This table only shows contacts who opt in for emails.  <em>(Hint: Go and edit your contact's opt in settings)</em></span>
+                            </div>
+                        </div>
                     </div>  
                 </div>
             </div>

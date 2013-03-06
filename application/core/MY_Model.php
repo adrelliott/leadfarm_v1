@@ -276,9 +276,38 @@ class MY_Model extends CI_Model {
         return $this->get();
     }
     
-    public function get_email_fields($recipients, $fields, $template_type = 'Email') {
+    public function get_email_fields($recipients, $fields, $permission_field = '_OptinEmailYN') {
+        //Do the query
+        $this->db->where($permission_field . ' !=', 0);
+        $this->db->where_in('Id', $recipients);
+        $this->db->select($fields);
+        $results = $this->get();
+        //print_array($results, 0, 'results from query of contacts');
+        //
+        //now add the table name back to the results ready for PostageApp
+        $retval = array();
+        foreach ($results as $key => $array)
+        {
+            if ( isset($array['Email']) && $array['Email'] )
+            {
+                $key = $array['Email'];
+                foreach ($array as $k => $v)
+                {
+                   //Need to send all data as lowercase to PostageApp
+                    $key = strtolower($key);
+                   $table_name = strtolower($this->table_name);
+                   $k = strtolower($k);
+                    $retval[$key]["$table_name.$k"] = $v;
+                }
+            }            
+        }
+                
+        return $retval;
+    }
+    
+    
+    public function get_email_fields_old($recipients, $fields, $template_type = 'Email') {
         //This is used when we send out emails from a template
-        //echo "<p>this si the method in the model for tab;e ".$this->table_name." and the id name ios ".$this->contactId_fieldname;
         
         //Ensure that the recipient data is present and first in the array (for assoc)
         if ($this->table_name == 'Contact')

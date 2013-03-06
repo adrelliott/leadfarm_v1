@@ -20,7 +20,7 @@ class Redir extends CI_Controller {
         
     }
     
-    function url($dID, $ContactId, $linkId, $Step = 1) {
+    function url($dID = FALSE, $linkId = FALSE, $ContactId = FALSE, $Step = 1) {
         $this->dID = $dID;
         
         //query the __Links table for url and campaign ID
@@ -32,12 +32,12 @@ class Redir extends CI_Controller {
         {
             extract($results);
             //start the sequence
-            if ($__SequenceId != 0) $this->set_campaign_step($dID, $ContactId, $__DestinationURL, $Step);
+            if ($__SequenceId != 0  && $ContactId) echo "both seqence and contactid exist";$this->set_campaign_step($dID, $ContactId, $__DestinationURL, $Step);
             
             //now redirect to the new link
             redirect($__DestinationURL, 'location');
         }
-        //else  -- redirect to a friendly payment page
+        else $this->load->view('default/redir/v_oops.php');
         
     }
     

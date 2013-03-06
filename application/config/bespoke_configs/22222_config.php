@@ -10,6 +10,8 @@
 | and upload to /assets/includes/custom/XXXXX where 'XXXXX' is dID. (must be called logo.png)
 */
 define('OPT_IN_REASON', "This is my opt in reason");  //Added to Infusionsoft
+define('UNSUBSCRIBE_LINK', base_url( 'gen/comms/unsubs/' . DATAOWNER_ID . '/_:_ContactId_:_'));
+define('UNSUBSCRIBE', '<br/><br/><small><a href="' . UNSUBSCRIBE_LINK . '">Unsubscribe from all future emails here</a></small>');
 define('COUNTDOWN', 45);  //Notifies the user {45 days {VALUE} days before MOT/Service expires. see libraries/garages/garages.php
 
 //
@@ -991,6 +993,32 @@ $config['contact'] = Array
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'radio',
                         'name' => '_OptinEmailYN',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                          (
+                            'Yes' => 1,
+                            'No' => 0,
+                          ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
+                      '_OptinTwitterYN' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Opt into Twitter?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '_OptinTwitterYN',
                         'helpText' => '',
                         'length' => '',
                         'options' => array
@@ -3906,14 +3934,16 @@ $config['template'] = Array
                     'data_source' => '', //The dataset name defined above
                     'model_name' => 'contact_model',
                     'model_method' => 'get_all_records', 
-                    'model_params' => NULL,
+                    'model_params' => array
+                    (
+                        '_OptinEmailYN =' => 1,
+                    ), 
                     'fields' => array 
                     (
                         'Id' => '#',
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
                         'Email' => 'Email Address',
-                        //'Password' => 'Password',
                     ),
                 ),
             ),            
@@ -4019,7 +4049,7 @@ $config['template'] = Array
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'cleditor',
-                        'cssIdInput' => '',
+                        'cssIdInput' => ' __Content',
                         'extraHTMLInput' => ' rows=20',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
                         'name' => '__Content',
@@ -4105,15 +4135,20 @@ $config['template'] = Array
                         'cssClassInput' => 'large',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'text',
+                        'type' => 'select',
                         'name' => '__TemplateName',
                         'helpText' => '',                        
                         'length' => '',
-                        //'options +'
+                        'options' => array
+                        (
+                            'Plain Text Email' => 'css_only_standard',
+                            'Newsletter' => 'test_basecamp',
+                        ),
                         'HTML_before' => '',
                         'HTML_after' => '',
-                        'value' => 'test_basecamp', 
-                        'default_value' => 'test_basecamp', 
+                        'value' => '', 
+                        'default_value' => 'css_only_standard',
+                        'blank_entry' => FALSE
                     ),                 
                 ),                
             ),
@@ -4204,7 +4239,7 @@ $config['links'] = Array
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'xxxlarge',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => 'placeholder="Click here for details" rel="tooltips" title="This the text your contacts see when you include this link in an email" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => '__LinkName',
                         'helpText' => '',

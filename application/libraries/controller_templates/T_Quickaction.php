@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class T_Template extends MY_Controller {
+class T_Quickaction extends MY_Controller {
 
-    public $controller_name = 'template';
+    public $controller_name = 'quickaction';
     
     public function __construct()    {
          parent::__construct($this->controller_name);
@@ -14,7 +14,7 @@ class T_Template extends MY_Controller {
     }
    
     public function view($view_file, $rID) {    //$rID=new => create new record
-        $this->data['view_setup']['view_file'] = 'v_template_' . $view_file;
+        $this->data['view_setup']['view_file'] = 'v_quickaction_' . $view_file;
         $this->data['controller_setup']['method_name'] = 'view';
         $this->data['view_setup']['modal'] = TRUE;
         $this->data['view_setup']['header_file'] = 'header_modal'; 
