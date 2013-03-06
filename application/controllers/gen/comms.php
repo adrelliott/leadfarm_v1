@@ -26,7 +26,7 @@ class Comms extends CI_Controller {
          $this->dID = $dID;
         
         //load db    
-        $model = $this->_set_up_db_conn('Contact'); 
+        $model = $this->_set_up_db_conn('contact'); 
         
         //set up fields to query for
         $this->data['config'] = $this->config->item('contact');
@@ -73,7 +73,7 @@ class Comms extends CI_Controller {
         unset ($input['submit']);
         
         //load db    
-        $model = $this->_set_up_db_conn('Contact');
+        $model = $this->_set_up_db_conn('contact');
         $rID = $this->$model->add($input, $ContactId);
         
         //refresh page               
@@ -162,7 +162,7 @@ class Comms extends CI_Controller {
             '__CampaignId' => $CampaignId,
             '__StepNo' => $Step
         );        
-        $model = $this->_set_up_db_conn('Steps');        
+        $model = $this->_set_up_db_conn('steps');        
         $results = $this->$model->get_by($arg);
         //print_array($results, 0, 'this is line 35 - results)');
         
@@ -179,7 +179,7 @@ class Comms extends CI_Controller {
                 '__CompletedYN' => FALSE
             );
 
-            $model = $this->_set_up_db_conn('NextSteps');        
+            $model = $this->_set_up_db_conn('nextsteps');        
             $result = $this->$model->save($input);
         }
         
@@ -190,7 +190,7 @@ class Comms extends CI_Controller {
         
         //get all outstanding tasks
         $time = time();
-        $model = $this->_set_up_db_conn('NextSteps');        
+        $model = $this->_set_up_db_conn('nextsteps');        
         $results = $this->$model->get_outstanding_tasks($time);
         
         //If there are outstanding task, then do them
@@ -211,7 +211,7 @@ class Comms extends CI_Controller {
                 extract($taskdata);
                 
                 //get the step details
-                $model = $this->_set_up_db_conn('Steps');        
+                $model = $this->_set_up_db_conn('steps');        
                 $taskdetails = $this->$model->get_steps($__CampaignId, $__StepNumber);
                 
                 //print_array($taskdetails, 0, 'These are the details for this step:' . $__StepNumber);
@@ -242,7 +242,7 @@ class Comms extends CI_Controller {
                     if ($result != FALSE)
                     {
                         //mark this task as done
-                        $model = $this->_set_up_db_conn('NextSteps'); 
+                        $model = $this->_set_up_db_conn('nextsteps'); 
                         $input = array('__CompletedYN' => TRUE);
                         $result = $this->$model->save($input, $__Id);
 

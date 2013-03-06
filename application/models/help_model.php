@@ -11,7 +11,7 @@ class Help_model extends MY_Model {
     function __construct (){
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
-        $this->table_name = '__Help';
+        $this->table_name = '__help';
         $this->order_by = '__Id ASC';   //why isnt;' this reflected in datatable? 
         
         $this->primary_key = '__Id';

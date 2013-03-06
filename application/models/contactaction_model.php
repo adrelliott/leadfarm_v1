@@ -11,7 +11,7 @@ class Contactaction_model extends MY_Model {
     function __construct (){
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
-        $this->table_name = 'ContactAction';
+        $this->table_name = 'contactaction';
         $this->order_by = 'ActionDate DESC';
         $this->contactId_fieldname = 'ContactId';
         if (isset($this->data['view_setup']['ContactId']))
@@ -41,13 +41,13 @@ class Contactaction_model extends MY_Model {
         //get all records $where joined on contact (ie get fields from contact table too)
         if ($where != NULL) { $this->db->where($where); }        
         $this->db->join(
-                'Contact', 
-                'Contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
+                'contact', 
+                'contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
                 'left outer'
                 );        
         $this->db->join(
-                '__Vehicles', 
-                '__Vehicles.__Id = ' . $this->table_name. '._VehicleId', 
+                '__vehicles', 
+                '__vehicles.__Id = ' . $this->table_name. '._VehicleId', 
                 'left outer'
                 );        
         return $this->get();
@@ -57,13 +57,13 @@ class Contactaction_model extends MY_Model {
         //get all records $where joined on contact (ie get fields from contact table too)
         if ($where != NULL) { $this->db->where($where); }        
         $this->db->join(
-                'Contact', 
-                'Contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
+                'contact', 
+                'contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
                 'left outer'
                 );        
         $this->db->join(
-                '__Vehicles', 
-                '__Vehicles.__Id = ' . $this->table_name. '._VehicleId', 
+                '__vehicles', 
+                '__vehicles.__Id = ' . $this->table_name. '._VehicleId', 
                 'left outer'
                 );        
         return $this->get($rID);

@@ -25,7 +25,7 @@
 | and upload to /assets/includes/custom/XXXXX where 'XXXXX' is dID. (must be called logo.png)
 */
 define('OPT_IN_REASON', "This is my opt in reason");  
-define('UNSUBSCRIBE_LINK', base_url( 'gen/comms/unsubs/' . DATAOWNER_ID . '/_:_ContactId_:_'));
+define('UNSUBSCRIBE_LINK', base_url( 'gen/comms/unsubs/' . DATAOWNER_ID . '/_:_contactId_:_'));
 define('UNSUBSCRIBE', '<br/><br/><small><a href="' . UNSUBSCRIBE_LINK . '">Unsubscribe from all future emails here</a></small>');
 define('COUNTDOWN', 45);  //Notifies the user {45 days {VALUE} days before MOT/Service expires. see libraries/garages/garages.php
 
@@ -77,7 +77,7 @@ $config['navbar_setup'] = Array
         ),
         'contact' => Array	//do not change this value - this is what the directory should be called too
         (
-            'pagename' => 'Contacts',
+            'pagename' => 'contacts',
             'controller' => 'contact',
             'method' => '',
             'param' => '',
@@ -163,19 +163,19 @@ $config['dashboard'] = Array
                     'model_method' => 'master_search',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            //'__Vehicles.__ActiveYN =' => 1, 
+                            //'__vehicles.__ActiveYN =' => 1, 
                         ),
                     'fields' => array 
                     (
-                        'Contact.Id' => '#',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        'Contact.PostalCode' => 'Postcode',
-                        'Contact.Phone1' => 'Phone',
-                        'Contact.Phone2' => 'Mobile',
-                        'Contact._OrganisationName' => 'Company Name',
-                        '__Vehicles.__Registration' => 'Registration',
-                        '__Vehicles.__Model' => 'Model',
+                        'contact.Id' => '#',
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        'contact.PostalCode' => 'Postcode',
+                        'contact.Phone1' => 'Phone',
+                        'contact.Phone2' => 'Mobile',
+                        'contact._OrganisationName' => 'Company Name',
+                        '__vehicles.__Registration' => 'Registration',
+                        '__vehicles.__Model' => 'Model',
                         
                     ),
                 ),   
@@ -213,7 +213,7 @@ $config['dashboard'] = Array
                         'Id' => '#',
                         '_OrganisationName' => 'Org Name',
                         'StreetAddress1' => 'Address',
-                        'FirstName' => 'Contact',
+                        'FirstName' => 'contact',
                         'LastName' => '',
                         '_IsOrganisationYN' => '',
                         
@@ -298,7 +298,7 @@ $config['dashboard'] = Array
 
 /*
 |--------------------------------------------------------------------------
-| Fields for Contact Controller
+| Fields for contact Controller
 |--------------------------------------------------------------------------
 |
 | set up like this:
@@ -353,7 +353,7 @@ $config['contact'] = Array
                         'Id' => '#',
                         '_OrganisationName' => 'Org Name',
                         'StreetAddress1' => 'Address',
-                        'FirstName' => 'Contact',
+                        'FirstName' => 'contact',
                         'LastName' => '',
                         '_IsOrganisationYN' => '',
                     ),
@@ -386,7 +386,7 @@ $config['contact'] = Array
                     'model_method' => 'get_all_contacts_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            //'ContactId =' => '??ContactId', 
+                            //'contactId =' => '??contactId', 
                             'ActionType =' => 'Booking', 
                         ),                  
                     'fields' => array 
@@ -410,7 +410,7 @@ $config['contact'] = Array
                     'fields' => array 
                     (
                         '__Id' => '#',
-                        //'__ContactId' => 'Contact Id of vehicle owner',
+                        //'__contactId' => 'contact Id of vehicle owner',
                         '__Make' => 'Make',
                         '__Model' => 'model',
                         '__Registration' => 'Reg',
@@ -437,17 +437,17 @@ $config['contact'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => 'relationships', //The dataset name defined above
                     'model_name' => 'contactjoin_model',
-                    'model_method' => 'joinon_ContactJoin', 
+                    'model_method' => 'joinon_contactJoin', 
                     'model_params' => NULL, 
                     'fields' => array 
                     (
-                        'Contact.Id' => '',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        '__ContactJoin.__Id' => '',
-                        '__ContactJoin.__Reason' => 'Reason',
-                        '__ContactJoin.__ContactId' => '',
-                        '__ContactJoin.__ContactId2' => '',
+                        'contact.Id' => '',
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        '__contactjoin.__Id' => '',
+                        '__contactjoin.__Reason' => 'Reason',
+                        '__contactjoin.__contactId' => '',
+                        '__contactjoin.__contactId2' => '',
                     ),
                 ),
                 'users' => array
@@ -894,7 +894,7 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
-                      'Leadsource' => array
+                      'leadsource' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -908,7 +908,7 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
-                        'name' => 'Leadsource',
+                        'name' => 'leadsource',
                         'helpText' => '',
                         'length' => '',
                         'options' => array
@@ -966,7 +966,7 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
-                      'ContactNotes' => array
+                      'contactNotes' => array
                     (
                         'on' => TRUE,    //TRUE or FALSE includes/excludes from query
                         'cssClassContainingDiv' => '',
@@ -980,7 +980,7 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'rows="20" readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
-                        'name' => 'ContactNotes',
+                        'name' => 'contactNotes',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -1160,19 +1160,19 @@ $config['booking'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => 'bookings_join', //The dataset name defined above
                     'model_name' => 'contactaction_model',
-                    'model_method' => 'joinon_Contact_and_Vehicle', 
+                    'model_method' => 'joinon_contact_and_Vehicle', 
                     'model_params' => array 
                         (   //These are chained with 'AND'
                             'ActionType =' => 'Booking', 
                         ),           
                     'fields' => array 
                     (
-                        'Contact.Id' => 'contact Id',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        'ContactAction.Id' => 'booking Id',
-                        'ContactAction.ActionDescription' => 'ActionDescription',
-                        '__Vehicles.__Registration' => 'Reg',
+                        'contact.Id' => 'contact Id',
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        'contactaction.Id' => 'booking Id',
+                        'contactaction.ActionDescription' => 'ActionDescription',
+                        '__vehicles.__Registration' => 'Reg',
                     ),
                 ), 
             ),
@@ -1191,7 +1191,7 @@ $config['booking'] = Array
                     'fields' => array 
                     (
                         '__Id' => '#',
-                        '__ContactId' => 'Contact Id of vehicle owner',
+                        '__contactId' => 'contact Id of vehicle owner',
                         '__Make' => 'Make',
                         '__Model' => 'model',
                         '__Registration' => 'Reg',
@@ -1224,18 +1224,18 @@ $config['booking'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => 'bookings_join', //The dataset name defined above
                     'model_name' => 'contactaction_model',
-                    'model_method' => 'joinon_Contact', 
+                    'model_method' => 'joinon_contact', 
                     'model_params' => array 
                         (   //These are chained with 'AND'
                             'ActionType =' => 'Booking', 
                         ),           
                     'fields' => array 
                     (
-                        'Contact.Id' => 'contact Id',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        'ContactAction.Id' => 'booking Id',
-                        'ContactAction.ActionDescription' => 'ActionDescription',
+                        'contact.Id' => 'contact Id',
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        'contactaction.Id' => 'booking Id',
+                        'contactaction.ActionDescription' => 'ActionDescription',
                     ),
                 ), */
             ),
@@ -1585,19 +1585,19 @@ $config['contactaction'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => 'bookings_join', //The dataset name defined above
                     'model_name' => 'contactaction_model',
-                    'model_method' => 'joinon_Contact_and_Vehicle', 
+                    'model_method' => 'joinon_contact_and_Vehicle', 
                     'model_params' => array 
                         (   //These are chained with 'AND'
                             'ActionType =' => 'Booking', 
                         ),           
                     'fields' => array 
                     (
-                        'Contact.Id' => 'contact Id',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        'ContactAction.Id' => 'booking Id',
-                        'ContactAction.ActionDescription' => 'ActionDescription',
-                        '__Vehicles.__Registration' => 'Reg',
+                        'contact.Id' => 'contact Id',
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        'contactaction.Id' => 'booking Id',
+                        'contactaction.ActionDescription' => 'ActionDescription',
+                        '__vehicles.__Registration' => 'Reg',
                     ),
                 ),*/ 
             ),
@@ -1616,7 +1616,7 @@ $config['contactaction'] = Array
                     'fields' => array 
                     (
                         '__Id' => '#',
-                        '__ContactId' => 'Contact Id of vehicle owner',
+                        '__contactId' => 'contact Id of vehicle owner',
                         '__Make' => 'Make',
                         '__Model' => 'model',
                         '__Registration' => 'Reg',
@@ -1649,18 +1649,18 @@ $config['contactaction'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => 'bookings_join', //The dataset name defined above
                     'model_name' => 'contactaction_model',
-                    'model_method' => 'joinon_Contact', 
+                    'model_method' => 'joinon_contact', 
                     'model_params' => array 
                         (   //These are chained with 'AND'
                             'ActionType =' => 'Booking', 
                         ),           
                     'fields' => array 
                     (
-                        'Contact.Id' => 'contact Id',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        'ContactAction.Id' => 'booking Id',
-                        'ContactAction.ActionDescription' => 'ActionDescription',
+                        'contact.Id' => 'contact Id',
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        'contactaction.Id' => 'booking Id',
+                        'contactaction.ActionDescription' => 'ActionDescription',
                     ),
                 ), */
             ),
@@ -1807,21 +1807,21 @@ $config['contactaction'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),                
-                    'ContactId' => array       
+                    'contactId' => array       
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'ContactId',                  
+                        'label' => 'contactId',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => 'ContactId',
+                        'name' => 'contactId',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
@@ -1916,19 +1916,19 @@ $config['contactjoin'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => 'bookings_join', //The dataset name defined above
                     'model_name' => 'contactaction_model',
-                    'model_method' => 'joinon_Contact_and_Vehicle', 
+                    'model_method' => 'joinon_contact_and_Vehicle', 
                     'model_params' => array 
                         (   //These are chained with 'AND'
                             'ActionType =' => 'Booking', 
                         ),           
                     'fields' => array 
                     (
-                        'Contact.Id' => 'contact Id',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        'ContactAction.Id' => 'booking Id',
-                        'ContactAction.ActionDescription' => 'ActionDescription',
-                        '__Vehicles.__Registration' => 'Reg',
+                        'contact.Id' => 'contact Id',
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        'contactaction.Id' => 'booking Id',
+                        'contactaction.ActionDescription' => 'ActionDescription',
+                        '__vehicles.__Registration' => 'Reg',
                     ),
                 ),*/ 
             ),
@@ -1958,17 +1958,17 @@ $config['contactjoin'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => 'relationships', //The dataset name defined above
                     'model_name' => 'contactjoin_model',
-                    'model_method' => 'joinon_ContactJoin', 
+                    'model_method' => 'joinon_contactJoin', 
                     'model_params' => NULL, 
                     'fields' => array 
                     (
-                        'Contact.Id' => 'contact Id',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        '__ContactJoin.__Id' => 'Realtionship Id',
-                        '__ContactJoin.__Reason' => 'reason',
-                        //'__ContactJoin.__ContactId' => 'reason',
-                        '__ContactJoin.__ContactId2' => 'CId 2',
+                        'contact.Id' => 'contact Id',
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        '__contactjoin.__Id' => 'Realtionship Id',
+                        '__contactjoin.__Reason' => 'reason',
+                        //'__contactjoin.__contactId' => 'reason',
+                        '__contactjoin.__contactId2' => 'CId 2',
                     ),
                 ),
             ),
@@ -2004,7 +2004,7 @@ $config['contactjoin'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),
-                    '__ContactId' => array      
+                    '__contactId' => array      
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -2018,14 +2018,14 @@ $config['contactjoin'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__ContactId',
+                        'name' => '__contactId',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
                     ),
-                    '__ContactId2' => array      
+                    '__contactId2' => array      
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -2039,7 +2039,7 @@ $config['contactjoin'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__ContactId2',
+                        'name' => '__contactId2',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',
@@ -2130,7 +2130,7 @@ $config['vehicles'] = Array
                     'fields' => array 
                     (
                         '__Id' => '#',
-                        '__ContactId' => 'Contact Id of vehicle owner',
+                        '__contactId' => 'contact Id of vehicle owner',
                         '__Make' => 'Make',
                         '__Model' => 'model',
                         '__Registration' => 'Reg',
@@ -2151,7 +2151,7 @@ $config['vehicles'] = Array
                     'fields' => array 
                     (
                         '__Id' => '#',
-                        '__ContactId' => '',
+                        '__contactId' => '',
                         '__Make' => 'Make',
                         '__Model' => 'model',
                         '__Registration' => 'Reg',
@@ -2184,7 +2184,7 @@ $config['vehicles'] = Array
                     'model_method' => 'get_all_contacts_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            //'ContactId =' => '??ContactId', 
+                            //'contactId =' => '??contactId', 
                             'ActionType =' => 'Booking', 
                         ),                  
                     'fields' => array 
@@ -2218,18 +2218,18 @@ $config['vehicles'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => 'bookings_join', //The dataset name defined above
                     'model_name' => 'contactaction_model',
-                    'model_method' => 'joinon_Contact', 
+                    'model_method' => 'joinon_contact', 
                     'model_params' => array 
                         (   //These are chained with 'AND'
                             'ActionType =' => 'Booking', 
                         ),           
                     'fields' => array 
                     (
-                        'Contact.Id' => 'contact Id',
-                        'Contact.FirstName' => 'First Name',
-                        'Contact.LastName' => 'Last Name',
-                        'ContactAction.Id' => 'booking Id',
-                        'ContactAction.ActionDescription' => 'ActionDescription',
+                        'contact.Id' => 'contact Id',
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        'contactaction.Id' => 'booking Id',
+                        'contactaction.ActionDescription' => 'ActionDescription',
                     ),
                 ), */
             ),
@@ -2281,21 +2281,21 @@ $config['vehicles'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),
-                    '__ContactId' => array      
+                    '__contactId' => array      
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Contact ID',                  
+                        'label' => 'contact ID',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
-                        'name' => '__ContactId',
+                        'name' => '__contactId',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -3543,16 +3543,16 @@ $config['campaign'] = Array
                     'model_params' => NULL,
                     'fields' => array 
                     (
-                        '__Steps.__Id' => '#',
-                        '__Steps.__CampaignId' => 'Camp ID',
-                        '__Steps.__StepName' => 'Last Name',
-                        '__Steps.__ActionType' => 'Postcode',
-                        '__Steps.__TemplateId' => 'Template Id',
-                        '__Steps.__TagId' => 'Tag Id',                        
-                        '__Steps.__StepNo' => 'StepNo',
-                        '__Steps.__Delay' => 'Delay',
-                        //'__Template.__Id' => 'templ id',
-                        '__Template.__Name' => 'temp name',
+                        '__steps.__Id' => '#',
+                        '__steps.__CampaignId' => 'Camp ID',
+                        '__steps.__StepName' => 'Last Name',
+                        '__steps.__ActionType' => 'Postcode',
+                        '__steps.__templateId' => 'Template Id',
+                        '__steps.__TagId' => 'Tag Id',                        
+                        '__steps.__StepNo' => 'StepNo',
+                        '__steps.__Delay' => 'Delay',
+                        //'__template.__Id' => 'templ id',
+                        '__template.__Name' => 'temp name',
                     ),
                 ),            
                 'get_all_templates' => array
@@ -4131,7 +4131,7 @@ $config['template'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),                 
-                    '__TemplateName' => array      
+                    '__templateName' => array      
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -4145,7 +4145,7 @@ $config['template'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
-                        'name' => '__TemplateName',
+                        'name' => '__templateName',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -4849,7 +4849,7 @@ $config['user'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
-                      'ContactNotes' => array
+                      'contactNotes' => array
                     (
                         'on' => TRUE,    //TRUE or FALSE includes/excludes from query
                         'cssClassContainingDiv' => '',
@@ -4863,7 +4863,7 @@ $config['user'] = Array
                         'cssIdInput' => 'contact_notes',
                         'extraHTMLInput' => 'rows="20" readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
-                        'name' => 'ContactNotes',
+                        'name' => 'contactNotes',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',

@@ -11,7 +11,7 @@ class Steps_model extends MY_Model {
     function __construct (){
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
-        $this->table_name = '__Steps';
+        $this->table_name = '__steps';
         $this->order_by = '__StepNo ASC';   //why isnt;' this reflected in datatable? 
         $this->templateId_fieldname = '__TemplateId'; 
         $this->primary_key = '__Id';
@@ -35,8 +35,8 @@ class Steps_model extends MY_Model {
         //just get the steps for this campaign
         $this->db->where('__CampaignId', $this->current_rID);        
         $this->db->join(
-                '__Template', 
-                '__Template.__Id = ' . $this->table_name. '.' . $this->templateId_fieldname, 
+                '__template', 
+                '__template.__Id = ' . $this->table_name. '.' . $this->templateId_fieldname, 
                 'left outer'
                 );          
         $results = $this->get();

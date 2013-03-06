@@ -11,7 +11,7 @@ class Contact_model extends MY_Model {
     function __construct (){
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
-        $this->table_name = 'Contact';
+        $this->table_name = 'contact';
         $this->order_by = 'LastName ASC';   //why isnt;' this reflected in datatable? 
         $this->contactId_fieldname = 'Id';
         //$this->primary_key = 'Id';
@@ -26,8 +26,8 @@ class Contact_model extends MY_Model {
     public function master_search() {
         //get all records. $where set up in dataset['model_params']
         $this->db->join(
-                '__Vehicles', 
-                '__Vehicles.__ContactId = ' . $this->table_name. '.' . $this->contactId_fieldname ,
+                '__vehicles', 
+                '__vehicles.__ContactId = ' . $this->table_name. '.' . $this->contactId_fieldname ,
                 'left outer'
                 );   
         return $this->get();

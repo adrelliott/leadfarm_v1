@@ -11,7 +11,7 @@ class Booking_model extends MY_Model {
     function __construct (){
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
-        $this->table_name = 'ContactAction';
+        $this->table_name = 'contactaction';
         $this->order_by = 'Id ASC';   
         $this->contactId_fieldname = 'Id'; 
         if (isset($this->data['view_setup']['ContactId']))

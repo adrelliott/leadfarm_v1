@@ -374,8 +374,8 @@ class MY_Model extends CI_Model {
         //get all records $where joined on contact (ie get fields from contact table too)
         if ($where != NULL) { $this->db->where($where); }        
         $this->db->join(
-                'Contact', 
-                'Contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
+                'contact', 
+                'contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
                 'left outer'
                 );        
         return $this->get();

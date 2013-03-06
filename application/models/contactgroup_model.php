@@ -11,7 +11,7 @@ class Contactgroup_model extends MY_Model {
     function __construct (){
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
-        $this->table_name = 'Contactgroup';
+        $this->table_name = 'contactgroup';
         $this->order_by = 'Id ASC';   //why isnt;' this reflected in datatable? 
         if (isset($this->data['view_setup']['rID']))
         {

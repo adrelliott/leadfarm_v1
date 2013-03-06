@@ -11,7 +11,7 @@ class Vehicles_model extends MY_Model {
     function __construct (){
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
-        $this->table_name = '__Vehicles';
+        $this->table_name = '__vehicles';
         $this->order_by = '__Id DESC';
         $this->primary_key = '__Id';
         $this->contactId_fieldname = '__ContactId';
@@ -37,8 +37,8 @@ class Vehicles_model extends MY_Model {
         $this->db->where('__ContactId', $this->current_ContactId);
         if ($where != NULL) { $this->db->where($where); }   
         $this->db->join(
-                'Contact', 
-                'Contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname ,
+                'contact', 
+                'contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname ,
                 'left outer'
                 );       
                 

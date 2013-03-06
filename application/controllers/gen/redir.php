@@ -24,7 +24,7 @@ class Redir extends CI_Controller {
         $this->dID = $dID;
         
         //query the __Links table for url and campaign ID
-        $model = $this->_set_up_db_conn('Links');        
+        $model = $this->_set_up_db_conn('links');        
         $results = $this->$model->get($linkId);
         //print_array($results, 0, 'link found:');
                 
@@ -49,7 +49,7 @@ class Redir extends CI_Controller {
             '__CampaignId' => $CampaignId,
             '__StepNo' => $Step
         );        
-        $model = $this->_set_up_db_conn('Steps');        
+        $model = $this->_set_up_db_conn('steps');        
         $results = $this->$model->get_by($arg);
         
         //send it to NextSteps table
@@ -63,7 +63,7 @@ class Redir extends CI_Controller {
             '__CompletedYN' => FALSE
         );
         
-        $model = $this->_set_up_db_conn('NextSteps');        
+        $model = $this->_set_up_db_conn('nextsteps');        
         $result = $this->$model->save($input);
     }
     
