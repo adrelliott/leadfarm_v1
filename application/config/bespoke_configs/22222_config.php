@@ -77,7 +77,7 @@ $config['navbar_setup'] = Array
         ),
         'contact' => Array	//do not change this value - this is what the directory should be called too
         (
-            'pagename' => 'contacts',
+            'pagename' => 'Contacts',
             'controller' => 'contact',
             'method' => '',
             'param' => '',
@@ -115,7 +115,7 @@ $config['navbar_setup'] = Array
             'css'	=> '',	
             'view' => '@viewtable',				
         ),
-        'report' => Array	//do not change this value - this is what the directory should be called too
+        /*'report' => Array	//do not change this value - this is what the directory should be called too
         (
             'pagename' => 'Reports',
             'controller' => 'report',
@@ -124,7 +124,7 @@ $config['navbar_setup'] = Array
             'icon'	=> '',
             'css'	=> '',	
             'view' => '@viewtable',				
-         ),
+         ),*/
     
         //ADDING MORE PAGES? Read this...
             //You can add pages here, but you MUST follow the structure above,
@@ -3551,8 +3551,8 @@ $config['campaign'] = Array
                         '__steps.__TagId' => 'Tag Id',                        
                         '__steps.__StepNo' => 'StepNo',
                         '__steps.__Delay' => 'Delay',
-                        //'__Template.__Id' => 'templ id',
-                        '__Template.__Name' => 'temp name',
+                        //'__template.__Id' => 'templ id',
+                        '__template.__Name' => 'temp name',
                     ),
                 ),            
                 'get_all_templates' => array

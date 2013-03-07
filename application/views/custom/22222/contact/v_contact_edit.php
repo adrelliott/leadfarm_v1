@@ -138,7 +138,6 @@
                     <div class="input">
                         <label>Choose an action:</label>
                         <select id="quick_action">
-                            <option value=""></option>
                             <option value="1">Send Email</option>
                             <option value="2">Send membership Enquiry Pack</option>
                             <option value="3">Send membership pack</option>

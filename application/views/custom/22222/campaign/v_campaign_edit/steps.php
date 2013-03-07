@@ -91,5 +91,3 @@ $(document).ready(function($)
   };
 });
 </script> 
-
-<?php print_array($this->data);?>

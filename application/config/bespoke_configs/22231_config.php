@@ -76,7 +76,7 @@ $config['navbar_setup'] = Array
         ),
         'contact' => Array	//do not change this value - this is what the directory should be called too
         (
-            'pagename' => 'contacts',
+            'pagename' => 'Contacts',
             'controller' => 'contact',
             'method' => '',
             'param' => '',
