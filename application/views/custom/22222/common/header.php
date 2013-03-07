@@ -45,8 +45,8 @@
     <!-- WYSIWYG Editor -->
     <script src="<?php echo site_url(); ?>assets/scripts/ckeditor/ckeditor.js"></script>
     
-    <script src="<?php //echo site_url(); ?>assets/scripts/cleditor/jquery.cleditor.min.js"></script>
-    <link rel="stylesheet" href="<?php //echo site_url(); ?>assets/scripts/cleditor/jquery.cleditor.css" type="text/css" media="screen" />
+    <script src="<?php echo site_url(); ?>assets/scripts/cleditor/jquery.cleditor.min.js"></script>
+    <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/cleditor/jquery.cleditor.css" type="text/css" media="screen" />
     
     <!-- Fullsized calendars -->
     <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/fullcalendar/fullcalendar.css" type="text/css" media="screen" />
