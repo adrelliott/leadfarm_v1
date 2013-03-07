@@ -32,7 +32,7 @@ class Redir extends CI_Controller {
         {
             extract($results);
             //start the sequence
-            if ($__SequenceId != 0  && $ContactId) echo "both seqence and contactid exist";$this->set_campaign_step($dID, $ContactId, $__DestinationURL, $Step);
+            if ($__SequenceId != 0  && $ContactId) $this->set_campaign_step($dID, $ContactId, $__DestinationURL, $Step);
             
             //now redirect to the new link
             redirect($__DestinationURL, 'location');

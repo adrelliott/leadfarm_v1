@@ -15,7 +15,8 @@ class Comms extends CI_Controller {
     function __construct()    {
         parent::__construct();
         $this->output->enable_profiler(TRUE);
-        $this->load->library('postageapp');
+        //Load the PostageApp library
+        $this->load->library('PostageApp/PostageApp');   
     }
     
     function index() {  

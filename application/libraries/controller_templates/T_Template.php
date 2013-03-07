@@ -43,7 +43,7 @@ class T_Template extends MY_Controller {
     
     private function _test_send($rID) {  
         //Load the PostageApp library
-        $this->load->library('PostageApp/postageapp');        
+        $this->load->library('PostageApp/PostageApp');        
         
         //now get the template info required
         $this->load->model('template_model', 'template');
@@ -111,7 +111,7 @@ class T_Template extends MY_Controller {
     }
     private function _test_send_old($rID) {        
         //Load the PostageApp library
-        $this->load->library('PostageApp/postageapp');
+        $this->load->library('PostageApp/PostageApp');
         
         //now get the template info required
         $this->load->model('template_model', 'template');

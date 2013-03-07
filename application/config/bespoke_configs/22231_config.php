@@ -25,7 +25,7 @@
 | and upload to /assets/includes/custom/XXXXX where 'XXXXX' is dID. (must be called logo.png)
 */
 define('OPT_IN_REASON', "This is my opt in reason");  
-define('UNSUBSCRIBE_LINK', base_url( 'gen/comms/unsubs/' . DATAOWNER_ID . '/_:_contactId_:_'));
+define('UNSUBSCRIBE_LINK', base_url( 'gen/comms/unsubs/' . DATAOWNER_ID . '/_:_ContactId_:_'));
 define('UNSUBSCRIBE', '<br/><br/><small><a href="' . UNSUBSCRIBE_LINK . '">Unsubscribe from all future emails here</a></small>');
 define('COUNTDOWN', 45);  //Notifies the user {45 days {VALUE} days before MOT/Service expires. see libraries/garages/garages.php
 
@@ -4110,7 +4110,8 @@ $config['template'] = Array
                         'label' => 'Content',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'cleditor',
+                        //'cssClassInput' => 'cleditor',
+                        'cssClassInput' => '',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' rows=20',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -4367,7 +4368,8 @@ $config['lead'] = Array
                         'label' => 'Content',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'cleditor',
+                        'cssClassInput' => '',
+                        //'cssClassInput' => 'cleditor',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' rows=20',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
