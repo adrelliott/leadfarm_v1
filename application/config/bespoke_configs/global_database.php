@@ -22,6 +22,7 @@ $config['database']['dbcollat'] = 'utf8_general_ci';
 $config['database']['swap_pre'] = '';
 $config['database']['autoinit'] = TRUE;
 $config['database']['stricton'] = FALSE;
+$config['database']['prefix'] = '';
 
 //Each envirnment has a standard prefix for db users and databases
 switch (ENVIRONMENT) 
@@ -33,7 +34,8 @@ case 'al-development':
     $config['database']['prefix'] = 'local_';
     break;
 case 'staging':
-    $config['database']['prefix'] = 'leadfar2_';
+    //$config['database']['prefix'] = 'leadfar2_';
+    $config['database']['prefix'] = 'leadfarm_';
     break;
 case 'demo':
     $config['database']['prefix'] = 'automati_';

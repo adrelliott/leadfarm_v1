@@ -11,6 +11,7 @@
 
 $default_username = 'admin';
 $default_password = 'DMmanch35';
+if (!isset($config['database']['prefix'])) $config['database']['prefix'] = '';
 $default_prefix = $config['database']['prefix'];
 
 switch (ENVIRONMENT) 
@@ -27,7 +28,7 @@ case 'al-development':  //on al's Desktop
 		$config['database']['database'] = $default_prefix . '22222';
 		break;
 	
-case 'staging': //On leadfarm-staging.co.uk
+case 'staging': //On leadfarm.co.uk
 		$config['database']['username'] = $default_prefix . 'admin';
 		$config['database']['password'] = $default_password;
 		$config['database']['database'] = $default_prefix . '22222';

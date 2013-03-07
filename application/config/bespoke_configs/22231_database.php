@@ -11,6 +11,7 @@
 
 $default_username = 'admin';
 $default_password = 'DMmanch35';
+if (!isset($config['database']['prefix'])) $config['database']['prefix'] = '';
 $default_prefix = $config['database']['prefix'];
 
 
@@ -31,7 +32,7 @@ case 'al-development':
 		$config['database']['database'] = $default_prefix . '22231';
 		break;
             
-case 'staging': //????? depends on the test!
+case 'staging': //leadfarm.co.uk
 		//$config['database']['username'] = 'leadfar2_admin';
 		//$config['database']['password'] = 'DMmanch35';
 		//$config['database']['database'] = 'leadfar2_22222_1';
