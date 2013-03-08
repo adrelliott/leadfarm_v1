@@ -179,13 +179,21 @@ $(function() {
     // Called when the user closes the dialog. Refreshes the datatable
     // associated with the link that opened it.
     var onOverlayClosedCallback = function () {
+        var link = $(this);
         var tableId = $(this).data ('table-id');
+        var dataTableContainer;
 
         if (typeof tableId === 'undefined') {
-            return;
-        }
 
-        var dataTableContainer = $('#' + tableId + ' .dataTable-container');
+            dataTableContainer = link.parentsUntil ('.dataTable-container').last ().parent ();
+
+            if (dataTableContainer.hasClass ('dataTable-container') === false) {
+                return;
+            }
+
+        } else {
+            dataTableContainer = $('#' + tableId + ' .dataTable-container');
+        }
 
         if (dataTableContainer.length !== 1) {
             return;
