@@ -75,4 +75,6 @@
         </footer>
     </body>
 </html>
+<?php if (ENVIRONMENT == 'al-development') : ?>
 <?php print_array($this->data);?>
+<?php endif; ?>

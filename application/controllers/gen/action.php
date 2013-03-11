@@ -5,6 +5,14 @@ class Action extends CI_Controller {
         protected $dID = '';    //set by $this->_set_DATAOWNER();
         var $tasks = array();   //holds all data on the tasks
         var $crud = array();    //holds all data on the query
+        var $form = array();    //holds all data from the form
+        var $cols = array       //alows us to remove bad fieldnames from $_POST
+        (
+            'contact' => array
+            (
+                'FirstName', 'LastName', 'Email', 'Username', 'Password'
+            ),
+        );
         
         public function __construct()    {
             parent::__construct();
@@ -210,6 +218,89 @@ class Action extends CI_Controller {
             } //... No step is found. (Its the end of campaign - kick back with a beer)
 
             return $retval;
+        }
+        
+        function redir($dID, $ContactId = NULL, $LinkId, $Step = 1) { 
+                    //NOTE> if step=-1 then stop the sequence
+            $this->_set_DATAOWNER($dID);
+            $this->contact_id = $ContactId;
+
+            //Set up & perform the query
+            $this->crud['model_name'] = 'links';
+            $this->crud['select'] = array
+            (
+                '__LinkName',
+                '__SequenceId',
+                '__DestinationURL',         
+            );        
+            $this->crud['id'] = $LinkId;
+            $results = $this->_crud('retrieve');
+
+            //redirect them if the link exists..
+            if ($results)
+            {           
+                extract($results);
+                //if (is_numeric($__SequenceId) && $this->contact_id ) $this->_get_real_campaign_step($__SequenceId, $Step);   //Start/advance a sequence (if data set)
+
+                //now redirect to the new link
+                redirect($__DestinationURL, 'location');
+            }
+            else $this->load->view('default/redir/v_oops.php');
+        }
+        
+        function web_form($dID, $action, $table, $link_id = 'default', $contact_id = FALSE){
+            //first, set up the crud environment
+            $this->_set_DATAOWNER($dID);
+             
+            //now look at the input & make safe for databases
+            $table = strtolower($table);
+            $this->form['input'] = $this->input->post(NULL, TRUE); // returns all POST items with XSS filter 
+            foreach ( $this->form['input'] as $key => $value )
+            {
+                //removes keys that are don't match those in database
+                if (substr($key, 0, 2) == '__' OR 
+                        !in_array($key, $this->cols[$table])
+                        ) unset($this->form['input'][$key]);
+            }
+            
+            //send query
+            $this->crud['model_name'] = $table;                     
+            $this->crud['input'] = $this->form['input'];  
+            switch($action)
+            {
+                case 'create':
+                    $results = $this->_crud('create');
+                    if ($table = 'contact') $contact_id = $results;
+                    break;
+                case 'retrieve':
+                    $this->crud['id'] = $contact_id;                 
+                    $results = $this->_crud('retrieve');
+                    return;
+                    break;
+                case 'update':
+                    $this->crud['id'] = '';                         
+                    $this->crud['where_in']['values'] = $this->tasks['campaign_ids'];
+                    $this->crud['where_in']['col'] = '__CampaignId';
+                    $results = $this->_crud('update');
+                    break;               
+                default:
+                    break;
+            }
+            $this->form['results'] = $results;
+            
+            //Now redirect to the link
+            if( $link_id != 'default' ) $this->redir($dID, $contact_id, $link_id);
+            elseif ( $link_id != 'redir' )  //we need to append results to url
+            {
+                $url = $this->input->post('url');
+                foreach ($this->form['results'] as $k => $v)
+                {
+                    //
+                }
+                //redirect(, 'location');
+            }
+            else $this->load->view('default/redir/v_thanks.php');
+            //$this->load->view('default/redir/v_thanks.php');
         }
        
            

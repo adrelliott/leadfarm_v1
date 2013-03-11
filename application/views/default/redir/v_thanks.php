@@ -6,7 +6,7 @@
 
         <link rel="apple-touch-con" href="" />
 
-	<title>Oops...</title>
+	<title>Thank you!</title>
 
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 
@@ -46,16 +46,11 @@
                     <div class="row">
                         <div class="col_6 pre_3 padding_top_120">
                             <div class="widget clearfix">
-                                <h2>Uh Oh...</h2>
+                                <h2>Thanks!</h2>
                                  <div class="widget_inside">
-                                    <h3>Well this is embarrassing...</h3>
-                                    <h4>Seeing this page means either:</h4>
-                                    <ul>
-                                        <li><h4>- We've messed up and given you a link that doesn't work. (Please let us know if we have),</h4></li>
-                                        <li><h4>- ...Or, you've entered a link into your browser that doesn't exist, (its OK - we all like to try new things from time to time)</h4></li>
-                                    </ul>
-                                    <br/>
-                                    <h4>Either way, <strong>just press the back button on your browser</strong> and see time magically travel backwards as you find yourself in the same place you were before this whole sorry incident ever happened.</h4>
+                                    <h3>We got it!</h3>
+                                    <h4>Thanks for submitting your information</h4>
+                                    <h4>You can <strong>press the back button on your browser</strong> to go back to the website you were on, or close this browser.</h4>
                                 </div>
                             </div>
                         </div>
@@ -75,4 +70,3 @@
         </footer>
     </body>
 </html>
-<?php print_array($this->data);?>
