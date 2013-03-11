@@ -70,6 +70,7 @@
     <!-- All the js used in the demo -->
     <script src="<?php echo site_url(); ?>assets/scripts/app.js"></script>
 
+    <script src="<?php echo site_url('assets/scripts/contactsearch.js'); ?>"></script>
 
 </head>
 <body>
