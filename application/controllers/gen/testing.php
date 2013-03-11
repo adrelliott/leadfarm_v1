@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Contactgroup extends T_Contactgroup {
+class Testing extends CI_Controller {
 
 	/**
 	 * This acts as a template for every controller.
@@ -9,19 +9,15 @@ class Contactgroup extends T_Contactgroup {
 	 * and/or define methods here that can be extended in other controllers
 	 * 
 	 */
+
+    protected $dID = '';
     
     public function __construct()    {
-        parent::__construct();
+         parent::__construct();
+         //$this->load->library('Automation/Automation_1');
+         $this->output->enable_profiler(TRUE);
+         echo "<p>this is the testing controller talking</p>";
     }
-    
    
-  public function view($view_file = 'view', $rID = 'new') {          
-        parent::view($view_file, $rID);
-            // Generate the view!
-        $this->_generate_view($this->data);
-    }
-    
-        
-    
 }
    

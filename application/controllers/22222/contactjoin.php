@@ -21,7 +21,7 @@ class Contactjoin extends T_Contactjoin {
        //$this->_generate_view($this->data);
    }
    
-  public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE) {    
+  public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE) {    
        parent::view($view_file, $rID, $ContactId);   
             
         // Generate the view!        

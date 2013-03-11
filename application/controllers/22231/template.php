@@ -15,7 +15,7 @@ class Template extends T_Template {
     }
     
    
-  public function view($view_file = 'view', $rID = 'new') {          
+  public function view($view_file = 'edit', $rID = 'new') {          
         parent::view($view_file, $rID);
             // Generate the view!
         $this->_generate_view($this->data);

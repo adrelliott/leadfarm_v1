@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Links extends T_Links {
+class Tags extends T_Tags {
 
 	/**
 	 * This acts as a template for every controller.
@@ -15,7 +15,7 @@ class Links extends T_Links {
     }
     
    
-  public function view($view_file = 'edit', $rID = 'new') {          
+  public function view($view_file = 'view', $rID = 'new') {          
         parent::view($view_file, $rID);
             // Generate the view!
         $this->_generate_view($this->data);

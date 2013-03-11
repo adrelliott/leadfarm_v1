@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Contactgroup extends T_Contactgroup {
+class Tags extends T_Tags {
 
 	/**
 	 * This acts as a template for every controller.

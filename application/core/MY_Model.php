@@ -306,7 +306,44 @@ class MY_Model extends CI_Model {
     }
     
     
-    public function get_email_fields_old($recipients, $fields, $template_type = 'Email') {
+   
+    
+     public function get_single_record($rID, $where = NULL) {
+        //get the record with rID. $where set up in dataset['model_params']
+        if ($where != NULL) { $this->db->where($where); }
+        return $this->get($rID);
+        
+    }
+    
+    
+    /**
+     * Get records joined on Contact.Id
+     * @param array (this is the where condition as set in the config file) 
+     * @return void
+     * @author Al Elliott
+     */
+     public function joinon_Contact($where = NULL) {
+        //get all records $where joined on contact (ie get fields from contact table too)
+        if ($where != NULL) { $this->db->where($where); }        
+        $this->db->join(
+                'contact', 
+                'contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
+                'left outer'
+                );        
+        return $this->get();
+    } 
+    
+    function add($input, $rID) {
+       if ($rID == 'new')
+       {
+          $rID = NULL;
+       }      
+       
+       return $this->save($input, $rID);
+    }
+    
+    /*
+     *  public function get_email_fields_old($recipients, $fields, $template_type = 'Email') {
         //This is used when we send out emails from a template
         
         //Ensure that the recipient data is present and first in the array (for assoc)
@@ -355,42 +392,8 @@ class MY_Model extends CI_Model {
         
         return $retval;
     }
-    
-     public function get_single_record($rID, $where = NULL) {
-        //get the record with rID. $where set up in dataset['model_params']
-        if ($where != NULL) { $this->db->where($where); }
-        return $this->get($rID);
-        
-    }
-    
-    
-    /**
-     * Get records joined on Contact.Id
-     * @param array (this is the where condition as set in the config file) 
-     * @return void
-     * @author Al Elliott
+     * 
      */
-     public function joinon_Contact($where = NULL) {
-        //get all records $where joined on contact (ie get fields from contact table too)
-        if ($where != NULL) { $this->db->where($where); }        
-        $this->db->join(
-                'contact', 
-                'contact.Id = ' . $this->table_name. '.' . $this->contactId_fieldname, 
-                'left outer'
-                );        
-        return $this->get();
-    } 
-    
-    function add($input, $rID) {
-       if ($rID == 'new')
-       {
-          $rID = NULL;
-       }      
-       
-       return $this->save($input, $rID);
-    }
-    
-    
     
     
     

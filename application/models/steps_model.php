@@ -15,13 +15,14 @@ class Steps_model extends MY_Model {
         $this->order_by = '__StepNo ASC';   //why isnt;' this reflected in datatable? 
         $this->templateId_fieldname = '__TemplateId'; 
         $this->primary_key = '__Id';
-        if (isset($this->data['view_setup']['rID']))
+        $this->current_rID = '';
+        if (isset($this->data))
         {
-            $this->current_rID = $this->data['view_setup']['rID'];
+            if (isset($this->data['view_setup']['rID'])) $this->current_rID = $this->data['view_setup']['rID'];
         }
-        
     }
     
+    /*
     function get_steps($CampaignId, $__StepNumber) {
         $this->db->where('__CampaignId >=', $CampaignId);
         $this->db->where('__StepNo =', $__StepNumber);
@@ -30,7 +31,7 @@ class Steps_model extends MY_Model {
         
         return $result;
     }
-    
+    */
     function get_campaign_steps() {
         //just get the steps for this campaign
         $this->db->where('__CampaignId', $this->current_rID);        
@@ -41,7 +42,7 @@ class Steps_model extends MY_Model {
                 );          
         $results = $this->get();
         
-        //print_array($results,1);
+        //print_array($results);
         
         //now set up the dropdown array
         $retval = array();
@@ -73,10 +74,11 @@ class Steps_model extends MY_Model {
         return $retval;
     }
     
-    function get_all_steps() {
+    /*function get_all_steps() {
         //just get the steps for this campaign        
         return $this->get_assoc();
-    }
+    }*/
+     
     
     
    

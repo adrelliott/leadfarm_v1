@@ -11,7 +11,7 @@ class User extends T_User {
   public function index($view_file = 'index') {   
    }
    
-  public function view($view_file, $rID, $ContactId) {  
+  public function view($view_file = 'edit', $rID, $ContactId) {  
         parent::view($view_file, $rID, $ContactId);
         
           // Generate the view!

@@ -15,9 +15,12 @@ class Contact_model extends MY_Model {
         $this->order_by = 'LastName ASC';   //why isnt;' this reflected in datatable? 
         $this->contactId_fieldname = 'Id';
         //$this->primary_key = 'Id';
-        if (isset($this->data['view_setup']['ContactId']))
+        if (isset($this->data))
         {
-            $this->current_ContactId = $this->data['view_setup']['ContactId'];
+            if (isset($this->data['view_setup']['ContactId']))
+            {
+                $this->current_ContactId = $this->data['view_setup']['ContactId'];
+            }
         }
     }
     

@@ -28,6 +28,7 @@ class MY_Controller extends CI_Controller {
                     (
                         'header_file' => 'header', //turned into modal in T_Controller
                         'footer_file' => 'footer', //turned into modal in T_Controller
+                        'modal' => FALSE, //set in T_Controller if true
                     ),              
             );
     
@@ -66,7 +67,18 @@ class MY_Controller extends CI_Controller {
     
     //Is there any need for an index() function here?
    
-    
+    protected function index($view_file) {
+        $this->data['controller_setup']['method_name'] = 'index';
+        $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file; 
+    }
+   
+    protected function view($view_file){
+        $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file;      
+        $this->data['controller_setup']['method_name'] = 'view'; 
+        $ext = ''; if ($this->data['view_setup']['modal']) $ext = '_modal';
+        $this->data['view_setup']['header_file'] .= $ext;
+        $this->data['view_setup']['footer_file'] .= $ext;   
+    }    
     
     protected function _load_view_data($rID = NULL) {
         // 1. Set up the vars for this method

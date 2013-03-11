@@ -13,7 +13,7 @@ class Campaign extends T_Campaign {
         $this->_generate_view($this->data);
    }
    
-  public function view($view_file, $rID) {  
+  public function view($view_file = 'edit', $rID) {  
         parent::view($view_file, $rID);
         
           // Generate the view!

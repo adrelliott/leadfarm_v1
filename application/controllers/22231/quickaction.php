@@ -26,7 +26,7 @@ class Quickaction extends CI_Controller {
         echo "view action id is ";
     }
    
-    function action($view, $rID, $ContactId, $ActionId) {
+    function action($view = 'edit', $rID, $ContactId, $ActionId) {
         echo "action id is $ActionId";
     }
    

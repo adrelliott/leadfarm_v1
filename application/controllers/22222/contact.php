@@ -14,7 +14,6 @@ class Contact extends T_Contact {
    }
    
   public function view($view_file, $rID, $ContactId, $fieldset, $pull = '') {
-
         parent::view($view_file, $rID, $ContactId, $fieldset);
         
             //check for expirations of MOT & service

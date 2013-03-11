@@ -11,8 +11,7 @@ class Vehicles extends T_Vehicles {
         $this->_generate_view($this->data);
     }
    
-    public function view($view_file = 'view', $rID = 'new', $ContactId = FALSE, $pull = '') {
-
+    public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE, $pull = '') {
         parent::view($view_file, $rID, $ContactId);
         
             //check for expirations of MOT & service

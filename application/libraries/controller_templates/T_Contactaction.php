@@ -13,11 +13,8 @@ class T_Contactaction extends MY_Controller {
     }
    
     public function view($view_file, $rID, $ContactId) {    //$rID=new => create new record
-        $this->data['view_setup']['view_file'] = 'v_contactaction_' . $view_file;
-        $this->data['controller_setup']['method_name'] = 'view';
         $this->data['view_setup']['modal'] = TRUE;
-        $this->data['view_setup']['header_file'] = 'header_modal'; 
-        $this->data['view_setup']['footer_file'] = 'footer_modal'; 
+        parent::view($view_file);
         $this->data['view_setup']['rID'] = $rID;
         $this->data['view_setup']['ContactId'] = $ContactId;  
         $this->data['view_setup']['display_none'] = '';

@@ -13,23 +13,10 @@ class Contact extends T_Contact {
         $this->_generate_view($this->data);
    }
    
-  public function view($view_file, $rID, $ContactId, $fieldset, $pull = '') {
+  public function view($view_file = 'edit', $rID, $ContactId, $fieldset, $pull = '') {
 
-        parent::view($view_file, $rID, $ContactId, $fieldset);
+        parent::view($view_file, $rID, $ContactId, $fieldset);        
         
-            //check for expirations of MOT & service
-        $this->load->library('garages/garage');
-        $this->data['view_setup']['notifications'] = array();
-        if (isset($this->data['view_setup']['tables']['vehicles']['table_data'][0]))
-        {
-            $this->data['view_setup']['notifications'] = 
-                    $this->garage->check_vehicle_expiry 
-                    (
-                    $this->data['view_setup']['tables']['vehicles'],
-                    $this->data['view_setup']['ContactId']
-                    );
-        }
-
         if ($pull && array_key_exists ($pull, $this->data['view_setup']['tables']))
         {
           // Generate the dataset for this single table and return the HTML as JSON

@@ -16,8 +16,7 @@ class T_Dashboard extends MY_Controller {
     }
     
     public function index($view_file) {
-        $this->data['controller_setup']['method_name'] = 'index'; 
-        $this->data['view_setup']['view_file'] = 'v_dashboard_' . $view_file;
+        parent::index($view_file);
         
         $this->_load_view_data();   //retrieves and process all data for view
     }

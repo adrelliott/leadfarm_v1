@@ -9,18 +9,13 @@ class T_Vehicles extends MY_Controller {
     }
     
     public function index($view_file) {
-        $this->data['controller_setup']['method_name'] = 'index';
-        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;
+        parent::index($view_file);
         
         $this->_load_view_data();    //retrieves and process all data for view
      }
 
     public function view($view_file, $rID, $ContactId) {    //$rID=new => create new record
-        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;
-        $this->data['controller_setup']['method_name'] = 'view'; 
-        $this->data['view_setup']['modal'] = FALSE; 
-        $this->data['view_setup']['header_file'] .= '';  //add '_modal' for modal
-        $this->data['view_setup']['footer_file'] .= '';  //add '_modal' for modal       
+        parent::view($view_file);   
         $this->data['view_setup']['rID'] = $rID;        
         $this->data['view_setup']['ContactId'] = $ContactId; ;   
         $this->data['view_setup']['display_none'] = '';
@@ -28,12 +23,9 @@ class T_Vehicles extends MY_Controller {
         $this->_load_view_data($rID);     //retrieves and process all data for view    
      }
      
-      public function view_modal($view_file, $rID, $ContactId) {    
-        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file;  
-        $this->data['controller_setup']['method_name'] = 'view';        
+      public function view_modal($view_file, $rID, $ContactId) {  
         $this->data['view_setup']['modal'] = TRUE;
-        $this->data['view_setup']['header_file'] .= '_modal';  
-        $this->data['view_setup']['footer_file'] .= '_modal';  
+        parent::view($view_file);
         $this->data['view_setup']['rID'] = $rID;        
         $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
         $this->data['view_setup']['display_none'] = '';

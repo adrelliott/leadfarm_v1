@@ -13,11 +13,8 @@ class T_Help extends MY_Controller {
     }
    
     public function view($view_file, $rID = 'new') {    
-        $this->data['view_setup']['view_file'] = 'v_help_' . $view_file;
-        $this->data['controller_setup']['method_name'] = 'view';
         $this->data['view_setup']['modal'] = TRUE;
-        $this->data['view_setup']['header_file'] = 'header_modal'; 
-        $this->data['view_setup']['footer_file'] = 'footer_modal'; 
+        parent::view($view_file);
         
         //Grab the url of the page with the problem
         if ($view_file == 'edit')

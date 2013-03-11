@@ -18,7 +18,7 @@ class Quickaction extends T_Quickaction {
        exit;
     }
     
-    function view($view_file, $rID) {
+    function view($view_file = 'edit', $rID) {
         parent::view($view_file, $rID);
         
          // Generate the view!        

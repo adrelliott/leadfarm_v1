@@ -894,7 +894,7 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
-                      'leadsource' => array
+                      'Leadsource' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -908,7 +908,7 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
-                        'name' => 'leadsource',
+                        'name' => 'Leadsource',
                         'helpText' => '',
                         'length' => '',
                         'options' => array
@@ -3506,7 +3506,7 @@ $config['campaign'] = Array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => '', //The dataset name defined above
-                    'model_name' => 'contactgroup_model',
+                    'model_name' => 'tags_model',
                     'model_method' => 'get_all_records', 
                     'model_params' => NULL,
                     'fields' => array 
@@ -3576,7 +3576,7 @@ $config['campaign'] = Array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => '', //The dataset name defined above
-                    'model_name' => 'contactgroup_model',
+                    'model_name' => 'tags_model',
                     'model_method' => 'get_all_records', 
                     'model_params' => NULL,
                     'fields' => array 
@@ -3604,7 +3604,7 @@ $config['campaign'] = Array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => '', //The dataset name defined above
-                    'model_name' => 'contactgroup_model',
+                    'model_name' => 'tags_model',
                     'model_method' => 'tag_dropdown', 
                     'model_params' => NULL, 
                     'fields' => array 
@@ -3776,7 +3776,7 @@ $config['campaign'] = Array
     );
 
 
-$config['contactgroup'] = Array
+$config['tags'] = Array
     (
     'datasets' => array 
         (
@@ -3807,7 +3807,7 @@ $config['contactgroup'] = Array
         (
             'view' => array
             (
-                'model_name' => 'contactgroup_model',
+                'model_name' => 'tags_model',
                 'model_method' => 'get_single_record',
                 'model_params' => NULL, 
                 'dropdowns' => array    //or NULL
@@ -4183,10 +4183,11 @@ $config['links'] = Array
                     'data_source' => '', //The dataset name defined above
                     'model_name' => 'campaign_model',
                     'model_method' => 'get_all_records', 
-                    'model_params' => array
+                    'model_params' => NULL,
+                    /*'model_params' => array
                     (
                         '_Type =' => 'Link_Automation',
-                    ), 
+                    ), */
                     'fields' => array 
                     (
                         'Id' => 'Id',
