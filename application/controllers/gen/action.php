@@ -35,7 +35,7 @@ class Action extends CI_Controller {
                 '__CompletedYN !=' => TRUE
                 );
             $this->tasks['to_do'] = $this->_crud('retrieve');
-            print_array($this->tasks);
+            print_array($this->tasks, 0, "outstanding tasks - time = ".time());
             if( empty($this->tasks['to_do'])){
                 echo "no tasks found, time is ".time();
                 return;
@@ -46,7 +46,7 @@ class Action extends CI_Controller {
                     "unserialize", 
                     array_unique(array_map("serialize",$this->tasks['to_do']))
                     );            
-
+            
             //Get all steps for each campaign that is affected
             $this->tasks['campaign_ids'] = array_keys($this->_make_assoc(
                      $this->tasks['to_do'],
@@ -68,7 +68,7 @@ class Action extends CI_Controller {
             $this->tasks['all_templates'] = $this->_make_assoc(
                     $this->_crud('retrieve'),
                     '__Id');
-            
+           
         # 2. Now sort the array into an assoc that contains all data for each step
             //sort these steps into array [campId] => step_array
             $tmp_array = array();
@@ -126,7 +126,7 @@ class Action extends CI_Controller {
                         );
                     //is there another step?
                     $next_step = $this->_find_next_step($campaign_data, $current_step);
-                    //if( $next_step ) echo "<h1>found next step!</h1>".print_array($next_step);
+                   
                     if( $next_step ) $this->tasks['insert_array'][] = array
                         (
                             '__ContactId' => $task_details['__ContactId'],
@@ -147,9 +147,10 @@ class Action extends CI_Controller {
                         'table' => '__nextsteps',
                         'data' => $this->tasks['update_array'],
                         'col' => '__Id',               
-                    );
-            $this->_crud('update_batch');
+                    );            
+            $this->_crud('update_batch');   
             
+             //insert
             $this->crud['model_name'] = 'nextsteps';  
             $this->crud['insert_batch'] = array
                     (
@@ -158,66 +159,7 @@ class Action extends CI_Controller {
                     );
             $this->_crud('insert_batch');
             
-            //insert
-            print_array($this->tasks, 0, 'final array');
-        }
-       
-        protected function _do_step($campaign_data, $contact_data, $step_no) {
-            $result = FALSE;
-            //What type of action we doing here?
-            extract($campaign_data[$step_no]);
-            switch ($__ActionType)
-            {
-                case 'EMAIL':
-                    //send email
-                    $result = $this->_send_email($template_data, $contact_data);
-                    break;
-                case 'TAG':
-                    //apply tag
-                    $result = $this->_apply_tag($__TagId, $contact_data['Id']);
-                    break;
-                //add rest of things like tweet etc here
-            }
-            
-            //perform email/tag etc for this step
-            $result = 1;
-            return $result;
-        }
-        
-         
-        protected function _find_next_step($step_data, $current_step){
-            //$current_step = $current_step + 1;
-            $retval = FALSE;
-            
-            //whats the last step?
-            $tmp = end($step_data);
-            $last_step_no = $tmp['__StepNo']; 
-            
-            //Is there a step that equals current step + 1?
-            $next_step = $current_step + 1;
-            if ( isset($step_data[$next_step]) ) 
-            {
-                $retval['step_no'] = $next_step;
-                $retval['delay'] = $step_data[$next_step]['__Delay'];
-
-            }
-            //No? Ok, is next_step less than last step?
-            elseif ( $next_step < $last_step_no )
-            {   //Yes! So cycle through all possible steps till we find it...
-                $count = $next_step + 1;    //look for current_step + 2
-                while ($count < $last_step_no)
-                {               
-                    if (isset($step_data[$count])) //...until a step is found, OR...
-                    {
-                       $retval['step_no'] = $count;
-                       $retval['delay'] = $step_data[$count]['__Delay'];
-                       break;
-                    }
-                    else $count++;
-                }
-            } //... No step is found. (Its the end of campaign - kick back with a beer)
-
-            return $retval;
+            //print_array($this->tasks, 0, 'final array');
         }
         
         function redir($dID, $ContactId = NULL, $LinkId, $Step = 1) { 
@@ -303,6 +245,73 @@ class Action extends CI_Controller {
             //$this->load->view('default/redir/v_thanks.php');
         }
        
+        
+        
+        
+        
+        
+        
+        /*********************Internal Methods **************************/
+       
+        protected function _do_step($campaign_data, $contact_data, $step_no) {
+            $result = FALSE;
+            //What type of action we doing here?
+            extract($campaign_data[$step_no]);
+            switch ($__ActionType)
+            {
+                case 'EMAIL':
+                    //send email
+                    $result = $this->_send_email($template_data, $contact_data);
+                    break;
+                case 'TAG':
+                    //apply tag
+                    $result = $this->_apply_tag($__TagId, $contact_data['Id']);
+                    break;
+                //add rest of things like tweet etc here
+            }
+            
+            //perform email/tag etc for this step
+            $result = 1;
+            return $result;
+        }
+        
+         
+        protected function _find_next_step($step_data, $current_step){
+            //$current_step = $current_step + 1;
+            $retval = FALSE;
+            
+            //whats the last step?
+            $tmp = end($step_data);
+            $last_step_no = $tmp['__StepNo']; 
+            
+            //Is there a step that equals current step + 1?
+            $next_step = $current_step + 1;
+            if ( isset($step_data[$next_step]) ) 
+            {
+                $retval['step_no'] = $next_step;
+                $retval['delay'] = $step_data[$next_step]['__Delay'];
+
+            }
+            //No? Ok, is next_step less than last step?
+            elseif ( $next_step < $last_step_no )
+            {   //Yes! So cycle through all possible steps till we find it...
+                $count = $next_step + 1;    //look for current_step + 2
+                while ($count < $last_step_no)
+                {               
+                    if (isset($step_data[$count])) //...until a step is found, OR...
+                    {
+                       $retval['step_no'] = $count;
+                       $retval['delay'] = $step_data[$count]['__Delay'];
+                       break;
+                    }
+                    else $count++;
+                }
+            } //... No step is found. (Its the end of campaign - kick back with a beer)
+
+            return $retval;
+        }
+        
+        
            
         
         
@@ -317,6 +326,7 @@ class Action extends CI_Controller {
             return $success_flag;
         }
         protected function _send_email($template_data, $contact_data) {
+            
             //get template data
             
             //get contact(s) data
@@ -407,14 +417,14 @@ class Action extends CI_Controller {
                 case 'delete':
                     //do update
                     break;            
-                case 'update_batch':
-                    if ($this->crud['update_batch'])  $results = $this->db->update_batch(
+                case 'update_batch': //surpress error due to CI bug http://stackoverflow.com/questions/11279262/update-database-field-error-codeigniter 
+                    if ($this->crud['update_batch'])  $results = @$this->db->update_batch(
                             $this->crud['update_batch']['table'], //what table we updating? 
                             $this->crud['update_batch']['data'], //with what (array), 
                             $this->crud['update_batch']['col'] //What col are we matching?, 
                             ); 
                     break;                
-                case 'insert_batch':
+                case 'insert_batch': //surpress error due to CI bug http://stackoverflow.com/questions/11279262/update-database-field-error-codeigniter 
                     if ($this->crud['insert_batch']) $results = $this->db->insert_batch(
                             $this->crud['insert_batch']['table'], //what table we updating? 
                             $this->crud['insert_batch']['data'] //with what (array), 
