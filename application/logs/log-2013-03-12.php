@@ -140,3 +140,8 @@ DEBUG - 2013-03-12 11:35:47 --> Total execution time: 0.9203
 
 
 
+ERROR - 2013-03-12 13:10:25 --> Query error: Table 'local_22222.contact_search' doesn't exist
+ERROR - 2013-03-12 13:10:57 --> Query error: Table 'local_22222.contact_search' doesn't exist
+ERROR - 2013-03-12 13:11:07 --> Severity: Notice  --> Undefined property: CI_Loader::$contactgroup_model C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22222\contact\v_contact_index.php 54
+ERROR - 2013-03-12 13:12:12 --> Severity: Notice  --> Undefined property: CI_Loader::$contactgroup_model C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22222\contact\v_contact_index.php 54
+ERROR - 2013-03-12 13:18:13 --> Severity: Notice  --> Undefined index: Id C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\models\contactsearch_model.php 536

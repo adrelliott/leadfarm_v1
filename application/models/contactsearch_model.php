@@ -70,8 +70,10 @@ class Contactsearch_model extends MY_Model
     {
         parent::__construct ();
 
-        $this->load->model ('contactgroup_model');
-        $this->_tags = $this->contactgroup_model->get ();
+        $this->load->model ('tags_model');
+        //$this->load->model ('contactgroup_model');
+        $this->_tags = $this->tags_model->get ();
+        //$this->_tags = $this->contactgroup_model->get ();
 
         if ($this->form_submitted ()) {
 
@@ -121,7 +123,8 @@ class Contactsearch_model extends MY_Model
         $this->_include_tag_ids = array ();
         $this->_exclude_tag_ids = array ();
 
-        $this->load->model ('contactgroup_model');
+        //$this->load->model ('contactgroup_model');
+        $this->load->model ('tags_model');
 
         foreach ($this->_tags as $tag) {
 

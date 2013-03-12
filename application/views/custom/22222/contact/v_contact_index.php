@@ -51,7 +51,7 @@ jQuery (document).ready (function ($) {
 
     options = {
         'operations' : <?php echo json_encode ($this->contactsearch_model->get_valid_operations ()) ?>,
-        'tags' : <?php echo json_encode ($this->contactgroup_model->get ()) ?>,
+        'tags' : <?php echo json_encode ($this->tags_model->get ()) ?>,
         'fields' : <?php echo json_encode ($this->contactsearch_model->get_valid_fields ()) ?>,
         'searches' : <?php echo json_encode ($this->contactsearch_model->get ()) ?>
     };
