@@ -53,7 +53,7 @@ jQuery (document).ready (function ($) {
         'operations' : <?php echo json_encode ($this->contactsearch_model->get_valid_operations ()) ?>,
         'tags' : <?php echo json_encode ($this->contactgroup_model->get ()) ?>,
         'fields' : <?php echo json_encode ($this->contactsearch_model->get_valid_fields ()) ?>,
-        'searches' : <?php echo json_encode ($this->contactsearch_model->get_previous_searches ()) ?>
+        'searches' : <?php echo json_encode ($this->contactsearch_model->get ()) ?>
     };
 
     $('#contact-search').contactsearch (options);

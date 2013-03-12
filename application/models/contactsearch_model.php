@@ -396,17 +396,6 @@ class Contactsearch_model extends MY_Model
     }
 
     /**
-     * Returns the previously conducted searches
-     *
-     * @return array
-     * @access public
-     */
-    public function get_previous_searches ()
-    {
-        return $this->get_by ('Contact_id', $this->session->userdata ('UserId'));
-    }
-
-    /**
      * Saves the search criteria
      *
      * @return void
@@ -425,7 +414,7 @@ class Contactsearch_model extends MY_Model
         $search_id = $this->input->post ('search-id');
         $data = $this->get_single_record ($search_id);
 
-        if (array_key_exists ('Contact_id', $data) && $data['Contact_id'] === $this->session->userdata ('UserId')) {
+        if (array_key_exists ('Id', $data) && $data['Id']) {
 
             $this->contactsearchcriteria_model->delete_by ('Search_id', $search_id);
             $this->contactsearchtag_model->delete_by ('Search_id', $search_id);
