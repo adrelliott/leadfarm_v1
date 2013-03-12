@@ -108,3 +108,30 @@ body:before {content:"";height:100%;float:left;width:0;margin-top:-32767px;/* th
   z-index: 1000;
   text-align: center;
 }
+
+.contact-search fieldset {
+  border: 1px solid #cccccc;
+  padding: 1em;
+  margin: 0 0 1em 0;
+}
+
+.contact-search legend {
+  padding: 0.5em;
+}
+
+.contact-search table.auto {
+  width: auto;
+}
+
+.contact-search input.date-value {
+  width: 100px;
+}
+        
+input[type="text"].error {
+  background-color: #fcdddd;
+  border: 1px solid #db7a7a;
+}
+
+label.error {
+  color: #731313;
+}

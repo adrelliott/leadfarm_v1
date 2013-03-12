@@ -8,7 +8,10 @@ class Contact extends T_Contact {
          parent::__construct();
     }
     
-  public function index($view_file = 'index') {   
+    public function index($view_file = 'index') {
+
+        $this->load->model ('contactsearch_model');
+
         parent::index($view_file);
         $this->_generate_view($this->data);
    }
