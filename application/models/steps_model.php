@@ -16,10 +16,9 @@ class Steps_model extends MY_Model {
         $this->templateId_fieldname = '__TemplateId'; 
         $this->primary_key = '__Id';
         $this->current_rID = '';
-        if (isset($this->data))
-        {
-            if (isset($this->data['view_setup']['rID'])) $this->current_rID = $this->data['view_setup']['rID'];
-        }
+        if (isset($this->data['view_setup']) && isset($this->data['view_setup']['rID'])) 
+            $this->current_rID = $this->data['view_setup']['rID'];
+        
     }
     
     /*

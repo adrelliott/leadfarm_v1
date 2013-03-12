@@ -4,6 +4,7 @@ class Action extends CI_Controller {
     
         protected $dID = '';    //set by $this->_set_DATAOWNER();
         var $tasks = array();   //holds all data on the tasks
+        var $data = array();   //Not used at the moment
         var $crud = array();    //holds all data on the query
         var $form = array();    //holds all data from the form
         var $cols = array       //alows us to remove bad fieldnames from $_POST

@@ -35,30 +35,36 @@
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-1">
-                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/get_all_templates') ?>">
-                        <?php $this->load->view ('custom/' . DATAOWNER_ID . '/campaign/v_campaign_edit/get_all_templates') ?>
-                        </div>
+                        <?php 
+                            $this->table->set_template_custom(array ('anchor_uri' => 'template/view/edit', 'anchor_attr' => 'class="iframe"', 'primary_key_fieldname' => '__Id'));    //
+                            $this->table->set_heading_custom($tables['get_all_templates']['table_headers']);
+                            echo $this->table->generate_custom($tables['get_all_templates']['table_data']); 
+                        ?> 
                         <div class="margin_top_15"></div>
                         <div class="clearfix">
-                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/template/view/edit/new" class="large blue button right iframe" data-table-id="tab-1"><span>Create New Template</span></a>
+                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/template/view/edit/new" class="large blue button right iframe"><span>Create New Template</span></a>
                         </div>
                     </div>
                     <div id="tab-2">
-                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/get_all_tags') ?>">
-                        <?php $this->load->view ('custom/' . DATAOWNER_ID . '/campaign/v_campaign_edit/get_all_tags') ?>
-                        </div>
+                        <?php 
+                            $this->table->set_template_custom(array ('anchor_uri' => 'contactgroup/view/edit', 'anchor_attr' => 'class="iframe"'));    
+                            $this->table->set_heading_custom($tables['get_all_tags']['table_headers']);
+                            echo $this->table->generate_custom($tables['get_all_tags']['table_data']); 
+                        ?> 
                         <div class="margin_top_15"></div>
                         <div class="clearfix">
-                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactgroup/view/edit/new" class="large blue button right iframe" data-table-id="tab-2"><span>Create New Tag</span></a>
+                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactgroup/view/edit/new" class="large blue button right iframe"><span>Create New Tag</span></a>
                         </div>
                     </div>
                     <div id="tab-3">
-                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/get_all_links') ?>">
-                        <?php $this->load->view ('custom/' . DATAOWNER_ID . '/campaign/v_campaign_edit/get_all_links') ?>
-                        </div>
+                        <?php 
+                            $this->table->set_template_custom(array ('anchor_uri' => 'links/view/edit', 'anchor_attr' => 'class="iframe"', 'primary_key_fieldname' => '__Id'));    
+                            $this->table->set_heading_custom($tables['get_all_links']['table_headers']);
+                            echo $this->table->generate_custom($tables['get_all_links']['table_data']); 
+                        ?> 
                         <div class="margin_top_15"></div>
                         <div class="clearfix">
-                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/links/view/edit/new" class="large blue button right iframe" data-table-id="tab-3"><span>Create New Link</span></a>
+                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/links/view/edit/new" class="large blue button right iframe"><span>Create New Link</span></a>
                         </div>
                     </div>
                 </div>
