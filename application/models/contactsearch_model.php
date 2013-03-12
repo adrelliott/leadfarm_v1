@@ -346,6 +346,8 @@ class Contactsearch_model extends MY_Model
 
             if (count ($contact_ids) > 0) {
                 $where[] = 'Id IN (' . implode (', ', $contact_ids) . ')';
+            } else {
+                $where[] = 'FALSE';
             }
 
         }
