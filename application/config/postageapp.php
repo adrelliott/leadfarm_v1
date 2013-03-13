@@ -36,7 +36,7 @@ $config['secure'] = TRUE;
 | this to override the recipient.
 |
 */
-$config['recipient_override'] = '';
+$config['recipient_override'] = 'test@dallasmatthews.co.uk';
 
 /* End of file postageapp.php */
 /* Location: ./system/application/config/postageapp.php */

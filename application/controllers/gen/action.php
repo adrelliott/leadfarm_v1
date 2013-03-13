@@ -14,7 +14,7 @@ class Action extends Crud_lib {
                 'FirstName', 'LastName', 'Email', 'Username', 'Password'
             ),
         );
-        var $mandatory_fields = array
+        var $mandatory_fields = array   //these are the minimum cols to retrieve from the contact query
         (
             'contact' => array
                 (
@@ -286,7 +286,10 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
         
         /*********************Internal Methods **************************/
        
-        
+        /*
+         * This method cycles through all the temnplates (passed as $template_ids) and extracts all the cols required to retrive from the contact database
+         * It also makes all vars in the temnplate lower case if it is an Email (PostageApp doesn;t like mixed case)
+         */
         protected function _get_cols($template_ids = array(), $mandatory_fields = FALSE) {
             //set up method
             if( empty($template_ids)) return FALSE;
@@ -295,6 +298,7 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
             //1. cycle though the templates passed & extract vars
             foreach ($template_ids as $id => $array)
             {
+                //Find all the vars (wrapped in '{{ }}')
                 preg_match_all(
                         '/\{{([^}]+)\}}/', 
                         $array['__Subject'], 
@@ -305,15 +309,15 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
                         $array['__Content'], 
                         $retval['cols'][$id]
                         );
+                
+                //Add them to the list of cols to retrieve
                 foreach($retval['cols'][$id][1] as $k => $var)
                 {
                     $explode = explode('.', $var);
                     $this->mandatory_fields[strtolower($explode[0])][] = $explode[1];
-                    
-                    //$retval['cols']['cols_rqd'][strtolower($explode[0])][] = $explode[1];
                 }
                 
-                //change vars to lower case (for PostageApp only)
+                //change vars to lower case in the template (for PostageApp only)
                 if ($array['__ActionType'] == 'EMAIL')
                 {
                     foreach($retval['cols'][$id][0] as $k => $var)
@@ -412,6 +416,36 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
         }
         protected function _send_email($template_data, $contact_data) {
             $success_flag = FALSE;
+            $retval['headers'] = array(
+                'subject' => 'Example Subject',
+                'from'    => 'sender@example.com'
+              ); 
+            $retval['message'] = array(
+                'text/html'   => $template_data['__Content'],
+                'text/plain'   => $template_data['__ContentPlaintext']                
+              );
+            $retval['test-template'] = $template_data['__TemplateName'];
+            
+            //debug:    REMOVE THIS WHEN GOING LIVE!!!
+            //check $config['recipient_override'] in postageapp/config!!!!!;
+            
+            if( ! isset($contact_data[0])) $contact_data = array($contact_data);
+            {
+                foreach ($contact_data as $key => $array)
+                {
+                    extract($array);
+                    if ($_ActiveUserYN == 1 && '_OptinEmailYN' == 1)
+                    {
+                        $retval['recipients'][$Email] = array();
+                        foreach($retval['recipients']['Email'] as $k => $v)
+                        {
+                            $retval['recipients']['Email'][strtolower($key)] = $v;
+                        }
+                    }
+                }                
+            }
+            print_array($retval['recipients'], 0, 'retval_recipients for ');
+                    //sort the incoming data ready to pass to PostageApp
             //get template data
             
             //get contact(s) data
@@ -450,105 +484,6 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
             
             return $success_flag;
         }
-
-       
-        /********************** The Database ,ethods *********************/
-        
-         /*
-        protected function _set_up_db_conn($model_name) {
-            $this->config->load('bespoke_configs/' . DATAOWNER_ID . '_config');
-            $dbConn = $this->config->item('database');     //these are different for each dID           
-            //Load DB & Model
-            $this->load->database($dbConn, FALSE, TRUE); 
-            $model_name = $model_name . '_model';
-            $this->load->model($model_name);
-
-            return $model_name;
-        }
-
-        protected function _set_DATAOWNER($dID) {
-            $this->dID = $dID; 
-            if ( ! defined('DATAOWNER_ID') ) define('DATAOWNER_ID', $this->dID);
-        }
-        
-        private function _reset() {  //resets the crud (query) array
-            $this->crud = array
-            (
-                'model_name' => '',
-                'select' => FALSE,
-                'where' => FALSE,
-                'where_in' => FALSE,
-                'id' => FALSE,
-                'assocYN' => FALSE
-            );
-        }
-        
-        protected function _crud($type, $method_name = FALSE) {
-            $model = $this->_set_up_db_conn($this->crud['model_name']);
-            //For instructions on these see http://ellislab.com/codeigniter/user-guide/database/active_record.html
-            if ($this->crud['select']) $this->db->select($this->crud['select']);
-            if ($this->crud['where']) $this->db->where($this->crud['where']);
-            if ($this->crud['where_in']) $this->db->where_in(
-                    $this->crud['where_in']['col'], 
-                    $this->crud['where_in']['values']
-                    );
-            switch($type)
-            {
-                case 'create':
-                    $results = $this->$model->save($this->crud['input']);
-                    break;
-                case 'retrieve':       
-                    if ($this->crud['id']) $results = $this->$model->get($this->crud['id']);
-                    else $results = $this->$model->get();
-                    break;
-                case 'update':
-                    //do update
-                    break;
-                case 'delete':
-                    //do update
-                    break;            
-                case 'update_batch': //surpress error due to CI bug http://stackoverflow.com/questions/11279262/update-database-field-error-codeigniter 
-                    if ($this->crud['update_batch'])  $results = @$this->db->update_batch(
-                            $this->crud['update_batch']['table'], //what table we updating? 
-                            $this->crud['update_batch']['data'], //with what (array), 
-                            $this->crud['update_batch']['col'] //What col are we matching?, 
-                            ); 
-                    break;                
-                case 'insert_batch': //surpress error due to CI bug http://stackoverflow.com/questions/11279262/update-database-field-error-codeigniter 
-                    if ($this->crud['insert_batch']) $results = $this->db->insert_batch(
-                            $this->crud['insert_batch']['table'], //what table we updating? 
-                            $this->crud['insert_batch']['data'] //with what (array), 
-                            );
-                    break;                
-                case 'where_in':
-                    $ids = $this->crud['where_in'];
-                    $this->db->where_in(
-                            $this->crud['where_in']['col'], 
-                            $this->crud['where_in']['values']
-                            );
-                    if ($this->crud['id']) $results = $this->$model->get($this->crud['id']);
-                    else $results = $this->$model->get();
-                    break;            
-                default:
-                    show_error("No CRUD chosen");
-                    break;         
-            }
-
-            $this->_reset();    //reset the crud array
-
-            //maybe some error reporting? what happens if this tag is not set?
-            return $results;
-        }  
-
-        protected function _make_assoc($array, $field) {
-            //rewrites array where $field is the key for each dimension
-            $tmp = array();
-            //Check and see if its an assoc array already
-            if ( array_key_exists($field, $array) ) $array = array_chunk($array, count($array), TRUE);
-            foreach ($array as $k => $a) $tmp[$a[$field]] = $a;
-            return $tmp;
-        }
-        */
 }
    
 

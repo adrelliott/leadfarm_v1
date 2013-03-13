@@ -204,3 +204,52 @@ ERROR - 2013-03-13 16:12:20 --> Severity: Notice  --> Array to string conversion
 ERROR - 2013-03-13 16:12:20 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
 ERROR - 2013-03-13 16:12:34 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
 ERROR - 2013-03-13 16:12:34 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 16:14:47 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 16:14:47 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 16:20:21 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 16:20:21 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 16:32:47 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 16:32:47 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 16:33:18 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Undefined variable: _ActiveUserYN C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 437
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Undefined variable: _ActiveUserYN C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 437
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Undefined variable: _ActiveUserYN C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 437
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Undefined variable: _ActiveUserYN C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 437
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Undefined variable: _ActiveUserYN C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 437
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Undefined variable: _ActiveUserYN C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 437
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:20 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:43 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:43 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:43 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:53:43 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:58:03 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:58:03 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:58:03 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:58:03 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:58:03 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:59:17 --> Severity: Notice  --> Undefined index: recipients C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 447
+ERROR - 2013-03-13 17:59:17 --> Severity: Notice  --> Undefined index: recipients C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 447
+ERROR - 2013-03-13 17:59:17 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 17:59:17 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Undefined index: recipients C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 447
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Undefined index: recipients C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 447
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Undefined index: recipients C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 447
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Undefined index: recipients C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 447
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Undefined index: recipients C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 447
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Undefined index: recipients C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\gen\action.php 447
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407
+ERROR - 2013-03-13 18:00:11 --> Severity: Notice  --> Array to string conversion C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\CI_Framework\database\DB_active_rec.php 1407

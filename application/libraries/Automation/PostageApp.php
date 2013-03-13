@@ -341,53 +341,6 @@ class PostageApp {
       return $content;
   }
   
-  
-  /* Prepare the template
-   * 
-   * 1. Make sure all the variables are lowercase
-   */
-  
-  function prepare_template($Template, $mandatory_fields = array('Id', 'Email', '_OptinEmailYN')) { 
-        //Isolate all the fields ready for find & replace
-        $reval = array();        
-        preg_match_all('/\{{([^}]+)\}}/', $Template['__Content'], $retval['__Content']);
-        preg_match_all('/\{{([^}]+)\}}/', $Template['__Subject'], $retval['__Subject']);
-        
-        //now cycle through these fields and edit for PostageApp 
-        //(PostageApp only allows lower case vars)
-        foreach ($retval as $content_type => $array)
-        {
-            $array[0] = array_unique($array[0]);    //remove duplicates
-            foreach ($array[0] as $k => $field)
-            {
-                $Template[$content_type] = str_replace($field, strtolower($field), $Template[$content_type]);
-            }
-            
-            //now prepare an array for the variables to be passed
-            $array[1] = array_unique($array[1]);
-            foreach ($array[1] as $k => $field)
-            {
-                 $temp = explode('.', $field);
-                if ( !isset($retval[$temp[0]][$field] ) ) $retval[$temp[0]][strtolower($field)] = $temp[1];
-            }      
-            unset($retval[$content_type]);  //tidy up
-        }
-        
-        //Make sure mandatory fields passed are included in the merge field list
-        $table_name = 'Contact';    //we can use this if we start searching on other tables
-        foreach ($mandatory_fields as $field_name)
-        {
-            $full_fieldname = strtolower($table_name . '.' . $field_name);
-            if( !isset($retval[$table_name][$full_fieldname])) $retval[$table_name][$full_fieldname] = $field_name;
-        }
-        
-        //combine results
-        $Template['postageapp_merge_fields'] = $retval;
-        
-        return $Template;
-
-  }
-  
 }
 
 /* End of file PostageApp.php */
