@@ -1,11 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-include(APPPATH . 'libraries/Automation/Crud_lib.php');
-
-class Action extends Crud_lib {
+class Action extends CI_Controller {
     
+        protected $dID = '';    //set by $this->_set_DATAOWNER();
         var $tasks = array();   //holds all data on the tasks
-        var $data = array();   //Not used at the moment        
+        var $data = array();   //Not used at the moment
+        var $crud = array();    //holds all data on the query
         var $form = array();    //holds all data from the form
         var $cols = array       //alows us to remove bad fieldnames from $_POST
         (
@@ -14,26 +14,17 @@ class Action extends Crud_lib {
                 'FirstName', 'LastName', 'Email', 'Username', 'Password'
             ),
         );
-        var $mandatory_fields = array
-        (
-            'contact' => array
-                (
-                'Id', 'Email', '_OptinEmailYN', '_OptinSmsYN', '_OptinTwitterYN', '_OptinSurfaceMailYN', '_OptinNewsletterYN', '_ActiveUserYN'
-                ),
-            'link' => NULL,
-            '__tags' => array
-            (
-                '__Id',
-            ),
-        );
         
         public function __construct()    {
             parent::__construct();
+            $this->output->enable_profiler(TRUE);
+            $this->load->library('Automation/Crud_lib');
+            $this->crud_lib->_reset();    //set up the crud array
         }     
         
         
 	function check_for_tasks($dID) {
-            $this->set_DATAOWNER($dID);
+            $this->crud_lib->_set_DATAOWNER($dID);
             
         # 1. Lets retrive all the data we'll need to do all these tasks
             //retrieve all next steps that are not done, time is expired and belong to dID 
@@ -45,52 +36,42 @@ class Action extends Crud_lib {
                 '__TaskDue <=' => time(),
                 '__CompletedYN !=' => TRUE
                 );
-            $this->tasks['to_do'] = $this->crud('retrieve');
-            
-print_array($this->tasks, 0, "outstanding tasks - time = ".time());
+            $this->tasks['to_do'] = $this->crud_lib->_crud('retrieve');
+            print_array($this->tasks, 0, "outstanding tasks - time = ".time());
             if( empty($this->tasks['to_do'])){
                 echo "no tasks found, time is ".time();
                 return;
             }
             
-            //remove duplicate tasks to do
+            echo "*got here********";return;
+            //remove duplicates
             $this->tasks['to_do'] = array_map(
                     "unserialize", 
                     array_unique(array_map("serialize",$this->tasks['to_do']))
                     );            
             
             //Get all steps for each campaign that is affected
-            $this->tasks['campaign_ids'] = array_keys($this->make_assoc(
+            $this->tasks['campaign_ids'] = array_keys($this->crud_lib->_make_assoc(
                      $this->tasks['to_do'],
                      '__CampaignId')
                      );
-            
             $this->crud['model_name'] = 'steps';              
             $this->crud['where_in']['values'] = $this->tasks['campaign_ids'];            
             $this->crud['where_in']['col'] = '__CampaignId';            
-            $this->tasks['all_steps'] = $this->crud('retrieve');            
-
+            $this->tasks['all_steps'] = $this->crud_lib->_crud('retrieve');
+            
             //Get all templates for each step that is returned
-            $this->tasks['template_ids'] = array_keys($this->make_assoc(
+            $this->tasks['template_ids'] = array_keys($this->crud_lib->_make_assoc(
                      $this->tasks['all_steps'],
                      '__TemplateId')
-                     );            
-            $this->tasks['template_ids'] = array_filter($this->tasks['template_ids']);
-            
-            //if we have templates returned, then convert them to an array that _send_email or _send_tweet can recognise
-            if ( ! empty($this->tasks['template_ids']) )
-            {
-                $this->crud['model_name'] = 'template';              
-                $this->crud['where_in']['values'] = $this->tasks['template_ids'];            
-                $this->crud['where_in']['col'] = '__Id';
-                $this->tasks['all_templates'] = $this->make_assoc(
-                        $this->crud('retrieve'),
-                        '__Id');
-                
-                //now get a list of the queries we need to do to populate these templates
-                $this->tasks['queries'] = $this->_get_cols($this->tasks['all_templates']);
-            }
-            
+                     );
+            $this->crud['model_name'] = 'template';              
+            $this->crud['where_in']['values'] = $this->tasks['template_ids'];            
+            $this->crud['where_in']['col'] = '__Id';
+            $this->tasks['all_templates'] = $this->crud_lib->_make_assoc(
+                    $this->crud_lib->_crud('retrieve'),
+                    '__Id');
+           print_array($this->tasks, 1);
         # 2. Now sort the array into an assoc that contains all data for each step
             //sort these steps into array [campId] => step_array
             $tmp_array = array();
@@ -101,36 +82,35 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
                 $template_id = $array['__TemplateId'];
                 $tmp_array[$camp_id][$step_no] = $array; 
                     //now add in the template details
-                if (isset($this->tasks['queries']['cleaned_template'][$template_id]))
-                    $template_data = $this->tasks['queries']['cleaned_template'][$template_id];
+                if (isset($this->tasks['all_templates'][$template_id]))
+                    $template_data = $this->tasks['all_templates'][$template_id];
                 else $template_data = FALSE;
                 $tmp_array[$camp_id][$step_no]['template_data'] = $template_data;
             }
-            $this->tasks['all_data'] = $tmp_array;  //this is a master array for all task! 
-
-        
+            $this->tasks['all_data'] = $tmp_array;  //this is a master array for all task!
+            
         # 3. Now get the contact details for these tasks
-            $this->tasks['contact_ids'] = array_keys($this->make_assoc(
+            $this->tasks['contact_ids'] = array_keys($this->crud_lib->_make_assoc(
                      $this->tasks['to_do'],
                      '__ContactId')
                      );
-            
             $this->crud['model_name'] = 'contact';              
                 //get the most common fields used in templates
-            $this->crud['select'] = $this->tasks['queries']['cols']['contact'];
+            $this->crud['select'] = array(
+                'Email', 'FirstName', 'LastName', 'Id', 'Nickname', 'Phone1', 'StreetAddress1', 'StreetAddress2', 'City', 'Postalcode', 'Country', 'State', 'Title', '_IsOrganisationYN', '_OrganisationName', '_OptinEmailYN', '_OptinSmsYN', '_OptinTwitterYN', '_OptinSurfaceMailYN', '_OptinNewsletterYN', '_OptinPref'
+                    );              
             $this->crud['where_in']['values'] = $this->tasks['contact_ids'];            
             $this->crud['where_in']['col'] = 'Id';            
-            $this->tasks['all_contacts'] = $this->make_assoc(  //make 'Id' the key
-                     $this->crud('retrieve'),
+            $this->tasks['all_contacts'] = $this->crud_lib->_make_assoc(  //make 'Id' the key
+                     $this->crud_lib->_crud('retrieve'),
                      'Id'
                     );
-            //************* should we be getting other data here from other tables??***
-        
+            
         # 4. Now perform each task    
             foreach ($this->tasks['to_do'] as $k => $task_details)
             {
                 $campaign_data = $this->tasks['all_data'][$task_details['__CampaignId']];
-                if ($this->tasks['all_contacts'][$task_details['__ContactId']]) $contact_data = $this->tasks['all_contacts'][$task_details['__ContactId']]; else return;
+                $contact_data = $this->tasks['all_contacts'][$task_details['__ContactId']];
                 $current_step = $task_details['__StepNumber'];
                 $result = $this->_do_step(
                         $campaign_data, 
@@ -163,41 +143,31 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
             }
             
         ## 5. Finally write these to the database
-            
-             //insert new tasks (if there are any)
-            if( isset($this->tasks['insert_array'] ))
-            {
-                $this->crud['model_name'] = 'nextsteps';  
-                $this->crud['insert_batch'] = array
-                        (
-                            'table' => '__nextsteps',
-                            'data' => $this->tasks['insert_array'],             
-                        );
-
-                print_array($this->crud['insert_batch'], 0, 'insert_batch');
-                $this->crud('insert_batch');
-            }
-            
             //update...
-            if( isset($this->tasks['update_array'] ))
-            {
-                $this->crud['model_name'] = 'nextsteps';  
-                $this->crud['update_batch'] = array
-                        (
-                            'table' => '__nextsteps',
-                            'data' => $this->tasks['update_array'],
-                            'col' => '__Id',               
-                        );            
-                print_array($this->crud['update_batch'], 0, 'update_batch');
-                $this->crud('update_batch');   
-            }
+            $this->crud['model_name'] = 'nextsteps';  
+            $this->crud['update_batch'] = array
+                    (
+                        'table' => '__nextsteps',
+                        'data' => $this->tasks['update_array'],
+                        'col' => '__Id',               
+                    );            
+            $this->crud_lib->_crud('update_batch');   
+            
+             //insert
+            $this->crud['model_name'] = 'nextsteps';  
+            $this->crud['insert_batch'] = array
+                    (
+                        'table' => '__nextsteps',
+                        'data' => $this->tasks['insert_array'],             
+                    );
+            $this->crud_lib->_crud('insert_batch');
             
             //print_array($this->tasks, 0, 'final array');
         }
         
         function redir($dID, $ContactId = NULL, $LinkId, $Step = 1) { 
                     //NOTE> if step=-1 then stop the sequence
-            $this->set_DATAOWNER($dID);
+            $this->crud_lib->_set_DATAOWNER($dID);
             $this->contact_id = $ContactId;
 
             //Set up & perform the query
@@ -209,7 +179,7 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
                 '__DestinationURL',         
             );        
             $this->crud['id'] = $LinkId;
-            $results = $this->crud('retrieve');
+            $results = $this->crud_lib->_crud('retrieve');
 
             //redirect them if the link exists..
             if ($results)
@@ -225,7 +195,7 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
         
         function web_form($dID, $action, $table, $link_id = 'default', $contact_id = FALSE){
             //first, set up the crud environment
-            $this->set_DATAOWNER($dID);
+            $this->crud_lib->_set_DATAOWNER($dID);
              
             //now look at the input & make safe for databases
             $table = strtolower($table);
@@ -244,19 +214,19 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
             switch($action)
             {
                 case 'create':
-                    $results = $this->crud('create');
+                    $results = $this->crud_lib->_crud('create');
                     if ($table = 'contact') $contact_id = $results;
                     break;
                 case 'retrieve':
                     $this->crud['id'] = $contact_id;                 
-                    $results = $this->crud('retrieve');
+                    $results = $this->crud_lib->_crud('retrieve');
                     return;
                     break;
                 case 'update':
                     $this->crud['id'] = '';                         
                     $this->crud['where_in']['values'] = $this->tasks['campaign_ids'];
                     $this->crud['where_in']['col'] = '__CampaignId';
-                    $results = $this->crud('update');
+                    $results = $this->crud_lib->_crud('update');
                     break;               
                 default:
                     break;
@@ -286,57 +256,6 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
         
         /*********************Internal Methods **************************/
        
-        
-        protected function _get_cols($template_ids = array(), $mandatory_fields = FALSE) {
-            //set up method
-            if( empty($template_ids)) return FALSE;
-            $reval = array(); 
-            
-            //1. cycle though the templates passed & extract vars
-            foreach ($template_ids as $id => $array)
-            {
-                preg_match_all(
-                        '/\{{([^}]+)\}}/', 
-                        $array['__Subject'], 
-                        $retval['cols'][$id]
-                        );
-                preg_match_all(
-                        '/\{{([^}]+)\}}/', 
-                        $array['__Content'], 
-                        $retval['cols'][$id]
-                        );
-                foreach($retval['cols'][$id][1] as $k => $var)
-                {
-                    $explode = explode('.', $var);
-                    $this->mandatory_fields[strtolower($explode[0])][] = $explode[1];
-                    
-                    //$retval['cols']['cols_rqd'][strtolower($explode[0])][] = $explode[1];
-                }
-                
-                //change vars to lower case (for PostageApp only)
-                if ($array['__ActionType'] == 'EMAIL')
-                {
-                    foreach($retval['cols'][$id][0] as $k => $var)
-                    {
-                        $template_ids[$id]['__Subject'] = str_replace($var, strtolower($var), $template_ids[$id]['__Subject']);
-                        $template_ids[$id]['__Content'] = str_replace($var, strtolower($var), $template_ids[$id]['__Content']);
-                    }
-                }
-            }
-            $retval['cleaned_template'] = $template_ids;    //
-            $retval['cols'] = $this->mandatory_fields;
-            
-            //now remove any duplicates in the cols_rqd array
-            foreach ( $retval['cols'] as $table => $array)
-            {
-                $retval['cols'][$table] = array_unique($array);                   
-            }
-            
-            return $retval;
-        }
-        
-        
-        
         protected function _do_step($campaign_data, $contact_data, $step_no) {
             $result = FALSE;
             //What type of action we doing here?
@@ -405,13 +324,12 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
         
         /**************** These methods perform the actions of the step ************/        
         protected function _apply_tag($tag_id, $contact_id) {
-            $success_flag = FALSE;
-//insert into tag_join table
+            //insert into tag_join table
             
             return $success_flag;
         }
         protected function _send_email($template_data, $contact_data) {
-            $success_flag = FALSE;
+            
             //get template data
             
             //get contact(s) data
@@ -421,7 +339,6 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
             //return $success_flag;
         }
         protected function _send_letter($template_id, $contact_id) {
-            $success_flag = FALSE;
             //get template data
             
             //get contact(s) data
@@ -431,7 +348,6 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
             return $success_flag;
         }
         protected function _send_tweet($template_id, $contact_id) {
-            $success_flag = FALSE;
             //get template data
             
             //get contact(s) data
@@ -441,7 +357,6 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
             return $success_flag;
         }
         protected function _send_sms($template_id, $contact_id) {
-            $success_flag = FALSE;
             //get template data
             
             //get contact(s) data
@@ -451,104 +366,9 @@ print_array($this->tasks, 0, "outstanding tasks - time = ".time());
             return $success_flag;
         }
 
-       
-        /********************** The Database ,ethods *********************/
         
-         /*
-        protected function _set_up_db_conn($model_name) {
-            $this->config->load('bespoke_configs/' . DATAOWNER_ID . '_config');
-            $dbConn = $this->config->item('database');     //these are different for each dID           
-            //Load DB & Model
-            $this->load->database($dbConn, FALSE, TRUE); 
-            $model_name = $model_name . '_model';
-            $this->load->model($model_name);
-
-            return $model_name;
-        }
-
-        protected function _set_DATAOWNER($dID) {
-            $this->dID = $dID; 
-            if ( ! defined('DATAOWNER_ID') ) define('DATAOWNER_ID', $this->dID);
-        }
         
-        private function _reset() {  //resets the crud (query) array
-            $this->crud = array
-            (
-                'model_name' => '',
-                'select' => FALSE,
-                'where' => FALSE,
-                'where_in' => FALSE,
-                'id' => FALSE,
-                'assocYN' => FALSE
-            );
-        }
         
-        protected function _crud($type, $method_name = FALSE) {
-            $model = $this->_set_up_db_conn($this->crud['model_name']);
-            //For instructions on these see http://ellislab.com/codeigniter/user-guide/database/active_record.html
-            if ($this->crud['select']) $this->db->select($this->crud['select']);
-            if ($this->crud['where']) $this->db->where($this->crud['where']);
-            if ($this->crud['where_in']) $this->db->where_in(
-                    $this->crud['where_in']['col'], 
-                    $this->crud['where_in']['values']
-                    );
-            switch($type)
-            {
-                case 'create':
-                    $results = $this->$model->save($this->crud['input']);
-                    break;
-                case 'retrieve':       
-                    if ($this->crud['id']) $results = $this->$model->get($this->crud['id']);
-                    else $results = $this->$model->get();
-                    break;
-                case 'update':
-                    //do update
-                    break;
-                case 'delete':
-                    //do update
-                    break;            
-                case 'update_batch': //surpress error due to CI bug http://stackoverflow.com/questions/11279262/update-database-field-error-codeigniter 
-                    if ($this->crud['update_batch'])  $results = @$this->db->update_batch(
-                            $this->crud['update_batch']['table'], //what table we updating? 
-                            $this->crud['update_batch']['data'], //with what (array), 
-                            $this->crud['update_batch']['col'] //What col are we matching?, 
-                            ); 
-                    break;                
-                case 'insert_batch': //surpress error due to CI bug http://stackoverflow.com/questions/11279262/update-database-field-error-codeigniter 
-                    if ($this->crud['insert_batch']) $results = $this->db->insert_batch(
-                            $this->crud['insert_batch']['table'], //what table we updating? 
-                            $this->crud['insert_batch']['data'] //with what (array), 
-                            );
-                    break;                
-                case 'where_in':
-                    $ids = $this->crud['where_in'];
-                    $this->db->where_in(
-                            $this->crud['where_in']['col'], 
-                            $this->crud['where_in']['values']
-                            );
-                    if ($this->crud['id']) $results = $this->$model->get($this->crud['id']);
-                    else $results = $this->$model->get();
-                    break;            
-                default:
-                    show_error("No CRUD chosen");
-                    break;         
-            }
-
-            $this->_reset();    //reset the crud array
-
-            //maybe some error reporting? what happens if this tag is not set?
-            return $results;
-        }  
-
-        protected function _make_assoc($array, $field) {
-            //rewrites array where $field is the key for each dimension
-            $tmp = array();
-            //Check and see if its an assoc array already
-            if ( array_key_exists($field, $array) ) $array = array_chunk($array, count($array), TRUE);
-            foreach ($array as $k => $a) $tmp[$a[$field]] = $a;
-            return $tmp;
-        }
-        */
 }
    
 

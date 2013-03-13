@@ -58,6 +58,7 @@ if (defined('ENVIRONMENT'))
                 exit('The application environment is not set correctly.');
     }
 }
+/********** Turn off the profiler (shows query outputs) in core/MY_Model.php **/
 
 /*
  *---------------------------------------------------------------

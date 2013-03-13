@@ -49,6 +49,5 @@ default:
 
 
 
-
 /* End of file global_database.php */
 /* Location: ./application/config/bespoke_config/global_database.php */
