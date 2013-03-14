@@ -311,3 +311,14 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
         echo $retval;
 
     }
+    
+    function concatenate_fields($array, $fields_array = array()) {
+        //takes fields passed and puts inot an address style format
+        $retval = '';
+        foreach ($fields_array as $field)
+        {
+            if (isset($array['$fields_array'])) $retval .= $array[$fields_array].",/n";
+        }
+        
+        return $retval;
+    }

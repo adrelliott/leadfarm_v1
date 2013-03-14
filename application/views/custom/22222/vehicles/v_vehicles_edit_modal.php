@@ -23,12 +23,11 @@
                                 </div>                            
                             <?php echo form_close(); ?>
                         </div>
-                        <span class="notification information margin_top_25">NOTE: More details available by clicking 'Vehicles' menu button or on the vehicle list on Contact's page</span>
+                        <span class="notification information margin_top_25">NOTE: More details available by clicking 'Vehicles' menu button</span>
                     </div>
                 </div>                
             </div>
         </div>      
     </div>    
 </div> 
-<?php //print_array($this->data); ?>
         

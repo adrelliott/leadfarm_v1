@@ -71,6 +71,7 @@ class Login extends CI_Controller {
                       'Phone1' => $Phone1,
                       'Company' => $Company,
                       'UserId' => $Id,
+                      '_JobCategory' => $_JobCategory,
                       '_dID' => DATAOWNER_ID
                   );
                 $this->session->set_userdata($sessionData);

@@ -24,6 +24,10 @@ class Contact_model extends MY_Model {
         }
     }
     
+    function get_contacts_details() {
+        return $this->get($this->data['view_setup']['ContactId']);
+    }
+    
     
         
     public function master_search() {

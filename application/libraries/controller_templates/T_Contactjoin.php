@@ -29,6 +29,8 @@ class T_Contactjoin extends MY_Controller {
         $input = clean_data($this->input->post());
         $input['__ContactId'] = $ContactId;
         
+        //print_array($input, 1, 'iunput');
+        
         //save record
         $rID = $this->add_record($input, $rID);
         

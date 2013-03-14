@@ -695,5 +695,27 @@ h3.speech_icon {
 	}
  
 .display_none {display: none}
-        
-  
+
+/* Garage styles for Booking page */
+.booking {
+        width:70%;
+}
+.booking_left {
+    width:90%;
+    float:left;
+}
+.booking_left h3{
+    margin: 0;
+}
+
+.booking_right {
+    width:10%;
+    float:right;
+    padding: 5px 0;
+}
+.giant.button {
+    font-size: 3.3em;
+}
+.giant {
+    font-size: 2.3em;
+    }

@@ -119,14 +119,13 @@
                        </div>
                     </div>
                     <div id="tab-7">
-                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/relationships') ?>">
-                        <?php
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactjoin/view/edit', 'anchor_uri_append' => $ContactId, 'anchor_attr' => 'class="iframe"'));    
-                            $this->table->set_heading_custom($tables['relationships']['table_headers']);
-                            echo $this->table->generate_custom($tables['relationships']['table_data']); 
-                        ?>
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/comms') ?>">
+                             <?php $this->load->view ('custom/22222/contact/v_contact_edit/comms') ?>
                         </div>
-                        <code>This section shows details of emails/texts & letters sent to this contact</code>
+                            <div class="clearfix margin_top_15">
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/comms/view/new/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-7"><span>Create New Comm</span></a>
+                       </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -45,7 +45,7 @@ class Booking_model extends MY_Model {
             {
                 //echo "color of status = " . $array['_Status'];die;
                 case 0:
-                    $color = '#cccccc'; //#ccc
+                    $color = '#99ccff'; //#ccc
                     break;
                 case 1:
                     $color = '#99ccff'; //blue
