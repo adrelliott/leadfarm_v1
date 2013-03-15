@@ -23,15 +23,16 @@ class T_User extends MY_Controller {
         $this->_load_view_data($rID);    //retrieves and process all data for view              
     }    
      
-    public function add($view_file, $rID, $ContactId) {       
+    public function add($view_file, $rID) {       
         //clean input
         $input = clean_data($this->input->post());
+        if (isset($input['Email'])) $input['Email'] = md5 ($input['Email']);
         
         //save record
         $rID = $this->add_record($input, $rID);
         
         //refresh page
-        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId);
+        redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/' . $view_file . '/' . $rID );
        
     }
     

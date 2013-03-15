@@ -86,3 +86,9 @@ ERROR - 2013-03-14 08:47:27 --> Severity: Notice  --> Undefined index: _Status C
 ERROR - 2013-03-14 08:47:27 --> Severity: Notice  --> Undefined index: _Status C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\libraries\controller_templates\T_Booking.php 67
 ERROR - 2013-03-14 08:47:27 --> Severity: Notice  --> Undefined index: _Status C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\libraries\controller_templates\T_Booking.php 67
 ERROR - 2013-03-14 08:47:27 --> Severity: Notice  --> Undefined index: _Status C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\libraries\controller_templates\T_Booking.php 67
+ERROR - 2013-03-14 09:54:32 --> Severity: Warning  --> Missing argument 1 for T_Settings::index() C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\libraries\controller_templates\T_Settings.php 11
+ERROR - 2013-03-14 09:54:32 --> Severity: Notice  --> Undefined variable: view_file C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\libraries\controller_templates\T_Settings.php 12
+ERROR - 2013-03-14 09:54:32 --> Severity: Notice  --> Undefined variable: model_setup C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\core\MY_Controller.php 229
+ERROR - 2013-03-14 14:30:48 --> Severity: Warning  --> Missing argument 1 for T_Settings::index() C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\libraries\controller_templates\T_Settings.php 11
+ERROR - 2013-03-14 14:30:48 --> Severity: Notice  --> Undefined variable: view_file C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\libraries\controller_templates\T_Settings.php 12
+ERROR - 2013-03-14 14:30:48 --> Severity: Notice  --> Undefined variable: model_setup C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\core\MY_Controller.php 229
