@@ -28,6 +28,7 @@ define('OPT_IN_REASON', "This is my opt in reason");
 define('UNSUBSCRIBE_LINK', base_url( 'gen/comms/unsubs/' . DATAOWNER_ID . '/_:_ContactId_:_'));
 define('UNSUBSCRIBE', '<br/><br/><small><a href="' . UNSUBSCRIBE_LINK . '">Unsubscribe from all future emails here</a></small>');
 define('COUNTDOWN', 45);  //Notifies the user {45 days {VALUE} days before MOT/Service expires. see libraries/garages/garages.php
+define('ADMIN_LEVEL_SUPERVISOR', 5);  //set Contact->_AdminLevel to alow superior access
 
 
 /*
@@ -4754,7 +4755,7 @@ $config['help'] = Array
 
 
 
-/*
+
 $config['user'] = Array
     (
     'datasets' => array 
@@ -4764,7 +4765,7 @@ $config['user'] = Array
                 'users' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
-                    'data_source' => 'contacts', //The dataset name defined in this file
+                    //'data_source' => 'contacts', //The dataset name defined in this file
                     'model_name' => 'contact_model',
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
@@ -4796,7 +4797,25 @@ $config['user'] = Array
                         'ActionDescription' => 'Description',
                         'UserID' => '',
                     ),
-                ),      
+                ),
+                 'users' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    //'data_source' => 'contacts', //The dataset name defined in this file
+                    'model_name' => 'contact_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            '_IsCrmUserYN =' => 1, 
+                        ),
+                    'fields' => array 
+                    (
+                        'Id' => '',
+                        'FirstName' => 'First Name',
+                        'LastName' => 'Last Name',
+                        'UserName' => 'Username',
+                    ),
+                ),   
                 /*'communications' => array
                 (
     // this needs to be turned to TRUE!!! )(create table & model first though)                
@@ -4810,25 +4829,6 @@ $config['user'] = Array
                         'Id' => '#',
                     ),
                 ),   */  
-/*                'users' => array
-                (
-                    'include_in_query' => TRUE, //TRUE or FALSE,
-                    'data_source' => 'users', //The dataset name defined above
-                    'model_name' => 'contact_model',
-                    'model_method' => 'get_all_records', 
-                    'model_params' => array 
-                        (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsCrmUserYN =' => 1, 
-                        ),
-                    'fields' => array 
-                    (
-                        'Id' => '#',
-                        'FirstName' => 'First Name',
-                        'LastName' => 'Last Name',
-                        'Username' => 'Username',
-                        'Password' => 'Password',
-                    ),
-                ),
             ),
         ),
         'record' => array
@@ -5440,7 +5440,7 @@ $config['user'] = Array
             ),
         ),
     );
-*/
+
 
 /* End of file */
 

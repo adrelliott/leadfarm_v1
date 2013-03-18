@@ -63,9 +63,13 @@ function clean_data($input, $cleanse_type = NULL){
                         
                         unset($retval[$key]);
                     }
-                    elseif (substr($key, 0, 3) == '_:_') //prepended with double underscore?
+                    elseif (substr($key, 0, 3) == '_:_') //prepended with this...
                     {
-                        unset($retval[$key]);
+                        unset($retval[$key]);   //...ignore it
+                    }
+                    elseif (substr($key, 0, 3) == '___') //prepended with 3 underscores...
+                    {
+                        unset($retval[$key]);   //...ignore it
                     }
                 }
                 

@@ -7,7 +7,7 @@
                     <li>
                         <h2><a href="#tab-1">Details</a></h2>
                     </li>
-                    <li style="<?php echo $display_none; ?>"">
+                    <li style="<?php echo $display_none; ?>">
                         <h2><a href="#tab-2">Notes</a></h2>
                     </li>
                     <li style="<?php echo $display_none; ?>">

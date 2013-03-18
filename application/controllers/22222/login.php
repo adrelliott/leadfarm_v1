@@ -72,6 +72,7 @@ class Login extends CI_Controller {
                       'Company' => $Company,
                       'UserId' => $Id,
                       '_JobCategory' => $_JobCategory,
+                      '_AdminLevel' => $_AdminLevel,
                       '_dID' => DATAOWNER_ID
                   );
                 $this->session->set_userdata($sessionData);

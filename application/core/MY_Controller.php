@@ -298,6 +298,14 @@ class MY_Controller extends CI_Controller {
         return $rID;
     }
     
+    function get_record($rID) {        
+        $model_name = $this->controller_name . '_model';
+        $this->load->model($model_name);
+        $rID = $this->$model_name->get($rID); 
+        
+        return $rID;
+    }
+    
     
     
     
