@@ -122,9 +122,8 @@
                         <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/comms') ?>">
                              <?php $this->load->view ('custom/22222/contact/v_contact_edit/comms') ?>
                         </div>
-                            <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/comms/view/new/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-7"><span>Create New Comm</span></a>
-                       </div>
+                        <div class="clearfix margin_top_15">
+                       <a href="<?php echo site_url() . DATAOWNER_ID; ?>/comms/view/new/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-7"><span>Create New Comm</span></a>
                         </div>
                     </div>
                 </div>

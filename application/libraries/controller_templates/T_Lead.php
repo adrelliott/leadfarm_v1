@@ -14,22 +14,20 @@ class T_Lead extends MY_Controller {
         $this->_load_view_data();   //retrieves and process all data for view        
     }
    
-    public function view($view_file, $rID){
+    public function view($view_file, $rID, $ContactId){
+        $this->data['view_setup']['modal'] = TRUE;
         parent::view($view_file);    
         $this->data['view_setup']['rID'] = $rID;
-        //$this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
+        $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
         $this->data['view_setup']['display_none'] = ''; 
         
         
         $this->_load_view_data($rID);    //retrieves and process all data for view              
     }    
      
-    public function add($view_file, $rID) {
-
-        //clean input
+    public function add($view_file, $rID, $ContactId) {
+//clean input
         $input = clean_data($this->input->post());
-         $input['ContactID'] = $ContactId;   //Gotcha: watch for capitised 'ID'
-        
         //save record
         $rID = $this->add_record($input, $rID);
         

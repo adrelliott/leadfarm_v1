@@ -524,7 +524,7 @@ class MY_Table extends CI_Table {
 	{
 		return  array (
 			'anchor_uri'                   => '',
-			'ContactId_name'             => '',
+			'ContactId_name'             => '', //set this to append the contact Id at end of link
 			'anchor_uri_append'           => '',
 			'anchor_attr'                 => '',    //e.g class="iframe"
 			'primary_key_fieldname'       => 'Id',    //this is usually 'Id' or '__Id'

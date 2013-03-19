@@ -1,9 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Campaign extends T_Campaign {
-
-	
-
+    
     public function __construct()    {
          parent::__construct();
     }

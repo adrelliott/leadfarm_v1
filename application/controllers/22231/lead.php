@@ -19,8 +19,8 @@ class Lead extends T_Lead {
         $this->_generate_view($this->data);
    }
    
-  public function view($view_file = 'edit', $rID) {  
-        parent::view($view_file, $rID);
+  public function view($view_file = 'edit', $rID,  $ContactId) {  
+        parent::view($view_file, $rID,  $ContactId);
         
           // Generate the view!
         $this->_generate_view($this->data);

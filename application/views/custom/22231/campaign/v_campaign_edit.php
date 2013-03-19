@@ -47,13 +47,13 @@
                     </div>
                     <div id="tab-2">
                         <?php 
-                            $this->table->set_template_custom(array ('anchor_uri' => 'contactgroup/view/edit', 'anchor_attr' => 'class="iframe"'));    
+                            $this->table->set_template_custom(array ('anchor_uri' => 'tags/view/edit', 'anchor_attr' => 'class="iframe"'));    
                             $this->table->set_heading_custom($tables['get_all_tags']['table_headers']);
                             echo $this->table->generate_custom($tables['get_all_tags']['table_data']); 
                         ?> 
                         <div class="margin_top_15"></div>
                         <div class="clearfix">
-                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactgroup/view/edit/new" class="large blue button right iframe"><span>Create New Tag</span></a>
+                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/tags/view/edit/new" class="large blue button right iframe"><span>Create New Tag</span></a>
                         </div>
                     </div>
                     <div id="tab-3">
