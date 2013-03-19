@@ -394,3 +394,16 @@ ERROR - 2013-03-19 09:10:42 --> Severity: Notice  --> Undefined index: contactID
 ERROR - 2013-03-19 09:10:42 --> Severity: Notice  --> Undefined index: contactID C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 39
 ERROR - 2013-03-19 09:11:35 --> Query error: Unknown column 'Id' in 'field list'
 ERROR - 2013-03-19 09:12:31 --> Query error: Unknown column 'Id' in 'field list'
+ERROR - 2013-03-19 12:09:26 --> Severity: Notice  --> Undefined variable: model_setup C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\core\MY_Controller.php 229
+ERROR - 2013-03-19 12:09:26 --> Severity: Notice  --> Undefined index: tables C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\libraries\controller_templates\T_Lead.php 44
+ERROR - 2013-03-19 12:09:26 --> Severity: Warning  --> Invalid argument supplied for foreach() C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\libraries\controller_templates\T_Lead.php 44
+ERROR - 2013-03-19 12:09:26 --> Severity: Notice  --> Undefined index: Contact C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 15
+ERROR - 2013-03-19 12:09:26 --> Severity: Warning  --> Invalid argument supplied for foreach() C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 15
+ERROR - 2013-03-19 12:09:26 --> Severity: Notice  --> Undefined index: Lead C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 23
+ERROR - 2013-03-19 12:09:26 --> Severity: Warning  --> Invalid argument supplied for foreach() C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 23
+ERROR - 2013-03-19 12:09:26 --> Severity: Notice  --> Undefined index: Suspect C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 31
+ERROR - 2013-03-19 12:09:26 --> Severity: Warning  --> Invalid argument supplied for foreach() C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 31
+ERROR - 2013-03-19 12:09:26 --> Severity: Notice  --> Undefined index: Prospect C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 39
+ERROR - 2013-03-19 12:09:26 --> Severity: Warning  --> Invalid argument supplied for foreach() C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 39
+ERROR - 2013-03-19 12:09:26 --> Severity: Notice  --> Undefined index: leads C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 51
+ERROR - 2013-03-19 12:09:26 --> Severity: Notice  --> Undefined index: leads C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 52
