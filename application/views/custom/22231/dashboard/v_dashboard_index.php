@@ -22,10 +22,10 @@
                 <h4>You can search by <em>Name</em>, or <em>Postcode</em>, or <em>Company Name</em>, or <em>Phone Number</em></h4>
                 <div class="margin_top_15"></div>
                 <?php 
-                    $this->table->set_template_custom(array ('anchor_uri' => 'lead/view/edit', 'anchor_uri_append' => 'unknown', 'ContactId_name' => 'Id'));    
+                    $this->table->set_template_custom(array ('anchor_uri' => 'lead/view/edit', 'ContactId_name' => 'ContactID', 'anchor_attr' => 'class="iframe"'));    
                     $this->table->set_heading_custom($tables['leads']['table_headers']);
                     echo $this->table->generate_custom($tables['leads']['table_data']); 
-                ?> 
+                ?>
             </div>
             <div class="clearfix"></div>
             <h3 class="index toggle_icon" id="option2_toggle">Tasks...</h3>

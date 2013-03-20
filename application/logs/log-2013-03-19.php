@@ -407,3 +407,9 @@ ERROR - 2013-03-19 12:09:26 --> Severity: Notice  --> Undefined index: Prospect 
 ERROR - 2013-03-19 12:09:26 --> Severity: Warning  --> Invalid argument supplied for foreach() C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 39
 ERROR - 2013-03-19 12:09:26 --> Severity: Notice  --> Undefined index: leads C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 51
 ERROR - 2013-03-19 12:09:26 --> Severity: Notice  --> Undefined index: leads C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\lead\v_lead_index.php 52
+ERROR - 2013-03-19 12:39:47 --> Severity: Warning  --> Missing argument 3 for Lead::view() C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\22231\lead.php 22
+ERROR - 2013-03-19 12:39:47 --> Severity: Notice  --> Undefined variable: ContactId C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\controllers\22231\lead.php 23
+ERROR - 2013-03-19 12:40:12 --> Severity: Notice  --> Undefined index: comms C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\contact\v_contact_edit\comms.php 4
+ERROR - 2013-03-19 12:40:12 --> Severity: Notice  --> Undefined index: comms C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\contact\v_contact_edit\comms.php 5
+ERROR - 2013-03-19 12:42:09 --> Severity: Notice  --> Undefined index: comms C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\contact\v_contact_edit\comms.php 4
+ERROR - 2013-03-19 12:42:09 --> Severity: Notice  --> Undefined index: comms C:\wamp\www\projects\_leadfarm\_Current_version\Leadfarm_v1\application\views\custom\22231\contact\v_contact_edit\comms.php 5

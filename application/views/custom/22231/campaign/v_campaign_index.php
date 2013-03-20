@@ -20,13 +20,13 @@
                 <div class="hide_toggle" id="option1">
                     <h3>Your Tags:</h3>
                     <?php 
-                        $this->table->set_template_custom(array ('anchor_uri' => 'contactgroup/view/edit', 'anchor_attr' => 'class="iframe"'));    
+                        $this->table->set_template_custom(array ('anchor_uri' => 'tags/view/edit', 'anchor_attr' => 'class="iframe"'));    
                         $this->table->set_heading_custom($tables['get_all_tags']['table_headers']);
                         echo $this->table->generate_custom($tables['get_all_tags']['table_data']); 
                     ?> 
                     <div class="margin_top_15"></div>
                     <div class="clearfix">
-                        <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactgroup/view/edit/new" class="large blue button right iframe"><span>Create New Tag</span></a>
+                        <a href="<?php echo site_url() . DATAOWNER_ID; ?>/tags/view/edit/new" class="large blue button right iframe"><span>Create New Tag</span></a>
                     </div>
                     <h3>Your Templates:</h3>
                     <?php 
