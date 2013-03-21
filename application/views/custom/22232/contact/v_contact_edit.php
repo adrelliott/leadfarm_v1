@@ -29,9 +29,6 @@
                             <p id="option1_toggle" class="button left">
                                 <span>View Opt In Settings</span>
                             </p> 
-                            <p id="option2_toggle" class="button right">
-                                <span>View Organisation Details</span>
-                            </p> 
                             <div class="hide_toggle" id="option1">
                                 <div class="form margin_top_30">
                                     <?php display_field($fields['_OptinEmailYN']); ?>
@@ -39,19 +36,8 @@
                                     <?php display_field($fields['_OptinSurfaceMailYN']); ?>
                                     <?php display_field($fields['_OptinNewsletterYN']); ?>
                                     <?php display_field($fields['_OptinPref']); ?>
-                                    <div class="clearfix">
-                                        <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="hide_toggle" id="option2">
-                                <div class="form margin_top_30">
-                                    <?php display_field($fields['__OrgStructure']); ?>
-                                    <?php display_field($fields['__NoStaff']); ?>
-                                    <?php display_field($fields['__INHousehrYN']); ?>
-                                    <?php display_field($fields['__Sector']); ?>
+                                    <?php display_field($fields['__ClubEventsYN']); ?>
+                                    <?php display_field($fields['__AwayMatchYN']); ?>
                                     <div class="clearfix">
                                         <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
 
@@ -102,30 +88,30 @@
             <div class="widget clearfix tabs">
                 <ul>
                     <li><h2><a href='#tab-5'>Actions</a></h2></li>
-                    <li><h2><a href='#tab-6'>Opportunities</a></h2></li>
+                    <li><h2><a href='#tab-6'>Purchases</a></h2></li>
                     <li><h2><a href='#tab-7'>Comms</a></h2></li>
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-5">
                         <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_actions') ?>">
-                            <?php $this->load->view ('custom/22222/contact/v_contact_edit/all_actions') ?>
+                            <?php $this->load->view ('custom/22232/contact/v_contact_edit/all_actions') ?>
                         </div>
                         <div class="clearfix margin_top_15">
                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_action/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-5"><span>Create New Action</span></a>
                        </div>
                     </div>
                     <div id="tab-6">
-                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_actions') ?>">
-                            <?php $this->load->view ('custom/22231/contact/v_contact_edit/leads') ?>
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_purchases') ?>">
+                            <?php $this->load->view ('custom/22232/contact/v_contact_edit/all_purchases') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/lead/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-5"><span>Create New Opportunity</span></a>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/order/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-5"><span>Create New Order</span></a>
                        </div>
                     </div>
                     
                     <div id="tab-7">
                         <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/comms') ?>">
-                             <?php $this->load->view ('custom/22231/contact/v_contact_edit/comms') ?>
+                             <?php $this->load->view ('custom/22232/contact/v_contact_edit/comms') ?>
                         </div>
                         <div class="clearfix margin_top_15">
                        <a href="<?php echo site_url() . DATAOWNER_ID; ?>/comms/view/new/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-7"><span>Create New Comm</span></a>

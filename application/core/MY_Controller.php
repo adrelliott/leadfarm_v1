@@ -132,7 +132,17 @@ class MY_Controller extends CI_Controller {
            
         }
         
-        // 5. Any post processing to be done?
+        // 5. Now find any stats. store in ['controller_setup']['results']['stats']
+        // (This is the query that gets all the data for this record        
+        if (isset($this->data['config']['stats']))
+        { 
+            foreach ($this->data['config']['stats'][$method_name] as $stat => $array)
+            {
+                $this->data['view_setup']['stats'][$stat] = $this->_generate_stat($array);
+            }            
+        }
+        
+        // 6. Any post processing to be done?
         $method_name = 'post_process_' . $this->controller_name;
         if (method_exists($this,$method_name)) $this->$method_name($this->data);
         
@@ -149,6 +159,27 @@ class MY_Controller extends CI_Controller {
        
     }
     
+    protected function _generate_stat($array) {
+        //print_array($array, 0, 'this is array ');
+        //return;
+        $model_name = $array['model_name'];
+        $table_name = explode('_', $model_name);
+        $this->output->enable_profiler(TRUE);
+        
+        switch ($array['stat_type'])
+        {
+            case 'count':
+                //straight count                
+                if ($array['model_params']) $this->db->where($array['model_params']);
+                return $this->db->count_all_results($table_name[0]);                
+                break;
+            case 'average':
+                break;
+            case 'increase':
+                //do we need a date range?
+                break;
+        }
+    }
     
     
     
@@ -298,8 +329,8 @@ class MY_Controller extends CI_Controller {
         return $rID;
     }
     
-    function get_record($rID) {        
-        $model_name = $this->controller_name . '_model';
+    function get_record($rID, $model_name = FALSE) {        
+        if ( !$model_name ) $model_name = $this->controller_name . '_model';
         $this->load->model($model_name);
         $rID = $this->$model_name->get($rID); 
         

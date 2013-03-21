@@ -17,25 +17,72 @@
                 </div>
             </div>
             <div class="clearfix"></div>
-            <h3 class="index toggle_icon" id="option3_toggle">Leads...</h3>
+            <h3 class="index toggle_icon" id="option3_toggle">Campaigns...</h3>
             <div class="widget_inside hide_toggle" id="option3">
-                <h4>You can search by <em>Name</em>, or <em>Postcode</em>, or <em>Company Name</em>, or <em>Phone Number</em></h4>
                 <div class="margin_top_15"></div>
                 <?php 
-                    $this->table->set_template_custom(array ('anchor_uri' => 'lead/view/edit', 'ContactId_name' => 'ContactID', 'anchor_attr' => 'class="iframe"'));    
-                    $this->table->set_heading_custom($tables['leads']['table_headers']);
-                    echo $this->table->generate_custom($tables['leads']['table_data']); 
+                    $this->table->set_template_custom(array ('anchor_uri' => 'campaign/view/edit'));    
+                    $this->table->set_heading_custom($tables['campaigns']['table_headers']);
+                    echo $this->table->generate_custom($tables['campaigns']['table_data']); 
                 ?>
+                <div class="margin_top_15"></div>
+                <div class="clearfix">
+                    <a href="<?php echo site_url() . DATAOWNER_ID; ?>/campaign/view/edit/new" class="large blue button right"><span>Create New Campaign</span></a>
+                </div>
             </div>
             <div class="clearfix"></div>
-            <h3 class="index toggle_icon" id="option2_toggle">Tasks...</h3>
+            <h3 class="index toggle_icon" id="option2_toggle">Stats & Reports...</h3>
             <div class="widget_inside hide_toggle" id="option2">
+                 <table class="regular">
+                    <thead>
+                        <tr>
+                            <th class="align-left"><h4>Metric</h4></th>
+                    <th class="align-left"><h4>Value</h4></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Number of members</td>
+                            <td><h4>6,547</h4></td>
+                        </tr>
+                        <tr>
+                            <td>Number of Adult members</td>
+                            <td><h4>4,812</h4></td>
+                        </tr>
+                        <tr>
+                            <td>Number of Junior members</td>
+                            <td><h4>1,645</h4></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="report margin_top_15">
+                    <div class="button up">
+                        <span class="value">1,337</span>
+                        <span class="attr">Check-ins</span>
+                    </div>
+                    <div class="button down">
+                        <span class="value">9,001</span>
+                        <span class="attr">Pageviews</span>
+                    </div>
+                    <div class="button">
+                        <span class="value">3.142</span>
+                        <span class="attr">Pages/Views</span>
+                    </div>
+                    <div class="button">
+                        <span class="value">83%</span>
+                        <span class="attr">Bounce Rate</span>
+                    </div>
+                    <div class="button">
+                        <span class="value">00:00:33</span>
+                        <span class="attr">Avg. Time on Site</span>
+                    </div>
+                </div>
                 <div class="margin_top_15"></div>
                 <?php 
-                    $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => 'unknown', 'ContactId_name' => 'Id'));    
-                    $this->table->set_heading_custom($tables['tasks']['table_headers']);
-                    echo $this->table->generate_custom($tables['tasks']['table_data']); 
-                ?> 
+                    $this->table->set_template_custom(array ('anchor_uri' => 'reports/view/edit'));    
+                    $this->table->set_heading_custom($tables['reports']['table_headers']);
+                    echo $this->table->generate_custom($tables['reports']['table_data']); 
+                ?>
                 
             </div>
             <div class="clearfix"></div>

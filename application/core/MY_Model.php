@@ -52,7 +52,6 @@ class MY_Model extends CI_Model {
      * In all other cases the result wil be returned as an array of arrays
      * array(array('id' => 1, 'title' => 'Some title'), array('id' => 2, 'title' => 'Some other title'))
      * 
-     * Thanks to Zack Kitzmiller who suggested some improvements.
      * 
      * @param mixed $id An ID or an array of IDs (optional, default = FALSE)
      * @return array
