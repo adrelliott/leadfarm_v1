@@ -318,6 +318,32 @@ $config['dashboard'] = Array
                     (
                         'Id' => '#',
                     ),
+                ),
+                'count_all_adult_records' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE
+                    'data_source' => '', //The dataset name defined in this file
+                    'stat_type' => 'count', //count, average, etc
+                    'model_name' => 'contact_model',
+                    'model_method' => 'count_all_results',
+                    'model_params' => NULL, //e.g. where('type', 'mytype')
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                    ),
+                ),
+                'count_all_junior_records' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE
+                    'data_source' => '', //The dataset name defined in this file
+                    'stat_type' => 'count', //count, average, etc
+                    'model_name' => 'contact_model',
+                    'model_method' => 'count_all_results',
+                    'model_params' => NULL, //e.g. where('type', 'mytype')
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                    ),
                 )
             ),
         ),

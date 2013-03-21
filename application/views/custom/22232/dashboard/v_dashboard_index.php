@@ -43,40 +43,18 @@
                     <tbody>
                         <tr>
                             <td>Total Number of members</td>
-                            <td><h4>6,547</h4></td>
+                            <td><h4><?php echo $stats['count_all_records']; ?></h4></td>
                         </tr>
                         <tr>
                             <td>Number of Adult members</td>
-                            <td><h4>4,812</h4></td>
+                            <td><h4><?php echo $stats['count_all_records']; ?></h4></td>
                         </tr>
                         <tr>
                             <td>Number of Junior members</td>
-                            <td><h4>1,645</h4></td>
+                            <td><h4><?php echo $stats['count_all_records']; ?></h4></td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="report margin_top_15">
-                    <div class="button up">
-                        <span class="value">1,337</span>
-                        <span class="attr">Check-ins</span>
-                    </div>
-                    <div class="button down">
-                        <span class="value">9,001</span>
-                        <span class="attr">Pageviews</span>
-                    </div>
-                    <div class="button">
-                        <span class="value">3.142</span>
-                        <span class="attr">Pages/Views</span>
-                    </div>
-                    <div class="button">
-                        <span class="value">83%</span>
-                        <span class="attr">Bounce Rate</span>
-                    </div>
-                    <div class="button">
-                        <span class="value">00:00:33</span>
-                        <span class="attr">Avg. Time on Site</span>
-                    </div>
-                </div>
                 <div class="margin_top_15"></div>
                 <?php 
                     $this->table->set_template_custom(array ('anchor_uri' => 'reports/view/edit'));    
