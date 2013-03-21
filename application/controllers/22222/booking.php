@@ -30,6 +30,56 @@ class Booking extends T_Booking {
         echo json_encode ($results);
         exit;
    }
+   
+   public function post_process_booking($data) {
+        if (! $this->workshop) return;  //only for workshop users
+        if ( empty($this->data['view_setup']['tables']['bookings_join']['table_data'])) return; //make sure we have data to play with
+        
+        //Now sort it into today's work, yesterdays and tomorrows
+        $retval = array();
+        $jobs = $this->data['view_setup']['tables']['bookings_join']['table_data'];        
+        $dates['today'] = strtotime(date('Y-m-d 00:00:00'));
+        $dates['tomorrow'] = $dates['today'] + (24 * 60* 60);
+        $dates['yesterday'] = $dates['today'] - (24 * 60* 60);
+        $dates['today_date'] = date('Y-m-d H:i:s', $dates['today']);
+        $dates['tomorrow_date'] = date('Y-m-d H:i:s', $dates['tomorrow']);
+        $dates['yesterday_date'] = date('Y-m-d H:i:s', $dates['yesterday']);
+        
+        //print_array($dates, 1, 'dates');
+        
+        foreach($jobs as $k => $array)
+        {
+            if( strtotime($array['']) <= $dates['today'] )
+        }
+        
+        //$retval['jobs']
+        
+        return;
+        
+
+
+//set up the wokrshop_booking array
+        $retval = array();
+        $options = $this->data['config']['record']['view']['fields']['_Status']['options'];
+        $results  = $this->data['view_setup']['tables']['bookings_join']['table_data'];
+        foreach ( $results as $k => $array )
+        {            
+            echo "<br/>this is the date of the event". strtotime($array['ActionDate']);
+            echo "<br/>this todaty". strtotime("now");
+            echo "<br/>this si timestampe".time();
+            echo "<br/>this tomorow ?". strtotime("+1 day");
+
+            //if( strtotime($array['ActionDate']) <  )
+            $retval[$array['_Status']][] = $array;
+                //whats the stage? (not checked in, checked in or)
+            
+        }
+        die;
+        //print_array($this->data, 1);
+        $this->data['view_setup']['tables']['workshop']['table_data'] =  $retval;
+        return;
+        
+    }
     
    
     
