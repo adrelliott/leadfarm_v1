@@ -87,19 +87,10 @@
             
             <div class="widget clearfix tabs">
                 <ul>
-                    <li><h2><a href='#tab-5'>Actions</a></h2></li>
                     <li><h2><a href='#tab-6'>Purchases</a></h2></li>
                     <li><h2><a href='#tab-7'>Comms</a></h2></li>
                 </ul>
                 <div class="widget_inside">
-                    <div id="tab-5">
-                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_actions') ?>">
-                            <?php $this->load->view ('custom/22232/contact/v_contact_edit/all_actions') ?>
-                        </div>
-                        <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_action/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-5"><span>Create New Action</span></a>
-                       </div>
-                    </div>
                     <div id="tab-6">
                         <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_purchases') ?>">
                             <?php $this->load->view ('custom/22232/contact/v_contact_edit/all_purchases') ?>

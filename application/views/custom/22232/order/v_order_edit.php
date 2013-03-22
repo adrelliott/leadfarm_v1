@@ -44,7 +44,7 @@
                                 <?php echo display_field($fields['TotalPrice_A']); ?>
                                 <?php echo display_field($fields['_ValidUntil']); ?>
                                 <?php echo display_field($fields['OrderNotes']); ?> 
-                                <?php echo display_field($fields['OrderTitle'], array('value' => 'Membership')); ?> 
+                                <?php echo display_field($fields['OrderTitle'], array('value' => 'Draws/Raffles')); ?> 
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
                                 </div>                            
@@ -72,7 +72,7 @@
                                 <?php echo display_field($fields['TotalPrice_A']); ?>
                                 <?php echo display_field($fields['_ValidUntil']); ?>
                                 <?php echo display_field($fields['OrderNotes']); ?> 
-                                <?php echo display_field($fields['OrderTitle'], array('value' => 'Membership')); ?> 
+                                <?php echo display_field($fields['OrderTitle'], array('value' => 'Sponsorship')); ?> 
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
                                 </div>                            
@@ -95,7 +95,7 @@
                                 <?php echo display_field($fields['TotalPrice_A']); ?>
                                 <?php echo display_field($fields['_ValidUntil']); ?>
                                 <?php echo display_field($fields['OrderNotes']); ?> 
-                                <?php echo display_field($fields['OrderTitle'], array('value' => 'Membership')); ?> 
+                                <?php echo display_field($fields['OrderTitle'], array('value' => 'Other')); ?> 
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
                                 </div>                            

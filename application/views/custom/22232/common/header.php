@@ -67,6 +67,9 @@
      
     <!-- All the js used in the demo -->
     <script src="<?php echo site_url(); ?>assets/scripts/app.js"></script>
+    
+    <!-- Loads the script for the contact search -->
+     <script src="<?php echo site_url('assets/scripts/contactsearch.js'); ?>"></script>
 
 
 </head>
