@@ -15,12 +15,10 @@ $this->output->enable_profiler(TRUE);
        
     }
    
-    public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE) {  
-        echo "The view file is $view_file";die;
+    public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE, $pull = '') { 
         parent::view($view_file, $rID, $ContactId);
-        
-          // Generate the view!
-       $this->_generate_view($this->data);
+       
+        $this->load_view($pull);
         
     }
     

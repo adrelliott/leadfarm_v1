@@ -354,7 +354,7 @@ class MY_Controller extends CI_Controller {
     |
     */
     
-    function ajax_or_not($pull) {
+    function load_view($pull) {
         if ($pull && array_key_exists ($pull, $this->data['view_setup']['tables']))
         {
           // Generate the dataset for this single table and return the HTML as JSON

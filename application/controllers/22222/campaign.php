@@ -14,7 +14,7 @@ class Campaign extends T_Campaign {
     public function view($view_file, $rID, $pull = '') {  
         parent::view($view_file, $rID);
 
-        $this->ajax_or_not($pull);
+        $this->load_view($pull);
     }
    
     

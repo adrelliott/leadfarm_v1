@@ -26,24 +26,10 @@ class Vehicles extends T_Vehicles {
                     $this->data['view_setup']['ContactId']
                     );
         }
+        
+        $this->load_view($pull);
 
-        if ($pull && array_key_exists ($pull, $this->data['view_setup']['tables']))
-        {
-          // Generate the dataset for this single table and return the HTML as JSON
-
-          $data = $this->_generate_dataset($this->data['view_setup']['tables'][$pull]);
-          $view_uri = $this->_custom_or_default_file($this->data['view_setup']['controller_name'], $this->data['view_setup']['view_file']);
-          $view_uri = substr ($view_uri, 0, strlen ($view_uri) - strlen ('.php')) . '/' . $pull;
-          $content = $this->load->view($view_uri, $this->data['view_setup'], true);
-
-          $this->output->set_content_type("application/json");
-          $this->output->set_output(json_encode($content));
-          return;
-
-        }
-
-            // Generate the view!
-        $this->_generate_view($this->data);
+        
     }
     
     public function view_modal($view_file = 'view', $rID = 'new', $ContactId = NULL) {    
@@ -53,42 +39,6 @@ class Vehicles extends T_Vehicles {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-    public function create_new($view_file = 'view', $rID = 'new', $ContactId = FALSE) {     
-        $this->data['view_setup']['view_file'] = 'v_vehicles_' . $view_file; 
-        
-        $this->data['view_setup']['modal'] = TRUE;
-        $this->data['view_setup']['header_file'] = 'header_modal'; 
-        $this->data['view_setup']['footer_file'] = 'footer_modal'; 
-        parent::view($rID, $ContactId);
-        
-             // Generate the view!
-        $this->_generate_view($this->data);
-    }
-    
-    public function add_new($rID, $ContactId, $view_file = 'view') {    //false = create new record
-         //clean the input
-         $input = clean_data($this->input->post()); 
-         $input['__ContactId'] = $ContactId;
-
-         $this->load->model('vehicles_model');
-         $rID = $this->vehicles_model->add($input, $rID);
-         redirect(DATAOWNER_ID . "/vehicles/create_new/edit_modal/$rID/$ContactId" );
-         
-         //$this->create_new($view_file, $rID, $ContactId);
-
-     }
-     * */
     
 }
    
