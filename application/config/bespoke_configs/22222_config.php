@@ -1174,6 +1174,8 @@ $config['booking'] = Array
                         'contact.Id' => 'contact Id',
                         'contact.FirstName' => 'First Name',
                         'contact.LastName' => 'Last Name',
+                        'contactaction._NotificationDetails' => 'Phone',
+                        'contact.Phone1' => 'Phone',
                         'contactaction.Id' => 'booking Id',
                         'contactaction.ActionDescription' => 'ActionDescription',
                         'contactaction._ActionSubtype' => 'Type',
@@ -1182,9 +1184,85 @@ $config['booking'] = Array
                         'contactaction._CompletedYN' => 'Completed YN',
                         'contactaction.UserID' => '',
                         'contactaction._Status' => '',
+                        'contactaction.CreationNotes' => 'notes',
                         '__vehicles.__Registration' => 'Reg',
+                        '__vehicles.__Make' => 'Make',
+                        '__vehicles.__Model' => 'Model',
+                        //'contact.Id' => 'contact Id2',
+                    ),                    
+                ),
+                'users' => array
+                (
+                'include_in_query' => TRUE, //TRUE or FALSE,
+                'data_source' => 'users', //The dataset name defined above
+                'model_name' => 'contact_model',
+                'model_method' => 'get_all_records', 
+                'model_params' => array 
+                    (   //These are chained with 'AND'. To define an 'OR'...???
+                        '_IsCrmUserYN =' => 1,
+                        '_JobCategory =' => 'Workshop',                    
                     ),
-                ), 
+                'fields' => array 
+                    (
+                        'Id' => '#',
+                        'FirstName' => 'First Name',
+                        'LastName' => 'Last Name',
+                        'Username' => 'Username',
+                        '_JobCategory' => 'Cat',
+                    ),
+                ),
+            ),
+            'index_workshop' => array 
+            (
+                'bookings' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => 'bookings_join', //The dataset name defined above
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'get_todays_bookings', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                        (
+                            'contact.Id' => 'contact Id',
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        'contactaction._NotificationDetails' => 'Phone',
+                        'contact.Phone1' => 'Phone',
+                        'contactaction.Id' => 'booking Id',
+                        'contactaction.ActionDescription' => 'ActionDescription',
+                        'contactaction._ActionSubtype' => 'Type',
+                        'contactaction.ActionDate' => 'Date',
+                        'contactaction._EstimatedDuration' => 'Duration',
+                        'contactaction._CompletedYN' => 'Completed YN',
+                        'contactaction.UserID' => '',
+                        'contactaction._Status' => '',
+                        'contactaction.CreationNotes' => 'notes',
+                        '__vehicles.__Registration' => 'Reg',
+                        '__vehicles.__Make' => 'Make',
+                        '__vehicles.__Model' => 'Model',
+                        //'contact.Id' => 'contact Id2',
+                        ), 
+                ),
+                'users' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'users', //The dataset name defined above
+                    'model_name' => 'contact_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            '_IsCrmUserYN =' => 1,
+                            '_JobCategory =' => 'Workshop',                    
+                        ),
+                    'fields' => array 
+                        (
+                            'Id' => '#',
+                            'FirstName' => 'First Name',
+                            'LastName' => 'Last Name',
+                            'Username' => 'Username',
+                            '_JobCategory' => 'Cat',
+                        ),
+                ),
             ),
             'view' => array 
             (                
@@ -1344,6 +1422,8 @@ $config['booking'] = Array
                             'Electrical Fault' => 'Electrical Fault',
                             'Accident Damage' => 'Accident Damage',
                         ),
+                        'blank_entry' => 'yes', //or 'no' all lower case. 
+                                                //(puts a blank entrry on dropdown list
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -1443,6 +1523,8 @@ $config['booking'] = Array
                             '2 Days' => '2880',
                             '3 Days' => '4320',
                         ),
+                        'blank_entry' => 'yes', //or 'no' all lower case. 
+                                                //(puts a blank entrry on dropdown list
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -1523,6 +1605,8 @@ $config['booking'] = Array
                             'Abandoned' => 4,
                             'Completed' => 5,
                         ),
+                        'blank_entry' => 'NO', //or 'no' all lower case. 
+                                                //(puts a blank entrry on dropdown list
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'defaultvalue' => 0,
@@ -1737,7 +1821,6 @@ $config['contactaction'] = Array
                         'length' => '',
                         'options' => array
                         (
-                            '' => '',
                             'Enquiry' => 'Enquiry',
                             'Task' => 'Task',
                             //'Meeting' => 'Meeting',
@@ -1904,6 +1987,8 @@ $config['contactaction'] = Array
                             'Yes' => 1,
                             'No' => 0
                         ),
+                        'blank_entry' => 'NO', //or 'no' all lower case. 
+                                                //(puts a blank entrry on dropdown list
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -1932,6 +2017,8 @@ $config['contactaction'] = Array
                             'Diagnostics' => 'Diagnostics',
                             'Other' => 'Other'
                         ),
+                        'blank_entry' => 'NO', //or 'no' all lower case. 
+                                                //(puts a blank entrry on dropdown list
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 

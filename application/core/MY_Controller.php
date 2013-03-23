@@ -34,8 +34,11 @@ class MY_Controller extends CI_Controller {
     
     public function __construct($controller_name) {
         parent::__construct();
-        //Allow the use of query strings as well as trad CI URL paras
-        parse_str(str_replace($_SERVER['QUERY_STRING'],'',$_SERVER['REQUEST_URI']),$_GET);
+        //Allow the use of query strings as well as trad CI URL paras 
+        //(note,  $config['uri_protocol'] = 'PATH_INFO' (was ['REQUEST_URI'] ) 
+        //OLD LINE: parse_str(str_replace($_SERVER['QUERY_STRING'],'',
+        //$_SERVER['REQUEST_URI']),$_GET); removed as new line below is better
+        parse_str($_SERVER['QUERY_STRING'], $_GET); //using this one as it works!
         
         // Put any code here that is to be called before any other controller
         
@@ -67,14 +70,14 @@ class MY_Controller extends CI_Controller {
     
     //Is there any need for an index() function here?
    
-    protected function index($view_file) {
-        $this->data['controller_setup']['method_name'] = 'index';
+    protected function index($view_file, $method_name = 'index') {
+        $this->data['controller_setup']['method_name'] = $method_name;
         $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file; 
     }
    
-    protected function view($view_file){
+    protected function view($view_file, $method_name = 'view'){
         $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file;      
-        $this->data['controller_setup']['method_name'] = 'view'; 
+        $this->data['controller_setup']['method_name'] = $method_name; 
         $ext = ''; if ($this->data['view_setup']['modal']) $ext = '_modal';
         $this->data['view_setup']['header_file'] .= $ext;
         $this->data['view_setup']['footer_file'] .= $ext;   

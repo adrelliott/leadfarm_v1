@@ -698,24 +698,45 @@ h3.speech_icon {
 
 /* Garage styles for Booking page */
 .booking {
-        width:70%;
+    width:90%
+}
+.booking_label {
+    width: 10%;
+    float: left;
+    text-align: right;
+    padding: 6px 10px;
+        
 }
 .booking_left {
-    width:90%;
+    width:35%;
     float:left;
+    padding: 6px 10px;
 }
 .booking_left h3{
     margin: 0;
 }
 
 .booking_right {
-    width:10%;
+    width:15%;
     float:right;
-    padding: 5px 0;
+    padding: 6px 10px;
 }
 .giant.button {
-    font-size: 3.3em;
+    font-size: 3.2em;
 }
 .giant {
-    font-size: 2.3em;
+    font-size: 2.9em;
     }
+.largePrint {
+	font-size: 175%;        
+}
+.width_95 {
+    width:95%;
+}
+.col_65 {
+        width: 55%;
+    }
+.col_44 {
+    width: 44%;
+    border-left: 1px solid #ababab;
+}

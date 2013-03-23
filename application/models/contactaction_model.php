@@ -14,6 +14,7 @@ class Contactaction_model extends MY_Model {
         $this->table_name = 'contactaction';
         $this->order_by = 'ActionDate DESC';
         $this->contactId_fieldname = 'ContactId';
+        $this->action_date_fieldname = 'ActionDate';
         if (isset($this->data['view_setup']['ContactId']))
         {
             $this->current_ContactId = $this->data['view_setup']['ContactId'];
@@ -49,8 +50,29 @@ class Contactaction_model extends MY_Model {
                 '__vehicles', 
                 '__vehicles.__Id = ' . $this->table_name. '._VehicleId', 
                 'left outer'
-                );        
+                );   
         return $this->get();
+    }
+    
+    function get_todays_bookings($where = NULL) {
+        $this->db->where('ActionDate >=', date('Y-m-d 00:00:00', $this->current_day));
+        $this->db->where('ActionDate <=', date('Y-m-d 23:59:59' , $this->current_day));
+        $this->db->where('ActionType =', 'Booking');
+        $result = $this->joinon_Contact_and_Vehicle($where);
+        //Sort these into an array sorted by _Status
+        foreach ($result as $k => $array)
+        {
+            $time = explode(' ', $array['ActionDate']);
+            $array['time'] = substr($time[1], 0, -3);
+            if ( isset($array['_Status'] )) $status = intval($array['_Status']);
+            else $status = 0;
+            $result['retval'][$status][$array['time']] = $array;
+        }
+        
+        //just make sure that an empty array is returned if no records exists
+        if ( ! array_key_exists('retval', $result)) $result['retval'] = array();
+        
+        return $result['retval'];
     }
     
     function joinon_Contact_and_Vehicle_singlerecord($rID, $where = NULL) {
@@ -68,6 +90,7 @@ class Contactaction_model extends MY_Model {
                 );        
         return $this->get($rID);
     }
+    
     
     function get_all_users_records($where = NULL){
         if ($where != NULL) { $this->db->where($where); }
