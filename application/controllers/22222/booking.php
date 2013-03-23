@@ -4,7 +4,6 @@ class Booking extends T_Booking {
 	
     public function __construct()    {
         parent::__construct();
-$this->output->enable_profiler(TRUE);
     }
     
     public function index($view_file = 'index') {   
@@ -14,9 +13,8 @@ $this->output->enable_profiler(TRUE);
         $this->_generate_view($this->data);       
        
     }
-   
-    public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE) {  
-        echo "The view file is $view_file";die;
+    
+   public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE) {  
         parent::view($view_file, $rID, $ContactId);
         
           // Generate the view!

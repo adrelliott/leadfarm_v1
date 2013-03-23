@@ -67,18 +67,22 @@
                     </div>
                     <div id="tab-3">
                         <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/relationships') ?>">
-                        <?php $this->load->view ('custom/22222/contact/v_contact_edit/relationships') ?>
+                        <?php include("v_contact_edit/relationships.php"); ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactjoin/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-3"><span>Create New Relationship</span></a>
+                           <a href="<?php echo site_url(DATAOWNER_ID . "/contactjoin/view/edit/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-3">
+                               <span>Create New Relationship</span>
+                           </a>
                        </div>
                     </div>
                     <div id="tab-4">
                         <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/vehicles') ?>">
-                        <?php $this->load->view ('custom/22222/contact/v_contact_edit/vehicles') ?>
+                        <?php include("v_contact_edit/vehicles.php"); ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/vehicles/view_modal/edit_modal/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-4"><span>Create New Vehicle</span></a>
+                           <a href="<?php echo site_url(DATAOWNER_ID . "/vehicles/view_modal/edit_modal/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-4">
+                               <span>Create New Vehicle</span>
+                           </a>
                        </div>
                     </div>
                 </div>
@@ -104,15 +108,18 @@
                 <div class="widget_inside">
                     <div id="tab-5">
                         <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_actions') ?>">
-                            <?php $this->load->view ('custom/22222/contact/v_contact_edit/all_actions') ?>
-                        </div>
+                            <?php include("v_contact_edit/all_actions.php"); ?>
+                            <?php //$this->load->view ('custom/22222/contact/v_contact_edit/all_actions') ?>
+                        </div>                        
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_action/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-5"><span>Create New Action</span></a>
+                           <a href="<?php echo site_url(DATAOWNER_ID . "/contactaction/view/edit_action/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-5">
+                               <span>Create New Action</span>
+                           </a>
                        </div>
                     </div>
                     <div id="tab-6">
                         <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/bookings') ?>">
-                            <?php $this->load->view ('custom/22222/contact/v_contact_edit/bookings') ?>
+                            <?php include("v_contact_edit/bookings.php"); ?>
                         </div>
                         <div class="clearfix margin_top_15">
                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/edit_booking/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-6"><span>Create New Booking</span></a>
@@ -120,11 +127,11 @@
                     </div>
                     <div id="tab-7">
                         <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/comms') ?>">
-                             <?php $this->load->view ('custom/22222/contact/v_contact_edit/comms') ?>
+                             <?php include("v_contact_edit/comms.php"); ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                       <a href="<?php echo site_url() . DATAOWNER_ID; ?>/comms/view/new/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-7"><span>Create New Comm</span></a>
-                        </div>
+                           <a href="<?php echo site_url() . DATAOWNER_ID; ?>/comms/view/new/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-7"><span>Create New Comm</span></a>
+                       </div>
                     </div>
                 </div>
             </div>

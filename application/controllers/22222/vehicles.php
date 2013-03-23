@@ -46,6 +46,7 @@ class Vehicles extends T_Vehicles {
         $this->_generate_view($this->data);
     }
     
+    
     public function view_modal($view_file = 'view', $rID = 'new', $ContactId = NULL) {    
         parent::view_modal($view_file, $rID, $ContactId);
             // Generate the view!

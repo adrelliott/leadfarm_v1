@@ -80,7 +80,19 @@ class T_Contact extends MY_Controller {
         redirect(DATAOWNER_ID . '/' . $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId . '/' . $fieldset );
 
     }
-   
+   protected function _refresh_via_ajax($pull) {
+        // Generate the dataset for this single table and return the HTML as JSON 
+        $data = $this->_generate_dataset($this->data['view_setup']['tables'][$pull]);
+        $view_uri = $this->_custom_or_default_file($this->data['view_setup']['controller_name'], $this->data['view_setup']['view_file']);
+        $view_uri = substr ($view_uri, 0, strlen ($view_uri) - strlen ('.php')) . '/' . $pull;
+        $content = $this->load->view($view_uri, $this->data['view_setup'], true);
+
+        $this->output->set_content_type("application/json");
+        $this->output->set_output(json_encode($content));
+    }
+    
+    
+    
    //create a remove method
    // does it actually delete or does it just add a tag/switch to say its deleted?
    

@@ -8,7 +8,8 @@ class T_Booking extends MY_Controller {
     
     public function __construct()    {
          parent::__construct($this->controller_name);
-         if ($this->session->userdata('_JobCategory') == 'Workshop' & ! isset($_GET['full_cal'])) $this->workshop=TRUE;
+         if ($this->session->userdata('_JobCategory') == 'Workshop' && ! isset($_GET['full_cal'])) 
+             $this->workshop = TRUE;
     }
     
     public function index($view_file) {
@@ -27,8 +28,6 @@ class T_Booking extends MY_Controller {
     
    
     public function view($view_file, $rID, $ContactId = NULL) { 
-        echo "The view file is $view_file";die;
-        if ($this->workshop) $view_file = 'workshop/edit_workshop'; 
         parent::view($view_file);     
         $this->data['view_setup']['rID'] = $rID;        
         $this->data['view_setup']['ContactId'] = $rID;   //in this context, $rID == ContactId

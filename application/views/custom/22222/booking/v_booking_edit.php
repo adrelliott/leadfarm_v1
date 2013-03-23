@@ -32,6 +32,7 @@
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
                                 </div>
+                                <span class="notification done" style="display:none">Record Updated!</span>
                                 <?php echo form_close(); ?>
                             </div>
                         </div>

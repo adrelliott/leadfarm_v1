@@ -9,7 +9,7 @@
     <div class="clearfix" id="">
         <label class="" id="">Postcode</label>
         <div class="input " id="">
-            <input class="small" style="text-transform: uppercase; background-color: #CDFAC1;" "id="" type="text" name="PostalCode" length="" value="">
+            <input class="small" style="text-transform: uppercase; background-color: #CDFAC1;" "id="" type="text" name="PostalCode" length="" value="<?php echo $fields['PostalCode']['value']; ?>">
             <SCRIPT LANGUAGE=JAVASCRIPT SRC="http://services.postcodeanywhere.co.uk/popups/javascript.aspx?account_code=charl11150&license_key=pw65-jx54-fz99-jx75"></SCRIPT> 
         </div>
     </div>
