@@ -584,7 +584,7 @@ class MY_Table extends CI_Table {
                 {
                     $cid = $row[$this->template['ContactId_name']]['data'] . '/';
                 }
-                $retval['start'] = '<a href="' . base_url() . DATAOWNER_ID . '/' . $this->template['anchor_uri'] . '/' . $id['data'] . '/' . $cid . $this->template['anchor_uri_append'] . '" ' . $attr . ' >';
+                $retval['start'] = '<a href="' . base_url() . $this->template['anchor_uri'] . '/' . $id['data'] . '/' . $cid . $this->template['anchor_uri_append'] . '" ' . $attr . ' >';
                 $retval['end'] = '</a>';
             }
             return $retval;

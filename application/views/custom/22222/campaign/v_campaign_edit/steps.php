@@ -1,5 +1,5 @@
 <div class="clearfix" id="">
-    <?php echo form_open(DATAOWNER_ID . '/steps/add/edit/campaign/' . $rID, 'class="ajax"'); ?>
+    <?php echo form_open( '/steps/add/edit/campaign/' . $rID, 'class="ajax"'); ?>
     <table id="never_ending_table">
     <thead>
       <tr>

@@ -1,67 +1,176 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-session_start();
-$_SESSION['dID'] = '22222';
-$dID = $_SESSION['dID'];
-// store session data
-if ( ! isset($dID) || empty($dID) ) 
-{
-    header( 'Location: http://google.co.uk');
-    return;
-}
+//Test to see if we have a bespoke controller class configured in controller_config.php
+include('controller_config/init.php');
+if( bespoke_controller('Contact') ) get_bespoke_controller();  //yup = go get it.
+else
+{   //nope? Use this default class then
 
-//do we have a bespoke controller for this client?
-$file_path = APPPATH . 'controllers/bespoke_controllers/' . $dID . '/' . 'booking' . '.php';
-/*if (file_exists($file_path)) 
-{
-    include ($file_path);
-    return;
-}*/
+    class Booking extends MY_Controller {
+        
+        public $controller_name = 'booking';
+        var $workshop = FALSE;
+        var $current_day = NULL;
 
-
-class Booking extends T_Booking {
-
-    public function __construct()    {
-        parent::__construct();
-$this->output->enable_profiler(TRUE);
-echo "<h1>This si the standard controller</h1>";
-        $file_path = APPPATH . 'controllers/bespoke_controllers/' . '22222' . '/' . 'booking' . '.php';
-        if (file_exists($file_path)) 
-        {
-            include ($file_path);
+        public function __construct()    {
+            parent::__construct();
+            //$this->output->enable_profiler(TRUE);
+            if ($this->session->userdata('_JobCategory') == 'Workshop' && ! isset($_GET['full_cal'])) $this->workshop = TRUE;             
         }
+
+        public function index() {   
+            $method_name = 'index';
+            $view_file = 'index';
+            if ($this->workshop)
+            {
+                $view_file = 'index_workshop';
+                $method_name = 'index_workshop';
+                $this->setup_dates();
+            }
+            
+            parent::index($view_file, $method_name);
+            $this->_load_view_data();    //retrieves and process all data for view  
+             // Generate the view!
+            $this->_generate_view($this->data);  
+
+        }
+
+        public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE, $pull = '') { 
+            parent::view($view_file);     
+            $this->data['view_setup']['rID'] = $rID;        
+            $this->data['view_setup']['ContactId'] = $rID;   //in this context, $rID == ContactId
+            $this->data['view_setup']['display_none'] = '';
+
+            $this->_load_view_data($rID);    //retrieves and process all data for view    
+
+            $this->load_view($pull);
+
+        }
+        
+         public function add($view_file, $rID, $ContactId = FALSE) {       
+        //clean input
+        $input = clean_data($this->input->post());
+        if ($ContactId) $input['ContactId'] = $ContactId;
+        
+        //save record
+        $this->add_record($input, $rID);
+        $url = site_url ($this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId);
+
+        if ($this->input->is_ajax_request()) {
+          $response = array (
+            'success' => true,
+            'updateCalendar' => true,
+          );
+
+          $this->output->set_content_type('application/json');
+          $this->output->set_output(json_encode($response));
+          return;
+
+        }
+
+        //refresh page
+        redirect($url);
+       
     }
+    
+    public function mechanic_amend_booking($rID, $param = NULL) {       
+        //clean input
+        $input = clean_data($this->input->post());
+        
+        //save record
+        $this->add_record($input, $rID);
+        
+        if ($param) $param = "?current_day=$param";
+        
+        //refresh page
+        //redirect( site_url (DATAOWNER_ID . '/' . $this->controller_name . $param) );
+        $url = site_url ($this->controller_name . $param);
+        
+        if ($this->input->is_ajax_request()) {
+          $response = array (
+            'success' => true,
+            'updateCalendar' => true,
+          );
 
-    public function index($view_file = 'index') {   
-        parent::index($view_file);
+          $this->output->set_content_type('application/json');
+          $this->output->set_output(json_encode($response));
+          return;
 
-         // Generate the view!
-        $this->_generate_view($this->data);  
+        }
+        
+        
+        //refresh page
+        redirect($url);
+       
+    }
+    
+    public function post_process_booking() {
+        if ($this->workshop)
+        {
+             $this->setup_dropdown($this->data['view_setup']['tables']['users']['table_data'], 'users');
+             $this->data['view_setup']['fields'] = $this->data['config']['record']['view']['fields'];;
+             
+        }
+           
+            
+        
+        return;
+    }
+    
+    function setup_dropdown($data, $type) {
+        $dropdowns = array();
+        foreach ($data as $k => $v)
+        {
+            switch ($type)
+            {
+                case 'users':
+                    $dropdowns[$v['FirstName'] . ' ' . substr($v['LastName'],0,1)] = $v['Id'];
+                    break;
+                case 'job_status':
+                    if ($v != 0) $dropdowns[$k] = $v;
+                    break;
+                //add in other dropdownsd here
+            }
+            
+        }
+        
+        //add all this dat back to the array available in the view
+        $this->data['view_setup']['dropdowns'][$type] = $dropdowns;
+        return;
+    }
+    
+     function setup_dates() { 
+        //Work out the dates for the nvigation on the page 
+        if (isset($_GET['current_day']))    //We can pass current day via URL param
+                $this->current_day = strtotime($_GET['current_day'] . ' 00:00:00');
+        else $this->current_day = strtotime(date('Y-m-d 00:00:00'));
+        
+        //Now set up the rest of the dates for the page
+        $this->data['view_setup']['dates'] = array
+        (
+            'yesterday' => date('Y-m-d', $this->current_day - (24*60*60)),
+            'today' => date('Y-m-d'),
+            'current_day' => date('Y-m-d', $this->current_day),
+            'current_day_nice' => date('dS F, Y', $this->current_day),
+            'tomorrow' => date('Y-m-d', $this->current_day + (24*60*60)),
+        );
+        
+        return;
+    }
+    
 
+        public function get_booking_array() {
+           //this generates the data for the non-workshop view
+           $this->load->model('booking_model');
+           $results = $this->booking_model->get_all_bookings();
+            header ('Content-Type: text/json');
+            echo json_encode ($results);
+            exit;
+       }
+
+        
 
     }
-
-    public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE, $pull = '') { 
-        parent::view($view_file, $rID, $ContactId);
-
-        $this->load_view($pull);
-
-    }
-
-    public function get_booking_array() {
-       //this generates the data for the non-workshop view
-       $this->load->model('booking_model');
-       $results = $this->booking_model->get_all_bookings();
-        header ('Content-Type: text/json');
-        echo json_encode ($results);
-        exit;
-   }
-
-    function test_gen() {
-       echo 'hello - I am in the main folder';
-    }
-
-
 }
 
     

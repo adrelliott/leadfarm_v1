@@ -1,10 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /* This is the Login controller for all users.
  * 
- * USER = any page that a logged in client will see, e.g. the CRM part
- * 
- * Put any methods or vars in this file that you want available fort he login module
- * 
  * 
  * 
  */
@@ -16,6 +12,7 @@ class Login extends CI_Controller {
     
     public function __construct()    {
          parent::__construct();
+         session_start();
     }
 
     public function index($message = NULL) {      
@@ -31,9 +28,6 @@ class Login extends CI_Controller {
        $this->load->model('login_model'); 
        $query = $this->login_model->validate_user();
        
-       //print_array($query);
-       //print_array($this->session->all_userdata());
-       
        //what's been returned?
        if ( isset($query['results']) ) redirect ( site_url('dashboard') );   //Yay!
        elseif ( isset($query['message']) ) $this->log_out( $query['message'] ); //Oh no!
@@ -44,6 +38,7 @@ class Login extends CI_Controller {
 
     function log_out($message = '<span class="notification warning">You\'ve been logged out.</span>') {
         $this->session->sess_destroy();
+        session_destroy();  //destroys PHP session too
         $this->index($message);
         
     }

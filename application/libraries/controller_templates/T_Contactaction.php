@@ -2,7 +2,7 @@
 
 class T_Contactaction extends MY_Controller {
 
-    public $controller_name = 'contactaction';
+    
     
     public function __construct()    {
          parent::__construct($this->controller_name);

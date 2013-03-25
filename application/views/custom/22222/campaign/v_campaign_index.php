@@ -14,7 +14,7 @@
                 ?>
                 <div class="margin_top_15"></div>
                 <div class="clearfix">
-                    <a href="<?php echo site_url() . DATAOWNER_ID; ?>/campaign/view/edit/new" class="large blue button right"><span>Create New Campaign</span></a>
+                    <a href="<?php echo site_url('/campaign/view/edit/new'); ?>" class="large blue button right"><span>Create New Campaign</span></a>
                 </div>
                 <h3 class="index toggle_icon" id="option1_toggle">Looking for an Tags, Templates & Links?</h3>
                 <div class="hide_toggle" id="option1">
@@ -26,7 +26,7 @@
                     ?> 
                     <div class="margin_top_15"></div>
                     <div class="clearfix">
-                        <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactgroup/view/edit/new" class="large blue button right iframe"><span>Create New Tag</span></a>
+                        <a href="<?php echo site_url('/contactgroup/view/edit/new'); ?>" class="large blue button right iframe"><span>Create New Tag</span></a>
                     </div>
                     <h3>Your Templates:</h3>
                     <?php 
@@ -36,7 +36,7 @@
                     ?> 
                     <div class="margin_top_15"></div>
                     <div class="clearfix">
-                        <a href="<?php echo site_url() . DATAOWNER_ID; ?>/template/view/edit/new" class="large blue button right iframe"><span>Create New Template</span></a>
+                        <a href="<?php echo site_url('/template/view/edit/new'); ?>" class="large blue button right iframe"><span>Create New Template</span></a>
                     </div>
                     <h3>Your Links:</h3>
                     <?php 
@@ -46,7 +46,7 @@
                     ?> 
                     <div class="margin_top_15"></div>
                     <div class="clearfix">
-                        <a href="<?php echo site_url() . DATAOWNER_ID; ?>/links/view/edit/new" class="large blue button right iframe"><span>Create New Link</span></a>
+                        <a href="<?php echo site_url('/links/view/edit/new'); ?>" class="large blue button right iframe"><span>Create New Link</span></a>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@
             <div class="widget_inside">
                 <h3>Campaign Details:</h3>
                 <div class="form">
-                    <?php echo form_open(DATAOWNER_ID . '/campaign/add/edit/' . $rID, 'class="ajax"'); ?>
+                    <?php echo form_open( '/campaign/add/edit/' . $rID, 'class="ajax"'); ?>
                         <?php display_field($fields['_Type']); ?>
                         <?php display_field($fields['Name']); ?>
                         <?php display_field($fields['__CampaignDescription']); ?>

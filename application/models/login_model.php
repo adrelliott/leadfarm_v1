@@ -65,6 +65,7 @@
                 {
                     $query['results']['is_logged_in'] = TRUE;
                     $this->session->set_userdata($query['results']);
+                    $_SESSION['dID'] = $this->session->userdata('_dID');
                 }                
             }
             else

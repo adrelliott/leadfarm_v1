@@ -15,7 +15,7 @@
  * (
  *      '12345' => array
  *      (
- *          'Contact' => TRUE,    
+ *          'Contact' => TRUE,      //CAPITALISE THE FIRST LETTER!!!!!!
  *      )
  * );
  * 
@@ -27,10 +27,16 @@
 
 $controller_config = array
 (
+    //e.g. 
+    //  '12345' => array
+    //    (
+    //          'Dashboard' => TRUE,    //capitalise the key! TRUE = yes, there is a bespoke
+    //    )
+    
     '22222' => array 
     (
         //'Dashboard' => TRUE,
-        //'Dashboard' => FALSE,
+        //'Contact' => TRUE,
     ),
     
 );

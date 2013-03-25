@@ -1,39 +1,57 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Contactaction extends T_Contactaction {
+//Test to see if we have a bespoke controller class configured in controller_config.php
+include('controller_config/init.php');
+if( bespoke_controller('Contactaction') ) get_bespoke_controller();  //yup = go get it.
+else
+{   //nope? Use this default class then
+    
+    class Contactaction extends MY_Controller {
 
-	/**
-	 * This acts as a template for every controller.
-	 *
-	 * Define methods/vars here in the construct (to run before anything else) 
-	 * and/or define methods here that can be extended in other controllers
-	 * 
-	 */
-    
-    public function __construct()    {
-        parent::__construct();
-    }
-    
-   public function index($view_file = 'index') {   
-        parent::index($view_file);
-      
-          // Generate the view!
-        $this->_generate_view($this->data);
-    }
-   
-  public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE) {          
-        parent::view($view_file, $rID, $ContactId);
-            // Generate the view!
-        $this->_generate_view($this->data);
-    }
-    
-  
-    
-    //function add_booking ($rID, $ContactId, $view_file = 'edit_booking') {
-     //   $this->add($rID, $ContactId, $view_file);
-   // }
-    
+        public $controller_name = 'contactaction';
         
-    
+        public function __construct()    {
+            parent::__construct();
+        }
+
+        public function index($view_file = 'index') {   
+             parent::index($view_file);
+
+               // Generate the view!
+             $this->_generate_view($this->data);
+         }
+
+        public function  view($view_file = 'edit', $rID = 'new', $ContactId = FALSE) {   
+          $this->data['view_setup']['modal'] = TRUE;
+          parent::view($view_file);
+          $this->data['view_setup']['rID'] = $rID;
+          $this->data['view_setup']['ContactId'] = $ContactId;  
+          $this->data['view_setup']['display_none'] = '';
+
+          $this->_load_view_data($rID);    //retrieves and process all data for view    
+              // Generate the view!
+          $this->_generate_view($this->data);
+          }
+
+          public function add($view_file, $rID, $ContactId) {       
+          //clean input
+          $input = clean_data($this->input->post());
+          $input['ContactId'] = $ContactId;
+
+          //save record
+          $rID = $this->add_record($input, $rID);
+          //refresh page
+          redirect($this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
+
+      }
+
+
+        //function add_booking ($rID, $ContactId, $view_file = 'edit_booking') {
+         //   $this->add($rID, $ContactId, $view_file);
+       // }
+
+
+
+    }
 }
    
