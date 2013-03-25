@@ -1,5 +1,5 @@
 <div class="form widget_inside margin_top_25">    
-    <?php echo form_open(DATAOWNER_ID . '/booking/mechanic_amend_booking/' . $array['Id'] . '/' . $dates['current_day']) ; ?>
+    <?php echo form_open(DATAOWNER_ID . '/booking/mechanic_amend_booking/' . $array['Id'] . '/' . $dates['current_day'], 'class="ajax"') ; ?>
         <div class="col_65 left">
                 <h2 class="largePrint"><?php echo $array['time'] .' - ' . $array['_ActionSubtype']; ?></h2>
                 <h4 class="largePrint"><?php

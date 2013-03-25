@@ -63,6 +63,37 @@ class T_Booking extends MY_Controller {
        
     }
     
+    public function mechanic_amend_booking($rID, $param = NULL) {       
+        //clean input
+        $input = clean_data($this->input->post());
+        
+        //save record
+        $this->add_record($input, $rID);
+        
+        if ($param) $param = "?current_day=$param";
+        
+        //refresh page
+        //redirect( site_url (DATAOWNER_ID . '/' . $this->controller_name . $param) );
+        $url = site_url (DATAOWNER_ID . '/' . $this->controller_name . $param);
+        
+        if ($this->input->is_ajax_request()) {
+          $response = array (
+            'success' => true,
+            'updateCalendar' => true,
+          );
+
+          $this->output->set_content_type('application/json');
+          $this->output->set_output(json_encode($response));
+          return;
+
+        }
+        
+        
+        //refresh page
+        redirect($url);
+       
+    }
+    
     public function post_process_booking() {
         if ($this->workshop)
         {
@@ -117,18 +148,7 @@ class T_Booking extends MY_Controller {
         return;
     }
     
-    public function mechanic_amend_booking($rID, $param = NULL) {       
-        //clean input
-        $input = clean_data($this->input->post());
-        
-        //save record
-        $this->add_record($input, $rID);
-        
-        if ($param) $param = "?current_day=$param";
-        //refresh page
-        redirect( site_url (DATAOWNER_ID . '/' . $this->controller_name . $param) );
-       
-    }
+    
     
     
     
