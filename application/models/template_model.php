@@ -25,7 +25,7 @@ class Template_model extends MY_Model {
         //get all axctive templates
         //$this->db->where('__ActiveYN =', 1);  no need for this complexity
         $this->order_by = '__ActionType ASC';  
-        $results = $this->get();
+        $results = $this->get();        
         
         //create dropdown 
         $retval = array();  

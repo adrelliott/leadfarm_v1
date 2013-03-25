@@ -142,23 +142,31 @@ class Action extends CI_Controller {
             
         ## 5. Finally write these to the database
             //update...
-            $this->crud['model_name'] = 'nextsteps';  
-            $this->crud['update_batch'] = array
-                    (
-                        'table' => '__nextsteps',
-                        'data' => $this->tasks['update_array'],
-                        'col' => '__Id',               
-                    );            
-            $this->_crud('update_batch');   
+            if ( !empty($this->tasks['update_array']))
+            {
+                $this->crud['model_name'] = 'nextsteps';  
+                $this->crud['update_batch'] = array
+                        (
+                            'table' => '__nextsteps',
+                            'data' => $this->tasks['update_array'],
+                            'col' => '__Id',               
+                        );            
+                $this->_crud('update_batch');  
+            }
             
              //insert
-            $this->crud['model_name'] = 'nextsteps';  
-            $this->crud['insert_batch'] = array
-                    (
-                        'table' => '__nextsteps',
-                        'data' => $this->tasks['insert_array'],             
-                    );
-            $this->_crud('insert_batch');
+            if ( !empty($this->tasks['insert_array']))
+            {
+                $this->crud['model_name'] = 'nextsteps';  
+                $this->crud['insert_batch'] = array
+                        (
+                            'table' => '__nextsteps',
+                            'data' => $this->tasks['insert_array'],             
+                        );
+                $this->_crud('insert_batch');
+            }
+            
+            return;
             
             //print_array($this->tasks, 0, 'final array');
         }
@@ -255,6 +263,9 @@ class Action extends CI_Controller {
         /*********************Internal Methods **************************/
        
         protected function _do_step($campaign_data, $contact_data, $step_no) {
+            print_array($campaign_data, 0, 'campagin data, _dostep - step no ='.$step_no);
+            print_array($contact_data, 0, 'campagin data, _dostep - step no ='.$step_no);
+            
             $result = FALSE;
             //What type of action we doing here?
             extract($campaign_data[$step_no]);
@@ -272,7 +283,7 @@ class Action extends CI_Controller {
             }
             
             //perform email/tag etc for this step
-            $result = 1;
+   $result = 1;
             return $result;
         }
         
@@ -323,11 +334,13 @@ class Action extends CI_Controller {
         /**************** These methods perform the actions of the step ************/        
         protected function _apply_tag($tag_id, $contact_id) {
             //insert into tag_join table
+            $success_flag = 1;
             
             return $success_flag;
         }
         protected function _send_email($template_data, $contact_data) {
-            
+            //echo "<h1>email called for " . $contact_data['Email'] . "</h1>";
+            $success_flag = $this->gmail($template_data, $contact_data);
             //get template data
             
             //get contact(s) data
@@ -364,6 +377,38 @@ class Action extends CI_Controller {
             return $success_flag;
         }
 
+        //send via Gmail
+        function gmail($template_data = null, $contact_data = null){
+            print_array($template_data, 0, '374');
+            print_array($contact_data, 0, '375');
+            $config = array
+            (
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_port' => 465,
+                'smtp_user' => 'leadfarmtest@gmail.com',
+                'smtp_pass' => 'DMmanch35',
+                'mailtype' => 'html',
+            );
+            
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+            
+            $this->email->from('Leadfarmtest@gmail.com', 'Leadfarm');
+            $this->email->to('al@dallasmatthews.co.uk');
+            $this->email->subject('this is an email test');
+            //$array = '';
+            //foreach ()
+            
+            $this->email->message
+                    (
+                        "\n Email should be sent to " . $contact_data['Email']
+                    . $template_data['__Content']
+                    );            
+            if($this->email->send()) echo "Mail sent!";
+            else show_error($this->email->print_debugger());
+        }
+        
         
         /********************** The Database ,ethods *********************/
         protected function _set_up_db_conn($model_name) {
