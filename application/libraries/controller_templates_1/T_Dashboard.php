@@ -1,9 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-//Do we have bespoke controller set up?
-$controller = 'Dashboard';
-include('controller_setup/init.php');
-
 class T_Dashboard extends MY_Controller {
 
 	/**

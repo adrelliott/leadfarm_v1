@@ -52,8 +52,8 @@ define('PATH_TO_LOGO', 'assets/includes/logos/' . DATAOWNER_ID . '/logo.png');
 |   Firstly, get the username and password for *this* user's database...
 |   Then get the general config details for the database from global_database.php
 */
-include('global_database.php');
-include(DATAOWNER_ID . '_database.php');
+//include('global_database.php');
+//include(DATAOWNER_ID . '_database.php');
 
 /*
 |--------------------------------------------------------------------------

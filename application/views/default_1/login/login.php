@@ -50,7 +50,7 @@
                                 <div class="widget_inside">
                                     <?php  echo $this->data['page_setup']['message']; ?>
                                     <div class="form">
-                                        <?php echo form_open('login/validate'); ?>
+                                        <?php echo form_open($this->uri->segment(1) . '/login/validate/' . $this->uri->segment(1)); ?>
                                             <div class="clearfix">
                                                 <label>Username</label>
                                                 <div class="input">

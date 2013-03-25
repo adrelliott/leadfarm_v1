@@ -16,57 +16,44 @@ class Login extends CI_Controller {
     
     public function __construct()    {
          parent::__construct();
+         
+         
     }
 
     public function index($message = NULL) {      
-        if ($this->session->userdata('is_logged_in')) redirect ( site_url('dashboard') );
-        elseif ($message == NULL)
-            $message = '<span class="notification information">Please log in below</span>';
-        
-        $this->data['page_setup']['message'] = $message;  
-        $this->load->view('default/login/login', $this->data);
-    }
-
-   public function validate() {
-       $this->load->model('login_model'); 
-       $query = $this->login_model->validate_user();
-       
-       //print_array($query);
-       //print_array($this->session->all_userdata());
-       
-       //what's been returned?
-       if ( isset($query['results']) ) redirect ( site_url('dashboard') );   //Yay!
-       elseif ( isset($query['message']) ) $this->log_out( $query['message'] ); //Oh no!
-       
-   }
-    
-    
-
-    function log_out($message = '<span class="notification warning">You\'ve been logged out.</span>') {
-        $this->session->sess_destroy();
-        $this->index($message);
-        
-    }
-
-    /*function force_log_out($message = NULL)
-    {
-        $this->session->sess_destroy();
-         if ($message == NULL)
+        if ($this->session->userdata('is_logged_in'))       //show friendly 404 page
         {
-            $message = '<span class="notification information">You\'ve been logged out. (Maximum login time is 2 hours)</span>';
+            $this->load->view('default/login/friendly_404');            
         }
-        $this->index($message);
-    }*/
-    
-   /* public function validateOld()
+        else
+        {
+            if ($message == NULL)
+            {
+                $message = '<span class="notification information">Please log in below</span>';
+            }
+            $this->data['page_setup']['message'] = $message;  
+            $this->load->view('default/login/login', $this->data);
+        }
+    }
+
+   
+    public function validate($dID)
     {
-        //load the database
-        echo "hello";print_r($this->input->post());
+        //first, test and see if there is config file for this dID exists
+        if(! file_exists(APPPATH . '/config/bespoke_configs/' . $dID . '_config.php'))
+        {
+            show_error ('Have you got the right URL?');
+        }
         
+        //Load the settings to do the query
+        define('DATAOWNER_ID', $dID);        
+        $this->config->load('bespoke_configs/' . DATAOWNER_ID . '_database');
+        $this->config->load('bespoke_configs/' . DATAOWNER_ID . '_config');
         $this->load->model('login_model');    
+        
         //do the query
         $query = $this->login_model->validate_user(); 
-        print_array($query, 1);
+        //print_array($query, 1);
         if ($query['result']) //Tests returned array(TRUE if result is found)
         {
             extract($query['data']);
@@ -86,11 +73,11 @@ class Login extends CI_Controller {
                       'UserId' => $Id,
                       '_JobCategory' => $_JobCategory,
                       '_AdminLevel' => $_AdminLevel,
-                      '_dID' => $dID
+                      '_dID' => DATAOWNER_ID
                   );
                 $this->session->set_userdata($sessionData);
-                //redirect( DATAOWNER_ID . '/dashboard');
-                echo "success!";                
+                redirect( DATAOWNER_ID . '/dashboard');
+                //echo "success!";                
             }
             else
             {
@@ -106,5 +93,25 @@ class Login extends CI_Controller {
             $this->index($message);
             //echo "username/pass not recognised!";
         }
-    }*/
+    }
+
+    function log_out()
+    {
+        $this->session->sess_destroy();
+        $message = '<span class="notification warning">You\'ve been logged out.</span>';
+        //redirect( DATAOWNER_ID . '/login/index');
+        $this->index($message);
+        //echo "logged out";
+        //print_array($this->session->all_userdata());
+    }
+
+    function force_log_out($message = NULL)
+    {
+        $this->session->sess_destroy();
+         if ($message == NULL)
+        {
+            $message = '<span class="notification information">You\'ve been logged out. (Maximum login time is 2 hours)</span>';
+        }
+        $this->index($message);
+    }
 }

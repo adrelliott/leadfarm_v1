@@ -452,10 +452,11 @@ class MY_Controller extends CI_Controller {
          if (!isset($status) || $status !== TRUE)
          {
              //kick them out
+             $dID = $this->uri->segment(1) . '/';
              $message = "Oops. Your session has ended. Please log in";
              $this->data['view_setup']['message'] = $message;
              
-             redirect('login');
+             redirect($dID . 'login/');
          }
      }
      
