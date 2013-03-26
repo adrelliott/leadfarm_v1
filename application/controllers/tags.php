@@ -1,27 +1,43 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Tags extends T_Tags {
+//Test to see if we have a bespoke controller class configured in controller_config.php
+include('controller_config/init.php');
+if( bespoke_controller('Tags') ) get_bespoke_controller();   //yup = go get it.
+else
+{   //nope? Use this default class then
+  
+    class Tags extends MY_Controller {
 
-	/**
-	 * This acts as a template for every controller.
-	 *
-	 * Define methods/vars here in the construct (to run before anything else) 
-	 * and/or define methods here that can be extended in other controllers
-	 * 
-	 */
-    
-    public function __construct()    {
-        parent::__construct();
-    }
-    
-   
-  public function view($view_file = 'view', $rID = 'new') {          
-        parent::view($view_file, $rID);
-            // Generate the view!
-        $this->_generate_view($this->data);
-    }
-    
+        public $controller_name = 'tags';
+
+        public function __construct()    {
+            parent::__construct();
+        }
+
+
+        public function view($view_file = 'view', $rID = 'new') {          
+            $this->data['view_setup']['modal'] = TRUE;
+            parent::view($view_file);
+            $this->data['view_setup']['rID'] = $rID;
+            $this->data['view_setup']['display_none'] = '';
+
+            $this->_load_view_data($rID);    //retrieves and process all data for view    
+                // Generate the view!
+            $this->_generate_view($this->data);
+        }
+
+        public function add($view_file, $rID) {       
+            //clean input
+            $input = clean_data($this->input->post());
+
+            //save record
+            $rID = $this->add_record($input, $rID);
+            //refresh page
+            redirect( $this->controller_name . '/view/' . $view_file . '/' . $rID );
+
+        }
         
-    
+        
+    }
 }
    

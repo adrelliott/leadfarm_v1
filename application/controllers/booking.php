@@ -2,7 +2,7 @@
 
 //Test to see if we have a bespoke controller class configured in controller_config.php
 include('controller_config/init.php');
-if( bespoke_controller('Contact') ) get_bespoke_controller();  //yup = go get it.
+if( bespoke_controller('Booking') ) get_bespoke_controller();  //yup = go get it.
 else
 {   //nope? Use this default class then
 

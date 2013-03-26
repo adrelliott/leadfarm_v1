@@ -40,6 +40,10 @@ class MY_Model extends CI_Model {
     
     function __construct() {
         parent::__construct();
+        if (isset($this->data['view_setup']['ContactId']))
+        {
+            $this->current_ContactId = $this->data['view_setup']['ContactId'];
+        }
     }
     
      /**

@@ -9,15 +9,11 @@
 class Booking_model extends MY_Model {
 
     function __construct (){
-        //parent::__construct();
+        parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = 'contactaction';
         $this->order_by = 'Id ASC';   
-        $this->contactId_fieldname = 'Id'; 
-        if (isset($this->data['view_setup']['ContactId']))
-        {
-            $this->current_ContactId = $this->data['view_setup']['ContactId'];
-        }
+        $this->contactId_fieldname = 'Id';         
     }
     
     function add($input, $rID) {
@@ -87,24 +83,6 @@ class Booking_model extends MY_Model {
         
      
     }
-   
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-   /* public function get_by_rID($rID) {
-        //get one record with the ID of $rID
-        parent::get($rID);
-    }*/
     
     
 
