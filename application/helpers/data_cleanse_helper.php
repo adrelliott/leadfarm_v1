@@ -200,10 +200,10 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
                     $retval .= '<input class="" type="checkbox"  name="' . $attributes['name'] . '" value="' . $v . '" ' . $checked . '>' . $k;
                 }
                 break;
-                case 'textarea':                
+            case 'textarea':                
                 $retval .= '<textarea class=" ' . $attributes['cssClassInput'] . '" id=" ' . $attributes['cssIdInput'] . '" type="textarea"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['extraHTMLInput'] . '  />' . $attributes['value'] . '</textarea>';
                 break;
-                case 'timestamp': 
+            case 'timestamp': 
                 $timestamp_array = cleanse_timestamps($attributes['value']);
                 //set up the date field   
                 $retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . ' datepicker" type="text"  name=":::' . $attributes['name'] . ':date" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $timestamp_array['date'] . '"  />';

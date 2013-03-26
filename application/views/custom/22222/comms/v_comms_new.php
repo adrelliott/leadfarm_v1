@@ -10,7 +10,7 @@
                 <div id="tab-1"><!-- Start of tab 1 -->
                     <h3>Write an Email to <?php echo $view_setup['tables']['contact_info']['table_data']['FirstName'] . ' ' . $view_setup['tables']['contact_info']['table_data']['LastName']; ?></h3>
                     <div class="form">
-                         <?php echo form_open( "/comms/add/new/$rID/$ContactId" ) ; ?>
+                         <?php echo form_open( "/comms/add/new/$rID/$ContactId",  'class="ajax"' ) ; ?>
                             <?php echo display_field($fields['__Type'], array('label' => 'Communication Type', 'value' => 'Email', 'type' => 'hidden')); ?>
                             <?php echo display_field($fields['__From'], array('value' => $view_setup['user_data']['Email'])); ?>
                             <?php echo display_field($fields['__To'], array('value' => $view_setup['tables']['contact_info']['table_data']['Email'])); ?>
@@ -25,7 +25,7 @@
                 <div id="tab-2"><!-- Start of tab 1 -->
                     <h3>Send a Letter to <?php echo $view_setup['tables']['contact_info']['table_data']['FirstName'] . ' ' . $view_setup['tables']['contact_info']['table_data']['LastName']; ?></h3>
                 <div class="form">
-                    <?php echo form_open( "/comms/add/new/$rID/$ContactId" ) ; ?>
+                    <?php echo form_open( "/comms/add/new/$rID/$ContactId", 'class="ajax"' ) ; ?>
                        <?php echo display_field($fields['__Type'], array('label' => 'Communication Type', 'value' => 'Letter', 'type' => 'hidden')); ?>
                        <?php echo display_field($fields['__Content'], array('extraHTMLInput' => 'rows=30')); ?>
                        <div class="clearfix">
@@ -36,7 +36,7 @@
                 <div id="tab-3"><!-- Start of tab 1 -->
                     <h3>Send an SMS text to <?php echo $view_setup['tables']['contact_info']['table_data']['FirstName'] . ' ' . $view_setup['tables']['contact_info']['table_data']['LastName']; ?></h3>
                     <div class="form">
-                         <?php echo form_open( "/comms/add/new/$rID/$ContactId" ) ; ?>
+                         <?php echo form_open( "/comms/add/new/$rID/$ContactId", 'class="ajax"' ) ; ?>
                             <?php echo display_field($fields['__Type'], array('label' => 'Communication Type', 'value' => 'Email', 'type' => 'text')); ?>
                             <?php echo display_field($fields['__From'], array('value' => $view_setup['user_data']['Email'])); ?>
                             <?php echo display_field($fields['__To'], array('value' => $view_setup['tables']['contact_info']['table_data']['Email'])); ?>

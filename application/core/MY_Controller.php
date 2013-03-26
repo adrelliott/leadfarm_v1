@@ -79,13 +79,17 @@ class MY_Controller extends CI_Controller {
         $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file; 
     }
    
-    protected function view($view_file, $method_name = 'view'){
+    protected function view($view_file, $rID, $ContactId = NULL, $method_name = 'view'){
         $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file;      
         $this->data['controller_setup']['method_name'] = $method_name; 
         $ext = ''; if ($this->data['view_setup']['modal']) $ext = '_modal';
         $this->data['view_setup']['header_file'] .= $ext;
-        $this->data['view_setup']['footer_file'] .= $ext;   
+        $this->data['view_setup']['footer_file'] .= $ext;  
+        $this->data['view_setup']['rID'] = $rID;
+        $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
+        $this->data['view_setup']['display_none'] = '';
     }    
+    
     
     protected function _load_view_data($rID = NULL) {
         // 1. Set up the vars for this method
@@ -137,7 +141,6 @@ class MY_Controller extends CI_Controller {
                    $rID, 
                    $this->data['model_setup']['record']
                    );
-           
         }
         
         // 5. Now find any stats. store in ['controller_setup']['results']['stats']
@@ -152,8 +155,9 @@ class MY_Controller extends CI_Controller {
         
         // 6. Any post processing to be done?
         $method_name = 'post_process_' . $this->controller_name;
-        if (method_exists($this,$method_name)) $this->$method_name($this->data);
+        if (method_exists($this, $method_name)) $this->$method_name($this->data);
         
+           //print_array($this->data['view_setup']['fields'], 1, "method name = $method_name");
         // 6. Now add the fields to view set up, tidy up & generate the view        
         $this->data['view_setup']['method_name'] = $method_name;
         $this->data['view_setup']['controller_name'] = $controller_name;

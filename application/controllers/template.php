@@ -17,9 +17,7 @@ else
 
         public function view($view_file = 'edit', $rID = 'new') {          
             $this->data['view_setup']['modal'] = TRUE;
-            parent::view($view_file); 
-            $this->data['view_setup']['rID'] = $rID;
-            $this->data['view_setup']['display_none'] = '';
+            parent::view($view_file, $rID);   
 
             $this->_load_view_data($rID);    //retrieves and process all data for view    
                 // Generate the view!

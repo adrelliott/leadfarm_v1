@@ -28,6 +28,7 @@
             <?php echo display_field($fields['UserID'], array('cssClassInputDiv' => ' largePrint ', 'cssClassInput' => ' largePrint', 'label' => 'Who\'s on it?', 'options' => $dropdowns['users'], 'value' => $array['UserID']));  ?>
             <?php echo display_field($fields['_EstimatedDuration'], array('cssClassInputDiv' => ' largePrint', 'cssClassInput' => ' largePrint', 'value' => $array['_EstimatedDuration']));  ?>
             <?php echo display_field($fields['_Status'], array('cssClassInputDiv' => ' largePrint width_95', 'cssClassInput' => ' largePrint', 'label' => '', 'blank_entry' => 'no', 'value' => $array['_Status'] ));  ?>
+           <?php echo form_hidden('_:_Status', $array['_Status']); ?>
             <div class="clearfix">
                 <input name='submit' type='submit' class='giant button blue right' style='float:right' value='SAVE!'></input>
             </div>

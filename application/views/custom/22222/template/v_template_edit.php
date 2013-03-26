@@ -4,7 +4,7 @@
             <h2>Edit/Create a Template</h2>
             <div class="widget_inside">
                 <div class="form">
-                    <?php echo form_open( 'template/add/edit/$rID' ) ; ?>
+                    <?php echo form_open( "template/add/edit/$rID" ) ; ?>
                         <?php echo display_field($fields['__Id']); ?>
                         <?php echo display_field($fields['__TemplateName']); ?>
                         <?php echo display_field($fields['__Name']); ?>

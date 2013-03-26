@@ -20,7 +20,8 @@
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-1">
-                        <?php echo form_open('contact/add/0/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
+                        <?php //echo form_open('contact/add/0/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
+                        <?php echo form_open('contact/add/edit/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
                             <div class="form">
                                 <?php include("fieldsets/v_contact_$fieldset.php");
                                     //v_contact_0 = contact, ..._1  org ?>

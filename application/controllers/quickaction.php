@@ -18,11 +18,9 @@ else
            exit;
         }
 
-        function view($view_file = 'edit', $rID) {
+        function view($view_file = 'edit', $rID, $ContactId = NULL) {
             $this->data['view_setup']['modal'] = TRUE;
-            parent::view($view_file);
-            $this->data['view_setup']['rID'] = $rID;
-            $this->data['view_setup']['display_none'] = '';
+            parent::view($view_file, $rID, $ContactId);   
 
             $this->_load_view_data($rID);    //retrieves and process all data for view    
 

@@ -19,7 +19,11 @@ class Contactaction_model extends MY_Model {
         {
             $this->current_ContactId = $this->data['view_setup']['ContactId'];
         }
-        $this->current_UserId = '9999999';
+        
+        //THIS SI FROM THE SESSION !!!
+        $this->current_UserId = '';
+        
+
         //We can maybe move htis MY_MODEL?
         if (isset($this->data['view_setup']['user_data']['UserId']))
         {

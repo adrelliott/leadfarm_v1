@@ -21,10 +21,7 @@ else
         }
 
         public function view($view_file = 'edit', $rID) {  
-            parent::view($view_file);    
-            $this->data['view_setup']['rID'] = $rID;
-            $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
-            $this->data['view_setup']['display_none'] = '';
+            parent::view($view_file, $rID);   
 
             //Do we show all users? Depends on admin level        
             if( $this->session->userdata('_AdminLevel') >= ADMIN_LEVEL_SUPERVISOR )

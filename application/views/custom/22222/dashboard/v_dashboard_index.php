@@ -18,7 +18,7 @@
             </div>
             <h3 class="index toggle_icon" id="option2_toggle">No...</h3>
             <div class="widget_inside hide_toggle" id="option2">
-                <?php echo form_open( '/contact/add/0/new/new/unknown' ); ?>
+                <?php echo form_open( '/contact/add/edit/new/new/unknown' ); ?>
                 <div class="col_6">
                     <h3>Can I take your number in case we get cut off?</h3>
                     <div class="form">

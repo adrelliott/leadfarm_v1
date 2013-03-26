@@ -21,17 +21,14 @@ else
            //$this->_generate_view($this->data);
        }
 
-      public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE) {    
+      public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE, $pull = '') {    
             $this->data['view_setup']['modal'] = TRUE;
-            parent::view($view_file);
-            $this->data['view_setup']['rID'] = $rID;
-            $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
-            $this->data['view_setup']['display_none'] = '';
+            parent::view($view_file, $rID, $ContactId);   
 
             $this->_load_view_data($rID); 
 
             // Generate the view!        
-           $this->_generate_view($this->data);
+           $this->load_view($pull);
 
       }
       
@@ -39,14 +36,24 @@ else
             //clean input
             $input = clean_data($this->input->post());
             $input['__ContactId'] = $ContactId;
-
-            //print_array($input, 1, 'iunput');
-
+            
             //save record
             $rID = $this->add_record($input, $rID);
+            
+            $url = $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId;
+            
+            if ($this->input->is_ajax_request ()) {
+                $response = array (
+                    'success' => true,
+                );
+
+                $this->output->set_content_type('application/json');
+                $this->output->set_output(json_encode($response));
+                return;
+            }
 
             //refresh page
-            redirect( $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
+            redirect($url);
 
         }
 

@@ -22,9 +22,7 @@ else
        }
 
         public function view($view_file, $rID, $pull = '') {  
-            parent::view($view_file);
-            $this->data['view_setup']['rID'] = $rID;       
-            $this->data['view_setup']['display_none'] = ''; 
+            parent::view($view_file, $rID);   
 
             $this->_load_view_data($rID);    //retrieves and process all data for view            
 

@@ -23,10 +23,7 @@ else
         }
 
         public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE, $pull = '') {
-            parent::view($view_file);   
-            $this->data['view_setup']['rID'] = $rID;        
-            $this->data['view_setup']['ContactId'] = $ContactId; ;   
-            $this->data['view_setup']['display_none'] = '';
+            parent::view($view_file, $rID, $ContactId); 
 
             $this->_load_view_data($rID);     //retrieves and process all data for view    
 
@@ -48,17 +45,15 @@ else
 
         }
 
-        public function view_modal($view_file = 'view', $rID = 'new', $ContactId = NULL) {    
+        public function view_modal($view_file = 'view', $rID = 'new', $ContactId = NULL, $pull = '') {    
             $this->data['view_setup']['modal'] = TRUE;
-            parent::view($view_file);
-            $this->data['view_setup']['rID'] = $rID;        
-            $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
-            $this->data['view_setup']['display_none'] = '';
+           parent::view($view_file, $rID, $ContactId); 
+           
             //print_array($this->data, 1);
             $this->_load_view_data($rID);    //retrieves and process all data for view    
        
                 // Generate the view!
-            $this->_generate_view($this->data);
+            $this->load_view($pull);
         }
         
          public function add($view_file, $rID, $ContactId) {       
@@ -76,7 +71,7 @@ else
                     'updateDatatable' => 'dataTable-container-vehicles'
                 );
 
-                if ($ContactId === 'new') {
+                if ($rID === 'new') {
                     $response['redirect'] = $url;
                 }
 

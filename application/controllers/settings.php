@@ -20,10 +20,7 @@ else
         } 
 
         public function view($view_file = 'edit', $rID = 'new') {          
-            parent::view($view_file);    
-            $this->data['view_setup']['rID'] = $rID;
-            $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
-            $this->data['view_setup']['display_none'] = ''; 
+            parent::view($view_file, $rID, $rID);   
 
             $this->_load_view_data($rID);    //retrieves and process all data for view        
                 // Generate the view!

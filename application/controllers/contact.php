@@ -16,21 +16,18 @@ else
 
         public function index() {   
             parent::index();
-            $this->_load_view_data();   //retrieves and process all data for view   
+            $this->_load_view_data();
             $this->_generate_view($this->data);
         }
         
         public function view($view_file, $rID, $ContactId, $fieldset, $pull = '') {
-            parent::view($view_file);   
-            $this->data['view_setup']['rID'] = $rID;
-            $this->data['view_setup']['ContactId'] = $ContactId;   //in this context, $rID == ContactId
-            $this->data['view_setup']['display_none'] = ''; 
+            parent::view($view_file, $rID, $ContactId);   
 
             //What record fieldset do we show? Org, ind or unknown?
             $this->data['view_setup']['fieldset'] = $fieldset;
         
-            $this->_load_view_data($rID);    
-             
+            $this->_load_view_data($rID);
+            
             //check for expirations of MOT & service
             $this->load->library('garages/garage');
             $this->data['view_setup']['notifications'] = array();
@@ -48,13 +45,13 @@ else
         }
         
         public function add($view_file, $rID, $ContactId, $fieldset) {
-
             //clean input
             $input = clean_data($this->input->post());
 
             //save record
             $rID = $this->add_record($input, $rID);
-            $url = site_url ($this->controller_name . '/view/edit/' . $rID . '/' . $rID . '/' . $input['_IsOrganisationYN']);
+            
+            $url = site_url ($this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $rID . '/' . $input['_IsOrganisationYN']);
 
             if ($this->input->is_ajax_request ()) {
                 $response = array (
@@ -74,7 +71,12 @@ else
             redirect($url);
 
         }
-
+        
+        //Post process data for the view? put it here:
+        /*public function post_process_contact() {
+            
+        }*/
+        
         public function append_note($view_file, $rID, $ContactId, $fieldset) {
             //Concatenate the new note ready for updating
             $input = clean_data($this->input->post()); 

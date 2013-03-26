@@ -5,7 +5,7 @@
             <div class="widget_inside">
                 <h3>Choose a sequence to start when a user clicks on a link</h3>
                 <div class="form">
-                    <?php echo form_open( 'links/add/edit/$rID' ) ; ?>
+                    <?php echo form_open( "links/add/edit/$rID", 'class="ajax"' ) ; ?>
                         <?php //echo display_field($fields['__Id']); ?>
                         <?php echo display_field($fields['__LinkName']); ?>
                         <?php echo display_field($fields['__LinkDescription']); ?>

@@ -16,7 +16,7 @@ else
 
       public function view($view_file = 'edit', $rID = 'new') {          
             $this->data['view_setup']['modal'] = TRUE;
-            parent::view($view_file);
+            parent::view($view_file, $rID);   
 
             //Grab the url of the page with the problem
             if ($view_file == 'edit')

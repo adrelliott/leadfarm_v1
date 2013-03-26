@@ -14,11 +14,12 @@ else
 
         public function __construct()    {
             parent::__construct();
-            //$this->output->enable_profiler(TRUE);
-            if ($this->session->userdata('_JobCategory') == 'Workshop' && ! isset($_GET['full_cal'])) $this->workshop = TRUE;             
+            //$this->output->enable_profiler(TRUE);                       
         }
 
         public function index() {   
+            if ($this->session->userdata('_JobCategory') == 'Workshop' 
+                    && ! isset($_GET['full_cal'])) $this->workshop = TRUE;  
             $method_name = 'index';
             $view_file = 'index';
             if ($this->workshop)
@@ -35,46 +36,46 @@ else
 
         }
 
-        public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE, $pull = '') { 
-            parent::view($view_file);     
-            $this->data['view_setup']['rID'] = $rID;        
-            $this->data['view_setup']['ContactId'] = $rID;   //in this context, $rID == ContactId
-            $this->data['view_setup']['display_none'] = '';
-
-            $this->_load_view_data($rID);    //retrieves and process all data for view    
-
+        public function view($view_file, $rID, $ContactId, $pull = '') { 
+            parent::view($view_file, $rID, $ContactId);     
+            
+            $this->_load_view_data($rID);    //retrieves and process all data for view  
+            
             $this->load_view($pull);
 
         }
         
          public function add($view_file, $rID, $ContactId = FALSE) {       
-        //clean input
-        $input = clean_data($this->input->post());
-        if ($ContactId) $input['ContactId'] = $ContactId;
-        
-        //save record
-        $this->add_record($input, $rID);
-        $url = site_url ($this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId);
+            //clean input
+            $input = clean_data($this->input->post());
+            if ($ContactId) $input['ContactId'] = $ContactId;
 
-        if ($this->input->is_ajax_request()) {
-          $response = array (
-            'success' => true,
-            'updateCalendar' => true,
-          );
+            //save record
+            $this->add_record($input, $rID);
+            $url = site_url ($this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId);
 
-          $this->output->set_content_type('application/json');
-          $this->output->set_output(json_encode($response));
-          return;
+            if ($this->input->is_ajax_request()) {
+              $response = array (
+                'success' => true,
+                'updateCalendar' => true,
+              );
 
-        }
+              $this->output->set_content_type('application/json');
+              $this->output->set_output(json_encode($response));
+              return;
 
-        //refresh page
-        redirect($url);
+            }
+
+            //refresh page
+            redirect($url);
        
-    }
+        }
     
     public function mechanic_amend_booking($rID, $param = NULL) {       
-        //clean input
+        //has status hcnaged?
+        if ( $this->input->post('_:_Status') != $this->input->post('_Status') ) $redirect = TRUE;
+        else $redirect = FALSE;
+//clean input
         $input = clean_data($this->input->post());
         
         //save record
@@ -89,16 +90,16 @@ else
         if ($this->input->is_ajax_request()) {
           $response = array (
             'success' => true,
-            'updateCalendar' => true,
+            'updateCalendar' => true,            
           );
+          
+          if ($redirect) $response['redirect'] = $url;
 
           $this->output->set_content_type('application/json');
           $this->output->set_output(json_encode($response));
           return;
 
         }
-        
-        
         //refresh page
         redirect($url);
        
@@ -108,12 +109,8 @@ else
         if ($this->workshop)
         {
              $this->setup_dropdown($this->data['view_setup']['tables']['users']['table_data'], 'users');
-             $this->data['view_setup']['fields'] = $this->data['config']['record']['view']['fields'];;
-             
+             $this->data['view_setup']['fields'] = $this->data['config']['record']['view']['fields'];             
         }
-           
-            
-        
         return;
     }
     
@@ -151,7 +148,7 @@ else
             'yesterday' => date('Y-m-d', $this->current_day - (24*60*60)),
             'today' => date('Y-m-d'),
             'current_day' => date('Y-m-d', $this->current_day),
-            'current_day_nice' => date('dS F, Y', $this->current_day),
+            'current_day_nice' => date('l, dS F, Y', $this->current_day),
             'tomorrow' => date('Y-m-d', $this->current_day + (24*60*60)),
         );
         

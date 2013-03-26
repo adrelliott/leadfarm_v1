@@ -9,7 +9,7 @@
                     <div id="tab-1"><!-- Start of tab 1 -->
                         <h3>Create/edit an Action for this contact</h3>
                         <div class="form">
-                            <?php echo form_open("contactaction/add/edit_action/$rID/$ContactId") ; ?>
+                            <?php echo form_open("contactaction/add/edit_action/$rID/$ContactId", 'class="ajax"') ; ?>
                                 <?php echo display_field($fields['ActionType'], array('label' => 'What type of Action?', 'blank_entry' => FALSE)); ?>
                                 <?php echo display_field($fields['ActionDescription'], array('label' => 'Give it a Title')); ?>
                                 <?php echo display_field($fields['CreationNotes']); ?>
