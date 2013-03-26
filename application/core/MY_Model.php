@@ -30,6 +30,8 @@ class MY_Model extends CI_Model {
     
     public $current_ContactId = '';
     
+    public $dID = DATAOWNER_ID;
+    
     
     /**
      * Define what the fieldname is for the ContactID.
@@ -86,6 +88,8 @@ class MY_Model extends CI_Model {
         // Return results
         $single == FALSE || $this->db->limit(1);
         $method = $single ? 'row_array' : 'result_array';
+        $condition = $this->table_name . "._dID = " . $this->dID;
+        $this->db->where($condition);   //ONLY get this user's records
         return $this->db->get($this->table_name)->$method();
     }
     
@@ -211,15 +215,19 @@ class MY_Model extends CI_Model {
         if ( $id == FALSE || $id == 'new' ) {
             
             // This is an insert
+            //if ( isset($data['_dID']) ) $data['_dID'] = $this->dID;
+            //else $data['_dID'] = $this->dID;
+            $data['_dID'] = $this->dID;
             $this->db->set($data)->insert($this->table_name);
         }
         else {
             
             // This is an update
             $filter = $this->primaryFilter;
+            $data['_dID'] = $this->dID;
             $this->db->set($data)->where($this->primary_key, $filter($id))->update($this->table_name);
         }
-        
+        $data['_dID'] = $this->dID;
         // Return the ID
         return $id == FALSE ? $this->db->insert_id() : $id;
     }
@@ -238,6 +246,7 @@ class MY_Model extends CI_Model {
         foreach ($ids as $id) {
             $id = $filter($id);
             if ($id) {
+                $this->db->where('_dID', $this->dID);
                 $this->db->where($this->primary_key, $id)->limit(1)->delete($this->table_name);
             }
         }
