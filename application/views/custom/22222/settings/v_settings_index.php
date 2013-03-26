@@ -11,7 +11,7 @@
                     <div id="tab-1">
                         <h4>Add New user</h4>
                             <div class="form">
-                                <?php echo form_open(DATAOWNER_ID . '/user/add/edit/' . $rID ); ?>
+                                <?php echo form_open( '/user/add/edit/' . $rID ); ?>
                                 <?php display_field($fields['Title']); ?>
                                 <?php display_field($fields['FirstName']); ?>
                                 <?php display_field($fields['LastName']); ?>

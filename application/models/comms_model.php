@@ -15,13 +15,13 @@ class Comms_model extends MY_Model {
         $this->order_by = '__Id DESC';
         $this->primary_key = '__Id';
         $this->contactId_fieldname = '__ContactId';
-        if (isset($this->data['view_setup']['ContactId']))
+        /*if (isset($this->data['view_setup']['ContactId'])) //now set in MY_Model
         {
             $this->current_ContactId = $this->data['view_setup']['ContactId'];
-        }
+        }*/
     }
     
-     function add($input, $rID) {
+     /*function add($input, $rID) {
         //mimic infusionsoft creation of record
        if ($rID == 'new')
        {
@@ -30,7 +30,7 @@ class Comms_model extends MY_Model {
        }      
        
        return $this->save($input, $rID);
-    }
+    }*/
     
   
     
@@ -46,37 +46,6 @@ class Comms_model extends MY_Model {
         return $query;
     }
     
-   /* 
-    
-    public function get_all_records($where = NULL) {
-        //get all records. $where set up in dataset['model_params']
-        if ($where != NULL) { $this->db->where($where); }
-        return $this->get();
-    }
-    
-    public function get_all_contacts_records($where = NULL) {
-        //get all records. $where set up in dataset['model_params']
-        if ($where != NULL) { $this->db->where($where); }
-        $this->db->where('__ContactId', $this->data['view_setup']['ContactId']);
-        return $this->get();
-    }
-    
-     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public function get_by_rID($rID) {
-        //get one record with the ID of $rID
-        parent::get($rID);
-    }
-    
-    * */
-    
+   
 
 }

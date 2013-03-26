@@ -208,8 +208,7 @@ class MY_Model extends CI_Model {
      * @author Joost van Veen
      */
     public function save($data, $id = FALSE) {
-        
-        if ($id == FALSE) {
+        if ( $id == FALSE || $id == 'new' ) {
             
             // This is an insert
             $this->db->set($data)->insert($this->table_name);

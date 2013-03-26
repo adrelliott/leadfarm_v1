@@ -15,7 +15,7 @@ class Contact_model extends MY_Model {
         $this->order_by = 'LastName ASC';   //why isnt;' this reflected in datatable? 
         $this->contactId_fieldname = 'Id';
         //$this->primary_key = 'Id';
-        /*if (isset($this->data))
+        /*if (isset($this->data))   //now set in MY_Model
         {
             if (isset($this->data['view_setup']['ContactId']))
             {
@@ -25,7 +25,8 @@ class Contact_model extends MY_Model {
     }
     
     function get_contacts_details() {
-        return $this->get($this->data['view_setup']['ContactId']);
+        //return $this->get($this->data['view_setup']['ContactId']);
+        return $this->get($this->current_ContactId);
     }
     
         

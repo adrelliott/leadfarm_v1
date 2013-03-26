@@ -15,9 +15,9 @@ else
         }
 
         public function index() {     
-            parent::index();
-            $this->_load_view_data();
-            $this->_generate_view($this->data);
+            //parent::index();
+            //$this->_load_view_data();
+            //$this->_generate_view($this->data);
         }
 
         public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE) {

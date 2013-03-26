@@ -7,7 +7,7 @@
         <div class="widget clearfix">
             <h2>Users</h2>
             <div class="widget_inside">                
-               <?php echo form_open(DATAOWNER_ID . '/user/add/edit/' . $rID ); ?>
+               <?php echo form_open( '/user/add/edit/' . $rID ); ?>
                     <?php display_field($fields['Title']); ?>
                     <?php display_field($fields['FirstName']); ?>
                     <?php display_field($fields['LastName']); ?>

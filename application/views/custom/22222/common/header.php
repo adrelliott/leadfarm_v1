@@ -84,7 +84,7 @@
                     <ul id="toolbar">
                        <li>Logged in as 
                            <?php echo anchor('user/view/edit/' .  $this->session->userdata('UserId') . '/' . $this->session->userdata('UserId'), $this->session->userdata('FirstName') . ' ' . $this->session->userdata('LastName'));?> (<?php echo anchor('login/log_out', 'Log out?');?>) </li>
-                       <li><?php echo anchor('settings', 'Settings', 'id="settings" class="iframe"'); ?></li>
+                       <?php //<li><?php echo anchor('settings', 'Settings', 'id="settings" class="iframe"');  //</li>?>
                        <li><?php echo anchor('help/view/edit/___'.uri_string(), 'Help', 'id="help" class=" iframe "'); ?></li>
                     </ul>
                 </div>
@@ -98,4 +98,3 @@
         </nav>
         <!-- End Navbar-->
         <div class="container" id="actualbody"><!-- Start body -->
-            <?Php //print_array($view_setup);?>

@@ -49,7 +49,7 @@
                         <?php echo form_close(); ?>
                     </div>
                     <div id="tab-2">
-                         <?php echo form_open('/contact/append_note/0/' . $rID . '/' . $ContactId . '/' . $fieldset, 'class="ajax"'); ?>
+                         <?php echo form_open('contact/append_note/0/' . $rID . '/' . $ContactId . '/' . $fieldset, 'class="ajax"'); ?>
                             <p>These are the notes for this record.</p>
                             <?php echo display_field($fields['ContactNotes']); ?>
                            <!-- Start field "Add a Note:" -->

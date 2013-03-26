@@ -9,7 +9,7 @@
                     <div id="tab-1"><!-- Start of tab 1 -->
                         <h3>Create/edit a vehicles for this contact</h3>
                         <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . "/vehicles/add/edit_modal/$rID/$ContactId") ; ?>
+                            <?php echo form_open( "/vehicles/add/edit_modal/$rID/$ContactId" ) ; ?>
                                 <?php //echo display_field($fields['__Id'], array('type' => 'hidden'));  ?>
                                 <?php //echo display_field($fields['__ContactId'], array('type' => 'hidden', 'value' => $ContactId));  ?>                                
                                 <?php echo display_field($fields['__Make']); ?>

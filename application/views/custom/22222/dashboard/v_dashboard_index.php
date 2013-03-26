@@ -12,13 +12,13 @@
                     echo $this->table->generate_custom($tables['master_search']['table_data']); 
                 ?> 
                 <div class="col_5 last clearfix margin_top_15 right">                    
-                    <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contact/view/edit/new/new/0" class="large blue button right"><span>Create New Contact</span></a>
-                    <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contact/view/edit/new/new/1" class="large button left"><span>Create New Organisation</span></a>
+                    <a href="<?php echo site_url( '/contact/view/edit/new/new/0' ); ?>" class="large blue button right"><span>Create New Contact</span></a>
+                    <a href="<?php echo site_url( '/contact/view/edit/new/new/1' ); ?>" class="large button left"><span>Create New Organisation</span></a>
                 </div>
             </div>
             <h3 class="index toggle_icon" id="option2_toggle">No...</h3>
             <div class="widget_inside hide_toggle" id="option2">
-                <?php echo form_open(DATAOWNER_ID . '/contact/add/0/new/new/unknown'); ?>
+                <?php echo form_open( '/contact/add/0/new/new/unknown' ); ?>
                 <div class="col_6">
                     <h3>Can I take your number in case we get cut off?</h3>
                     <div class="form">
