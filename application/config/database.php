@@ -45,7 +45,7 @@
 | the active record class
 */
 
-$active_group = 'default';
+
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
@@ -64,6 +64,64 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+$db['staging']['hostname'] = 'localhost';
+$db['staging']['username'] = 'leadfar2_user';
+$db['staging']['password'] = 'DMmanch35';
+$db['staging']['database'] = 'leadfar2_master';
+$db['staging']['dbdriver'] = 'mysql';
+$db['staging']['dbprefix'] = '';
+$db['staging']['pconnect'] = TRUE;
+$db['staging']['db_debug'] = TRUE;
+$db['staging']['cache_on'] = FALSE;
+$db['staging']['cachedir'] = '';
+$db['staging']['char_set'] = 'utf8';
+$db['staging']['dbcollat'] = 'utf8_general_ci';
+$db['staging']['swap_pre'] = '';
+$db['staging']['autoinit'] = TRUE;
+$db['staging']['stricton'] = FALSE;
+
+$db['production']['hostname'] = 'localhost';
+$db['production']['username'] = 'campaign2_master';
+$db['production']['password'] = 'DMmanch35';
+$db['production']['database'] = 'campaign2_master';
+$db['production']['dbdriver'] = 'mysql';
+$db['production']['dbprefix'] = '';
+$db['production']['pconnect'] = TRUE;
+$db['production']['db_debug'] = TRUE;
+$db['production']['cache_on'] = FALSE;
+$db['production']['cachedir'] = '';
+$db['production']['char_set'] = 'utf8';
+$db['production']['dbcollat'] = 'utf8_general_ci';
+$db['production']['swap_pre'] = '';
+$db['production']['autoinit'] = TRUE;
+$db['production']['stricton'] = FALSE;
+
+
+$active_group = 'default';
+//$active_group = 'production';
+
+if (defined('ENVIRONMENT'))
+{	
+    switch (ENVIRONMENT)
+    {
+        case 'hn-development':
+           $active_group = 'default';
+                break;
+        case 'al-development':
+            $active_group = 'default';
+                break;
+        case 'staging': 
+            $active_group = 'staging';
+                break;
+        case 'demo': 
+        case 'production':
+            $active_group = 'production';
+                break;
+
+        default:
+                exit('The application environment is not set correctly.');
+    }
+}
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
