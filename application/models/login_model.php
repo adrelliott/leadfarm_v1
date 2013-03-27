@@ -12,12 +12,11 @@
  * 
  * 
  */
-    class Login_model  extends MY_Model {  
+    class Login_model  extends CI_Model {  
         
         public function __construct()    {
             parent::__construct();
             $this->table_name = 'contact';
-            $this->order_by = 'Id';
             $this->fields = array //fields to retrive from the db
             (
                 'Username',
@@ -44,15 +43,17 @@
                 'Username' => $this->input->post('username'),
                 'Password' => md5($this->input->post('password'))
             );            
-            $this->db->where($conditions);
+            //$this->db->where($conditions);
             $this->db->select($this->fields);
-            $this->db->limit(1);
+            //$this->db->limit(1);
             
             //do query
-            $query = $this->get();
+            $query = $this->db->get_where($this->table_name, $conditions, 1);
             
-            if ($query)
+            if ($query->num_rows() > 0)
             {
+                //$query['results'] = $query[0]; unset($query[0]);
+                $query = $query->result_array();
                 $query['results'] = $query[0]; unset($query[0]);
                 
                 //check for suspended reason
@@ -66,6 +67,8 @@
                     $query['results']['is_logged_in'] = TRUE;
                     $this->session->set_userdata($query['results']);
                     $_SESSION['dID'] = $this->session->userdata('_dID');
+                    if ( ! defined('DATAOWNER_ID') )
+                        define('DATAOWNER_ID', $this->session->userdata('_dID'));
                 }                
             }
             else
@@ -78,31 +81,6 @@
         
         
         
-       /* 
-        function validate_user_old()
-        {
-            
-            $condition = array
-            (
-               
-            );            
-            //$this->db->select('FirstName,LastName,Id,Username,Company,Nickname,Email,Phone1,_SuspendedReason');
-            
-            $query = $this->db->get_where('contact', $condition);
-            
-            $retval = array('result' => FALSE, 'data' => '');
-            
-            if ($query->num_rows == 1)
-            {
-                $data = $query->result_array();
-                $retval = array(
-                    'result' => TRUE,
-                    'data' => $data[0],
-                );                
-            }
-            
-            return $retval;
-        }*/
         
         
     }

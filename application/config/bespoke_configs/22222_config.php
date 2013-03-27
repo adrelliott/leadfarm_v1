@@ -1481,10 +1481,11 @@ $config['booking'] = Array
                         'label' => 'Date of Booking',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'datetimepicker',
+                        //'cssClassInput' => 'datetimepicker',
+                        'cssClassInput' => '',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => ' readonly',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'date',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'timestamp',
                         'name' => 'ActionDate',
                         'helpText' => '',                        
                         'length' => '',
@@ -1926,6 +1927,29 @@ $config['contactaction'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
+                        'label' => 'Date of Booking',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        //'cssClassInput' => 'datetimepicker',
+                        'cssClassInput' => 'datepicker',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'timestamp',
+                        'name' => 'ActionDate',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                        //'defaultvalue' => '',   //needs to be in format of YYYY-MM-DD HH:MM:SS
+                    ),
+                    /*'ActionDate' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
                         'label' => 'Completion Date',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
@@ -1939,7 +1963,7 @@ $config['contactaction'] = Array
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
-                    ),
+                    ),*/
                     'UserID' => array       
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query

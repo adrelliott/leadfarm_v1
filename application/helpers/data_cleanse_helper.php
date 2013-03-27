@@ -55,7 +55,8 @@ function clean_data($input, $cleanse_type = NULL){
                     {
                                          
                         $array = explode(':', substr($key, 3));
-                        //gives us [0] = colname, [1]= filedname piece
+                        //gives us [0] = colname, [1]= fieldname piece
+                        //e.g. [0] = time, [1]= 21
                         if (isset($value))
                         {
                             $retval['timestamps'][$array[0]][$array[1]] = $value; 
@@ -90,9 +91,9 @@ function clean_data($input, $cleanse_type = NULL){
     }
     
     function cleanse_timestamps($data) {   
-        
-        if (! is_array($data))  //Turn separate fields into a timestamp!
-        {
+        //if (empty($data)) return ;
+        if ( ! is_array($data))  //Turn separate fields into a timestamp!
+        {                       
             $retval = array();
             $data = explode(' ', $data); 
                 //...creates $data[0]=YYYY-MM-DD, $data[1]=HH:MM:SS
@@ -107,15 +108,14 @@ function clean_data($input, $cleanse_type = NULL){
                 //...creates $retval[time][0] = HH, [1]=MM, [2]=SS
             $retval['hours'] = $retval['time'][0];
             $retval['mins'] = $retval['time'][1];
-            
             unset($retval['time']); //Tidy up
         }
         else   //Turn a timestamp into separate fields
         {    
-            
             $data['date'] = explode('/', $data['date']); //creates $retval['date'][0]=DD, [1]=MM, [2]=YYYY
             $retval = $data['date'][2] . '-' . $data['date'][1] . '-' . $data['date'][0];
             $retval .= ' ' . $data['hours'] . ':' . $data['mins'] . ':00';
+            //print_array($retval, 1, 'retval');
         }
         
         return $retval;
@@ -204,12 +204,20 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
                 $retval .= '<textarea class=" ' . $attributes['cssClassInput'] . '" id=" ' . $attributes['cssIdInput'] . '" type="textarea"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['extraHTMLInput'] . '  />' . $attributes['value'] . '</textarea>';
                 break;
             case 'timestamp': 
-                $timestamp_array = cleanse_timestamps($attributes['value']);
-                //set up the date field   
-                $retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . ' datepicker" type="text"  name=":::' . $attributes['name'] . ':date" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $timestamp_array['date'] . '"  />';
+                if ( empty($attributes['value']) )
+                {
+                    if ( ! empty($attributes['defaultvalue']) )
+                        $timestamp_array = cleanse_timestamps($attributes['defaultvalue']);
+                    else $timestamp_array = array( 'date' => date('d/m/Y'), 'hours' => '10', 'mins' => '00');                        
+                }
+                else $timestamp_array = cleanse_timestamps($attributes['value']);
                 
-                //set up the hours drop down (the value are taken form the attr for this field in XXXXX_Config
-                $retval .= '<select class="' . $attributes['cssClassInput'] . '" id=" ' . $attributes['cssIdInput'] . '" name=":::' . $attributes['name'] . ':hours">';
+                //now create the 3 fields
+                 $retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . ' datepicker" type="text"  name=":::' . $attributes['name'] . ':date" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $timestamp_array['date'] . '"  />';
+                 
+                  $retval .= '<select class="' . $attributes['cssClassInput'] . '" id=" ' . $attributes['cssIdInput'] . '" name=":::' . $attributes['name'] . ':hours">';
+                  if (empty($attributes['options'])) 
+                      $attributes['options'] = array('08','09','10','11','12','13','14','15','16','17');
                 foreach ($attributes['options'] as $k => $v)
                 {
                     $selected = ''; 
@@ -217,19 +225,13 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
                     {
                         $selected = 'selected="selected"';
                     }
-                    $retval .= '<option value="' . $v . '" ' . $selected . '>' . $k . '</option>';
+                    $retval .= '<option value="' . $v . '" ' . $selected . '>' . $v . '</option>';
                 }
                 $retval .= '</select>';
                 
                 //Set up minutes drop down
                 $retval .= '<select class="' . $attributes['cssClassInput'] . '" id=" ' . $attributes['cssIdInput'] . '" name=":::' . $attributes['name'] . ':mins">';
-                $attributes['options'] = array
-                (
-                    '00' => '00',
-                    '15' => '15',
-                    '30' => '30',
-                    '45' => '45',
-                );
+                $attributes['options'] = array('00', '15', '30','45');
                 foreach ($attributes['options'] as $k => $v)
                 {
                     $selected = ''; 
@@ -237,10 +239,9 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
                     {
                         $selected = 'selected="selected"';
                     }
-                    $retval .= '<option value="' . $v . '" ' . $selected . '>' . $k . '</option>';
+                    $retval .= '<option value="' . $v . '" ' . $selected . '>' . $v . '</option>';
                 }
                 $retval .= '</select>';
-                
                 break;
             case 'hidden':
                     //NOTE The first defition of $retval is not a concatenation, like the others, 
