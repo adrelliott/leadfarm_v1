@@ -1,4 +1,5 @@
 <?php
+echo "<h1>helo!</h1>";
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -18,9 +19,9 @@
  *
  */
 //define('ENVIRONMENT', 'hn-development');
-define('ENVIRONMENT', 'al-development');
+//define('ENVIRONMENT', 'al-development');
 //define('ENVIRONMENT', 'staging');
-//define('ENVIRONMENT', 'demo');
+define('ENVIRONMENT', 'demo');
 //define('ENVIRONMENT', 'production');
 
 /*
