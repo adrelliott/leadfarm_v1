@@ -82,7 +82,8 @@ $config['index_page'] = '';
 |
 */
 //$config['uri_protocol']	= 'REQUEST_URI';
-$config['uri_protocol']	= 'PATH_INFO';
+//$config['uri_protocol']	= 'PATH_INFO';
+$config['uri_protocol']	= 'ORIG_PATH_INFO';
 
 /*
 |--------------------------------------------------------------------------

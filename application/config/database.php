@@ -48,21 +48,21 @@
 
 $active_record = TRUE;
 
-$db['al_development']['hostname'] = 'localhost';
-$db['al_development']['username'] = 'local_superadmin';
-$db['al_development']['password'] = 'DMmanch35';
-$db['al_development']['database'] = 'local_master';
-$db['al_development']['dbdriver'] = 'mysql';
-$db['al_development']['dbprefix'] = '';
-$db['al_development']['pconnect'] = TRUE;
-$db['al_development']['db_debug'] = TRUE;
-$db['al_development']['cache_on'] = FALSE;
-$db['al_development']['cachedir'] = '';
-$db['al_development']['char_set'] = 'utf8';
-$db['al_development']['dbcollat'] = 'utf8_general_ci';
-$db['al_development']['swap_pre'] = '';
-$db['al_development']['autoinit'] = TRUE;
-$db['al_development']['stricton'] = FALSE;
+$db['al-development']['hostname'] = 'localhost';
+$db['al-development']['username'] = 'local_superadmin';
+$db['al-development']['password'] = 'DMmanch35';
+$db['al-development']['database'] = 'local_master';
+$db['al-development']['dbdriver'] = 'mysql';
+$db['al-development']['dbprefix'] = '';
+$db['al-development']['pconnect'] = TRUE;
+$db['al-development']['db_debug'] = TRUE;
+$db['al-development']['cache_on'] = FALSE;
+$db['al-development']['cachedir'] = '';
+$db['al-development']['char_set'] = 'utf8';
+$db['al-development']['dbcollat'] = 'utf8_general_ci';
+$db['al-development']['swap_pre'] = '';
+$db['al-development']['autoinit'] = TRUE;
+$db['al-development']['stricton'] = FALSE;
 
 $db['staging']['hostname'] = 'localhost';
 $db['staging']['username'] = 'leadfar2_user';
