@@ -18,10 +18,11 @@
  *
  */
 //define('ENVIRONMENT', 'hn-development');
-define('ENVIRONMENT', 'al-development');
-//define('ENVIRONMENT', 'staging');
-//define('ENVIRONMENT', 'demo');
-//define('ENVIRONMENT', 'production');
+//define('ENVIRONMENT', 'al-development');  //Al's MBP
+//define('ENVIRONMENT', 'staging');  //leadfarm-staging.co.uk
+define('ENVIRONMENT', 'demo');  //garagedashboard.co.uk
+//define('ENVIRONMENT', 'demo');  //??.co.uk
+//define('ENVIRONMENT', 'production');  //campaigndashboard.co.uk
 
 /*
  *---------------------------------------------------------------
