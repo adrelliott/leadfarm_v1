@@ -43,6 +43,8 @@
     <script src="<?php echo site_url(); ?>assets/scripts/twipsy.js"></script>
 
     <!-- WYSIWYG Editor -->
+    <script src="<?php echo site_url(); ?>assets/scripts/ckeditor/ckeditor.js"></script>
+    
     <script src="<?php echo site_url(); ?>assets/scripts/cleditor/jquery.cleditor.min.js"></script>
     <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/cleditor/jquery.cleditor.css" type="text/css" media="screen" />
     
@@ -67,9 +69,6 @@
      
     <!-- All the js used in the demo -->
     <script src="<?php echo site_url(); ?>assets/scripts/app.js"></script>
-    
-    <!-- Loads the script for the contact search -->
-     <script src="<?php echo site_url('assets/scripts/contactsearch.js'); ?>"></script>
 
 
 </head>
@@ -79,14 +78,14 @@
         <header class="container">
             <div class="row clearfix">
                 <div class="left">
-                    <a href="<?php echo site_url() . '/' . DATAOWNER_ID . '/dashboard'; ?>"><img src="<?php echo site_url() . '/' . PATH_TO_LOGO ?>" /></a>
+                    <a href="<?php echo site_url() . '/dashboard'; ?>"><img src="<?php echo site_url() . '/' . PATH_TO_LOGO ?>" /></a>
                 </div>                
                 <div class="right">
                     <ul id="toolbar">
                        <li>Logged in as 
-                           <?php echo anchor(DATAOWNER_ID . '/user/view/edit/' .  $this->session->userdata('UserId') . '/' . $this->session->userdata('UserId'), $this->session->userdata('FirstName') . ' ' . $this->session->userdata('LastName'));?> (<?php echo anchor(DATAOWNER_ID . '/login/log_out', 'Log out?');?>) </li>
-                       <li><?php echo anchor(DATAOWNER_ID . '/settings', 'Settings', 'id="settings" class="iframe"'); ?></li>
-                       <li><?php echo anchor(DATAOWNER_ID . '/help/view/edit/___'.uri_string(), 'Help', 'id="help" class=" iframe "'); ?></li>
+                           <?php echo anchor('user/view/edit/' .  $this->session->userdata('UserId') . '/' . $this->session->userdata('UserId'), $this->session->userdata('FirstName') . ' ' . $this->session->userdata('LastName'));?> (<?php echo anchor('login/log_out', 'Log out?');?>) </li>
+                       <?php //<li><?php echo anchor('settings', 'Settings', 'id="settings" class="iframe"');  //</li>?>
+                       <li><?php echo anchor('help/view/edit/___'.uri_string(), 'Help', 'id="help" class=" iframe "'); ?></li>
                     </ul>
                 </div>
             </div>
@@ -99,4 +98,3 @@
         </nav>
         <!-- End Navbar-->
         <div class="container" id="actualbody"><!-- Start body -->
-            <?Php //print_array($view_setup);?>

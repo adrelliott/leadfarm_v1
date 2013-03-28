@@ -22,7 +22,7 @@ $display_none = '';
                     <div id="tab-1">
                         <?php get_notifications($notifications, $rID, 'this'); ?>
                         <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . "/vehicles/add/edit/$rID/$ContactId", 'class="ajax"'); ?>
+                            <?php echo form_open( "/vehicles/add/edit/$rID/$ContactId", 'class="ajax"'); ?>
                             <?php display_field($fields['__Registration']); ?>
                             <?php display_field($fields['__Make']); ?>
                             <?php display_field($fields['__Model']); ?>
@@ -36,7 +36,7 @@ $display_none = '';
                         </div>
                     </div>
                     <div id="tab-2">
-                        <?php echo form_open(DATAOWNER_ID . '/vehicles/append_note/0/' . $rID . '/' . $ContactId, 'class="ajax"'); ?>
+                        <?php echo form_open( '/vehicles/append_note/0/' . $rID . '/' . $ContactId, 'class="ajax"'); ?>
                         <?php //echo form_open(DATAOWNER_ID . '/vehicles/append_note/' . $rID . '/' . $ContactId); ?>
                         <p>These are the notes for this record.</p>
                         <?php echo display_field($fields['__VehicleNotes']); ?>
@@ -54,7 +54,7 @@ $display_none = '';
                         <?php echo form_close(); ?>	
                     </div>
                     <div id="tab-3">
-                         <?php echo form_open(DATAOWNER_ID . "/vehicles/add/edit/$rID/$ContactId", 'class="ajax"'); ?>
+                         <?php echo form_open( "/vehicles/add/edit/$rID/$ContactId", 'class="ajax"'); ?>
                          <div class="form">
                             <?php display_field($fields['__Date_of_healthcheck']); ?>
                             <?php display_field($fields['__Mileage']); ?>
@@ -136,9 +136,10 @@ $display_none = '';
                 <h2>All Vehicles</h2>
                 <div class="widget_inside">
                     <h3>A list of all vehicles owned by this contact:</h3>
-                    <?php get_notifications($notifications, $rID, 'related'); ?>
-                    <div class="dataTable-container dataTable-container-vehicles" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/vehicles') ?>">    
-                    <?php $this->load->view ('custom/22222/vehicles/v_vehicles_edit/vehicles') ?>
+                        <?php get_notifications($notifications, $rID, 'related'); ?>
+                        <div class="dataTable-container dataTable-container-vehicles" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/vehicles') ?>">    
+                        <?php //$this->load->view ('custom/22222/vehicles/v_vehicles_edit/vehicles') ?>
+                        <?php include ('v_vehicles_edit/vehicles.php') ?>
                     </div>
                 </div>
             </div>
@@ -156,8 +157,8 @@ $display_none = '';
                             <option value="3">Send membership pack</option>
                             <option value="4">Send service pack (via email)</option>
                         </select>
-                        <input type="hidden" id="quick_action_url" value="<?php echo site_url() . DATAOWNER_ID; ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/" />
-                        <a id="quick_action_button" href="<?php echo site_url() . DATAOWNER_ID; ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/0" class="large blue button iframe">GO!</a>
+                        <input type="hidden" id="quick_action_url" value="<?php echo site_url('/quickaction/action/edit/' . $rID . '/' . $ContactId ); ?>/" />
+                        <a id="quick_action_button" href="<?php echo site_url('/quickaction/action/edit/' . $rID . '/' . $ContactId ); ?>/0" class="large blue button iframe">GO!</a>
                     </div>
                 </div>
             </div>

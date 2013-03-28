@@ -13,7 +13,7 @@
                         <div class="col_6">
                             <h4>Profile Details:</h4>
                             <div class="form">
-                                <?php echo form_open(DATAOWNER_ID . '/user/add/edit/' . $rID . '/' . $rID); ?>
+                                <?php echo form_open( '/user/add/edit/' . $rID . '/' . $rID ); ?>
                                 <?php display_field($fields['Title']); ?>
                                 <?php display_field($fields['FirstName']); ?>
                                 <?php display_field($fields['LastName']); ?>
@@ -44,7 +44,7 @@
                         <div class="col_5 last">
                             <h4>Login Details:</h4>
                             <div class="form">
-                                <?php echo form_open(DATAOWNER_ID . '/user/change_password/edit/' . $rID); ?>
+                                <?php echo form_open( '/user/change_password/edit/' . $rID ); ?>
                                 <?php if (isset($view_setup['message'])) echo $view_setup['message']; ?>
                                 <?php display_field($fields['Username'], array('extraHTMLInput' => 'disabled="disabled"')); ?>
                                 <div class="clearfix" id="">

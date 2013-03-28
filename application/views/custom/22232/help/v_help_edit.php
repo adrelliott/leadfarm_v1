@@ -4,7 +4,7 @@
             <h2>Help!</h2>
             <div class="widget_inside">
                 <div class="form">
-                    <?php echo form_open(DATAOWNER_ID . "/help/add/thanks/") ; ?>
+                    <?php echo form_open( 'help/add/thanks/' ) ; ?>
                         <div class="clearfix">
                             <label>What's your beef, chief?</label>
                             <div class="input">

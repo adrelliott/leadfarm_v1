@@ -5,7 +5,7 @@
             <div class="widget_inside">
                 <h3>Create/edit a Task for this contact</h3>
                 <div class="form">
-                    <?php echo form_open(DATAOWNER_ID . "/tags/add/edit/$rID") ; ?>
+                    <?php echo form_open( "/tags/add/edit/$rID" ) ; ?>
                         <?php //echo display_field($fields['Id']); ?>
                         <?php echo display_field($fields['GroupName']); ?>
                         <?php echo display_field($fields['GroupDescription']); ?> 

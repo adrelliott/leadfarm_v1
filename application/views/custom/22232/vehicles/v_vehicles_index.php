@@ -1,7 +1,3 @@
-<?php 
-    //if ($this->data['message']) {echo '<span class="notification information">'
-    //    . $this->data['message'] . '</span>';} 
-?>
 <div class="row clearfix">
     <div class="col_12">
         <div class="widget clearfix">

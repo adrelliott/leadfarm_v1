@@ -17,7 +17,7 @@
                         ?>
                         <div class="form">
                             
-                            <?php echo form_open(DATAOWNER_ID . '/user/add_new_user/edit_modal/' . $rID ); ?>
+                            <?php echo form_open( '/user/add_new_user/edit_modal/' . $rID ); ?>
                             <?php display_field($fields['Title'], array('value' => set_value('Title'))); ?>
                             <?php display_field($fields['FirstName'], array('value' => set_value('FirstName'))); ?>
                             <?php display_field($fields['LastName'], array('value' => set_value('LastName'))); ?>

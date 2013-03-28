@@ -6,7 +6,7 @@
         echo $this->table->generate_custom($tables['users']['table_data']); 
     ?>
     <div class="clearfix margin_top_15">
-        <a href="<?php echo site_url() . DATAOWNER_ID; ?>/user/view_modal/edit_modal/new" class="large blue button right iframe" data-table-id="">
+        <a href="<?php echo site_url( '/user/view_modal/edit_modal/new' ); ?>" class="large blue button right iframe" data-table-id="">
             <span>Create New User</span>
         </a>
     </div>

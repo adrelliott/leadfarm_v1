@@ -489,7 +489,7 @@ $config['contact'] = Array
                     'data_source' => 'relationships', //The dataset name defined above
                     'model_name' => 'contactjoin_model',
                     'model_method' => 'joinon_contactJoin', 
-                    'model_params' => NULL, 
+                    'model_params' => NULL,
                     'fields' => array 
                     (
                         'contact.Id' => '',
@@ -499,6 +499,7 @@ $config['contact'] = Array
                         '__contactjoin.__Reason' => 'Reason',
                         '__contactjoin.__contactId' => '',
                         '__contactjoin.__contactId2' => '',
+                        '__contactjoin.__ActiveYN' => 'Active?',
                     ),
                 ),
                 'users' => array

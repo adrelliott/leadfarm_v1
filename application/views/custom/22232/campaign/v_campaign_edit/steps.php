@@ -1,5 +1,5 @@
 <div class="clearfix" id="">
-    <?php echo form_open(DATAOWNER_ID . '/steps/add/edit/campaign/' . $rID, 'class="ajax"'); ?>
+    <?php echo form_open( '/steps/add/edit/campaign/' . $rID, 'class="ajax"'); ?>
     <table id="never_ending_table">
     <thead>
       <tr>
@@ -23,7 +23,7 @@
             </td>
             <td>
                 <select name="<?php echo 'Delay_' . $step; ?>" id="<?php echo 'Delay_' . $step; ?>" class="small">
-                    <?php echo generate_dropdown(array(''=>0, 'No Delay'=>1,'1 Hr'=>3600,'2 Hr'=>7200,'6 Hr'=>21600,'12 Hr'=>43200,'1 Day'=>86400,'2 Days'=>172800,'3 Days'=>259200,'4 Days'=>345600,'5 Days'=>432000,'6 Days'=>518400,'7 Days'=>604800,'10 Days'=>864000,'14 Days'=>1209600,'21 Days'=>1814400,'28 Days'=>2419200,'5 Weeks'=>3024000,'6 Weeks'=>3628800), $attributes['__Delay']); ?>
+                    <?php echo generate_dropdown(array(''=>0, 'No Delay'=>1,'1 Min'=>60,'1 Hr'=>3600,'2 Hr'=>7200,'6 Hr'=>21600,'12 Hr'=>43200,'1 Day'=>86400,'2 Days'=>172800,'3 Days'=>259200,'4 Days'=>345600,'5 Days'=>432000,'6 Days'=>518400,'7 Days'=>604800,'10 Days'=>864000,'14 Days'=>1209600,'21 Days'=>1814400,'28 Days'=>2419200,'5 Weeks'=>3024000,'6 Weeks'=>3628800), $attributes['__Delay']); ?>
               </select>
             </td>           
             <td>
