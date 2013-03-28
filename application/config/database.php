@@ -114,32 +114,10 @@ $db['production']['stricton'] = FALSE;
 
 
 
-//$active_group = 'production';
 
-if (defined('ENVIRONMENT'))
-{	
-    $active_group = ENVIRONMENT;
-    /*switch (ENVIRONMENT)
-    {
-        case 'hn-development':
-           $active_group = 'default';
-                break;
-        case 'al-development':
-            $active_group = 'default';
-                break;
-        case 'staging': 
-            $active_group = 'staging';
-                break;
-        case 'demo': 
-        case 'production':
-            $active_group = 'production';
-                break;
-
-        default:
-                exit('The application environment is not set correctly.');
-    }*/
-}
-else $active_group = 'al_development';
+//Define the active group to use (to connect to db)
+if (defined('ENVIRONMENT')) $active_group = ENVIRONMENT; 
+else $active_group = 'al-development';
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
