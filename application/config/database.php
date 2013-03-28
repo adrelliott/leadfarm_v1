@@ -48,21 +48,21 @@
 
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'local_superadmin';
-$db['default']['password'] = 'DMmanch35';
-$db['default']['database'] = 'local_master';
-$db['default']['dbdriver'] = 'mysql';
-$db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = TRUE;
-$db['default']['db_debug'] = TRUE;
-$db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = '';
-$db['default']['char_set'] = 'utf8';
-$db['default']['dbcollat'] = 'utf8_general_ci';
-$db['default']['swap_pre'] = '';
-$db['default']['autoinit'] = TRUE;
-$db['default']['stricton'] = FALSE;
+$db['al_development']['hostname'] = 'localhost';
+$db['al_development']['username'] = 'local_superadmin';
+$db['al_development']['password'] = 'DMmanch35';
+$db['al_development']['database'] = 'local_master';
+$db['al_development']['dbdriver'] = 'mysql';
+$db['al_development']['dbprefix'] = '';
+$db['al_development']['pconnect'] = TRUE;
+$db['al_development']['db_debug'] = TRUE;
+$db['al_development']['cache_on'] = FALSE;
+$db['al_development']['cachedir'] = '';
+$db['al_development']['char_set'] = 'utf8';
+$db['al_development']['dbcollat'] = 'utf8_general_ci';
+$db['al_development']['swap_pre'] = '';
+$db['al_development']['autoinit'] = TRUE;
+$db['al_development']['stricton'] = FALSE;
 
 $db['staging']['hostname'] = 'localhost';
 $db['staging']['username'] = 'leadfar2_user';
@@ -79,6 +79,22 @@ $db['staging']['dbcollat'] = 'utf8_general_ci';
 $db['staging']['swap_pre'] = '';
 $db['staging']['autoinit'] = TRUE;
 $db['staging']['stricton'] = FALSE;
+
+$db['demo']['hostname'] = '10.168.1.57';
+$db['demo']['username'] = 'garageda_master';
+$db['demo']['password'] = 'DMmanch35';
+$db['demo']['database'] = 'garageda_master';
+$db['demo']['dbdriver'] = 'mysql';
+$db['demo']['dbprefix'] = '';
+$db['demo']['pconnect'] = TRUE;
+$db['demo']['db_debug'] = TRUE;
+$db['demo']['cache_on'] = FALSE;
+$db['demo']['cachedir'] = '';
+$db['demo']['char_set'] = 'utf8';
+$db['demo']['dbcollat'] = 'utf8_general_ci';
+$db['demo']['swap_pre'] = '';
+$db['demo']['autoinit'] = TRUE;
+$db['demo']['stricton'] = FALSE;
 
 $db['production']['hostname'] = 'localhost';
 $db['production']['username'] = 'campaign2_master';
@@ -97,12 +113,13 @@ $db['production']['autoinit'] = TRUE;
 $db['production']['stricton'] = FALSE;
 
 
-$active_group = 'default';
+
 //$active_group = 'production';
 
 if (defined('ENVIRONMENT'))
 {	
-    switch (ENVIRONMENT)
+    $active_group = ENVIRONMENT;
+    /*switch (ENVIRONMENT)
     {
         case 'hn-development':
            $active_group = 'default';
@@ -120,8 +137,9 @@ if (defined('ENVIRONMENT'))
 
         default:
                 exit('The application environment is not set correctly.');
-    }
+    }*/
 }
+else $active_group = 'al_development';
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

@@ -36,11 +36,12 @@ switch (ENVIRONMENT)
         $base_url = 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html';
         break;
     case 'staging':
-        //$base_url = 'http://leadfarm-staging.co.uk';
-        $base_url = 'http://leadfarm.co.uk';
+        $base_url = 'http://leadfarm-staging.co.uk';
+        //$base_url = 'http://leadfarm.co.uk';
         break;
     case 'demo':
-        $base_url = 'http://automatingmarketing.co.uk/';
+        //$base_url = 'http://automatingmarketing.co.uk/';
+        $base_url = 'http://garagedashboard.co.uk/';
         break;
     case 'production':
         $base_url = 'http://campaigndashboard.co.uk/';
