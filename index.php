@@ -1,1 +1,0 @@
-<?php redirect('http://google.co.uk');

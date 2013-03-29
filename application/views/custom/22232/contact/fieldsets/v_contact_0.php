@@ -11,10 +11,14 @@
     <?php display_field($fields['Birthday']); ?>
     <?php display_field($fields['_LegacyMembershipNo']); ?>
 </div>
-<?php include ('postcode_finder.php');?>
+
+<?php include ( APPPATH . 'views/default/common/postcode_lookup.php' );?>
+
 <div class="form margin_top_15">
+    <?php display_field($fields['_OrganisationName']); ?>
     <?php display_field($fields['StreetAddress1']); ?>
     <?php display_field($fields['StreetAddress2']); ?>
+    <?php display_field($fields['_StreetAddress3']); ?>
     <?php display_field($fields['City']); ?>
     <?php display_field($fields['State']); ?>
     <?php display_field($fields['Country']); ?>

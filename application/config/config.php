@@ -81,8 +81,23 @@ $config['index_page'] = '';
 | 'ORIG_PATH_INFO'	Uses the ORIG_PATH_INFO
 |
 */
+
+###NOTE: the server enviuronment we use needs $config['uri_protocol']	= 'ORIG_PATH_INFO';
+#### however the dev environment need $config['uri_protocol']	= 'PATH_INFO';
+switch (ENVIRONMENT)
+{
+    case 'hn-development':
+    case 'al-development':
+    //Add more dev environments here...
+        $config['uri_protocol']	= 'PATH_INFO';
+        break;    
+    default:
+        $config['uri_protocol']	= 'ORIG_PATH_INFO';
+        break;
+}
+//
 //$config['uri_protocol']	= 'REQUEST_URI';
-$config['uri_protocol']	= 'PATH_INFO';
+//$config['uri_protocol']	= 'PATH_INFO';
 //$config['uri_protocol']	= 'ORIG_PATH_INFO';
 
 /*

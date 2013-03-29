@@ -1,4 +1,0 @@
-1. Is there an alternative to doing several similar queries from one table? For example, with the table ContactActions, we do a query for each action type. Should we do a query for all and then foreach through them anmd pick out what we need? (Trying to save load time)
-
-2. 
-
