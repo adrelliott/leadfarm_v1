@@ -18,11 +18,27 @@
  *
  */
 
-echo $_SERVER['HTTP_HOST'];
+$server = explode ( '.', strtolower( $_SERVER['HTTP_HOST'] ) );
+switch ( $server[0] )
+{  
+    case 'leadfarm-staging':
+        define('ENVIRONMENT', 'staging');
+        break;
+    case 'garagedashboard':
+    case 'automatingmarketing':
+    case 'mymarketingcentre.co.uk':
+        define('ENVIRONMENT', 'demo');
+        break;
+    case 'campaigndashboard':
+        define('ENVIRONMENT', 'production');
+        break;
+    default:
+        define('ENVIRONMENT', 'al-development');
+}
 //define('ENVIRONMENT', 'hn-development');
 //define('ENVIRONMENT', 'al-development');  //Al's MBP
 //define('ENVIRONMENT', 'staging');  //leadfarm-staging.co.uk
-define('ENVIRONMENT', 'demo');  //garagedashboard.co.uk
+//define('ENVIRONMENT', 'demo');  //garagedashboard.co.uk
 //define('ENVIRONMENT', 'demo');  //??.co.uk
 //define('ENVIRONMENT', 'production');  //campaigndashboard.co.uk
 
