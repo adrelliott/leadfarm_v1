@@ -17,10 +17,12 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
+
+echo $_SERVER['HTTP_HOST'];
 //define('ENVIRONMENT', 'hn-development');
-define('ENVIRONMENT', 'al-development');  //Al's MBP
+//define('ENVIRONMENT', 'al-development');  //Al's MBP
 //define('ENVIRONMENT', 'staging');  //leadfarm-staging.co.uk
-//define('ENVIRONMENT', 'demo');  //garagedashboard.co.uk
+define('ENVIRONMENT', 'demo');  //garagedashboard.co.uk
 //define('ENVIRONMENT', 'demo');  //??.co.uk
 //define('ENVIRONMENT', 'production');  //campaigndashboard.co.uk
 
