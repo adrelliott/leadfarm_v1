@@ -24,6 +24,7 @@ class Contact_model extends MY_Model {
         }*/
     }
     
+    
     function get_contacts_details() {
         //return $this->get($this->data['view_setup']['ContactId']);
         return $this->get($this->current_ContactId);
@@ -45,6 +46,23 @@ class Contact_model extends MY_Model {
         $fields = array('Id', 'Email', '_OptinEmailYN', '_OptinSmsYN', '_OptinTwitterYN', '_OptinSurfaceMailYN', '_OptinNewsletterYN', '_OptinPref');
         $this->db->select($fields);
         return $this->get($Id);
+    }
+    
+    
+    //bespoke methods:
+    //function 'bespoke_' . $this->table_name . '_22232' ()
+    //function bespoke_contact_22232($input, $rID) {
+    function bespoke_contact_22232($input, $rID) {
+        if( $rID === NULL )
+        {
+            //get the latest ID from database
+            $this->db->select_max($this->contactId_fieldname);
+            $query = $this->db->get($this->table_name);
+            $row = $query->row_array(); 
+            
+            $input['_LegacyMembershipNo'] = intval($row['Id'] + 50000);
+        }
+        return $input;        
     }
     
 

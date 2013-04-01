@@ -39,5 +39,11 @@ $controller_config = array
         //'Contact' => TRUE,
     ),
     
+    '22232' => array 
+    (
+        //'Dashboard' => TRUE,
+        //'Contact' => TRUE,
+    ),
+    
 );
 

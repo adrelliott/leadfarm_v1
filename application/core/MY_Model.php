@@ -251,6 +251,21 @@ class MY_Model extends CI_Model {
             }
         }
     }
+    
+    public function make_inactive($ids){
+        
+        $filter = $this->primaryFilter; 
+        $ids = ! is_array($ids) ? array($ids) : $ids;
+        
+        foreach ($ids as $id) {
+            $id = $filter($id);
+            if ($id) {
+                //_ActiveRecord_YN = 0
+                $this->db->where('_dID', $this->dID);
+                $this->db->where($this->primary_key, $id)->limit(1)->delete($this->table_name);
+            }
+        }
+    }
 
     /**
      * Delete one or more records by another key than the ID
@@ -348,7 +363,12 @@ class MY_Model extends CI_Model {
        if ($rID == 'new')
        {
           $rID = NULL;
-       }      
+       }
+       
+       //do we have any bespoke work to do? (These methods are set in each model)
+        $method_name = 'bespoke_' . $this->table_name . '_' . DATAOWNER_ID;
+        if (method_exists($this, $method_name)) 
+                $input = $this->$method_name($input, $rID);
        
        return $this->save($input, $rID);
     }

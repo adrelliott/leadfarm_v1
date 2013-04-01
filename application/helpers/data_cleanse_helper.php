@@ -87,6 +87,7 @@ function clean_data($input, $cleanse_type = NULL){
                 break;   
         }
         
+        
         return $retval;
     }
     
