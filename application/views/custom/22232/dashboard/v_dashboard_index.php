@@ -45,11 +45,11 @@
                         </tr>
                         <tr>
                             <td>Number of Adult members</td>
-                            <td><h4><?php echo $stats['count_all_adult_records']; ?></h4></td>
+                            <td><h4><?php echo $stats['count_all_records']; ?></h4></td>
                         </tr>
                         <tr>
                             <td>Number of Junior members</td>
-                            <td><h4><?php echo $stats['count_all_junior_records']; ?></h4></td>
+                            <td><h4><?php echo $stats['count_all_records']; ?></h4></td>
                         </tr>
                     </tbody>
                 </table>

@@ -185,13 +185,6 @@ class MY_Controller extends CI_Controller {
                 if ($array['model_params']) $this->db->where($array['model_params']);
                 return $this->db->count_all_results($table_name[0]);                
                 break;
-            case 'count_where':
-                //do a where then a count                
-                if ($array['model_params']) $this->db->where($array['model_params']);
-                //elseif ( )
-                //print_array($array, 1, 'stat details');
-                return $this->db->count_all_results($table_name[0]);                
-                break;
             case 'average':
                 break;
             case 'increase':

@@ -143,12 +143,10 @@ $config['dashboard'] = Array
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
                             //'__vehicles.__ActiveYN =' => 1, 
-                            '_ActiveRecord_YN' => 1,
                         ),
                     'fields' => array 
                     (
-                        'contact.Id' => '',
-                        'contact._LegacyMembershipNo' => 'Memb No',
+                        'contact.Id' => '#',
                         'contact.FirstName' => 'First Name',
                         'contact.LastName' => 'Last Name',
                         'contact.PostalCode' => 'Postcode',
@@ -323,11 +321,10 @@ $config['dashboard'] = Array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
                     'data_source' => '', //The dataset name defined in this file
-                    'stat_type' => 'count_where', //count, average, etc
+                    'stat_type' => 'count', //count, average, etc
                     'model_name' => 'contact_model',
                     'model_method' => 'count_all_results',
-                    //'model_params' => 'Birthday <' . date('Y-m-d'), //e.g. where('type', 'mytype')
-                    'model_params' => 'Birthday < ' . (date('Y')-16) . '-' . date('m-d'), 
+                    'model_params' => NULL, //e.g. where('type', 'mytype')
                     'fields' => array 
                     (
                         'Id' => '#',
@@ -340,8 +337,7 @@ $config['dashboard'] = Array
                     'stat_type' => 'count', //count, average, etc
                     'model_name' => 'contact_model',
                     'model_method' => 'count_all_results',
-                    //'model_params' => NULL, //e.g. where('type', 'mytype')
-                    'model_params' => 'Birthday >= ' . (date('Y')-16) . '-' . date('m-d'),
+                    'model_params' => NULL, //e.g. where('type', 'mytype')
                     'fields' => array 
                     (
                         'Id' => '#',
@@ -387,11 +383,9 @@ $config['contact'] = Array
                         ),
                     'fields' => array 
                     (
-                        'contact.Id' => '',
-                        'contact._LegacyMembershipNo' => 'Memb No',
+                        'Id' => '#',
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
-                        'Nickname' => 'Known As',
                         'PostalCode' => 'Postcode',
                     ),
                 ),            
@@ -819,8 +813,8 @@ $config['contact'] = Array
                         'length' => '',
                         'options' => array
                          (
-                            'Yes' => '1',
                             'No' => '0',
+                            'Yes' => '1',
                          ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
@@ -845,8 +839,8 @@ $config['contact'] = Array
                         'length' => '',
                         'options' => array
                          (
-                            'Yes' => '1',
                             'No' => '0',
+                            'Yes' => '1',
                          ),
                         'HTML_before' => '',
                         'HTML_after' => '',  

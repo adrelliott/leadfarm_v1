@@ -10,7 +10,6 @@
     <?php display_field($fields['_Gender']); ?>
     <?php display_field($fields['Birthday']); ?>
     <?php display_field($fields['_LegacyMembershipNo']); ?>
-    <?php //display_field($fields['Id'], array('label' => 'Membership Number', 'cssClassInput' => 'mini', 'extraHTMLInput' => ' readonly ')); ?>
 </div>
 
 <?php include ( APPPATH . 'views/default/common/postcode_lookup.php' );?>
