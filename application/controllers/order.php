@@ -61,6 +61,11 @@ else
 
           }
 
+          public function delete_record($dID) {
+              parent::delete_record($id);
+              
+              //redirect ( $this->uri->uri_string() );
+          }
       /*public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE) {          
             parent::view($view_file, $rID, $ContactId);
                 // Generate the view!

@@ -313,6 +313,7 @@ class MY_Table extends CI_Table {
 			}
                         $out .= $this->_generate_checkboxes('th');    //This inserts <th></th> if checkboxes rqd
                         $out .= $this->_generate_radio_buttons('th');    //This inserts <th></th> if checkboxes rqd
+                        $out .= $this->_generate_delete_button('th');    //This inserts <th></th> if delete buttons rqd
 			$out .= $this->template['heading_row_end'];
 			$out .= $this->newline;
                         $out .= $this->template['thead_close'];
@@ -385,6 +386,8 @@ class MY_Table extends CI_Table {
                                 $out .= $this->_generate_checkboxes('td',$row[$Id_fieldname]);  
                                 $out .= $this->_generate_radio_buttons('td',$row[$Id_fieldname]);  
                                    //This inserts checkboxes If rqd
+                                $out .= $this->_generate_delete_button('td',$row[$Id_fieldname]);  
+                                   //This inserts delete button If rqd
 				$out .= $this->template['row_'.$name.'end'];  
 				$out .= $this->newline;
 			}
@@ -503,7 +506,7 @@ class MY_Table extends CI_Table {
 		}
 
 		$this->temp = $this->_default_template();
-		foreach (array('anchor_uri','ContactId_name','anchor_uri_append','anchor_attr','primary_key_fieldname','checkbox_flag','checkbox_class','checkbox_name','checkbox_value_is_id','table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
+		foreach (array('anchor_uri','ContactId_name','anchor_uri_append','anchor_attr','primary_key_fieldname','checkbox_flag','checkbox_class','checkbox_name','checkbox_value_is_id','delete_button_flag','delete_button_uri', 'table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
 		{
 			if ( ! isset($this->template[$val]))
 			{
@@ -538,6 +541,10 @@ class MY_Table extends CI_Table {
                         'radio_value_is_id'          => '',  //do we use row[ID] as value for checkbox?
                         'table_open'			=> '<table class="dataTable">',
                         'link_controller'		=> 'contact',
+                    
+                        'delete_button_flag'    	=> '',
+                        'delete_button_uri'             => '',                   
+                    
 
                         'thead_open'			=> '<thead>',
                         'thead_close'			=> '</thead>',
@@ -651,6 +658,29 @@ class MY_Table extends CI_Table {
                     }
                     //$retval = '<td><input name="' . $name . '[' . $id['data'] . ']" class="' . $class . '" type="checkbox" value="' . $value . '"></td>'; 
                     $retval = '<td><input name="' . $name . '" class="' . $class . '" type="radio" value="' . $value . '"></td>'; 
+                }
+            }
+            return $retval;
+        }
+        
+        function _generate_delete_button($type, $id = NULL)
+        {         
+            $retval = '';
+            $class = '';
+            $name = '';
+            if (isset($this->template['delete_button_flag']) && $this->template['delete_button_flag'] != '')
+            {                
+                if ($type == 'th')
+                {
+                    $retval = '<th></th>';
+                }
+                else
+                {
+                    $value = $id['data'];
+                    
+                    //$retval = '<td><input name="' . $name . '[' . $id['data'] . ']" class="' . $class . '" type="checkbox" value="' . $value . '"></td>'; 
+                    $retval = '<td><a href="' . site_url( $this->template['delete_button_uri'] . "/$value") . '" class="small red button" onclick="return deletechecked();"><span>Delete</span></a></td>'; 
+                    //$retval = '<td><input name="' . $name . '" class="' . $class . '" type="radio" value="' . $value . '"></td>'; 
                 }
             }
             return $retval;
