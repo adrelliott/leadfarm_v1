@@ -497,6 +497,17 @@ $(function() {
     });
 });
 
+//Delete Confirmation
+function deletechecked()
+{
+    var answer = confirm("Really delete this record? (There is no undo!)")
+    if (answer){
+        document.messages.submit();
+    }
+    
+    return false;  
+}
+
 
 
 

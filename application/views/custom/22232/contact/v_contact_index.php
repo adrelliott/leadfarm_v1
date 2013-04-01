@@ -1,6 +1,9 @@
 <div class="row clearfix">
     <div class="col_12">
-        <div class="widget clearfix">
+        <div class="margin_bottom_30 clearfix">
+            <?php include ( APPPATH . 'views/default/common/display_message.php' );?>
+        </div>
+        <div class="widget clearfix">            
             <h2>Find Contacts</h2>
             <div class="widget_inside">                
                <?php 

@@ -104,5 +104,11 @@ else
 
         }
         
+        public function delete_record($id = FALSE) {
+            //$this->load->model($method_name . '_model', 'contact');
+            parent::delete_record($id);
+            
+            $this->index();            
+        }
     }
 }   

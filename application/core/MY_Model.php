@@ -89,6 +89,7 @@ class MY_Model extends CI_Model {
         $single == FALSE || $this->db->limit(1);
         $method = $single ? 'row_array' : 'result_array';
         $condition = $this->table_name . "._dID = " . $this->dID;
+        $condition .= " AND " . $this->table_name . "._ActiveRecordYN = 1";
         $this->db->where($condition);   //ONLY get this user's records
         return $this->db->get($this->table_name)->$method();
     }
@@ -250,6 +251,31 @@ class MY_Model extends CI_Model {
                 $this->db->where($this->primary_key, $id)->limit(1)->delete($this->table_name);
             }
         }
+    }
+    
+    public function make_inactive($ids = FALSE) {
+        if ( ! $ids ) return FALSE;
+        
+        //Turn single id into an array
+        $ids = ! is_array($ids) ? array($ids) : $ids;
+        $data = array();
+        
+        foreach ( $ids as $id ) 
+        {
+            //do a check to ensure that this record belongs to this client
+            $this->db->select('_dID');
+            $dID = $this->get_by('Id', $id, FALSE, TRUE);
+            if( $dID['_dID'] && $dID['_dID'] == DATAOWNER_ID )
+            {
+                //Build the UPDATE query
+                $data[$id] = array('Id' => $id,'_ActiveRecordYN' => 0);
+                //Do the query
+                $data[$id]['result'] = $this->save($data[$id], $id);
+            }                
+            else $data[$id]['result'] = 'You do not have permission to delete this record';
+        }
+        
+        return $data;
     }
 
     /**

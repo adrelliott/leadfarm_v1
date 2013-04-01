@@ -33,7 +33,8 @@ switch (ENVIRONMENT)
         $base_url = 'http://leadfarm.hndev.co.uk';
         break;
     case 'al-development':
-        $base_url = 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html';
+        //$base_url = 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html';
+        $base_url = 'http://localhost/projects/leadfarm/Leadfarm_v1/Leadfarm_v1/public_html';
         break;
     case 'staging':
         $base_url = 'http://leadfarm-staging.co.uk';

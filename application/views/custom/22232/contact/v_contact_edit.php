@@ -26,6 +26,11 @@
                                     </input>
                                 </div>
                                 <span class="notification done" style="display:none">Record Updated!</span>
+                                <div class="clearfix">
+                                    <a href="<?php echo site_url("/contact/delete_record/$ContactId"); ?>" class="small red button left" onclick="return deletechecked();">
+                                        <span>Delete this Fan</span>
+                                    </a>
+                                </div>
                             </div><!-- End of form div-->
                             <p id="option1_toggle" class="button left">
                                 <span>View Opt In Settings</span>

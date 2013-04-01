@@ -29,6 +29,7 @@ class MY_Controller extends CI_Controller {
                         'header_file' => 'header', //turned into modal in T_Controller
                         'footer_file' => 'footer', //turned into modal in T_Controller
                         'modal' => FALSE, //set in T_Controller if true
+                        'message' => FALSE, //to hold things like 'delete sucessful' messages
                     ),              
             );
     
@@ -42,7 +43,6 @@ class MY_Controller extends CI_Controller {
         parse_str($_SERVER['QUERY_STRING'], $_GET); //using this one as it works!
         
         // Put any code here that is to be called before any other controller
-        
          
         // 1. Test is_logged_in. This Redirects to login if not.
         $this->_is_logged_in();
@@ -349,6 +349,16 @@ class MY_Controller extends CI_Controller {
         return $rID;
     }
     
+    //NOTE: This doesn't actually delete record, it just sets flag _ActiveRecordYN to 0
+    function delete_record($id) {   
+        $this->load->model($this->controller_name . '_model', 'model');            
+        $this->model->make_inactive($id);
+        
+        //Set a success message
+        if ( ! $this->model->make_inactive($id) ) $message = "Delete Failed";
+        else $message = "Delete successful!";            
+        $this->data['view_setup']['message'] = $message;   
+    }
     
     
     
