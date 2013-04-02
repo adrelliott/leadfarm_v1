@@ -28,7 +28,7 @@ switch ( $server[0] )
         define('ENVIRONMENT', 'garage');
         break;
     //case 'automatingmarketing':
-    case 'mymarketingcentre.co.uk':
+    case 'mymarketingcentre':
         define('ENVIRONMENT', 'demo');
         break;
     case 'campaigndashboard':
