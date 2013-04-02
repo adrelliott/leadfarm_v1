@@ -47,9 +47,13 @@ else
         public function add($view_file, $rID, $ContactId, $fieldset) {
             //clean input
             $input = clean_data($this->input->post());
-
+            
             //save record
             $rID = $this->add_record($input, $rID);
+            
+             //Have we set nay client-specific methods to run?
+            $method_name = 'add_' . DATAOWNER_ID;
+            if (method_exists($this, $method_name)) $this->$method_name($input, $rID);
             
             $url = site_url ($this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $rID . '/' . $input['_IsOrganisationYN']);
 
@@ -109,6 +113,15 @@ else
             parent::delete_record($id);
             
             $this->index();            
+        }
+        
+        public function add_22232($input, $rID) {
+            //if memberhsip number is blank, then
+            if ( $input['_LegacyMembershipNo'] == NULL )
+            {
+                $input['_LegacyMembershipNo'] = $rID + 50000;
+            }
+            $this->add_record($input, $rID);
         }
     }
 }   

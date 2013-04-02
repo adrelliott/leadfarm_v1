@@ -743,7 +743,8 @@ $config['contact'] = Array
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'mini',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => ' readonly ',  //eg. title="tooltip" rel="tooltips"
+                        //'extraHTMLInput' => ' readonly ',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => '_LegacyMembershipNo',
                         'helpText' => '',
@@ -1200,6 +1201,7 @@ $config['contact'] = Array
                         'HTML_before' => '',
                         'HTML_after' => '',  
                         'value' => '',              
+                        'defaultvalue' => 1,              
                     ),
                       '_OptinTwitterYN' => array
                     (
@@ -1225,7 +1227,8 @@ $config['contact'] = Array
                           ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
-                        'value' => '',              
+                        'value' => '',       
+                        'defaultvalue' => 1,              
                     ),
                      '_OptinSmsYN' => array
                     (
@@ -1251,7 +1254,8 @@ $config['contact'] = Array
                           ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
-                        'value' => '',              
+                        'value' => '',       
+                        'defaultvalue' => 1,              
                     ),
                      '_OptinSurfaceMailYN' => array
                     (
@@ -1277,7 +1281,8 @@ $config['contact'] = Array
                           ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
-                        'value' => '',              
+                        'value' => '',        
+                        'defaultvalue' => 1,             
                     ),
                      '_OptinNewsletterYN' => array
                     (
@@ -1303,7 +1308,116 @@ $config['contact'] = Array
                           ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
-                        'value' => '',              
+                        'value' => '',       
+                        'defaultvalue' => 1,              
+                    ),
+                     '_OptinMerchandiseYN' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Opt into Merchandise Emails?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '_OptinMerchandiseYN',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                          (
+                            'Yes' => 1,
+                            'No' => 0,
+                          ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',       
+                        'defaultvalue' => 1,              
+                    ),
+                     '__ClubEventsYN' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Opt into Club Events?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__ClubEventsYN',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                          (
+                            'Yes' => 1,
+                            'No' => 0,
+                          ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',       
+                        'defaultvalue' => 1,              
+                    ),
+                     '__AwayMatchYN' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Opt into Away Match Details?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '__AwayMatchYN',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                          (
+                            'Yes' => 1,
+                            'No' => 0,
+                          ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',       
+                        'defaultvalue' => 0,              
+                    ),
+                     '_OptinOtherYN' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Opt into Youth/Women?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '_OptinOtherYN',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                          (
+                            'Yes' => 1,
+                            'No' => 0,
+                          ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',       
+                        'defaultvalue' => 1,              
                     ),
                      '_OptinPref' => array
                     (
@@ -1331,6 +1445,7 @@ $config['contact'] = Array
                         'HTML_before' => '',
                         'HTML_after' => '',  
                         'value' => '',              
+                        'defaultvalue' => 'Email',              
                     ),
                 ),                
             ),
@@ -2196,6 +2311,7 @@ $config['comms'] = Array
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
                         'Username' => 'Username',
+                        'Email' => 'Email',
                         //'Password' => 'Password',
                     ),
                 ),
@@ -2249,16 +2365,18 @@ $config['comms'] = Array
                 'model_name' => 'comms_model',
                 'model_method' => 'get_single_record',
                 'model_params' => NULL,
+                
                 'dropdowns' => array    //or NULL
                 (
                     'users' => array
                     (
                         'source' => 'users',    //which dataset are we using?
-                        'label' => array ('FirstName', 'LastName'),
+                        'label' => array ('Email'),
                         'label_separator' => ' ',
-                        'value' => 'Id',
+                        'value' => 'Email',
                     ),
                 ),
+                
                 'fields' => array 
                 (
                     '__Id' => array
@@ -2360,10 +2478,11 @@ $config['comms'] = Array
                         'cssClassInput' => 'xxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' ',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'text',
+                        'type' => 'select',
                         'name' => '__From',
                         'helpText' => '',                        
-                        'length' => '',                        
+                        'length' => '',
+                        'options' => array(1=>1, 2=>2),
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -5617,6 +5736,7 @@ $config['user'] = Array
                         'HTML_before' => '',
                         'HTML_after' => '',  
                         'value' => '',              
+                        'defaultvalue' => 1,              
                     ),
                      '_OptinSmsYN' => array
                     (
@@ -5625,7 +5745,7 @@ $config['user'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Opt into SMS texts?',                  
+                        'label' => 'Opt into SMS texts?3',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
@@ -5642,7 +5762,8 @@ $config['user'] = Array
                           ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
-                        'value' => '',              
+                        'value' => '', 
+                        'defaultvalue' => 1,   
                     ),
                      '_OptinSurfaceMailYN' => array
                     (

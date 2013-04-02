@@ -25,8 +25,8 @@ class Contact_model extends MY_Model {
     }
     
     function get_contacts_details() {
-        //return $this->get($this->data['view_setup']['ContactId']);
-        return $this->get($this->current_ContactId);
+        return $this->get($this->data['view_setup']['ContactId']);
+        //return $this->get($this->current_ContactId);
     }
     
         

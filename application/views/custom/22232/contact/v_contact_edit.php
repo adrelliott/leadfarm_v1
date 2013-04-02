@@ -41,9 +41,10 @@
                                     <?php display_field($fields['_OptinSmsYN']); ?>
                                     <?php display_field($fields['_OptinSurfaceMailYN']); ?>
                                     <?php display_field($fields['_OptinNewsletterYN']); ?>
-                                    <?php display_field($fields['_OptinPref']); ?>
+                                    <?php display_field($fields['_OptinMerchandiseYN']); ?>
                                     <?php display_field($fields['__ClubEventsYN']); ?>
                                     <?php display_field($fields['__AwayMatchYN']); ?>
+                                    <?php display_field($fields['_OptinPref']); ?>
                                     <div class="clearfix">
                                         <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
 
