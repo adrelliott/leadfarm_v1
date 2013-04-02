@@ -61,10 +61,10 @@ else
 
           }
 
-          public function delete_record($dID) {
+          public function delete_record($ContactId, $id) {
               parent::delete_record($id);
-              
-              //redirect ( $this->uri->uri_string() );
+              $url = 'contact/view/edit/' . $ContactId . '/' . $ContactId . '/0';
+              redirect ( $url );
           }
       /*public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE) {          
             parent::view($view_file, $rID, $ContactId);
