@@ -311,7 +311,7 @@ $config['dashboard'] = Array
                     'stat_type' => 'count', //count, average, etc
                     'model_name' => 'contact_model',
                     'model_method' => 'count_all_results',
-                    'model_params' => NULL, //e.g. where('type', 'mytype')
+                    'model_params' => NULL,
                     'fields' => array 
                     (
                         'Id' => '#',
@@ -324,7 +324,10 @@ $config['dashboard'] = Array
                     'stat_type' => 'count', //count, average, etc
                     'model_name' => 'contact_model',
                     'model_method' => 'count_all_results',
-                    'model_params' => NULL, //e.g. where('type', 'mytype')
+                    'model_params' => array
+                    (
+                        'Birthday >=' => date('Y-m-d', date('Y') - 16 ),
+                     ),
                     'fields' => array 
                     (
                         'Id' => '#',
@@ -337,7 +340,10 @@ $config['dashboard'] = Array
                     'stat_type' => 'count', //count, average, etc
                     'model_name' => 'contact_model',
                     'model_method' => 'count_all_results',
-                    'model_params' => NULL, //e.g. where('type', 'mytype')
+                    'model_params' => array
+                    (
+                        'Birthday <=' => date('Y-m-d', date('Y') - 16 ),
+                     ),
                     'fields' => array 
                     (
                         'Id' => '#',

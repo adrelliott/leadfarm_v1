@@ -24,7 +24,6 @@ class Login extends CI_Controller {
    public function validate() {
        $this->load->model('login_model'); 
        $query = $this->login_model->validate_user();
-       
        //what's been returned?
        if ( isset($query['results']) ) redirect ( site_url('dashboard') );   //Yay!
        elseif ( isset($query['message']) ) $this->log_out( $query['message'] ); //Oh no!
