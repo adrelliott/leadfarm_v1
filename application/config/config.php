@@ -33,16 +33,18 @@ switch (ENVIRONMENT)
         $base_url = 'http://leadfarm.hndev.co.uk';
         break;
     case 'al-development':
-        //$base_url = 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html';
-        $base_url = 'http://localhost/projects/leadfarm/Leadfarm_v1/Leadfarm_v1/public_html';
+        $base_url = 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html';
+        //$base_url = 'http://localhost/projects/leadfarm/Leadfarm_v1/Leadfarm_v1/public_html';
         break;
     case 'staging':
         $base_url = 'http://leadfarm-staging.co.uk';
         //$base_url = 'http://leadfarm.co.uk';
         break;
-    case 'demo':
-        //$base_url = 'http://automatingmarketing.co.uk/';
+    case 'garage':
         $base_url = 'http://garagedashboard.co.uk/';
+        break;
+    case 'demo':
+        $base_url = 'http://mymarketingcentre.co.uk/';
         break;
     case 'production':
         $base_url = 'http://campaigndashboard.co.uk/';
@@ -90,10 +92,10 @@ switch (ENVIRONMENT)
     case 'hn-development':
     case 'al-development':
     //Add more dev environments here...
-        $config['uri_protocol']	= 'PATH_INFO';
+        $config['uri_protocol']	= 'PATH_INFO'; //On WAMP server we need this setting
         break;    
     default:
-        $config['uri_protocol']	= 'ORIG_PATH_INFO';
+        $config['uri_protocol']	= 'ORIG_PATH_INFO'; //On CLOUD server we need this setting
         break;
 }
 //

@@ -25,7 +25,9 @@ switch ( $server[0] )
         define('ENVIRONMENT', 'staging');
         break;
     case 'garagedashboard':
-    case 'automatingmarketing':
+        define('ENVIRONMENT', 'garage');
+        break;
+    //case 'automatingmarketing':
     case 'mymarketingcentre.co.uk':
         define('ENVIRONMENT', 'demo');
         break;
@@ -69,6 +71,7 @@ if (defined('ENVIRONMENT'))
                 break;
         case 'demo': 
         case 'production':
+        case 'garage':
             error_reporting(0);
             $root = '../';
                 break;
