@@ -469,7 +469,7 @@ class CRM_Controller extends CI_Controller {
     private function _is_logged_in() {  //used as a test to see if all is well
          $status = $this->session->userdata('is_logged_in');
          //echo "status= $status and url para is" . $this->uri->segment(1);die;
-         echo "debug 472";die;
+         
          if (!isset($status) || $status !== TRUE)
          {
              //kick them out
