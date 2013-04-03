@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class MY_Model extends CI_Model {
+class CRM_Model extends CI_Model {
     
      /**
      * The database table to use.

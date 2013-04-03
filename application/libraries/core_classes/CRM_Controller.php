@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class MY_Controller extends CI_Controller {
+class CRM_Controller extends CI_Controller {
 
 	/**
 	 * This acts as a template for every controller.
