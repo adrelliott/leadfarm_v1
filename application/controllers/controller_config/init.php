@@ -3,7 +3,6 @@
     //starts PHP session (this holds the dID - allows us to use session to hold 
     //dID before initialising Codeignitor's base classes)
     session_start();
-    echo "hello"; die;
     //This accepts the controller name and tests to see if there is a bespoke file 
     //to call. We dontl use 'if_file_exists() as this seems to slow thre app down
     function bespoke_controller($controller_name) {
