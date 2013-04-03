@@ -36,6 +36,7 @@ class CRM_Controller extends CI_Controller {
     //public function __construct($controller_name) {
     public function __construct() {
         parent::__construct();
+        $this->output->enable_profiler(TRUE);
         //Allow the use of query strings as well as trad CI URL paras 
         //(note,  $config['uri_protocol'] = 'PATH_INFO' (was ['REQUEST_URI'] ) 
         //OLD LINE: parse_str(str_replace($_SERVER['QUERY_STRING'],'',
@@ -479,6 +480,7 @@ class CRM_Controller extends CI_Controller {
              
              redirect('login');
          }
+         else echo "no, all seems ok"; die;
      }
      
         
