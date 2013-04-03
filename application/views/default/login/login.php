@@ -90,4 +90,4 @@
         </footer>
     </body>
 </html>
-<?php print_array($this->data);?>
+<?php //print_array($this->data);?>

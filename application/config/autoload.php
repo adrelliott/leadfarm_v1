@@ -52,7 +52,9 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('table', 'session', 'database');
+$autoload['libraries'] = array('session', 'database');
+//$autoload['libraries'] = array('table', 'session', 'database', 'CRM_Controller', 'CRM_Model');
+//$autoload['libraries'] = array('table', 'session', 'database');
 
 
 /*
@@ -109,6 +111,7 @@ $autoload['language'] = array();
 |
 */
 
+//$autoload['model'] = array('login_model');
 $autoload['model'] = array();
 
 

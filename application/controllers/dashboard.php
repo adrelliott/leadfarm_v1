@@ -6,7 +6,7 @@ if( bespoke_controller('Dashboard') ) get_bespoke_controller();   //yup = go get
 else
 {   //nope? Use this default class then
     
-    class Dashboard extends MY_Controller {
+    class Dashboard extends CRM_Controller {
             
         public $controller_name = 'dashboard';
 
@@ -18,8 +18,8 @@ else
         public function index() {
             parent::index();    //Can send a $controller_setup array, see MY_Controlelr::index()
 
-            $this->_load_view_data();   //retrieves and process all data for view
-            $this->_generate_view($this->data);
+            //$this->_load_view_data();   //retrieves and process all data for view
+            //$this->_generate_view($this->data);
         }
 
     }

@@ -3,10 +3,10 @@
 
 function __autoload ($class)
 {
-    $file = APPPATH . 'libraries/controller_templates/' . $class . EXT;
+    $file = APPPATH . 'libraries/core_classes/' . $class . EXT;
     if (strpos($class, 'CI_') !== 0) {
         if (file_exists($file) && is_file($file)) {
-            @include_once (APPPATH . 'libraries/controller_templates/' . $class . EXT);
+            @include_once (APPPATH . 'libraries/core_classes/' . $class . EXT);
         }
     }
 }
@@ -37,8 +37,7 @@ switch (ENVIRONMENT)
         //$base_url = 'http://localhost/projects/leadfarm/Leadfarm_v1/Leadfarm_v1/public_html';
         break;
     case 'al_MBP_development':
-        $base_url = 'http://localhost/projects/Leadfarm_v1/public_html';
-        //$base_url = 'http://localhost/projects/leadfarm/Leadfarm_v1/Leadfarm_v1/public_html';
+        $base_url = 'http://localhost:8888/projects/leadfarm_v1/public_html/';
         break;
     case 'staging':
         $base_url = 'http://leadfarm-staging.co.uk';
