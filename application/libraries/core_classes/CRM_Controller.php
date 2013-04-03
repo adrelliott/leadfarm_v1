@@ -36,7 +36,6 @@ class CRM_Controller extends CI_Controller {
     //public function __construct($controller_name) {
     public function __construct() {
         parent::__construct();
-        $this->output->enable_profiler(TRUE);
         //Allow the use of query strings as well as trad CI URL paras 
         //(note,  $config['uri_protocol'] = 'PATH_INFO' (was ['REQUEST_URI'] ) 
         //OLD LINE: parse_str(str_replace($_SERVER['QUERY_STRING'],'',
@@ -69,7 +68,7 @@ class CRM_Controller extends CI_Controller {
         // 6. Finally set up last minute vars
         $this->data['controller_setup']['controller_name'] = $this->controller_name;
         
-        if ( strpos( ENVIRONMENT, 'development' ) ) $this->output->enable_profiler(TRUE);
+        if ( isset( $_GET['debug'] ) ) $this->output->enable_profiler(TRUE);
     }
     
     
@@ -177,7 +176,6 @@ class CRM_Controller extends CI_Controller {
         //return;
         $model_name = $array['model_name'];
         $table_name = explode('_', $model_name);
-        $this->output->enable_profiler(TRUE);
         
         switch ($array['stat_type'])
         {
