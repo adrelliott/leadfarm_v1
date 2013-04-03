@@ -479,6 +479,7 @@ class CRM_Controller extends CI_Controller {
              $this->data['view_setup']['message'] = $message;
              
              redirect('login');
+             return;
          }
          //else echo "no, all seems ok"; die; kk
      }
