@@ -45,7 +45,7 @@ class CRM_Controller extends CI_Controller {
         // Put any code here that is to be called before any other controller
          
         // 1. Test is_logged_in. This Redirects to login if not.
-        $this->_is_logged_in();
+        $this->_is_logged_in(); 
         
         // 2. Define dID (this should be defined in  controller_config/init.php
         //if ( ! defined('DATAOWNER_ID') )
@@ -469,6 +469,7 @@ class CRM_Controller extends CI_Controller {
     private function _is_logged_in() {  //used as a test to see if all is well
          $status = $this->session->userdata('is_logged_in');
          //echo "status= $status and url para is" . $this->uri->segment(1);die;
+         echo "debug 472";die;
          if (!isset($status) || $status !== TRUE)
          {
              //kick them out
