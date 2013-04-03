@@ -480,7 +480,7 @@ class CRM_Controller extends CI_Controller {
              
              redirect('login');
          }
-         //else echo "no, all seems ok"; die;
+         //else echo "no, all seems ok"; die; kk
      }
      
         
