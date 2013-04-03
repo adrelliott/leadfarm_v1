@@ -7,7 +7,7 @@
                 <h4>You can search by <em>Name</em>, or <em>Postcode</em>, or <em>Company Name</em>, or <em>Phone Number</em></h4>
                 <div class="margin_top_15"></div>
                 <?php 
-                    $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => 'unknown', 'ContactId_name' => 'Id'));    
+                    $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id'));    
                     $this->table->set_heading_custom($tables['master_search']['table_headers']);
                     echo $this->table->generate_custom($tables['master_search']['table_data']); 
                 ?> 

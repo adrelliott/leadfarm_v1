@@ -4,7 +4,7 @@
             <?php include ( APPPATH . 'views/default/common/display_message.php' );?>
         </div>
         <div class="widget clearfix">            
-            <h2>Find Contacts</h2>
+            <h2>Find Fans</h2>
             <div class="widget_inside">                
                <?php 
                     $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id'));    
@@ -18,7 +18,7 @@
                 <h3 class="index toggle_icon" id="option1_toggle">Looking for an Organisation?</h3>
                 <div class="hide_toggle" id="option1">
                     <?php 
-                    $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '1', 'ContactId_name' => 'Id'));    
+                    $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id'));    
                     $this->table->set_heading_custom($tables['organisations']['table_headers']);
                     echo $this->table->generate_custom($tables['organisations']['table_data']); 
                     ?> 
