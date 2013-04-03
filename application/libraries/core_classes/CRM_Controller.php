@@ -68,7 +68,7 @@ class CRM_Controller extends CI_Controller {
         // 6. Finally set up last minute vars
         $this->data['controller_setup']['controller_name'] = $this->controller_name;
         
-        //if (ENVIRONMENT == 'development') $this->output->enable_profiler(TRUE);
+        if ( strpos( ENVIRONMENT, 'development' ) ) $this->output->enable_profiler(TRUE);
     }
     
     
@@ -473,6 +473,7 @@ class CRM_Controller extends CI_Controller {
          if (!isset($status) || $status !== TRUE)
          {
              //kick them out
+             
              $message = "Oops. Your session has ended. Please log in";
              $this->data['view_setup']['message'] = $message;
              
