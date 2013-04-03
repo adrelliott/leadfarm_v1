@@ -64,6 +64,22 @@ $db['al-development']['swap_pre'] = '';
 $db['al-development']['autoinit'] = TRUE;
 $db['al-development']['stricton'] = FALSE;
 
+$db['al_MBP_development']['hostname'] = 'localhost';
+$db['al_MBP_development']['username'] = 'local_superadmin';
+$db['al_MBP_development']['password'] = 'DMmanch35';
+$db['al_MBP_development']['database'] = 'local_master';
+$db['al_MBP_development']['dbdriver'] = 'mysql';
+$db['al_MBP_development']['dbprefix'] = '';
+$db['al_MBP_development']['pconnect'] = TRUE;
+$db['al_MBP_development']['db_debug'] = TRUE;
+$db['al_MBP_development']['cache_on'] = FALSE;
+$db['al_MBP_development']['cachedir'] = '';
+$db['al_MBP_development']['char_set'] = 'utf8';
+$db['al_MBP_development']['dbcollat'] = 'utf8_general_ci';
+$db['al_MBP_development']['swap_pre'] = '';
+$db['al_MBP_development']['autoinit'] = TRUE;
+$db['al_MBP_development']['stricton'] = FALSE;
+
 $db['staging']['hostname'] = 'localhost';
 $db['staging']['username'] = 'leadfar2_user';
 $db['staging']['password'] = 'DMmanch35';

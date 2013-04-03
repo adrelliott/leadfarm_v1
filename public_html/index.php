@@ -35,7 +35,7 @@ switch ( $server[0] )
         define('ENVIRONMENT', 'production');
         break;
     default:
-        define('ENVIRONMENT', 'al-development');
+        define('ENVIRONMENT', 'al_MBP_development');
 }
 //define('ENVIRONMENT', 'hn-development');
 //define('ENVIRONMENT', 'al-development');  //Al's MBP
@@ -62,6 +62,7 @@ if (defined('ENVIRONMENT'))
             $root = '../';
                 break;
         case 'al-development':
+        case 'al_MBP_development':
             error_reporting(E_ALL);
             $root = '../';
                 break;

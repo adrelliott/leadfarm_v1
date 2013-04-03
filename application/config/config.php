@@ -36,6 +36,10 @@ switch (ENVIRONMENT)
         $base_url = 'http://localhost/projects/_leadfarm/_Current_version/Leadfarm_v1/public_html';
         //$base_url = 'http://localhost/projects/leadfarm/Leadfarm_v1/Leadfarm_v1/public_html';
         break;
+    case 'al_MBP_development':
+        $base_url = 'http://localhost/projects/Leadfarm_v1/public_html';
+        //$base_url = 'http://localhost/projects/leadfarm/Leadfarm_v1/Leadfarm_v1/public_html';
+        break;
     case 'staging':
         $base_url = 'http://leadfarm-staging.co.uk';
         //$base_url = 'http://leadfarm.co.uk';
@@ -91,6 +95,7 @@ switch (ENVIRONMENT)
 {
     case 'hn-development':
     case 'al-development':
+    case 'al_MBP_development':
     //Add more dev environments here...
         $config['uri_protocol']	= 'PATH_INFO'; //On WAMP server we need this setting
         break;    
