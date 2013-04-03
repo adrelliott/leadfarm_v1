@@ -6,7 +6,7 @@ if( bespoke_controller('Comms') ) get_bespoke_controller();   //yup = go get it.
 else
 {   //nope? Use this default class then
   
-    class Comms extends MY_Controller {
+    class Comms extends CRM_Controller {
 
         public $controller_name = 'comms';
 

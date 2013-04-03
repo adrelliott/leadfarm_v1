@@ -6,7 +6,7 @@ if( bespoke_controller('Contact') ) get_bespoke_controller();  //yup = go get it
 else
 {   //nope? Use this default class then
     
-    class Contact extends MY_Controller {
+    class Contact extends CRM_Controller {
         
         public $controller_name = 'contact';
 
@@ -22,7 +22,7 @@ else
         
         public function view($view_file, $rID, $ContactId, $fieldset, $pull = '') {
             parent::view($view_file, $rID, $ContactId);   
-
+            
             //What record fieldset do we show? Org, ind or unknown?
             $this->data['view_setup']['fieldset'] = $fieldset;
         
@@ -30,6 +30,7 @@ else
             
             //check for expirations of MOT & service
             $this->load->library('garages/garage');
+            
             $this->data['view_setup']['notifications'] = array();
             if (isset($this->data['view_setup']['tables']['vehicles']['table_data'][0]))
             {
@@ -41,6 +42,7 @@ else
                         );
             }
 
+            
             $this->load_view($pull);
         }
         

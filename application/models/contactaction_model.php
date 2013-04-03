@@ -6,7 +6,7 @@
  * @author Al Elliott
  */
 
-class Contactaction_model extends MY_Model {
+class Contactaction_model extends CRM_Model {
 
     function __construct (){
         //parent::__construct();

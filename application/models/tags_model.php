@@ -6,7 +6,7 @@
  * @author Al Elliott
  */
 
-class Tags_model extends MY_Model {
+class Tags_model extends CRM_Model {
 
     function __construct (){
         //parent::__construct();

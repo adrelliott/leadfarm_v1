@@ -6,7 +6,7 @@ if( bespoke_controller('Contactaction') ) get_bespoke_controller();  //yup = go 
 else
 {   //nope? Use this default class then
     
-    class Contactaction extends MY_Controller {
+    class Contactaction extends CRM_Controller {
 
         public $controller_name = 'contactaction';
         

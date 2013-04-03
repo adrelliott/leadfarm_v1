@@ -1,6 +1,6 @@
 <?php    if ( ! defined('BASEPATH') ) exit( 'No direct script access allowed' );
 
-class Garage extends MY_Controller {
+class Garage extends CRM_Controller {
     public function __construct() {
         //construct methods go here
     }

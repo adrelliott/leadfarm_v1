@@ -6,7 +6,7 @@ if( bespoke_controller('Steps') ) get_bespoke_controller();   //yup = go get it.
 else
 {   //nope? Use this default class then
 
-    class Steps extends MY_Controller {
+    class Steps extends CRM_Controller {
         
         public function __construct()    {
              parent::__construct();

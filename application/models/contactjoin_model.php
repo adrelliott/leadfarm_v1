@@ -6,7 +6,7 @@
  * @author Al Elliott
  */
 
-class Contactjoin_model extends MY_Model {
+class Contactjoin_model extends CRM_Model {
 
     function __construct (){
         //parent::__construct();

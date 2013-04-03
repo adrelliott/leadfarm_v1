@@ -6,7 +6,7 @@ if( bespoke_controller('Campaign') ) get_bespoke_controller();   //yup = go get 
 else
 {   //nope? Use this default class then
   
-    class Campaign extends MY_Controller {
+    class Campaign extends CRM_Controller {
         
         public $controller_name = 'campaign';
 

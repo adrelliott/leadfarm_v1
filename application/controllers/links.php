@@ -6,7 +6,7 @@ if( bespoke_controller('Links') ) get_bespoke_controller();   //yup = go get it.
 else
 {   //nope? Use this default class then
   
-    class Links extends MY_Controller {
+    class Links extends CRM_Controller {
 
         public $controller_name = 'links';
 

@@ -6,7 +6,7 @@ if( bespoke_controller('Contactjoin') ) get_bespoke_controller();   //yup = go g
 else
 {   //nope? Use this default class then  
 
-    class Contactjoin extends MY_Controller {
+    class Contactjoin extends CRM_Controller {
         
         public $controller_name = 'contactjoin';
         

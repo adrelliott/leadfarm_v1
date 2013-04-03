@@ -8,7 +8,7 @@ if (defined ('BASEPATH') === false)
 /**
  * Model for accessing contact tags
  */
-class Contactsearchtag_model extends MY_Model
+class Contactsearchtag_model extends CRM_Model
 {
     /**
      * The database table to use

@@ -6,7 +6,7 @@
  * @author Al Elliott
  */
 
-class Tagjoin_model extends MY_Model {
+class Tagjoin_model extends CRM_Model {
 
     function __construct (){
         //parent::__construct();

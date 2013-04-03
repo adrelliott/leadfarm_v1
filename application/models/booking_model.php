@@ -6,7 +6,7 @@
  * @author Al Elliott
  */
 
-class Booking_model extends MY_Model {
+class Booking_model extends CRM_Model {
 
     function __construct (){
         parent::__construct();

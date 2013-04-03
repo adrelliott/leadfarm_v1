@@ -6,7 +6,7 @@
  * @author Al Elliott
  */
 
-class Report_model extends MY_Model {
+class Report_model extends CRM_Model {
 
     function __construct (){
         //parent::__construct();

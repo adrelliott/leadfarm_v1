@@ -6,7 +6,7 @@ if( bespoke_controller('Quickaction') ) get_bespoke_controller();   //yup = go g
 else
 {   //nope? Use this default class then
   
-    class Quickaction extends MY_Controller {
+    class Quickaction extends CRM_Controller {
 
         public $controller_name = 'quickaction';
 

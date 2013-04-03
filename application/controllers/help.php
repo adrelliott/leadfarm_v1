@@ -6,7 +6,7 @@ if( bespoke_controller('Help') ) get_bespoke_controller();   //yup = go get it.
 else
 {   //nope? Use this default class then  
     
-    class Help extends MY_Controller {
+    class Help extends CRM_Controller {
         public $controller_name = 'help';
 
         public function __construct()    {

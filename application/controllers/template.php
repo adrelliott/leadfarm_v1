@@ -6,7 +6,7 @@ if( bespoke_controller('Template') ) get_bespoke_controller();   //yup = go get 
 else
 {   //nope? Use this default class then
   
-    class Template extends MY_Controller {
+    class Template extends CRM_Controller {
 
         public $controller_name = 'template';
         

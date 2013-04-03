@@ -6,7 +6,7 @@
  * @author Al Elliott
  */
 
-class Help_model extends MY_Model {
+class Help_model extends CRM_Model {
 
     function __construct (){
         //parent::__construct();

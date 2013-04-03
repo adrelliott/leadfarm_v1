@@ -6,7 +6,7 @@ if( bespoke_controller('Settings') ) get_bespoke_controller();   //yup = go get 
 else
 {   //nope? Use this default class then
   
-    class Settings extends MY_Controller {
+    class Settings extends CRM_Controller {
 
         public $controller_name = 'settings';
 

@@ -5,7 +5,7 @@ include('controller_config/init.php');
 if( bespoke_controller('Contactaction') ) get_bespoke_controller();  //yup = go get it.
 else
 {   //nope? Use this default class then
-    class Order extends MY_Controller {
+    class Order extends CRM_Controller {
 
         public $controller_name = 'order';
 

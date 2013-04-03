@@ -6,7 +6,7 @@
  * @author Al Elliott
  */
 
-class Campaign_model extends MY_Model {
+class Campaign_model extends CRM_Model {
 
     function __construct (){
         //parent::__construct();

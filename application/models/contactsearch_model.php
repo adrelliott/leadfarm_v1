@@ -8,7 +8,7 @@ if (defined ('BASEPATH') === false)
 /**
  * Model for accessing contact searches
  */
-class Contactsearch_model extends MY_Model
+class Contactsearch_model extends CRM_Model
 {
     /**
      * The database table to use

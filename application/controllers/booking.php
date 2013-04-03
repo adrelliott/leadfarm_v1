@@ -6,7 +6,7 @@ if( bespoke_controller('Booking') ) get_bespoke_controller();  //yup = go get it
 else
 {   //nope? Use this default class then
 
-    class Booking extends MY_Controller {
+    class Booking extends CRM_Controller {
         
         public $controller_name = 'booking';
         var $workshop = FALSE;

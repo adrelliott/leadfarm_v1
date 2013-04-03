@@ -6,7 +6,7 @@
  * @author Al Elliott
  */
 
-class Steps_model extends MY_Model {
+class Steps_model extends CRM_Model {
 
     function __construct (){
         //parent::__construct();
