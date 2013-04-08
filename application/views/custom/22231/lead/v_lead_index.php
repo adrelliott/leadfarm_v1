@@ -2,56 +2,67 @@
     //if ($this->data['message']) {echo '<span class="notification information">'
     //    . $this->data['message'] . '</span>';} 
 ?>
+
+
 <style>
     .leadBox {
         text-align: center;
     }
 </style>
 <div class="row clearfix">
-    <div class="col_3">
+    <div class="col_4">
         <div class="widget clearfix">
-            <h2>Contacts</h2>
+            <h2>Prospect</h2>
             <div class="widget_inside">
-                <?php foreach($tables['leads_by_type']['Contact'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url(DATAOWNER_ID . '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID']) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . '</a></p>';} ?>
+                <?php if ( ! empty ( $tables['leads_by_type']['Prospect'] )) : ?>
+                <?php foreach($tables['leads_by_type']['Prospect'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url( '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID'] ) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . '</a></p>'; } ?>
+                <?php else: ?>
+                <p>No records found...</p>
+                <?php endif; ?>
             </div>
         </div>
     </div>
-    <div class="col_3">
+    <div class="col_4">
         <div class="widget clearfix">
-            <h2>Leads</h2>
+            <h2>Potential</h2>
             <div class="widget_inside">
-                 <?php foreach($tables['leads_by_type']['Lead'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url(DATAOWNER_ID . '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID']) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . '</a></p>';} ?>
+                <?php if ( ! empty ( $tables['leads_by_type']['Potential'] )) : ?>
+                <?php foreach($tables['leads_by_type']['Potential'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url( '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID'] ) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . '</a></p>'; } ?>
+                <?php else: ?>
+                <p>No records found...</p>
+                <?php endif; ?>
             </div>
         </div>
     </div>
-    <div class="col_3">
+    <div class="col_4 last">
         <div class="widget clearfix">
-            <h2>Suspects</h2>
+            <h2>Lead</h2>
             <div class="widget_inside">
-                 <?php foreach($tables['leads_by_type']['Suspect'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url(DATAOWNER_ID . '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID']) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . '</a></p>';} ?>
-            </div>
-        </div>
-    </div>
-    <div class="col_3 last">
-        <div class="widget clearfix">
-            <h2>Prospects</h2>
-            <div class="widget_inside">
-                 <?php foreach($tables['leads_by_type']['Prospect'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url(DATAOWNER_ID . '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID']) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . '</a></p>';} ?>
+                <?php if ( ! empty ( $tables['leads_by_type']['Lead'] )) : ?>
+                <?php foreach($tables['leads_by_type']['Lead'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url( '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID'] ) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . '</a></p>'; } ?>
+                <?php else: ?>
+                <p>No records found...</p>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </div>
 <div class="row clearfix">
-    <div class="col_12">
-        <div class="widget clearfix">
-            <h2>Active Leads</h2>
-            <div class="widget_inside">   
-                 <?php 
-                    $this->table->set_template_custom(array ('anchor_uri' => 'lead/view/edit', 'ContactId_name' => 'ContactID', 'anchor_attr' => 'class="iframe"'));    
-                    $this->table->set_heading_custom($tables['leads']['table_headers']);
-                    echo $this->table->generate_custom($tables['leads']['table_data']); 
-                ?>
+    <div class="row">
+        <div class="widget clearfix tabs">
+            <ul>
+                <li><h2><a href='#tab-1'>All Active Opportunities</a></h2></li>
+            </ul>
+            <div class="widget_inside">
+                <div id="tab-1">
+                    <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/index/edit/leads') ?>">
+                        <?php include ('v_lead_edit/leads.php') ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<a href="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/index/edit/leads') ?>" target='_blank'>here</a>
+
+http://localhost:8888/projects/leadfarm_v1/public_html//lead/index/edit/leads

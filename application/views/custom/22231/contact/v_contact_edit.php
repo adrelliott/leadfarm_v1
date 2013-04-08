@@ -28,12 +28,28 @@
                                 <span class="notification done" style="display:none">Record Updated!</span>
                                 <div class="clearfix">
                                     <a href="<?php echo site_url("/contact/delete_record/$ContactId"); ?>" class="small red button left" onclick="return deletechecked();">
-                                        <span>Delete this Fan</span>
+                                        <span>Delete this Contact</span>
                                     </a>
                                 </div>
                             </div><!-- End of form div-->
+                            <div class="clearfix"></div>
+                            <div class="hide_toggle" id="option2">
+                                <div class="form margin_top_30">
+                                    <?php display_field($fields['__OrgStructure']); ?>
+                                    <?php display_field($fields['__NoStaff']); ?>
+                                    <?php display_field($fields['__INHousehrYN']); ?>
+                                    <?php display_field($fields['__Sector']); ?>
+                                    <div class="clearfix">
+                                        <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+
+                                    </div>
+                                </div>
+                            </div>
                             <p id="option1_toggle" class="button left">
                                 <span>View Opt In Settings</span>
+                            </p>
+                            <p id="option2_toggle" class="button right">
+                                <span>View Organisation Details</span>
                             </p> 
                             <div class="hide_toggle" id="option1">
                                 <div class="form margin_top_30">
@@ -41,9 +57,6 @@
                                     <?php display_field($fields['_OptinSmsYN']); ?>
                                     <?php display_field($fields['_OptinSurfaceMailYN']); ?>
                                     <?php display_field($fields['_OptinNewsletterYN']); ?>
-                                    <?php display_field($fields['_OptinMerchandiseYN']); ?>
-                                    <?php display_field($fields['__ClubEventsYN']); ?>
-                                    <?php display_field($fields['__AwayMatchYN']); ?>
                                     <?php display_field($fields['_OptinPref']); ?>
                                     <div class="clearfix">
                                         <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
@@ -90,33 +103,44 @@
 <div class="col_6 last" style="<?php echo $display_none; ?>">
     
 <span class="notification information">
-    <h4><strong>Transferring</strong> this contact? Quote Contact Id <strong><?php echo $ContactId; ?></strong></h4>
+    <h4><strong>Discussing</strong> this contact? Quote Contact Id <strong><?php echo $ContactId; ?></strong></h4>
 </span>
     <div class="row clearfix"> 
         <div class="row"><!-- Tabs begin -->
             
             <div class="widget clearfix tabs">
                 <ul>
-                    <li><h2><a href='#tab-5'>Purchases</a></h2></li>
-                    <li><h2><a href='#tab-6'>Comms</a></h2></li>
+                    <li><h2><a href='#tab-5'>Actions</a></h2></li>
+                    <li><h2><a href='#tab-6'>Opportunities</a></h2></li>
+                    <li><h2><a href='#tab-7'>Comms</a></h2></li>
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-5">
-                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_purchases') ?>">
-                            <?php include ('v_contact_edit/all_purchases.php') ?>
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_actions') ?>">
+                            <?php include ('v_contact_edit/all_actions.php') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url("order/view/edit/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-5">
-                               <span>Create New Order</span>
+                           <a href="<?php echo site_url("contactaction/view/edit/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-5">
+                               <span>Create New Action</span>
                            </a>
                        </div>
                     </div>
                     <div id="tab-6">
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/leads') ?>">
+                            <?php include ('v_contact_edit/leads.php') ?>
+                        </div>
+                        <div class="clearfix margin_top_15">
+                            <a href="<?php echo site_url("lead/view/edit/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-6">
+                                <span>Create New Opportunity</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="tab-7">
                         <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/comms') ?>">
                             <?php include ('v_contact_edit/comms.php') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                            <a href="<?php echo site_url("comms/view/new/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-6">
+                            <a href="<?php echo site_url("comms/view/new/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-7">
                                 <span>Create New Comm</span>
                             </a>
                         </div>

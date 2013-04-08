@@ -102,8 +102,8 @@
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-5">
-                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_purchases') ?>">
-                            <?php include ('v_contact_edit/all_purchases.php') ?>
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/orders') ?>">
+                            <?php include ('v_contact_edit/orders.php') ?>
                         </div>
                         <div class="clearfix margin_top_15">
                            <a href="<?php echo site_url("order/view/edit/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-5">

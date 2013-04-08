@@ -9,10 +9,10 @@
                     <div id="tab-1"><!-- Start of tab 1 -->
                         <h3>Create/edit an Action for this contact</h3>
                         <div class="form">
-                            <?php echo form_open(DATAOWNER_ID . "/lead/add/edit/$rID/$ContactId") ; ?>
+                            <?php echo form_open( "/lead/add/edit/$rID/$ContactId", 'class="ajax"') ; ?>
                                 <?php echo display_field($fields['OpportunityTitle']); ?>
                                 <?php echo display_field($fields['ContactID'], array('type'=> 'hidden', 'value' => $ContactId)); ?>
-                                <?php echo display_field($fields['__LeadType']); ?>
+                                <?php echo display_field($fields['__LeadType'] ); ?>
                                 <?php echo display_field($fields['OpportunityNotes']); ?>
                                 <?php echo display_field($fields['UserID'], array('options' => $dropdowns['users'])); ?>     
                             <div class="clearfix">

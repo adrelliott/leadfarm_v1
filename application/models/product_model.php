@@ -6,15 +6,15 @@
  * @author Al Elliott
  */
 
-class Links_model extends CRM_Model {
+class Product_model extends CRM_Model {
 
     function __construct (){
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
-        $this->table_name = '__links';
-        $this->order_by = '__Id ASC';   //why isnt;' this reflected in datatable? 
+        $this->table_name = 'product';
+        $this->order_by = 'Id ASC';   //why isnt;' this reflected in datatable? 
         //$this->contactId_fieldname = '__ContactId'; 
-        $this->primary_key = '__Id';
+        $this->primary_key = 'Id';
     }
     
     /*function get_link_fields($Id_array) {

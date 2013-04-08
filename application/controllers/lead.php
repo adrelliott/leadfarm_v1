@@ -5,22 +5,26 @@ include('controller_config/init.php');
 if( bespoke_controller('Contactaction') ) get_bespoke_controller();  //yup = go get it.
 else
 {   //nope? Use this default class then
-    class Order extends CRM_Controller {
+    class Lead extends CRM_Controller {
 
-        public $controller_name = 'order';
+        public $controller_name = 'lead';
 
         public function __construct()    {
             parent::__construct();
         }
 
-        public function index($view_file = 'index') {   
+        public function index($view_file = 'index',  $pull = '') {   
             parent::index($view_file);
+            $this->_load_view_data();
+            
+            $this->sort_leads();
 
               // Generate the view!
-            $this->_generate_view($this->data);
+            $this->load_view($pull);
+            
         }
 
-        public function  view($view_file = 'edit', $rID = 'new', $ContactId = FALSE, $pull = '') {   
+        public function  view($view_file = 'edit', $rID = 'new', $ContactId, $pull = '') {   
             $this->data['view_setup']['modal'] = TRUE;
             parent::view($view_file, $rID, $ContactId);   
 
@@ -32,7 +36,7 @@ else
         public function add($view_file, $rID, $ContactId) {       
             //clean input
             $input = clean_data($this->input->post());
-            $input['ContactId'] = $ContactId;
+            //$input['ContactID'] = $ContactId; //GOTCHA: the ID is capitalised
 
             //save record
             $rID = $this->add_record($input, $rID);
@@ -66,6 +70,19 @@ else
               $url = 'contact/view/edit/' . $ContactId . '/' . $ContactId . '/0';
               redirect ( $url );
           }
+          
+          
+          public function sort_leads () {
+                $retval = array();
+                foreach ($this->data['view_setup']['tables']['leads']['table_data'] as $key => $array)
+                {            
+                    if ($array['__LeadType']) $retval[$array['__LeadType']][] = $array;
+                }
+                
+                $this->data['view_setup']['tables']['leads_by_type'] = $retval;
+          }
+          
+          
       /*public function view($view_file = 'edit', $rID = 'new', $ContactId = FALSE) {          
             parent::view($view_file, $rID, $ContactId);
                 // Generate the view!

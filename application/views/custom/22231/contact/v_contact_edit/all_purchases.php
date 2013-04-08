@@ -1,5 +1,4 @@
 <?php
-
 $this->table->set_template_custom(array (
     'anchor_uri' => 'order/view/edit', 
     'anchor_uri_append' => $ContactId, 

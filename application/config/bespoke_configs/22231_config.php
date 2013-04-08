@@ -85,7 +85,7 @@ $config['navbar_setup'] = Array
         ),
         'lead' => Array	//do not change this value - this is what the directory should be called too
         (
-            'pagename' => 'leads',
+            'pagename' => 'Leads',
             'controller' => 'lead',
             'method' => '',
             'param' => '',
@@ -379,7 +379,24 @@ $config['contact'] = Array
                         //'ActionDescription' => 'Description',
                         'ActionDate' => 'Date',
                     ),
-                ),     
+                ),
+                'orders' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    //'data_source' => 'all_actions', //The dataset name defined above
+                    'model_name' => 'order_model',
+                    'model_method' => 'get_all_contacts_records', 
+                    'model_params' => NULL,  
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        '_ItemBought' => 'Item Bought',
+                        'OrderTitle' => 'Description',
+                        'TotalPrice_A' => '£',
+                        'DateCreated' => 'Date',
+                        //'DateCreated' => 'Date Created',
+                    ),
+                ), 
                 'leads' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
@@ -656,6 +673,27 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
+                      'EmailAddress2' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Secondary Email',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' title="Automated emails go to PRIMARY email only" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'EmailAddress2',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
                       '_Gender' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
@@ -718,6 +756,27 @@ $config['contact'] = Array
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'StreetAddress2',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
+                     '_StreetAddress3' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Address 3',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '_StreetAddress3',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -1207,6 +1266,86 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
+                     '__ReferredBy' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Referred By:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__ReferredBy',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => NULL,
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
+                     '__Consultant' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Consultant',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '__Consultant',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                          (
+                            'Charlotte' => 'Charlotte',
+                            'Claire' => 'Claire',
+                            'Eleanor' => 'Eleanor',
+                          ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
+                     '__TypeOfContact' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Type of Contact',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '__TypeOfContact',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                          (
+                                'Associate' => 'Associate',
+                                'Competitor' => 'Competitor',
+                                'Employee' => 'Employee',
+                                'Manchester Business Network' => 'Manchester Business Network',
+                                'MDD Contact' => 'MDD Contact',
+                                'Misc' => 'Misc',
+                                'Potential Associate' => 'Potential Associate', 
+                          ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
                 ),                
             ),
         ),
@@ -1406,14 +1545,15 @@ $config['lead'] = Array
                             'Lead' => 'lead',
                             'Suspect' => 'suspect',
                             'Prospect' => 'prospect',*/
-                            'Contact' => 'Contact',
-                            'Lead' => 'Lead',
-                            'Suspect' => 'Suspect',
                             'Prospect' => 'Prospect',
+                            'Potential' => 'Potential',
+                            'Lead' => 'Lead',
+                            'Snoozing' => 'Snoozing',
                         ),
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
+                        'defaultvalue' => 'prospect', 
                     ),                 
                     'OpportunityNotes' => array      
                     (
@@ -5644,6 +5784,203 @@ $config['user'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
+                ),                
+            ),
+        ),
+    );
+
+
+$config['settings'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                'products' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'product_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    /*'model_params' => array
+                    (
+                        '_Type =' => 'Link_Automation',
+                    ), */
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'ProductName' => 'Name',                       
+                        //'ActionType' => 'Action type',                        
+                    ),
+                ),
+            ),
+            'view' => array 
+            (  
+               //dont; think we need this
+                
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'links_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL, 
+                'dropdowns' => array    //or NULL
+                (                    
+                    'campaign_dropdown' => array
+                    (
+                        'source' => 'campaign_dropdown',    //which dataset are we using?
+                        'label' => array ('Name'),
+                        'label_separator' => '',
+                        'value' => 'Id',
+                    ),
+                    
+                ),
+                'fields' => array 
+                (
+                    '__Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'readonly',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),      
+                ),                
+            ),
+        ),
+    );
+
+$config['product'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                'products' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'product_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    /*'model_params' => array
+                    (
+                        '_Type =' => 'Link_Automation',
+                    ), */
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'ProductName' => 'Name',                       
+                        //'ActionType' => 'Action type',                        
+                    ),
+                ),
+            ),
+            'view' => array 
+            (  
+               //dont; think we need this
+                
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'product_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL, 
+                /*'dropdowns' => array    //or NULL
+                (                    
+                    'campaign_dropdown' => array
+                    (
+                        'source' => 'campaign_dropdown',    //which dataset are we using?
+                        'label' => array ('Name'),
+                        'label_separator' => '',
+                        'value' => 'Id',
+                    ),
+                    
+                ),*/
+                'fields' => array 
+                (
+                    'Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'readonly',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'ProductName' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Product Name',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',
+                        'type' => 'text',
+                        'name' => 'ProductName',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'ProductPrice' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'price',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'mini',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'ProductPrice',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ), 
                 ),                
             ),
         ),

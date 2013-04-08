@@ -10,7 +10,7 @@
                         <h2><a href="#tab-2">Notes</a></h2>
                     </li>
                     <li style="<?php echo $display_none; ?>">
-                        <h2><a href="#tab-3">Relationships</a></h2>
+                        <h2><a href="#tab-3">Relationships1</a></h2>
                     </li>
                     </li>
                 </ul>
@@ -122,13 +122,12 @@
                            <a href="<?php echo site_url() . DATAOWNER_ID; ?>/lead/view/edit/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-5"><span>Create New Opportunity</span></a>
                        </div>
                     </div>
-                    
                     <div id="tab-7">
-                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/comms') ?>">
-                             <?php $this->load->view ('custom/22231/contact/v_contact_edit/comms') ?>
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_actions') ?>">
+                             <?php $this->load->view ('custom/22231/contact/v_contact_edit/all_actions') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                       <a href="<?php echo site_url() . DATAOWNER_ID; ?>/comms/view/new/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-7"><span>Create New Comm</span></a>
+                       <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contactaction/view/new/new/<?php echo $ContactId; ?>" class="large blue button right iframe" data-table-id="tab-7"><span>Create New Action</span></a>
                         </div>
                     </div>
                 </div>

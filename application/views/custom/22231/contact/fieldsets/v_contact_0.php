@@ -8,8 +8,11 @@
     <?php display_field($fields['Email']); ?>   
     <?php display_field($fields['EmailAddress2']); ?>
     <?php display_field($fields['_Gender']); ?>
-    <?php display_field($fields['Birthday']); ?>
-    <?php display_field($fields['_LegacyMembershipNo']); ?>
+    <?php display_field($fields['__ReferredBy']); ?>
+    <?php display_field($fields['__Consultant']); ?>
+    <?php display_field($fields['__TypeOfContact']); ?>
+    <?php //display_field($fields['Birthday']); ?>
+    <?php //display_field($fields['_LegacyMembershipNo']); ?>
 </div>
 
 <?php include ( APPPATH . 'views/default/common/postcode_lookup.php' );?>

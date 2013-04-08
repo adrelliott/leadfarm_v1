@@ -15,7 +15,7 @@
     </body>
 </html>
 
-<?php if (ENVIRONMENT == 'development') : ?>
+<?php if (strpos( ENVIRONMENT , 'development')) : ?>
 <pre>here is CI session
 <?php print_r($this->session->all_userdata()); ?>
 </pre>

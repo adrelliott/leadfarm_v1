@@ -14,9 +14,11 @@ else
             parent::__construct();
         }
         
-        public function index($view_file = 'edit') {
+        public function index($view_file = 'index') {
+            parent::index($view_file);
             $this->_load_view_data();   //retrieves and process all data for view  
-
+            //print_array($this->data, 1);
+            $this->_generate_view($this->data);
         } 
 
         public function view($view_file = 'edit', $rID = 'new') {          
