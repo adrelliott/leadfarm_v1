@@ -486,6 +486,8 @@ $(function() {
         }
     });
     
+    //$("#cboxClose").click();
+    
     
 
 });

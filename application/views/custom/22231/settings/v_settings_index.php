@@ -19,7 +19,7 @@
                         </div>
                         <div class="clearfix margin_top_15">
                            <a href="<?php echo site_url("product/view/edit/new"); ?>" class="large blue button right iframe" data-table-id="tab-2">
-                               <span>Create New Action</span>
+                               <span>Create New Product</span>
                            </a>
                        </div>
                     </div>              

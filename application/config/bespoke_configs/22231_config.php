@@ -1393,6 +1393,51 @@ $config['lead'] = Array
                         '__LeadType' => '',
                     ),
                 ),
+                'productjoin' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    //'model_name' => 'productjoin_model',
+                    'model_name' => 'product_model',
+                    //'model_method' => 'joinon_ContactJoin', 
+                    'model_method' => 'joinon_productjoin', 
+                    'model_params' => NULL,
+                    /*'model_params' => array
+                    (
+                        '_Type =' => 'Link_Automation',
+                    ), */
+                    'fields' => array 
+                    (
+                        'productjoin.Id' => 'Id',                    
+                        'productjoin.ProductId' => 'Id',                    
+                        'productjoin.ContactId' => 'Id',                    
+                        'product.Id' => 'Id',                    
+                        'product.ProductName' => 'Prod name1',                    
+                        'product.ProductPrice' => '£',                    
+                        //'contact.FirstName' => 'Id',                    
+                        //'contact.LastName' => 'Id',                    
+                    ),
+                ),
+                'products' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'product_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    /*'model_params' => array
+                    (
+                        '_Type =' => 'Link_Automation',
+                    ), */
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'ProductName' => 'Name',                       
+                        'ProductPrice' => '£',                       
+                        'ItemType' => 'Type',                       
+                        //'ActionType' => 'Action type',                        
+                    ),
+                ),
                'users' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
@@ -5811,6 +5856,8 @@ $config['settings'] = Array
                     (
                         'Id' => 'Id',
                         'ProductName' => 'Name',                       
+                        'ProductPrice' => '£',                       
+                        'ItemType' => 'Type',                       
                         //'ActionType' => 'Action type',                        
                     ),
                 ),
@@ -5867,18 +5914,18 @@ $config['settings'] = Array
         ),
     );
 
-$config['product'] = Array
+$config['product_join'] = Array
     (
     'datasets' => array 
         (
             'index' => array 
             (
-                'products' => array
+                'product_join' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => '', //The dataset name defined above
-                    'model_name' => 'product_model',
-                    'model_method' => 'get_all_records', 
+                    'model_name' => 'productjoin_model',
+                    'model_method' => 'productjoin_joinoncontact', 
                     'model_params' => NULL,
                     /*'model_params' => array
                     (
@@ -5886,9 +5933,12 @@ $config['product'] = Array
                     ), */
                     'fields' => array 
                     (
-                        'Id' => 'Id',
-                        'ProductName' => 'Name',                       
-                        //'ActionType' => 'Action type',                        
+                        'productjoin.Id' => 'Id',
+                        'productjoin.ProductId' => 'Producct Id1', 
+                        'productjoin.ContactId' => 'Contact Id',             
+                        'contact.Id' => 'Id',             
+                        'contact.FirstName' => 'First Name',             
+                        'contact.LastName' => 'Last Name',             
                     ),
                 ),
             ),
@@ -5967,14 +6017,235 @@ $config['product'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'price',                  
+                        'label' => 'Price',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'mini',
+                        'cssClassInput' => 'small',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'ProductPrice',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ), 
+                    'ItemType' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Type of Product',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => 'ItemType',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Telephone Support' => 'Telephone Support',
+                            'Onsite' => 'Onsite',
+                            'Coaching/mentoring' => 'Coaching/mentoring',
+                            'One-Off' => 'One-Off',
+                            //'word' => 'word',
+                            
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ), 
+                    'ShortDescription' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Description',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'rows=2',  //eg. title="tooltip" rel="tooltips"rows
+                        'type' => 'textarea',
+                        'name' => 'ShortDescription',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ), 
+                ),                
+            ),
+        ),
+    );
+$config['product'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                'products' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'product_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    /*'model_params' => array
+                    (
+                        '_Type =' => 'Link_Automation',
+                    ), */
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'ProductName' => 'Name',                       
+                        'ProductPrice' => '£',                       
+                        'ItemType' => 'Type',                          
+                    ),
+                ),
+            ),
+            'view' => array 
+            (  
+               //dont; think we need this
+                
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'product_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL, 
+                /*'dropdowns' => array    //or NULL
+                (                    
+                    'campaign_dropdown' => array
+                    (
+                        'source' => 'campaign_dropdown',    //which dataset are we using?
+                        'label' => array ('Name'),
+                        'label_separator' => '',
+                        'value' => 'Id',
+                    ),
+                    
+                ),*/
+                'fields' => array 
+                (
+                    'Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'readonly',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'ProductName' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Product Name',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',
+                        'type' => 'text',
+                        'name' => 'ProductName',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'ProductPrice' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Price',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'small',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'ProductPrice',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ), 
+                    'ItemType' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Type of Product',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => 'ItemType',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Telephone Support' => 'Telephone Support',
+                            'Onsite' => 'Onsite',
+                            'Coaching/mentoring' => 'Coaching/mentoring',
+                            'One-Off' => 'One-Off',
+                            //'word' => 'word',
+                            
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ), 
+                    'ShortDescription' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Description',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'rows=2',  //eg. title="tooltip" rel="tooltips"rows
+                        'type' => 'textarea',
+                        'name' => 'ShortDescription',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',

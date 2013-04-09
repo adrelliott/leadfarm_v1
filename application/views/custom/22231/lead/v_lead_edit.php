@@ -4,6 +4,7 @@
             <div class="widget clearfix tabs">
                 <ul>
                     <li><h2><a href="#tab-1">Create An Action</a></h2></li>
+                    <li><h2><a href="#tab-2">Products</a></h2></li>
                 </ul>							
                 <div class="widget_inside">
                     <div id="tab-1"><!-- Start of tab 1 -->
@@ -21,9 +22,16 @@
                             <?php echo form_close(); ?>
                         </div>
                     </div>
+                    <div id="tab-2"><!-- Start of tab 1 -->
+                        <h3>What is this contact interested in?</h3>
+                        <div class="form">
+                            <?php foreach ( $tables['products']['table_data'] as $k => $array ) : ?>
+                            <p>The product is <?php echo $array['ProductName']; ?></p>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
                 </div>                
             </div>
         </div>      
     </div>    
 </div> 
-        
