@@ -67,6 +67,19 @@
     <script type="text/javascript" src="<?php echo site_url(); ?>assets/scripts/timepicker/jquery-ui-timepicker-addon.js"></script>
     <link rel="stylesheet" media="all" type="text/css" href="<?php echo site_url(); ?>assets/scripts/timepicker/jquery-ui-timepicker-addon.css" />
      
+    <!-- Pure CSS3 Validation & Masking -->
+    <link rel="stylesheet" href="<?php //echo site_url(); ?>assets/scripts/PCSS3/css/pcss3fs.css" />
+    <link rel="stylesheet" href="<?php //echo site_url(); ?>333assets/scripts/PCSS3/css/main.css" />
+    <script src="<?php echo site_url(); ?>assets/scripts/PCSS3/js/jquery.maskedinput.min.js"></script>
+    <script src="<?php echo site_url(); ?>assets/scripts/PCSS3/js/jquery.validate.min.js"></script>
+    <!--[if lt IE 9]>
+            <link rel="stylesheet" href="<?php //echo site_url(); ?>assets/scripts/PCSS3/css/pcss3fs-ie8.css" />
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="<?php echo site_url(); ?>assets/scripts/PCSS3/js/ie8.js"></script>
+    <![endif]-->
+
+
+    
     <!-- All the js used in the demo -->
     <script src="<?php echo site_url(); ?>assets/scripts/app.js"></script>
 

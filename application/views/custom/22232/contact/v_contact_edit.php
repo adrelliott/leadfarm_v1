@@ -1,3 +1,6 @@
+ <?php //include("v_contact_edit/deleteme.php"); ?>
+
+ 
 <div class="col_6"><!-- Start Column 1-->	
     <?php foreach($notifications as $vehicle) { foreach ($vehicle as $n => $html) { echo $html; }} ?>
     <div class="row clearfix">
@@ -17,17 +20,14 @@
                 <div class="widget_inside">
                     <div id="tab-1">
                         <?php //echo form_open('contact/add/0/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
-                        <?php echo form_open('contact/add/edit/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
+                        <?php echo form_open('contact/add/edit/' . $rID . '/' . $ContactId . '/0', 'class="ajax form"'); ?>
                         <!-- Form opened in fieldset file -->
                                 <?php include("fieldsets/v_contact_$fieldset.php");
                                     //v_contact_0 = contact, ..._1  org ?>
-                                <div class="clearfix">
-                                    <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'>
-                                    </input>
-                                </div>
+                                
                                 <span class="notification done" style="display:none">Record Updated!</span>
                                 <div class="clearfix">
-                                    <a href="<?php echo site_url("/contact/delete_record/$ContactId"); ?>" class="small red button left" onclick="return deletechecked();">
+                                    <a href="<?php echo site_url("/contact/delete_record/$ContactId"); ?>" class="small button green left" onclick="return deletechecked();">
                                         <span>Delete this Fan</span>
                                     </a>
                                 </div>
@@ -46,7 +46,7 @@
                                     <?php display_field($fields['__AwayMatchYN']); ?>
                                     <?php display_field($fields['_OptinPref']); ?>
                                     <div class="clearfix">
-                                        <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+                                        <input name='submit' type='submit' class='button red right small' style='float:right' value='Save'></input>
 
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                            </div>
                            <!-- End field "Add a Note:" -->	
                            <div class="clearfix margin_top_15">
-                               <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
+                               <input name='submit' type='submit' class='button red right large' style='float:right' value='Save'></input>
                            </div>
                         <?php echo form_close(); ?>	
                     </div>
@@ -76,7 +76,7 @@
                         <?php //$this->load->view ('custom/22222/contact/v_contact_edit/relationships') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url("/contactjoin/view/edit/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-3">
+                           <a href="<?php echo site_url("/contactjoin/view/edit/new/$ContactId"); ?>" class="large red button right iframe" data-table-id="tab-3">
                                <span>Create New Relationship</span>
                            </a>
                        </div>
@@ -106,7 +106,7 @@
                             <?php include ('v_contact_edit/orders.php') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url("order/view/edit/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-5">
+                           <a href="<?php echo site_url("order/view/edit/new/$ContactId"); ?>" class="large red button right iframe" data-table-id="tab-5">
                                <span>Create New Order</span>
                            </a>
                        </div>
@@ -116,7 +116,7 @@
                             <?php include ('v_contact_edit/comms.php') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                            <a href="<?php echo site_url("comms/view/new/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-6">
+                            <a href="<?php echo site_url("comms/view/new/new/$ContactId"); ?>" class="large red button right iframe" data-table-id="tab-6">
                                 <span>Create New Comm</span>
                             </a>
                         </div>
@@ -136,10 +136,22 @@
                             <option value="3">Send membership pack</option>
                         </select>
                         <input type="hidden" id="quick_action_url" value="<?php echo site_url() ; ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/" />
-                        <a id="quick_action_button" href="<?php echo site_url(); ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/0" class="large blue button iframe">GO!</a>
+                        <a id="quick_action_button" href="<?php echo site_url(); ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/0" class="large red button iframe">GO!</a>
                     </div>
                 </div>
             </div>
         </div>        
     </div>
 </div>
+
+
+		<!-- validation init -->
+<script type="text/javascript">
+        $(function()
+        {
+            //Add bespoke masks to overide the defaults set in app.js    
+            //$(".mask_date").mask('99/99/99', {placeholder:'x'});
+                
+        });			
+</script>
+<!--/ validation init -->

@@ -33,6 +33,11 @@ class Productjoin_model extends CRM_Model {
        return $this->save($input, $rID);
     }
     public function get_all_products() {
+        //do a query for all products
+        
+        //now do a query for all product joins
+        
+        //now cylce through and create a 
         
     }
     

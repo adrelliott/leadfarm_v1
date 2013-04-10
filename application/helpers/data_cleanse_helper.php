@@ -161,7 +161,7 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
         }
         
         $retval = "\n" . '<!-- Start field "' . $attributes['name'] . '" -->' . "\n" . $attributes['HTML_before'];
-        $retval .= '<div class="clearfix' . $attributes['cssClassContainingDiv'] . '" id="' . $attributes['cssIdContainingDiv'] . '"><label class="' . $attributes['cssClassLabel'] . '" id="' . $attributes['cssIdLabel'] . '">' . $attributes['label'] . '</label>';
+        $retval .= '<div class="clearfix' . $attributes['cssClassContainingDiv'] . '" id="' . $attributes['cssIdContainingDiv'] . '"><section class="state-normal"><label class="' . $attributes['cssClassLabel'] . '" id="' . $attributes['cssIdLabel'] . '">' . $attributes['label'] . '</label>';
          $retval .= $attributes['before_field'];
          $retval .= '<div class="input ' . $attributes['cssClassInputDiv'] . '" id="' . $attributes['cssIdInputDiv'] . '">';
         //switch each type of input
@@ -213,7 +213,7 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
                 else $timestamp_array = cleanse_timestamps($attributes['value']);
                 
                 //now create the 3 fields
-                 $retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . ' datepicker" type="text"  name=":::' . $attributes['name'] . ':date" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $timestamp_array['date'] . '"  />';
+                 $retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . ' datepicker" type="text"  name=":::' . $attributes['name'] . ':date" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $timestamp_array['date'] . '"  >';
                  
                   $retval .= '<select class="' . $attributes['cssClassInput'] . '" id=" ' . $attributes['cssIdInput'] . '" name=":::' . $attributes['name'] . ':hours">';
                   if (empty($attributes['options'])) 
@@ -249,15 +249,15 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
                     //of this method. We set double <div> to balance up the 2 closing divs set 
                     //at the end of this method
                 $retval = "\n" . '<!-- Start field "' . $attributes['name'] . '" -->' . "\n";
-                $retval .= '<div><div><input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . '" type="hidden"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $attributes['value'] . '"  />';
+                $retval .= '<div><div><input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . '" type="hidden"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $attributes['value'] . '"  >';
                 break;
             default:
-                $retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . '" type="text"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $attributes['value'] . '"  />';
+                $retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . '" type="text"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $attributes['value'] . '"  >';
                 break;
         }
       
         $retval .= $attributes['after_field'];
-        $retval .= '</div>';
+        $retval .= '</div></section>';
         
         
         $retval .= '</div>' . $attributes['HTML_after'];

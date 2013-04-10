@@ -1,0 +1,98 @@
+/**/
+/* radios and checkboxes */
+/**/
+.pcss3f input[type="radio"].checked + label,
+.pcss3f input[type="checkbox"].checked + label {
+	font-weight: 600;
+}
+.pcss3f input[type="radio"].checked + label:after,
+.pcss3f input[type="checkbox"].checked + label:after {
+	content: '';	
+	position: absolute;
+	top: 50%;
+	left: 0;
+	display: block;
+	width: 6px;
+	height: 6px;
+	margin: -3px 0 0 5px;
+	border-radius: 50%;
+}
+.pcss3f input[type="checkbox"].checked + label:after {
+	width: 10px;
+	height: 10px;
+	margin: -5px 0 0 3px;
+	border-radius: 2px;
+}
+
+
+/**/
+/* tooltips */
+/**/
+.pcss3f b {	
+	background: #000;
+}
+.pcss3f b:before {
+	border-bottom: 4px solid #000;
+}
+
+
+/**/
+/* sizes */
+/**/
+.pcss3f-size-small input[type="radio"].checked + label:after,
+.pcss3f-size-small input[type="checkbox"].checked + label:after {
+	width: 4px;
+	height: 4px;
+	margin: -2px 0 0 4px;
+}
+.pcss3f-size-small input[type="checkbox"].checked + label:after {
+	width: 6px;
+	height: 6px;
+	margin: -3px 0 0 3px;
+	border-radius: 2px;
+}
+.pcss3f-size-large input[type="radio"].checked + label:after,
+.pcss3f-size-large input[type="checkbox"].checked + label:after {
+	width: 8px;
+	height: 8px;
+	margin: -4px 0 0 6px;
+}
+.pcss3f-size-large input[type="checkbox"].checked + label:after {
+	width: 12px;
+	height: 12px;
+	margin: -6px 0 0 4px;
+	border-radius: 2px;
+}
+
+
+/**/
+/* colors */
+/**/
+.pcss3f input[type="radio"].checked + label:after,
+.pcss3f input[type="checkbox"].checked + label:after {
+	background: #d9d9d9;
+}
+
+.pcss3f .state-error input[type="radio"].checked + label:after,
+.pcss3f .state-error input[type="checkbox"].checked + label:after {
+	background-color: rgb(229,184,184);
+}
+
+.pcss3f .state-success input[type="radio"].checked + label:after,
+.pcss3f .state-success input[type="checkbox"].checked + label:after {
+	background: #d4eab8;
+}
+
+.pcss3f .state-disabled label,
+.pcss3f .state-disabled select, 
+.pcss3f .state-disabled textarea,
+.pcss3f .state-disabled input[type="url"],
+.pcss3f .state-disabled input[type="tel"],
+.pcss3f .state-disabled input[type="text"],
+.pcss3f .state-disabled input[type="email"],
+.pcss3f .state-disabled input[type="search"],
+.pcss3f .state-disabled input[type="password"],
+.pcss3f .state-disabled input[type="radio"] + label:before,
+.pcss3f .state-disabled input[type="checkbox"] + label:before {
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
