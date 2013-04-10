@@ -12,7 +12,7 @@ class Product_model extends CRM_Model {
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = 'product';
-        $this->order_by = 'product.Id ASC';   //why isnt;' this reflected in datatable? 
+        $this->order_by = 'product.ProductName ASC';   //why isnt;' this reflected in datatable? 
         //$this->contactId_fieldname = '__ContactId'; 
         $this->primary_key = 'Id';
     }

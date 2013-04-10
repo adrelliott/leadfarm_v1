@@ -14,6 +14,7 @@ class Productjoin_model extends CRM_Model {
         $this->table_name = 'productjoin';
         $this->order_by = 'productjoin.Id DESC';
         $this->contactId_fieldname = 'ContactId';
+        $this->leadId_fieldname = 'LeadId';
         $this->primary_key = 'Id';
         if (isset($this->data['view_setup']['ContactId']))
         {
@@ -32,9 +33,7 @@ class Productjoin_model extends CRM_Model {
        
        return $this->save($input, $rID);
     }
-    public function get_all_products() {
-        
-    }
+    
     
     
      public function joinon_ContactJoin($where = NULL) {
@@ -62,6 +61,15 @@ class Productjoin_model extends CRM_Model {
        
     }
     
+    function get_all_opps_records($where = NULL) {
+        //get all records. $where set up in dataset['model_params']
+        if ($where != NULL) { $this->db->where($where); }
+        $this->db->where(
+                $this->leadId_fieldname, 
+                $this->data['view_setup']['rID']
+                );
+        return $this->get();
+    }
     
     /*
     public function get_all_records($where = NULL) {

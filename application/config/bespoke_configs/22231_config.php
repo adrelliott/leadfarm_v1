@@ -1398,9 +1398,9 @@ $config['lead'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => '', //The dataset name defined above
                     //'model_name' => 'productjoin_model',
-                    'model_name' => 'product_model',
+                    'model_name' => 'productjoin_model',
                     //'model_method' => 'joinon_ContactJoin', 
-                    'model_method' => 'joinon_productjoin', 
+                    'model_method' => 'get_all_opps_records', 
                     'model_params' => NULL,
                     /*'model_params' => array
                     (
@@ -1408,12 +1408,10 @@ $config['lead'] = Array
                     ), */
                     'fields' => array 
                     (
-                        'productjoin.Id' => 'Id',                    
-                        'productjoin.ProductId' => 'Id',                    
-                        'productjoin.ContactId' => 'Id',                    
-                        'product.Id' => 'Id',                    
-                        'product.ProductName' => 'Prod name1',                    
-                        'product.ProductPrice' => '£',                    
+                        'Id' => 'Id',                    
+                        'ProductId' => 'Id',                    
+                        'ContactId' => 'Id',                        
+                        'InterestLevel' => 'Id',                        
                         //'contact.FirstName' => 'Id',                    
                         //'contact.LastName' => 'Id',                    
                     ),
