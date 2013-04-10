@@ -1,7 +1,7 @@
 <?php
 
 $this->table->set_template_custom(array (
-    'anchor_uri' => 'contactaction/view/edit_action', 
+    'anchor_uri' => 'contactaction/view/edit', 
     'anchor_uri_append' => $ContactId, 
     'anchor_attr' => 'class="iframe" data-table-id="tab-7"'
     ));    
