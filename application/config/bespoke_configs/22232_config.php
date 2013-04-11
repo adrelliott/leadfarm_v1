@@ -76,7 +76,7 @@ $config['navbar_setup'] = Array
         ),
         'contact' => Array	//do not change this value - this is what the directory should be called too
         (
-            'pagename' => 'Fans',
+            'pagename' => 'Fans & Orgs',
             'controller' => 'contact',
             'method' => '',
             'param' => '',
@@ -128,6 +128,7 @@ $config['navbar_setup'] = Array
     )
 |
 */
+
 $config['dashboard'] = Array
     (
         'datasets' => array 
@@ -151,8 +152,10 @@ $config['dashboard'] = Array
                         'contact.LastName' => 'Last Name',
                         'contact.Nickname' => 'Known As',
                         'contact.PostalCode' => 'Postcode',
-                        'contact.Phone1' => 'Phone',
+                        'contact.Email' => 'Prim Email',
+                        'contact.Phone1' => 'Landline',
                         'contact.Phone2' => 'Mobile',
+                        'contact.PostalCode' => 'Postcode',
                         'contact._OrganisationName' => 'Company Name',
                         'contact._LegacyMembershipNo' => 'Memb No',
                         
@@ -395,9 +398,10 @@ $config['contact'] = Array
                         'contact.LastName' => 'Last Name',
                         'contact.Nickname' => 'Known As',
                         'contact.PostalCode' => 'Postcode',
-                        'contact.Phone1' => 'Phone',
+                        'contact.Email' => 'Prim Email',
+                        'contact.Phone1' => 'Landline',
                         'contact.Phone2' => 'Mobile',
-                        'contact._OrganisationName' => 'Company Name',
+                        'contact.PostalCode' => 'Postcode',
                         'contact._LegacyMembershipNo' => 'Memb No',
                     ),
                 ),            
@@ -418,9 +422,10 @@ $config['contact'] = Array
                         'contact.LastName' => 'Last Name',
                         'contact._OrganisationName' => 'Company Name',
                         'contact.PostalCode' => 'Postcode',
-                        'contact.Phone1' => 'Phone',
+                        'contact.Email' => 'Prim Email',
+                        'contact.Phone1' => 'Landline',
                         'contact.Phone2' => 'Mobile',
-                        'contact._OrganisationName' => 'Company Name',
+                        'contact.PostalCode' => 'Postcode',
                         'contact._LegacyMembershipNo' => 'Memb No',
                     ),
                 ),            
@@ -454,10 +459,10 @@ $config['contact'] = Array
                     'fields' => array 
                     (
                         'Id' => '#',
-                        '_ItemBought' => 'Item Bought',
-                        'OrderTitle' => 'Description',
-                        'TotalPrice_A' => '£',
                         'DateCreated' => 'Date',
+                        '_ItemBought' => 'Item Bought',
+                        '_ValidUntil' => 'Season',
+                        'TotalPrice_A' => '£',
                         //'DateCreated' => 'Date Created',
                     ),
                 ), 
@@ -621,7 +626,7 @@ $config['contact'] = Array
                         'label' => 'Organisation Name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -656,7 +661,7 @@ $config['contact'] = Array
                             'Mrs' => 'Mrs',
                             'Miss' => 'Miss',
                             'Ms' => 'Ms',
-                            'Lord' => 'Lord',
+                            'Dr' => 'Dr',
                         ),
                         'HTML_before' => '',
                         'HTML_after' => '',
@@ -735,7 +740,7 @@ $config['contact'] = Array
                         'label' => 'Primary Email',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge ',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -778,7 +783,7 @@ $config['contact'] = Array
                         'label' => 'Secondary Email',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' title="Automated emails go to PRIMARY email only" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -799,9 +804,10 @@ $config['contact'] = Array
                         'label' => 'Date of Birth',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'datepicker',
+                        //'cssClassInput' => 'datepicker',
+                        'cssClassInput' => 'datepicker_dob mask_date',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => 'readonly',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => 'title="Use format dd/mm/yyyy" rel="tooltips"',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Birthday',
                         'helpText' => '',
@@ -1004,8 +1010,8 @@ $config['contact'] = Array
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'medium',
-                        'cssIdInput' => 'Country',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'cssIdInput' => 'countries_uk',
+                        'extraHTMLInput' => ' title="Start typing to find your country" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Country',
                         'helpText' => '',
@@ -1045,9 +1051,9 @@ $config['contact'] = Array
                         'label' => 'Landline',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'mask_phone',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' title="Landline Only" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Phone1',
                         'helpText' => '',
@@ -1066,9 +1072,9 @@ $config['contact'] = Array
                         'label' => 'Mobile',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'mask_mobile',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' title="Mobile Only - no spaces" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Phone2',
                         'helpText' => '',
@@ -1087,11 +1093,32 @@ $config['contact'] = Array
                         'label' => 'Work Number',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => 'mask_phone_work',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' title="Work Only - space for optional extension" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Phone3',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
+                      'Phone4' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Overseas Number',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'mask_phone_overseas',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' title="Overseas Only - (+44) 161 2762 987 (Optional space for 4 extra numbers at end)" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Phone4',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -1108,7 +1135,7 @@ $config['contact'] = Array
                         'label' => 'Where did you hear of us?',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
@@ -1180,7 +1207,7 @@ $config['contact'] = Array
                         'label' => '',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxxlarge',
+                        'cssClassInput' => 'xxxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'rows="20" readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -2490,7 +2517,7 @@ $config['comms'] = Array
                         'label' => 'Sender',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
@@ -2512,7 +2539,7 @@ $config['comms'] = Array
                         'label' => 'To',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -2533,7 +2560,7 @@ $config['comms'] = Array
                         'label' => 'Subject',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxxlarge',
+                        'cssClassInput' => 'xxxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -2554,7 +2581,7 @@ $config['comms'] = Array
                         'label' => 'Content',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxxlarge',
+                        'cssClassInput' => 'xxxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '  rows=15',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -2742,7 +2769,7 @@ $config['contactjoin'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Reason for Realtionship',                  
+                        'label' => 'Reason for Relationship',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
@@ -2754,14 +2781,9 @@ $config['contactjoin'] = Array
                         'length' => '',
                         'options' => array
                          (
-                            'Spouse' => 'Spouse',
-                            'Partner' => 'Partner',
-                            'Employee' => 'Employee',
-                            'Colleague' => 'Colleague',
-                            'Business Partner'=> 'Business Partner',
-                            'Friend' => 'Friend',    //label => value
-                            'Sibling' => 'Sibling',
-                            'Neighbour' => 'Neighbour', 
+                            'Same household' => 'same-household',
+                            'Parent/Child Relationship' => 'parent-child',
+                            
                          ),
                         'HTML_before' => '',
                         'HTML_after' => '',
@@ -3033,7 +3055,7 @@ $config['vehicles'] = Array
                         'cssIdLabel' => '',
                         'label' => 'Notes on this Vehicle',                  
                         'cssClassInputDiv' => '',
-                        'cssClassInput' => 'xxxxlarge',
+                        'cssClassInput' => 'xxxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'rows="20" readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -3465,7 +3487,7 @@ $config['vehicles'] = Array
                         'label' => 'Notes for Tyres:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'textarea xxlarge',
+                        'cssClassInput' => 'textarea xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -3567,7 +3589,7 @@ $config['vehicles'] = Array
                         'label' => 'Notes for Electrics:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'textarea xxlarge',
+                        'cssClassInput' => 'textarea xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -3723,7 +3745,7 @@ $config['vehicles'] = Array
                         'label' => 'Notes:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'textarea xxlarge',
+                        'cssClassInput' => 'textarea xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -3852,7 +3874,7 @@ $config['vehicles'] = Array
                         'label' => 'Notes:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'textarea xxlarge',
+                        'cssClassInput' => 'textarea xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -4008,7 +4030,7 @@ $config['vehicles'] = Array
                         'label' => 'Notes:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'textarea xxlarge',
+                        'cssClassInput' => 'textarea xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -4137,7 +4159,7 @@ $config['vehicles'] = Array
                         'label' => 'Notes:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'textarea xxlarge',
+                        'cssClassInput' => 'textarea xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -4377,7 +4399,7 @@ $config['campaign'] = Array
                         'label' => 'Campaign name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -4398,7 +4420,7 @@ $config['campaign'] = Array
                         'label' => 'Campaign Type',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
@@ -4448,7 +4470,7 @@ $config['campaign'] = Array
                         'label' => 'Description',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' rows=2',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -4543,7 +4565,7 @@ $config['tags'] = Array
                         'label' => 'Tag name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -4585,7 +4607,7 @@ $config['tags'] = Array
                         'label' => 'Description',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' rows=2',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -4725,7 +4747,7 @@ $config['template'] = Array
                         'label' => 'Template name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxxlarge',
+                        'cssClassInput' => 'xxxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' placeholder="E.g. Email 12-2 - Requesting a meeting" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -4768,7 +4790,7 @@ $config['template'] = Array
                         'label' => 'Sender\'s Email',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -4789,7 +4811,7 @@ $config['template'] = Array
                         'label' => 'Sender\'s Name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -4810,7 +4832,7 @@ $config['template'] = Array
                         'label' => 'Subject',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxxlarge',
+                        'cssClassInput' => 'xxxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'PLaceholder="Write a short, snappy subject here"',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -4937,7 +4959,7 @@ $config['links'] = Array
                         'label' => 'Link Name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxlarge',
+                        'cssClassInput' => 'xxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'placeholder="Click here for details" rel="tooltips" title="This the text your contacts see when you include this link in an email" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -4958,7 +4980,7 @@ $config['links'] = Array
                         'label' => 'Link Description',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxxxlarge',
+                        'cssClassInput' => 'xxxxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'rows=2',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -4979,7 +5001,7 @@ $config['links'] = Array
                         'label' => 'Start a Campaign?',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
@@ -5004,7 +5026,7 @@ $config['links'] = Array
                         'label' => 'Destination URL',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxxlarge',
+                        'cssClassInput' => 'xxxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' placeholder="http://" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -5111,6 +5133,29 @@ $config['order'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),
+                    'DateCreated' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Date of Order',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'datepicker mask_date',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'DateCreated',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => NULL,
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                        'defaultvalue' => date('d/m/Y'),
+                    ),
                     'TotalPrice_A' => array
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
@@ -5121,13 +5166,70 @@ $config['order'] = Array
                         'label' => 'Amount Paid',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'mini',
+                        'cssClassInput' => 'small input_mask_price',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'TotalPrice_A',
                         'helpText' => '',
                         'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'PaymentMethod' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Payment Method',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => 'PaymentMethod',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array 
+                        (
+                            'Cash' => 'Cash',
+                            'Cheque' => 'Cheque',
+                            'Credit-Debit Card' => 'Credit-Debit Card',
+                            'Standing Order' => 'Standing Order', 
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'Source' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Source',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => 'Source',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array 
+                        (
+                            'Online' => 'Online',
+                            'Post' => 'Post',
+                            'Telephone' => 'Telephone',
+                            'Office' => 'Office',
+                            'Stall' => 'Stall',
+                        ),
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -5139,7 +5241,7 @@ $config['order'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Year',                  
+                        'label' => 'Season',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
@@ -5155,6 +5257,10 @@ $config['order'] = Array
                                 '2011/12' => '2011/12',
                                 '2010/11' => '2010/11',
                                 '2009/10' => '2009/10',
+                                '2008/09' => '2008/09',
+                                '2007/08' => '2007/08',
+                                '2006/07' => '2006/07',
+                                '2005/06' => '2005/06',
                             ),
                         'HTML_before' => '',
                         'HTML_after' => '',
@@ -5170,7 +5276,7 @@ $config['order'] = Array
                         'label' => 'Order Notes',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxlarge',
+                        'cssClassInput' => 'xxlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' rows=2 ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -5391,7 +5497,7 @@ $config['user'] = Array
                         'label' => 'Organisation Name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -5505,7 +5611,7 @@ $config['user'] = Array
                         'label' => 'Email',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
+                        'cssClassInput' => 'xlarge',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -5715,7 +5821,7 @@ $config['user'] = Array
                         'label' => '',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxxlarge',
+                        'cssClassInput' => 'xxxlarge',
                         'cssIdInput' => 'contact_notes',
                         'extraHTMLInput' => 'rows="20" readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -5911,7 +6017,7 @@ $config['user'] = Array
                         'label' => 'Signature:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxxlarge cleditor',
+                        'cssClassInput' => 'xxxlarge cleditor',
                         'cssIdInput' => '',
                         'extraHTMLInput' => 'rows="20" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',

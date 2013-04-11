@@ -1,0 +1,93 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	background: #afc9ee url(../img/bg.jpg) fixed no-repeat 50% 0;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: #1a1a1a;
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	padding: 40px 20px;
+}
+h1 {
+	margin: 0 0 40px;
+	padding: 0;
+	text-align: center;
+	font-size: 32px;
+	line-height: 32px;
+	font-weight: 300;
+	text-shadow: 0 1px 1px #fff;
+}
+h1 strong {
+	font-weight: 400;
+}
+a {
+	text-decoration: underline;
+	color: #78a5e3;
+}
+a:hover {
+	text-decoration: none;
+}
+.table {
+	width: 780px;
+	overflow: hidden;
+	margin: 0 auto 80px;
+	border-radius: 5px;
+	background: #fff;
+	box-shadow: 0 0 5px #999;
+}
+.table table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 14px;
+	text-align: center;
+}
+.table th {
+	padding: 20px 25px;
+	border-bottom: 1px solid #f2f2f2;
+	background: rgba(217,217,217,0.1);
+	font-weight: 600;
+}
+.table th:first-child {
+	text-align: left
+}
+.table td {
+	width: 20%;
+	padding: 15px 25px;
+	border: 1px solid #f2f2f2;
+	font-weight: 300;
+	white-space: nowrap;
+}
+.table td[rowspan] {
+	text-align: left;
+	font-weight: 600;
+} 
+.table .title {
+	text-align: left;
+}
+.table .sep td {
+	padding: 0;
+	border: 0;
+}
+
+
+@media screen and (max-width: 768px) {
+	body {
+		padding: 40px 15px;
+	}
+	.table {
+		width: 700px;
+	}
+	.table table {
+		font-size: 13px;
+	}
+}
+
+
+@media screen and (max-width: 480px) {
+	body {
+		padding: 40px 10px;
+	}
+}
