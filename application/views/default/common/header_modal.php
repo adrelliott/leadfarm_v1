@@ -38,6 +38,19 @@
         <!-- Menu -->
         <link rel="stylesheet" href="assets/scripts/superfish/superfish.css" type="text/css" media="screen" />
         <script src="assets/scripts/superfish/superfish.js"></script>
+        
+        <!-- Pure CSS3 Validation & Masking -->
+    <link rel="stylesheet" href="<?php //echo site_url(); ?>assets/scripts/PCSS3/css/pcss3fs.css" />
+    <link rel="stylesheet" href="<?php //echo site_url(); ?>333assets/scripts/PCSS3/css/main.css" />
+    <script src="<?php echo site_url(); ?>assets/scripts/PCSS3/js/jquery.maskedinput.min.js"></script>
+    <script src="<?php echo site_url(); ?>assets/scripts/PCSS3/js/jquery.validate.min.js"></script>
+    <!--[if lt IE 9]>
+            <link rel="stylesheet" href="<?php //echo site_url(); ?>assets/scripts/PCSS3/css/pcss3fs-ie8.css" />
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="<?php echo site_url(); ?>assets/scripts/PCSS3/js/ie8.js"></script>
+    <![endif]-->
+
+
 
 
         <!-- Js used in the theme -->
