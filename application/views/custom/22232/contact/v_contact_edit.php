@@ -27,7 +27,7 @@
                                 
                                 <span class="notification done" style="display:none">Record Updated!</span>
                                 <div class="clearfix">
-                                        <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+                                        <input name='submit' type='submit' class='button red right medium' style='float:right' value='Save'></input>
                                         <a href="<?php echo site_url("/contact/delete_record/$ContactId"); ?>" class="small button green left" onclick="return deletechecked();">
                                         <span>Delete this Fan</span>
                                     </a>
