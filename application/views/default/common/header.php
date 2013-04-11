@@ -78,7 +78,8 @@
             <script src="<?php echo site_url(); ?>assets/scripts/PCSS3/js/ie8.js"></script>
     <![endif]-->
 
-
+ <!-- Now call InputMask -->
+        <script src="<?php echo site_url();  ?>assets/scripts/inputmask/jquery.inputmask.js" type="text/javascript"></script>
     
     <!-- All the js used in the demo -->
     <script src="<?php echo site_url(); ?>assets/scripts/app.js"></script>

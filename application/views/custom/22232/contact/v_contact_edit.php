@@ -20,14 +20,15 @@
                 <div class="widget_inside">
                     <div id="tab-1">
                         <?php //echo form_open('contact/add/0/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
-                        <?php echo form_open('contact/add/edit/' . $rID . '/' . $ContactId . '/0', 'class="ajax form"'); ?>
+                        <?php echo form_open('contact/add/edit/' . $rID . '/' . $ContactId . '/0', 'class="ajax form_val"'); ?>
                         <!-- Form opened in fieldset file -->
                                 <?php include("fieldsets/v_contact_$fieldset.php");
                                     //v_contact_0 = contact, ..._1  org ?>
                                 
                                 <span class="notification done" style="display:none">Record Updated!</span>
                                 <div class="clearfix">
-                                    <a href="<?php echo site_url("/contact/delete_record/$ContactId"); ?>" class="small button green left" onclick="return deletechecked();">
+                                        <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+                                        <a href="<?php echo site_url("/contact/delete_record/$ContactId"); ?>" class="small button green left" onclick="return deletechecked();">
                                         <span>Delete this Fan</span>
                                     </a>
                                 </div>
@@ -40,7 +41,7 @@
                                     <?php display_field($fields['_OptinEmailYN']); ?>
                                     <?php display_field($fields['_OptinSmsYN']); ?>
                                     <?php display_field($fields['_OptinSurfaceMailYN']); ?>
-                                    <?php display_field($fields['_OptinNewsletterYN']); ?>
+                                    <?php //display_field($fields['_OptinNewsletterYN']); ?>
                                     <?php display_field($fields['_OptinMerchandiseYN']); ?>
                                     <?php display_field($fields['__ClubEventsYN']); ?>
                                     <?php display_field($fields['__AwayMatchYN']); ?>
@@ -107,7 +108,7 @@
                         </div>
                         <div class="clearfix margin_top_15">
                            <a href="<?php echo site_url("order/view/edit/new/$ContactId"); ?>" class="large red button right iframe" data-table-id="tab-5">
-                               <span>Create New Order</span>
+                               <span>Create New Purchase</span>
                            </a>
                        </div>
                     </div>

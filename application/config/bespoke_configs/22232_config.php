@@ -459,10 +459,10 @@ $config['contact'] = Array
                     'fields' => array 
                     (
                         'Id' => '#',
-                        '_ItemBought' => 'Item Bought',
-                        'OrderTitle' => 'Description',
-                        'TotalPrice_A' => '£',
                         'DateCreated' => 'Date',
+                        '_ItemBought' => 'Item Bought',
+                        '_ValidUntil' => 'Season',
+                        'TotalPrice_A' => '£',
                         //'DateCreated' => 'Date Created',
                     ),
                 ), 
@@ -740,7 +740,7 @@ $config['contact'] = Array
                         'label' => 'Primary Email',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xlarge',
+                        'cssClassInput' => 'xlarge ',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -1053,7 +1053,7 @@ $config['contact'] = Array
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'mask_phone',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' title="Landline Only" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Phone1',
                         'helpText' => '',
@@ -1074,7 +1074,7 @@ $config['contact'] = Array
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'mask_mobile',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' title="Mobile Only - no spaces" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Phone2',
                         'helpText' => '',
@@ -1093,11 +1093,32 @@ $config['contact'] = Array
                         'label' => 'Work Number',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'mask_phone',
+                        'cssClassInput' => 'mask_phone_work',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' title="Work Only - space for optional extension" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Phone3',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
+                      'Phone4' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Overseas Number',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'mask_phone_overseas',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' title="Overseas Only - (+44) 161 2762 987 (Optional space for 4 extra numbers at end)" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Phone4',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -2748,7 +2769,7 @@ $config['contactjoin'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Reason for Realtionship',                  
+                        'label' => 'Reason for Relationship',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
@@ -2760,14 +2781,9 @@ $config['contactjoin'] = Array
                         'length' => '',
                         'options' => array
                          (
-                            'Spouse' => 'Spouse',
-                            'Partner' => 'Partner',
-                            'Employee' => 'Employee',
-                            'Colleague' => 'Colleague',
-                            'Business Partner'=> 'Business Partner',
-                            'Friend' => 'Friend',    //label => value
-                            'Sibling' => 'Sibling',
-                            'Neighbour' => 'Neighbour', 
+                            'Same household' => 'same-household',
+                            'Parent/Child Relationship' => 'parent-child',
+                            
                          ),
                         'HTML_before' => '',
                         'HTML_after' => '',
@@ -5117,6 +5133,29 @@ $config['order'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),
+                    'DateCreated' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Date of Order',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'datepicker mask_date',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'DateCreated',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => NULL,
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                        'defaultvalue' => date('d/m/Y'),
+                    ),
                     'TotalPrice_A' => array
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
@@ -5127,13 +5166,70 @@ $config['order'] = Array
                         'label' => 'Amount Paid',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'mini',
+                        'cssClassInput' => 'small input_mask_price',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'TotalPrice_A',
                         'helpText' => '',
                         'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'PaymentMethod' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Payment Method',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => 'PaymentMethod',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array 
+                        (
+                            'Cash' => 'Cash',
+                            'Cheque' => 'Cheque',
+                            'Credit-Debit Card' => 'Credit-Debit Card',
+                            'Standing Order' => 'Standing Order', 
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'Source' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Source',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => 'Source',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array 
+                        (
+                            'Online' => 'Online',
+                            'Post' => 'Post',
+                            'Telephone' => 'Telephone',
+                            'Office' => 'Office',
+                            'Stall' => 'Stall',
+                        ),
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
@@ -5145,7 +5241,7 @@ $config['order'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Year',                  
+                        'label' => 'Season',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
@@ -5161,6 +5257,10 @@ $config['order'] = Array
                                 '2011/12' => '2011/12',
                                 '2010/11' => '2010/11',
                                 '2009/10' => '2009/10',
+                                '2008/09' => '2008/09',
+                                '2007/08' => '2007/08',
+                                '2006/07' => '2006/07',
+                                '2005/06' => '2005/06',
                             ),
                         'HTML_before' => '',
                         'HTML_after' => '',

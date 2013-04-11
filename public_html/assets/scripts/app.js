@@ -92,7 +92,12 @@ $(function() {
     });
 
     // Datepicker
-    $('.datepicker').datepicker().children().show();
+    $('.datepicker').datepicker({
+      changeMonth: true,
+      changeYear: true,
+      defaultDate: '01/01/70',
+      dateFormat: 'dd/mm/yy'
+    }).children().show();
     
     // Datepicker
     $('.datepicker_dob').datepicker({
@@ -102,15 +107,26 @@ $(function() {
       dateFormat: 'dd/mm/yy'
     });
     
-    $(".mask_date").mask('99/99/9999', {placeholder:'x'});
-    $(".mask_phone").mask('(9999) 999 9999', {placeholder:'x'});
-    $(".mask_mobile").mask('99999999999', {placeholder:'x'});
+    //Inputmask mask - a much more powerful mask: https://github.com/RobinHerbots/jquery.inputmask
+    $(":input").inputmask();
+    $(".input_mask_date").inputmask("d/m/y");  //direct mask
+    $(".input_mask_phone").inputmask("mask", {"mask": "(999) 999-9999"}); //specifying fn & options
+    $("#tin").inputmask({"mask": "99-9999999"}); //specifying options only
+    $(".input_mask_price").inputmask('£99999.99', { numericInput: true, rightAlignNumerics: false, "placeholder": " " }); //For prices
+    
+    //This is under PCSS3 - not as powerful a mask
+    $(".mask_date").mask('99/99/9999', {placeholder:'-'});
+    $(".mask_phone").mask('(0999) 999 9999', {placeholder:'_'});
+    $(".mask_phone_work").mask('(0999) 999 9999  ?xxxx', {placeholder:'_'});
+    $(".mask_phone_overseas").mask('(+99) (999) 999 9999 ?999999', {placeholder:'_'});
+    $(".mask_mobile").mask('07999999999', {placeholder:'_'});
     $(".mask_card").mask('9999-9999-9999-9999', {placeholder:'x'});
     $(".serial").mask('***-***-***-***-***-***', {placeholder:'x'});
     $(".mask_tax").mask('99-9999999', {placeholder:'x'}); 
+    $(".mask_price").mask('£?99999', {placeholder:'_'}); 
     
    $('<i class="icon-ok"></i><i class="icon-remove"></i>').appendTo($('.form section'));					
-    $(".form").validate(
+    $(".form_val").validate(
     {
             // Rules for form validation
             rules:

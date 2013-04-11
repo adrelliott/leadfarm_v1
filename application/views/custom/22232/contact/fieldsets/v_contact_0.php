@@ -34,11 +34,7 @@
 <div class="form margin_top_15">
     <?php display_field($fields['Phone1']); ?>
     <?php display_field($fields['Phone2']); ?>
-    <?php display_field($fields['Phone3']); ?>
-    <?php display_field($fields['_FacebookUrl']); ?>
+    <?php //display_field($fields['Phone3']); ?>
+    <?php display_field($fields['Phone4']); ?>
+    <?php //display_field($fields['_FacebookUrl']); ?>
     <?php display_field($fields['_TwitterName']); ?>
-    <?php echo $save_button; ?>
-</div><!-- End of form div-->
-<div class="form margin_top_15">
-    <?php display_field($fields['Leadsource']); ?>
-    <?php echo $save_button; ?>

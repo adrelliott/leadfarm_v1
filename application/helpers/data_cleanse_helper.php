@@ -160,6 +160,12 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
             $attributes['value'] = $value;
         }
         
+        //Now add in a default value if one has been passed
+        if ( empty ($attributes['value']) && isset($attributes['defaultvalue'])) 
+        {   //set default val
+            $attributes['value'] = $attributes['defaultvalue'];
+        }
+        
         $retval = "\n" . '<!-- Start field "' . $attributes['name'] . '" -->' . "\n" . $attributes['HTML_before'];
         $retval .= '<div class="clearfix' . $attributes['cssClassContainingDiv'] . '" id="' . $attributes['cssIdContainingDiv'] . '"><section class="state-normal"><label class="' . $attributes['cssClassLabel'] . '" id="' . $attributes['cssIdLabel'] . '">' . $attributes['label'] . '</label>';
          $retval .= $attributes['before_field'];
@@ -176,7 +182,7 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
             case 'radio':                
                 foreach ($attributes['options'] as $k => $v)
                 {
-                    if ($attributes['value'] == NULL && isset($attributes['defaultvalue']))   //set default val
+                    if ( empty ($attributes['value']) && isset($attributes['defaultvalue']))   //set default val
                     {
                         $attributes['value'] = $attributes['defaultvalue'];
                     }
@@ -252,6 +258,7 @@ function display_field($attributes, $new_attributes = NULL, $value = NULL)  {
                 $retval .= '<div><div><input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . '" type="hidden"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $attributes['value'] . '"  >';
                 break;
             default:
+                
                 $retval .= '<input class="' . $attributes['cssClassInput'] . '" id="' . $attributes['cssIdInput'] . '" type="text"  name="' . $attributes['name'] . '" length="' . $attributes['length'] . '" ' . $attributes['helpText'] . ' ' . $attributes['extraHTMLInput'] . '  value="' . $attributes['value'] . '"  >';
                 break;
         }
