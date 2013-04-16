@@ -76,7 +76,7 @@ $config['navbar_setup'] = Array
         ),
         'contact' => Array	//do not change this value - this is what the directory should be called too
         (
-            'pagename' => 'Fans & Orgs',
+            'pagename' => 'Customers',
             'controller' => 'contact',
             'method' => '',
             'param' => '',
@@ -150,14 +150,12 @@ $config['dashboard'] = Array
                         'contact.Id' => '#',
                         'contact.FirstName' => 'First Name',
                         'contact.LastName' => 'Last Name',
-                        'contact.Nickname' => 'Known As',
                         'contact.PostalCode' => 'Postcode',
                         'contact.Email' => 'Prim Email',
                         'contact.Phone1' => 'Landline',
                         'contact.Phone2' => 'Mobile',
                         'contact.PostalCode' => 'Postcode',
                         'contact._OrganisationName' => 'Company Name',
-                        'contact._LegacyMembershipNo' => 'Memb No',
                         
                     ),
                 ),   
@@ -216,7 +214,7 @@ $config['dashboard'] = Array
                         //'PostalCode' => 'Postcode',
                     ),
                 ), */
-                /*'tasks' => array
+                'tasks' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
                     'data_source' => 'actions', //The dataset name defined in this file
@@ -234,7 +232,7 @@ $config['dashboard'] = Array
                         //'PostalCode' => 'Postcode',
                     ),
                 ),
-                'bookings' => array
+                /*'bookings' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
                     'data_source' => 'actions', //The dataset name defined in this file
@@ -283,20 +281,24 @@ $config['dashboard'] = Array
                         '_Type' => 'Type',
                     ),
                 ),
-                'reports' => array
+                /*'orders' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
-                    'data_source' => 'reports', //The dataset name defined in this file
-                    'model_name' => 'report_model',
-                    'model_method' => 'get_all_records',
+                    'data_source' => 'orders', //The dataset name defined in this file
+                    'model_name' => 'order_model',
+                    'model_method' => 'join_on_contact',
                     'model_params' => NULL,
                     'fields' => array 
                     (
-                        'Id' => '#',
-                        'Name' => 'Report Name',
-                        'Type' => 'Type',
+                        'order.Id' => '#',
+                        //'order.Date' => 'Date', ****
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        'order.ShippingAddress1' => 'Ship Add 1',
+                        'order.PostalCode' => 'Ship Postcode',
+                        //'order.Value' => 'Order Value', ***
                     ),
-                ),
+                ),*/
             ),
         ),
         'record' => array
@@ -321,7 +323,14 @@ $config['dashboard'] = Array
                         'Id' => '#',
                     ),
                 ),
-                'count_all_adult_records' => array
+                 
+                 //Maybe have:
+                 // - number of open orders
+                 // - number of orders this month?
+                 //etc
+                 
+                 
+               /* 'count_all_adult_records' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
                     'data_source' => '', //The dataset name defined in this file
@@ -352,7 +361,7 @@ $config['dashboard'] = Array
                     (
                         'Id' => '#',
                     ),
-                )
+                )*/
             ),
         ),
     );
@@ -396,13 +405,11 @@ $config['contact'] = Array
                         'contact.Id' => '#',
                         'contact.FirstName' => 'First Name',
                         'contact.LastName' => 'Last Name',
-                        'contact.Nickname' => 'Known As',
                         'contact.PostalCode' => 'Postcode',
                         'contact.Email' => 'Prim Email',
                         'contact.Phone1' => 'Landline',
                         'contact.Phone2' => 'Mobile',
                         'contact.PostalCode' => 'Postcode',
-                        'contact._LegacyMembershipNo' => 'Memb No',
                     ),
                 ),            
                 'organisations' => array
@@ -426,7 +433,6 @@ $config['contact'] = Array
                         'contact.Phone1' => 'Landline',
                         'contact.Phone2' => 'Mobile',
                         'contact.PostalCode' => 'Postcode',
-                        'contact._LegacyMembershipNo' => 'Memb No',
                     ),
                 ),            
             ),
@@ -461,7 +467,7 @@ $config['contact'] = Array
                         'Id' => '#',
                         'DateCreated' => 'Date',
                         '_ItemBought' => 'Item Bought',
-                        '_ValidUntil' => 'Season',
+                        '_ValidUntil' => 'type',
                         'TotalPrice_A' => '£',
                         //'DateCreated' => 'Date Created',
                     ),
