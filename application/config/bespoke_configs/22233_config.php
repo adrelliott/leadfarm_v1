@@ -787,7 +787,7 @@ $config['contact'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Membership no',                  
+                        'label' => 'Customer no',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'mini',
@@ -817,6 +817,27 @@ $config['contact'] = Array
                         'extraHTMLInput' => ' title="Automated emails go to PRIMARY email only" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'EmailAddress2',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
+                      'EmailAddress3' => array
+                    (
+                        'on' => FALSE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Organiasation Email',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' title="Automated emails go to PRIMARY email only" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'EmailAddress3',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -892,6 +913,34 @@ $config['contact'] = Array
                          (
                             'No' => '0',
                             'Yes' => '1',
+                         ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
+                      '_AccountStatus' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Account Status:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '_AccountStatus',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                         (
+                            'Customer' => 'Customer',
+                            'Prospect' => 'Prospect',
+                            'Closed' => 'Closed',
+                            'You can add more options!' => 'You can add more options!'
                          ),
                         'HTML_before' => '',
                         'HTML_after' => '',  

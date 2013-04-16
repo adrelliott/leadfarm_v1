@@ -14,7 +14,7 @@
     <?php display_field($fields['EmailAddress2']); ?>
     <?php display_field($fields['_Gender']); ?>
     <?php display_field($fields['Birthday']); ?>
-    <?php display_field($fields['_LegacyMembershipNo']); ?>
+    <?php display_field($fields['_LegacyMembershipNo'], array('value' => $rID)); ?>
     <?php echo $save_button; ?>
 </div>
 
@@ -37,4 +37,5 @@
     <?php //display_field($fields['Phone3']); ?>
     <?php display_field($fields['Phone4']); ?>
     <?php //display_field($fields['_FacebookUrl']); ?>
-    <?php display_field($fields['_TwitterName']); ?>
+    <?php //display_field($fields['_TwitterName']); ?>
+    <?php display_field($fields['_AccountStatus']); ?>

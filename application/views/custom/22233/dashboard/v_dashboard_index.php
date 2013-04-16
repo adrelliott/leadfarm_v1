@@ -20,7 +20,7 @@
             <div class="widget_inside hide_toggle" id="option2">
                 <div class="margin_top_15"></div>
                 <?php 
-                    $this->table->set_template_custom(array ('anchor_uri' => 'order/view/edit'));    
+                    $this->table->set_template_custom(array ('anchor_uri' => 'order/view/edit', 'anchor_attr' => 'class="iframe"' ));    
                     $this->table->set_heading_custom($tables['orders']['table_headers']);
                     echo $this->table->generate_custom($tables['orders']['table_data']); 
                 ?>

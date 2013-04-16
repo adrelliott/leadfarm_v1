@@ -13,9 +13,6 @@
                     <li style="<?php echo $display_none; ?>">
                         <h2><a href="#tab-2">Notes</a></h2>
                     </li>
-                    <li style="<?php echo $display_none; ?>">
-                        <h2><a href="#tab-3">Relationships</a></h2>
-                    </li>
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-1">
@@ -29,7 +26,7 @@
                                 <div class="clearfix">
                                         <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
                                         <a href="<?php echo site_url("/contact/delete_record/$ContactId"); ?>" class="small button red left" onclick="return deletechecked();">
-                                        <span>Delete this Fan</span>
+                                        <span>Delete this Contact</span>
                                     </a>
                                 </div>
                             </div><!-- End of form div-->
@@ -41,11 +38,8 @@
                                     <?php display_field($fields['_OptinEmailYN']); ?>
                                     <?php display_field($fields['_OptinSmsYN']); ?>
                                     <?php display_field($fields['_OptinSurfaceMailYN']); ?>
-                                    <?php //display_field($fields['_OptinNewsletterYN']); ?>
+                                    <?php display_field($fields['_OptinNewsletterYN']); ?>
                                     <?php display_field($fields['_OptinMerchandiseYN']); ?>
-                                    <?php display_field($fields['__ClubEventsYN']); ?>
-                                    <?php display_field($fields['__AwayMatchYN']); ?>
-                                    <?php display_field($fields['_OptinPref']); ?>
                                     <div class="clearfix">
                                         <input name='submit' type='submit' class='button blue right small' style='float:right' value='Save'></input>
 
@@ -55,7 +49,7 @@
                         <?php echo form_close(); ?>
                     </div>
                     <div id="tab-2">
-                         <?php echo form_open('contact/append_note/0/' . $rID . '/' . $ContactId . '/' . $fieldset, 'class="ajax"'); ?>
+                         <?php //echo form_open('contact/append_note/0/' . $rID . '/' . $ContactId . '/' . $fieldset, 'class="ajax"'); ?>
                             <p>These are the notes for this record.</p>
                             <?php echo display_field($fields['ContactNotes']); ?>
                            <!-- Start field "Add a Note:" -->
@@ -71,17 +65,6 @@
                            </div>
                         <?php echo form_close(); ?>	
                     </div>
-                    <div id="tab-3">
-                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/relationships') ?>">
-                        <?php include ('v_contact_edit/relationships.php') ?>
-                        <?php //$this->load->view ('custom/22222/contact/v_contact_edit/relationships') ?>
-                        </div>
-                        <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url("/contactjoin/view/edit/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-3">
-                               <span>Create New Relationship</span>
-                           </a>
-                       </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -91,7 +74,7 @@
 <div class="col_6 last" style="<?php echo $display_none; ?>">
     
 <span class="notification information">
-    <h4><strong>Transferring</strong> this contact? Quote Contact Id <strong><?php echo $ContactId; ?></strong></h4>
+    <h4><strong>Discussing</strong> this contact? Quote Contact Id <strong><?php echo $ContactId; ?></strong></h4>
 </span>
     <div class="row clearfix"> 
         <div class="row"><!-- Tabs begin -->
@@ -100,6 +83,7 @@
                 <ul>
                     <li><h2><a href='#tab-5'>Purchases</a></h2></li>
                     <li><h2><a href='#tab-6'>Comms</a></h2></li>
+                    <li><h2><a href='#tab-7'>Actions</a></h2></li>
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-5">
@@ -122,6 +106,16 @@
                             </a>
                         </div>
                     </div>
+                    <div id="tab-7">
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/all_actions') ?>">
+                            <?php include ('v_contact_edit/all_actions.php') ?>
+                        </div>
+                        <div class="clearfix margin_top_15">
+                            <a href="<?php echo site_url("contactaction/view/edit/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-7">
+                                <span>Create New Action</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -133,8 +127,8 @@
                         <label>Choose an action:</label>
                         <select id="quick_action">
                             <option value="1">Send Email</option>
-                            <option value="2">Send membership Enquiry Pack</option>
-                            <option value="3">Send membership pack</option>
+                            <option value="2">Send Product Enquiry Pack</option>
+                            <option value="3">Start on Upsell Sequence</option>
                         </select>
                         <input type="hidden" id="quick_action_url" value="<?php echo site_url() ; ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/" />
                         <a id="quick_action_button" href="<?php echo site_url(); ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/0" class="large blue button iframe">GO!</a>
