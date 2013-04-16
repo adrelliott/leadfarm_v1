@@ -5306,7 +5306,7 @@ $config['order'] = Array
                             'Post' => 'Post',
                             'Telephone' => 'Telephone',
                             'Office' => 'Office',
-                            'Stall' => 'Stall',
+                            'Peter the Rep' => 'Peter the Rep',
                         ),
                         'HTML_before' => '',
                         'HTML_after' => '',

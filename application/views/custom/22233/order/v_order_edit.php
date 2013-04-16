@@ -3,107 +3,10 @@
         <div class="row clearfix"> 
             <div class="widget clearfix tabs">
                 <ul>
-                    <li><h2><a href="#tab-1">Membership/ST</a></h2></li>
-                    <li><h2><a href="#tab-2">Draws/Raffles</a></h2></li>
-                    <li><h2><a href="#tab-3">Sponsorship</a></h2></li>
-                    <li><h2><a href="#tab-4">Other</a></h2></li>
-                    <li><h2><a href="#tab-4">test</a></h2></li>
+                    <li><h2><a href="#tab-1">Add a Purchase</a></h2></li>
                 </ul>							
                 <div class="widget_inside">
                     <div id="tab-1"><!-- Start of tab 1 -->
-                        <h3>Create/edit a Purchase for this contact</h3>
-                        <div class="form">
-                            <?php echo form_open( "/order/add/edit/$rID/$ContactId", 'class="ajax"' ) ; ?>
-                                <?php echo display_field(
-                                        $fields['_ItemBought'], 
-                                        array('options' => array(
-                                            'Adult Membership' => 'Adult Membership', 
-                                            'Junior Membership' => 'Junior Membership', 
-                                            'Season Ticket Holder' => 'Season Ticket Holder', 
-                                            'Community Shares' => 'Community Shares')
-                                            )); ?>
-                                <?php echo display_field($fields['TotalPrice_A']); ?>
-                                <?php echo display_field($fields['_ValidUntil']); ?>
-                                <?php echo display_field($fields['OrderNotes']); ?> 
-                                <?php echo display_field($fields['OrderTitle'], array('value' => 'Membership')); ?> 
-                                <div class="clearfix">
-                                    <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
-                                </div>                            
-                            <?php echo form_close(); ?>
-                        </div>
-                    </div>
-                    <div id="tab-2"><!-- Start of tab 1 -->
-                        <h3>Create/edit a Purchase for this contact</h3>
-                        <div class="form">
-                            <?php echo form_open( "/order/add/edit/$rID/$ContactId", 'class="ajax"' ) ; ?>
-                                <?php echo display_field(
-                                        $fields['_ItemBought'], 
-                                        array('options' => array(
-                                            'TreasureLine' => 'TreasureLine', 
-                                            'Holiday Draw' => 'Holiday Draw',
-                                            ))); ?>
-                                <?php echo display_field($fields['TotalPrice_A']); ?>
-                                <?php echo display_field($fields['_ValidUntil']); ?>
-                                <?php echo display_field($fields['OrderNotes']); ?> 
-                                <?php echo display_field($fields['OrderTitle'], array('value' => 'Draws/Raffles')); ?> 
-                                <div class="clearfix">
-                                    <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
-                                </div>                            
-                            <?php echo form_close(); ?>
-                        </div>
-                    </div>
-                    <div id="tab-3"><!-- Start of tab 1 -->
-                        <h3>Create/edit a Purchase for this contact</h3>
-                        <div class="form">
-                            <?php echo form_open( "/order/add/edit/$rID/$ContactId", 'class="ajax"' ) ; ?>
-                                <?php echo display_field(
-                                        $fields['_ItemBought'], 
-                                        array('options' => array(
-                                            '127' => '127',
-                                            'Match Sponsor' => 'Match Sponsor',
-                                            'Matchday Programme Sponsor' => 'Matchday Programme Sponsor',
-                                            'Programme Adverts' => 'Programme Adverts',
-                                            'Pitchside Hording' => 'Pitchside Hording',
-                                            'Newsletter Sponsor' => 'Newsletter Sponsor',
-                                            'Community Sponsor' => 'Community Sponsor',
-                                            'Youth Team Sponsor' => 'Youth Team Sponsor',
-                                            'Women Team Sponsor' => 'Women Team Sponsor',
-                                            'Player Sponsor' => 'Player Sponsor',
-                                            ))); ?>
-                                <?php echo display_field($fields['TotalPrice_A']); ?>
-                                <?php echo display_field($fields['_ValidUntil']); ?>
-                                <?php echo display_field($fields['OrderNotes']); ?> 
-                                <?php echo display_field($fields['OrderTitle'], array('value' => 'Sponsorship')); ?> 
-                                <div class="clearfix">
-                                    <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
-                                </div>                            
-                            <?php echo form_close(); ?>
-                        </div>
-                    </div>
-                    <div id="tab-4"><!-- Start of tab 1 -->
-                        <h3>Create/edit a Purchase for this contact</h3>
-                        <div class="form">
-                            <?php echo form_open( "/order/add/edit/$rID/$ContactId", 'class="ajax"' ) ; ?>
-                                <?php echo display_field(
-                                        $fields['_ItemBought'], 
-                                        array('options' => array(
-                                            'Club Donations' => 'Club Donations', 
-                                            'DF Donations' => 'DF Donations', 
-                                            'Club Events' => 'Club Events', 
-                                            'Merchanidise' => 'Merchanidise', 
-                                            'Away Match Travel' => 'Away Match Travel', 
-                                            ))); ?>
-                                <?php echo display_field($fields['TotalPrice_A']); ?>
-                                <?php echo display_field($fields['_ValidUntil']); ?>
-                                <?php echo display_field($fields['OrderNotes']); ?> 
-                                <?php echo display_field($fields['OrderTitle'], array('value' => 'Other')); ?> 
-                                <div class="clearfix">
-                                    <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
-                                </div>                            
-                            <?php echo form_close(); ?>
-                        </div>
-                    </div>
-                    <div id="tab-5"><!-- Start of tab 1 -->
                         <h3>Create/edit a Purchase for this contact</h3>
                         <div class="form">
                             <?php echo form_open( "/order/add/edit/$rID/$ContactId", 'class="ajax"' ) ; ?>
@@ -111,35 +14,37 @@
                                 <?php echo display_field(
                                         $fields['_ItemBought'], 
                                         array('options' => array(
-                                            '--- Membership/Season Tickets ---' => 'no2',
-                                            'Adult Membership' => 'Adult Membership', 
-                                            'Junior Membership' => 'Junior Membership', 
-                                            'Season Ticket Holder' => 'Season Ticket Holder', 
-                                            'Community Shares' => 'Community Shares',
-                                            '--- Draws & Raffles ---' => 'no4',
-                                            'TreasureLine' => 'TreasureLine', 
-                                            'Holiday Draw' => 'Holiday Draw',
-                                            '--- Sponsorship ---'  => 'no6',
-                                            '127' => '127',
-                                            'Match Sponsor' => 'Match Sponsor',
-                                            'Matchball Sponsor' => 'Matchball Sponsor',
-                                            'Matchday Programme Sponsor' => 'Matchday Programme Sponsor',
-                                            'Programme Adverts' => 'Programme Adverts',
-                                            'Pitchside Hording' => 'Pitchside Hording',
-                                            'Pink Sponsorship' => 'Pink Sponsorship',
-                                            'Newsletter Sponsor' => 'Newsletter Sponsor',
-                                            'Community Sponsor' => 'Community Sponsor',
-                                            'Youth Team Sponsor' => 'Youth Team Sponsor',
-                                            'Women Team Sponsor' => 'Women Team Sponsor',
-                                            'Player Sponsor' => 'Player Sponsor',
-                                            '--- Others ---' => 'no8',
-                                            'Club Donations' => 'Club Donations', 
-                                            'DF Donations' => 'DF Donations', 
-                                            'Club Events' => 'Club Events', 
-                                            'Merchanidise' => 'Merchanidise', 
-                                            'Away Match Travel' => 'Away Match Travel', 
+                                            '--- BOOKS ---' => 'no1',
+                                            'Childhood Days' => 'Childhood Days',
+                                            'The Countryside' => 'The Countryside',
+                                            'Women’s Work' => 'Women’s Work',
+                                            'A Funny Old World' => 'A Funny Old World',
+                                            'Beside the Seaside' => 'Beside the Seaside',
+                                            'A Sporting Life' => 'A Sporting Life',
+                                            'In The Garden' => 'In The Garden',
+                                            'Pets' => 'Pets',
+                                            'Shopping' => 'Shopping',
+                                            'Travelling' => 'Travelling',
+                                            'Family Life' => 'Family Life',
+                                            'A World of Work' => 'A World of Work',
+                                            'Proverbs and Sayings' => 'Proverbs and Sayings',
+                                            '--- DVDs ---' => 'no2',
+                                            'Childhood Days' => 'Childhood Days',
+                                            'World of Work' => 'World of Work',
+                                            'Twin Pack' => 'Twin Pack',
+                                            '--- PICTURES FOR WALLS ---' => 'no3',
+                                            '001' => '001',
+                                            '002' => '002',
+                                            '003' => '003',
+                                            '004' => '004',
+                                            '005' => '005',
+                                            '006' => '006',
+                                            '007' => '007',
+                                            '008' => '008',
+                                            '009' => '009',
+                                            '010' => '010',
+                                            'and so on' => 1,
                                             ))); ?>
-                                <?php echo display_field($fields['_ValidUntil']); ?>
                                 <?php echo display_field($fields['TotalPrice_A']); ?>
                                 <?php echo display_field($fields['PaymentMethod']); ?>
                                 <?php echo display_field($fields['OrderNotes']); ?> 
