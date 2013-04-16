@@ -232,6 +232,28 @@ $config['dashboard'] = Array
                         //'PostalCode' => 'Postcode',
                     ),
                 ),
+                'orders' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE
+                    'data_source' => 'orders', //The dataset name defined in this file
+                    'model_name' => 'order_model',
+                    'model_method' => 'get_all_records',
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            //'ActionType =' => 'Booking', 
+                        ), 
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        'OrderTitle' => 'Order Title    ',
+                        'ContactId' => 'ContactId',
+                        'TotalPrice_A' => '£',
+                        'DateCreated' => 'Date',
+                        //'FirstName' => 'First Name',
+                        //'LastName' => 'Last Name',
+                        //'PostalCode' => 'Postcode',
+                    ),
+                ),
                 /*'bookings' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
@@ -621,6 +643,7 @@ $config['contact'] = Array
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
+                        'defaultvalue' => 0, 
                     ),
                      '_OrganisationName' => array
                     (

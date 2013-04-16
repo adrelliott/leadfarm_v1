@@ -1,4 +1,4 @@
-<?php $save_button = '<div class="clearfix"><input name="submit" type="submit" class="button red right small" value="Save"></input></div>'; ?>
+<?php $save_button = '<div class="clearfix"><input name="submit" type="submit" class="button blue right small" value="Save"></input></div>'; ?>
 
 <div class="form">
     <?php echo display_field($fields['_IsOrganisationYN']); ?>  

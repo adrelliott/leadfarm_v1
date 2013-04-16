@@ -2,7 +2,7 @@
     <div class="col_12">
         <div class="widget clearfix">
            <h3 class="index speech_icon">"Hello <?php echo $this->session->userdata('Nickname');?> . What's on your mind?"</h3>
-            <h3 class="index toggle_icon" id="option1_toggle">Contacts...</h3>
+            <h3 class="index toggle_icon" id="option1_toggle">Customers...</h3>
             <div class="widget_inside hide_toggle" id="option1">
                 <h4>"Psst...You can search by any of the columns you see below."</h4>
                 <div class="margin_top_15"></div>
@@ -12,7 +12,7 @@
                     echo $this->table->generate_custom($tables['master_search']['table_data']); 
                 ?> 
                 <div class="col_5 last clearfix margin_top_15 right">                    
-                    <a href="<?php echo site_url( '/contact/view/edit/new/new/0' ); ?>" class="large red button right"><span>Create New Customer</span></a>
+                    <a href="<?php echo site_url( '/contact/view/edit/new/new/0' ); ?>" class="large blue button right"><span>Create New Customer</span></a>
                     <a href="<?php echo site_url( '/contact/view/edit/new/new/1' ); ?>" class="large button left"><span>Create New Organisation</span></a>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 ?>
                 <div class="margin_top_15"></div>
                 <div class="clearfix">
-                    <a href="<?php echo site_url( '/campaign/view/edit/new' ); ?>" class="large red button right"><span>Create New Campaign</span></a>
+                    <a href="<?php echo site_url( '/campaign/view/edit/new' ); ?>" class="large blue button right"><span>Create New Campaign</span></a>
                 </div>
             </div>
             <div class="clearfix"></div>

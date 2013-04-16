@@ -28,7 +28,7 @@
                                 <span class="notification done" style="display:none">Record Updated!</span>
                                 <div class="clearfix">
                                         <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
-                                        <a href="<?php echo site_url("/contact/delete_record/$ContactId"); ?>" class="small button green left" onclick="return deletechecked();">
+                                        <a href="<?php echo site_url("/contact/delete_record/$ContactId"); ?>" class="small button red left" onclick="return deletechecked();">
                                         <span>Delete this Fan</span>
                                     </a>
                                 </div>
@@ -47,7 +47,7 @@
                                     <?php display_field($fields['__AwayMatchYN']); ?>
                                     <?php display_field($fields['_OptinPref']); ?>
                                     <div class="clearfix">
-                                        <input name='submit' type='submit' class='button red right small' style='float:right' value='Save'></input>
+                                        <input name='submit' type='submit' class='button blue right small' style='float:right' value='Save'></input>
 
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                            </div>
                            <!-- End field "Add a Note:" -->	
                            <div class="clearfix margin_top_15">
-                               <input name='submit' type='submit' class='button red right large' style='float:right' value='Save'></input>
+                               <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
                            </div>
                         <?php echo form_close(); ?>	
                     </div>
@@ -77,7 +77,7 @@
                         <?php //$this->load->view ('custom/22222/contact/v_contact_edit/relationships') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url("/contactjoin/view/edit/new/$ContactId"); ?>" class="large red button right iframe" data-table-id="tab-3">
+                           <a href="<?php echo site_url("/contactjoin/view/edit/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-3">
                                <span>Create New Relationship</span>
                            </a>
                        </div>
@@ -107,7 +107,7 @@
                             <?php include ('v_contact_edit/orders.php') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                           <a href="<?php echo site_url("order/view/edit/new/$ContactId"); ?>" class="large red button right iframe" data-table-id="tab-5">
+                           <a href="<?php echo site_url("order/view/edit/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-5">
                                <span>Create New Purchase</span>
                            </a>
                        </div>
@@ -117,7 +117,7 @@
                             <?php include ('v_contact_edit/comms.php') ?>
                         </div>
                         <div class="clearfix margin_top_15">
-                            <a href="<?php echo site_url("comms/view/new/new/$ContactId"); ?>" class="large red button right iframe" data-table-id="tab-6">
+                            <a href="<?php echo site_url("comms/view/new/new/$ContactId"); ?>" class="large blue button right iframe" data-table-id="tab-6">
                                 <span>Create New Comm</span>
                             </a>
                         </div>
@@ -137,7 +137,7 @@
                             <option value="3">Send membership pack</option>
                         </select>
                         <input type="hidden" id="quick_action_url" value="<?php echo site_url() ; ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/" />
-                        <a id="quick_action_button" href="<?php echo site_url(); ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/0" class="large red button iframe">GO!</a>
+                        <a id="quick_action_button" href="<?php echo site_url(); ?>/quickaction/action/edit/<?php echo $rID . '/' . $ContactId; ?>/0" class="large blue button iframe">GO!</a>
                     </div>
                 </div>
             </div>
