@@ -29,9 +29,13 @@
         <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/config.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/custom_styles.php" type="text/css" media="screen" />
 
-        <!-- Load Main Jquery libraries -->
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>	
-        <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>  
+        <?php if ( strpos ( ENVIRONMENT, 'development') ) : //load local libs if in dev mode ?>
+            <script type="text/javascript" src="<?php echo site_url(); ?>assets/scripts/jquery-1.8.2.min.js"></script>	
+            <script type="text/javascript" src="<?php echo site_url(); ?>assets/scripts/jqueryui/1.9.1/jquery-ui.min.js"></script>  
+        <?php else: ?>
+            <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>	
+            <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script> 
+        <?php endif; ?>
 
         <!-- Adds HTML5 Placeholder attributes to those lesser browsers (i.e. IE) -->
         <script type="text/javascript" src="<?php echo site_url(); ?>assets/scripts/jquery.placeholder.1.2.min.shrink.js"></script>
