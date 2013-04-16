@@ -33,9 +33,7 @@ class Productjoin_model extends CRM_Model {
        
        return $this->save($input, $rID);
     }
-<<<<<<< HEAD
     
-=======
     public function get_all_products() {
         //do a query for all products
         
@@ -44,7 +42,6 @@ class Productjoin_model extends CRM_Model {
         //now cylce through and create a 
         
     }
->>>>>>> changes-to-FC-Utd
     
     
      public function joinon_ContactJoin($where = NULL) {
