@@ -318,8 +318,9 @@ $(function() {
     var dataTableOptions = {
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,
-        "iDisplayLength": 5,
-         "aaSorting": [],   //disables sorting when page loads, but users can still sort manually
+        "iDisplayLength": 10,
+        "aaSorting": [],   //disables sorting when page loads, but users can still sort manually
+        //"bSort": false,
         //AE 21-06-12	Next line added apply modalbox to whole table no matter how you 'redraw' it (redraw=re-sort) 
         "fnDrawCallback": function(  ) {
             $(".iframe").colorbox({iframe:true, width:"80%", height:"90%", escKey: false, overlayClose: false, fixed:true, onClosed: onOverlayClosedCallback });

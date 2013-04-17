@@ -12,7 +12,7 @@ class Order_model extends CRM_Model {
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = 'order';
-        $this->order_by = 'Id ASC';   //why isnt;' this reflected in datatable? 
+        $this->order_by = '_ValidUntil DESC';   //why isnt;' this reflected in datatable? 
         $this->contactId_fieldname = 'ContactId';
         if (isset($this->data['view_setup']['ContactId']))
         {
