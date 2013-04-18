@@ -37,7 +37,7 @@
     </tbody>
   </table>
   <button id="add_row">Add A New Step</button>
-  <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save Sequence'></input>
+  <input name='submit' type='submit' class='button red right medium' style='float:right' value='Save Sequence'></input>
    <?php echo form_close(); ?>
 </div>
 

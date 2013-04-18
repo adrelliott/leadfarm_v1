@@ -32,7 +32,7 @@
                                 )
                             ); ?>
                         <div class="clearfix">
-                            <input name='submit' type='submit' class='button blue right large ' style='float:right' value='Save'></input>
+                            <input name='submit' type='submit' class='button red right large ' style='float:right' value='Save'></input>
                         </div>
                         <h3 class="index toggle_icon" id="option2_toggle">Send a Test Email</h3>
                         <div class="widget_inside hide_toggle" id="option2">
@@ -41,7 +41,7 @@
                             $this->table->set_heading_custom($tables['contacts']['table_headers']);
                             echo $this->table->generate_custom($tables['contacts']['table_data']); ?>
                              <div class="col_4 last clearfix margin_top_15 right">
-                                <input name='submit' type='submit' class='button blue right large' style='float:right' value='Send Test Email'></input>
+                                <input name='submit' type='submit' class='button red right large' style='float:right' value='Send Test Email'></input>
                             </div>
                             <?php echo form_close(); ?>
                             <div class="clearfix"></div>

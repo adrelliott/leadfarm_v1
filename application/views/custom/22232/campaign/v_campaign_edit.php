@@ -10,7 +10,7 @@
                         <?php display_field($fields['Name']); ?>
                         <?php display_field($fields['__CampaignDescription']); ?>
                         <div class="clearfix" id="">
-                            <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+                            <input name='submit' type='submit' class='button red right medium' style='float:right' value='Save'></input>
                         </div>                                 
                     <?php echo form_close(); ?>
                 </div>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="margin_top_15"></div>
                         <div class="clearfix">
-                            <a href="<?php echo site_url( '/template/view/edit/new' ); ?>" class="large blue button right iframe" data-table-id="tab-1"><span>Create New Template</span></a>
+                            <a href="<?php echo site_url( '/template/view/edit/new' ); ?>" class="large red button right iframe" data-table-id="tab-1"><span>Create New Template</span></a>
                         </div>
                     </div>
                     <div id="tab-2">
@@ -52,7 +52,7 @@
                         </div>
                         <div class="margin_top_15"></div>
                         <div class="clearfix">
-                            <a href="<?php echo site_url( '/tags/view/edit/new' ) ?>" class="large blue button right iframe" data-table-id="tab-2"><span>Create New Tag</span></a>
+                            <a href="<?php echo site_url( '/tags/view/edit/new' ) ?>" class="large red button right iframe" data-table-id="tab-2"><span>Create New Tag</span></a>
                         </div>
                     </div>
                     <div id="tab-3">
@@ -62,7 +62,7 @@
                         </div>
                         <div class="margin_top_15"></div>
                         <div class="clearfix">
-                            <a href="<?php echo site_url( '/links/view/edit/new' ); ?>" class="large blue button right iframe" data-table-id="tab-3"><span>Create New Link</span></a>
+                            <a href="<?php echo site_url( '/links/view/edit/new' ); ?>" class="large red button right iframe" data-table-id="tab-3"><span>Create New Link</span></a>
                         </div>
                     </div>
                 </div>

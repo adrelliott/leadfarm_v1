@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="clearfix">
-                                <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+                                <input name='submit' type='submit' class='button red right medium' style='float:right' value='Save'></input>
                             </div>
                             
                                 <?php echo form_hidden('_IsCrmUserYN', 1) ; ?>

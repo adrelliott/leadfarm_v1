@@ -449,6 +449,24 @@ $config['contact'] = Array
                         'ActionDescription' => 'Description',
                     ),
                 ),     
+                'roles' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    //'data_source' => 'roles', //The dataset name defined above
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'get_all_contacts_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            'ActionType =' => 'Role', 
+                        ),     
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        '_ActionSubtype' => 'Role',
+                        'ActionDescription' => 'Description',
+                        '_ValidUntil' => 'Season',
+                    ),
+                ),  
                 'orders' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
@@ -487,7 +505,7 @@ $config['contact'] = Array
                         '__Service_expiry' => 'Service Exp',
                         //'__ActiveYN' => 'Active?',
                     ),
-                ),    
+                ),   
                 'comms' => array
                 (
     // this needs to be turned to TRUE!!! )(create table & model first though)                
@@ -520,6 +538,7 @@ $config['contact'] = Array
                         '__contactjoin.__contactId' => '',
                         '__contactjoin.__contactId2' => '',
                         '__contactjoin.__ActiveYN' => 'Active?',
+                        '__contactjoin._ActiveRecordYN' => 'deleted??',
                     ),
                 ),
                 'users' => array
@@ -1183,12 +1202,13 @@ $config['contact'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Twitter Handle',                  
+                        'label' => 'Twitter Id',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
+                        //'cssClassInput' => 'twitter',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' title="Exclude the @" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => '_TwitterName',
                         'helpText' => '',
@@ -2244,6 +2264,38 @@ $config['contactaction'] = Array
                         (
                             'Yes' => 1,
                             'No' => 0
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    '_ValidUntil' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Season',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '_ValidUntil',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            '2012/13' => '2012/13',
+                            '2011/12' => '2011/12',
+                            '2010/11' => '2010/11',
+                            '2009/10' => '2009/10',
+                            '2008/09' => '2008/09',
+                            '2007/08' => '2007/08',
+                            '2006/07' => '2006/07',
+                            '2005/06' => '2005/06',
                         ),
                         'HTML_before' => '',
                         'HTML_after' => '',
@@ -5168,7 +5220,7 @@ $config['order'] = Array
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'small input_mask_price',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => 'title="Enter the FULL price, including zeros, e.g. £12.00" rel="tooltips"', //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'TotalPrice_A',
                         'helpText' => '',
@@ -5821,7 +5873,7 @@ $config['user'] = Array
                         'label' => '',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxlarge',
+                        'cssClassInput' => 'xxxxlarge',
                         'cssIdInput' => 'contact_notes',
                         'extraHTMLInput' => 'rows="20" readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
@@ -5893,7 +5945,7 @@ $config['user'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Opt into Surface Mail?',                  
+                        'label' => 'Opt into Post?',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',

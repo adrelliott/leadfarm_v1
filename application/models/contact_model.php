@@ -12,7 +12,7 @@ class Contact_model extends CRM_Model {
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = 'contact';
-        $this->order_by = 'LastName ASC';   //why isnt;' this reflected in datatable? 
+        $this->order_by = 'FirstName ASC';   //why isnt;' this reflected in datatable? 
         $this->contactId_fieldname = 'Id';
         //$this->primary_key = 'Id';
         /*if (isset($this->data))   //now set in MY_Model

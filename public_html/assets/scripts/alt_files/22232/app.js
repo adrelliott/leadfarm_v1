@@ -109,9 +109,10 @@ $(function() {
     
     //Inputmask mask - a much more powerful mask: https://github.com/RobinHerbots/jquery.inputmask
     $(":input").inputmask();
-    $(".input_mask_date").inputmask("d/m/y");  //direct mask
+    $(".input_mask_date").inputmask("d/m/y" );  //direct mask
     $(".input_mask_phone").inputmask("mask", {"mask": "(999) 999-9999"}); //specifying fn & options
     $("#tin").inputmask({"mask": "99-9999999"}); //specifying options only
+    $(".twitter").inputmask({"mask": "a-z_1-9"}); //specifying options only
     $(".input_mask_price").inputmask('£99999.99', { numericInput: true, rightAlignNumerics: false, "placeholder": " " }); //For prices
     
     //This is under PCSS3 - not as powerful a mask

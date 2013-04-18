@@ -2,20 +2,8 @@
     <div class="col_12">
         <div class="widget clearfix">
            <h3 class="index speech_icon">"Hello <?php echo $this->session->userdata('Nickname');?> . Please select from the options below:"</h3>
-            <h3 class="index toggle_icon" id="option1_toggle">Fans...</h3>
-            <div class="widget_inside hide_toggle" id="option1">
-                <h4>You can search by <em>Name</em>, or <em>Postcode</em>, or <em>Company Name</em>, or <em>Phone Number</em></h4>
-                <div class="margin_top_15"></div>
-                <?php 
-                    $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id'));    
-                    $this->table->set_heading_custom($tables['master_search']['table_headers']);
-                    echo $this->table->generate_custom($tables['master_search']['table_data']); 
-                ?> 
-                <div class="col_5 last clearfix margin_top_15 right">                    
-                    <a href="<?php echo site_url( '/contact/view/edit/new/new/0' ); ?>" class="large red button right"><span>Create New Fan</span></a>
-                    <a href="<?php echo site_url( '/contact/view/edit/new/new/1' ); ?>" class="large button left"><span>Create New Organisation</span></a>
-                </div>
-            </div><h3 class="index toggle_icon" id="option3_toggle">Campaigns...</h3>
+            <a href="<?php echo site_url('contact'); ?>" style="text-decoration: none"><h3 class="index toggle_icon">Fans...</h3></a>
+            <h3 class="index toggle_icon" id="option3_toggle">Campaigns...</h3>
             <div class="widget_inside hide_toggle" id="option3">
                 <div class="margin_top_15"></div>
                 <?php 

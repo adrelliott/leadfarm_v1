@@ -21,7 +21,7 @@
                                 <?php display_field($fields['Email']); ?>
                                 <?php display_field($fields['_Signature']); ?>
                                  <div class="clearfix">
-                                    <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
+                                    <input name='submit' type='submit' class='button red right large' style='float:right' value='Save'></input>
                                 </div>
                             </div><!-- End of form div-->
                             <p id="option1_toggle" class="button left">
@@ -35,7 +35,7 @@
                                     <?php display_field($fields['_OptinNewsletterYN']); ?>
                                     <?php display_field($fields['_OptinPref']); ?>
                                     <div class="clearfix">
-                                        <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+                                        <input name='submit' type='submit' class='button red right medium' style='float:right' value='Save'></input>
                                     </div>
                                 </div>
                                 <?php echo form_close(); ?>
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                                 <div class="clearfix">
-                                    <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
+                                    <input name='submit' type='submit' class='button red right medium' style='float:right' value='Save'></input>
                                 </div>
                                 
                                 <?php echo form_close(); ?>

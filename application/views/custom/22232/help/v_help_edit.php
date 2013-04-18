@@ -45,7 +45,7 @@
                             <div class="input"><textarea class="xxxxxlarge" name="indepth" rows=20 placeholder="Tell us what's on your mind..."></textarea></div>
                         </div>
                         <div class="clearfix">
-                            <input name='submit' type='submit' class='button blue right large ' style='float:right' value='Send Help Request'></input>
+                            <input name='submit' type='submit' class='button red right large ' style='float:right' value='Send Help Request'></input>
                         </div>                            
                     <?php echo form_close(); ?>
                 </div>

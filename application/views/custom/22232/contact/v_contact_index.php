@@ -5,7 +5,8 @@
         </div>
         <div class="widget clearfix">            
             <h2>Find Fans</h2>
-            <div class="widget_inside">                
+            <div class="widget_inside">  
+                 <h4>You can search by any of the columns you see below in the table:</h4>
                <?php 
                     $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id'));    
                     $this->table->set_heading_custom($tables['contacts']['table_headers']);
@@ -17,6 +18,7 @@
                 </div>
                 <h3 class="index toggle_icon" id="option1_toggle">Looking for an Organisation?</h3>
                 <div class="hide_toggle" id="option1">
+                 <h4>You can search by any of the columns you see below in the table:</h4>
                     <?php 
                     $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id'));    
                     $this->table->set_heading_custom($tables['organisations']['table_headers']);

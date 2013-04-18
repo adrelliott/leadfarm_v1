@@ -17,7 +17,7 @@
                             <?php echo display_field($fields['__Subject']); ?>
                             <?php echo display_field($fields['__Content']); ?>
                             <div class="clearfix">
-                                <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
+                                <input name='submit' type='submit' class='button red right large' style='float:right' value='Save'></input>
                             </div>
                         <?php echo form_close(); ?>
                     </div>

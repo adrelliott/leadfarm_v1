@@ -61,6 +61,8 @@ else
           //redirect($this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
 
       }
+      
+       
 
 
         //function add_booking ($rID, $ContactId, $view_file = 'edit_booking') {

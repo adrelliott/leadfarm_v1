@@ -349,12 +349,11 @@ class CRM_Controller extends CI_Controller {
     }
     
     //NOTE: This doesn't actually delete record, it just sets flag _ActiveRecordYN to 0
-    function delete_record($id) {   
-        $this->load->model($this->controller_name . '_model', 'model');            
-        $this->model->make_inactive($id);
+    function delete_record($id,  $id_field_name = 'Id') {   
+        $this->load->model($this->controller_name . '_model', 'model');  
         
         //Set a success message
-        if ( ! $this->model->make_inactive($id) ) $message = "Delete Failed";
+        if ( ! $this->model->make_inactive($id, $id_field_name) ) $message = "Delete Failed";
         else $message = "Delete successful!";            
         $this->data['view_setup']['message'] = $message;   
     }

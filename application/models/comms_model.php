@@ -12,7 +12,7 @@ class Comms_model extends CRM_Model {
         parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = '__comms';
-        $this->order_by = '__Id DESC';
+        $this->order_by = '__DateSent DESC';
         $this->primary_key = '__Id';
         $this->contactId_fieldname = '__ContactId';
         /*if (isset($this->data['view_setup']['ContactId'])) //now set in MY_Model

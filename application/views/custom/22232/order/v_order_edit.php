@@ -45,10 +45,11 @@
                                 <?php echo display_field($fields['_ValidUntil']); ?>
                                 <?php echo display_field($fields['TotalPrice_A']); ?>
                                 <?php echo display_field($fields['PaymentMethod']); ?>
+                                <?php echo display_field($fields['Source']); ?>
                                 <?php echo display_field($fields['OrderNotes']); ?> 
                                 <?php echo display_field($fields['OrderTitle'], array('value' => 'Other')); ?> 
                                 <div class="clearfix">
-                                    <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
+                                    <input name='submit' type='submit' class='button red right large' style='float:right' value='Save'></input>
                                 </div>                            
                             <?php echo form_close(); ?>
                         </div>

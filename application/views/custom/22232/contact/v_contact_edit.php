@@ -38,6 +38,7 @@
                             </p> 
                             <div class="hide_toggle" id="option1">
                                 <div class="form margin_top_30">
+                                    <?php display_field($fields['_OptinPref']); ?>
                                     <?php display_field($fields['_OptinEmailYN']); ?>
                                     <?php display_field($fields['_OptinSmsYN']); ?>
                                     <?php display_field($fields['_OptinSurfaceMailYN']); ?>
@@ -45,7 +46,6 @@
                                     <?php display_field($fields['_OptinMerchandiseYN']); ?>
                                     <?php display_field($fields['__ClubEventsYN']); ?>
                                     <?php display_field($fields['__AwayMatchYN']); ?>
-                                    <?php display_field($fields['_OptinPref']); ?>
                                     <div class="clearfix">
                                         <input name='submit' type='submit' class='button red right small' style='float:right' value='Save'></input>
 
@@ -100,6 +100,7 @@
                 <ul>
                     <li><h2><a href='#tab-5'>Purchases</a></h2></li>
                     <li><h2><a href='#tab-6'>Comms</a></h2></li>
+                    <li><h2><a href='#tab-7'>Roles</a></h2></li>
                 </ul>
                 <div class="widget_inside">
                     <div id="tab-5">
@@ -119,6 +120,16 @@
                         <div class="clearfix margin_top_15">
                             <a href="<?php echo site_url("comms/view/new/new/$ContactId"); ?>" class="large red button right iframe" data-table-id="tab-6">
                                 <span>Create New Comm</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="tab-7">
+                        <div class="dataTable-container" data-table-source="<?php echo html_escape (base_url () . $this->uri->uri_string () . '/roles') ?>">
+                            <?php include ('v_contact_edit/roles.php') ?>
+                        </div>
+                        <div class="clearfix margin_top_15">
+                            <a href="<?php echo site_url("contactaction/view/edit_role/new/$ContactId"); ?>" class="large red button right iframe" data-table-id="tab-7">
+                                <span>Create New Roles</span>
                             </a>
                         </div>
                     </div>

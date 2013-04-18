@@ -10,7 +10,7 @@
                         <?php echo display_field($fields['GroupName']); ?>
                         <?php echo display_field($fields['GroupDescription']); ?> 
                         <div class="clearfix">
-                            <input name='submit' type='submit' class='button blue right large ' style='float:right' value='Save'></input>
+                            <input name='submit' type='submit' class='button red right large ' style='float:right' value='Save'></input>
                         </div>                            
                     <?php echo form_close(); ?>
                 </div>

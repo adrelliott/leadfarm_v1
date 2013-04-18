@@ -56,6 +56,12 @@ else
             redirect($url);
 
         }
+        
+        public function delete_record($ContactId, $id) {
+              parent::delete_record($id, '__Id');
+              $url = 'contact/view/edit/' . $ContactId . '/' . $ContactId . '/0';
+              redirect ( $url );
+          }
 
 
     }

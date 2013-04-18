@@ -253,7 +253,7 @@ class CRM_Model extends CI_Model {
         }
     }
     
-    public function make_inactive($ids = FALSE) {
+    public function make_inactive($ids = FALSE, $id_field_name) {
         if ( ! $ids ) return FALSE;
         
         //Turn single id into an array
@@ -264,11 +264,11 @@ class CRM_Model extends CI_Model {
         {
             //do a check to ensure that this record belongs to this client
             $this->db->select('_dID');
-            $dID = $this->get_by('Id', $id, FALSE, TRUE);
+            $dID = $this->get_by($id_field_name, $id, FALSE, TRUE);
             if( $dID['_dID'] && $dID['_dID'] == DATAOWNER_ID )
             {
                 //Build the UPDATE query
-                $data[$id] = array('Id' => $id,'_ActiveRecordYN' => 0);
+                $data[$id] = array($id_field_name => $id,'_ActiveRecordYN' => 0);
                 //Do the query
                 $data[$id]['result'] = $this->save($data[$id], $id);
             }                

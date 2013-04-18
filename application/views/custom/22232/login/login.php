@@ -65,7 +65,7 @@
                                             </div>
                                             <div class="clearfix grey-highlight">
                                                 <div class="input no-label ">
-                                                    <input type='submit' name='submit' class='button large blue right' value='Login' />
+                                                    <input type='submit' name='submit' class='button large red right' value='Login' />
                                                 </div>
                                             </div>
                                        <?php echo form_close(); ?>
