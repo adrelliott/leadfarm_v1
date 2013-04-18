@@ -2,13 +2,13 @@
 
 //Test to see if we have a bespoke controller class configured in controller_config.php
 include('controller_config/init.php');
-if( bespoke_controller('Campaign') ) get_bespoke_controller();   //yup = go get it.
+if( bespoke_controller('Broadcast') ) get_bespoke_controller();   //yup = go get it.
 else
 {   //nope? Use this default class then
   
-    class Campaign extends CRM_Controller {
+    class Broadcast extends CRM_Controller {
         
-        public $controller_name = 'campaign';
+        public $controller_name = 'broadcast';
 
         public function __construct()    {
              parent::__construct();
@@ -16,8 +16,9 @@ else
 
       public function index($view_file = 'index') {   
             parent::index($view_file);
-        
-            $this->_load_view_data();   //retrieves and process all data for view        
+            
+            $this->_load_view_data();   //retrieves and process all data for view 
+            //print_array($this->data);
             $this->_generate_view($this->data);
        }
 
@@ -26,6 +27,7 @@ else
 
             $this->_load_view_data($rID);    //retrieves and process all data for view            
 
+            //print_array($this->data);
             $this->load_view($pull);
         }
         

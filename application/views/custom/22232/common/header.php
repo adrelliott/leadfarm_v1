@@ -22,13 +22,6 @@
         <![endif]-->        
 
 
-        <!-- Now that all the grids are loaded, we can move on to the actual styles. --> 
-        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/jqueryui/jqueryui.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/style.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/global.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/config.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/custom_styles.php" type="text/css" media="screen" />
-
         <!-- Load Main Jquery libraries -->
         <?php if ( strpos ( ENVIRONMENT, 'development') ) : //load local libs if in dev mode ?>
             <script type="text/javascript" src="<?php echo site_url(); ?>assets/scripts/jquery-1.8.2.min.js"></script>	
@@ -83,9 +76,23 @@
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
                 <script src="<?php echo site_url(); ?>assets/scripts/PCSS3/js/ie8.js"></script>
         <![endif]-->
+        
+        <!-- Wizard Pro: http://codecanyon.net/item/wizard-pro/121295 -->
+        <script type="text/javascript" src="<?php echo site_url('cc');  ?>assets/scripts/wizard_pro/js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo site_url();  ?>assets/scripts/wizard_pro/js/validate.js"></script> <!-- Optional -->
+	<script type="text/javascript" src="<?php echo site_url();  ?>assets/scripts/wizard_pro/js/hoverIntent.js"></script> <!-- Optional -->
+	<script type="text/javascript" src="<?php echo site_url();  ?>assets/scripts/wizard_pro/js/wizardPro.js"></script> 
+	<link href="<?php echo site_url('');  ?>assets/scripts/wizard_pro/css/wizardPro.css" media="screen" rel="stylesheet" type="text/css" />
 
         <!-- Now call InputMask -->
         <script src="<?php echo site_url(); ?>assets/scripts/inputmask/jquery.inputmask.js" type="text/javascript"></script>
+        
+        <!-- Now that all the grids are loaded, we can move on to the actual styles. --> 
+        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/jqueryui/jqueryui.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/global.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/config.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/custom_styles.php" type="text/css" media="screen" />
 
         <!-- All the js used in the demo -->
         <script src="<?php echo site_url(); ?>assets/scripts/alt_files/22232/app.js"></script>

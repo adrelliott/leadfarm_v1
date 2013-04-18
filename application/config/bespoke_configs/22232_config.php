@@ -5094,6 +5094,124 @@ $config['links'] = Array
         ),
     );
 
+
+$config['broadcast'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                'broadcasts' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'broadcast_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    /*'model_params' => array
+                    (
+                        '_Type =' => 'Link_Automation',
+                    ), */
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'BroadcastName' => 'Name',                       
+                        //'ActionType' => 'Action type',                        
+                    ),
+                ),
+            ),
+            'view' => array 
+            (  
+               //dont; think we need this
+                'campaign_dropdown' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'campaign_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    /*'model_params' => array
+                    (
+                        '_Type =' => 'Link_Automation',
+                    ), */
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'Name' => 'Name',                       
+                        //'ActionType' => 'Action type',                        
+                    ),
+                ),
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'broadcast_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL, 
+                'dropdowns' => array    //or NULL
+                (                    
+                    'campaign_dropdown' => array
+                    (
+                        'source' => 'campaign_dropdown',    //which dataset are we using?
+                        'label' => array ('Name'),
+                        'label_separator' => '',
+                        'value' => 'Id',
+                    ),
+                    
+                ),
+                'fields' => array 
+                (
+                    'Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'readonly',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'BroadcastName' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Name',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'placeholder="Click here for details" rel="tooltips" title="This the text your contacts see when you include this link in an email" ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'BroadcastName',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                ),                
+            ),
+        ),
+    );
+
+
+
 $config['order'] = Array
     (
     'datasets' => array 
