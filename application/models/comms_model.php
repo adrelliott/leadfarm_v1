@@ -21,6 +21,7 @@ class Comms_model extends CRM_Model {
         }*/
     }
     
+    function test() { echo "hello"; }
      /*function add($input, $rID) {
         //mimic infusionsoft creation of record
        if ($rID == 'new')

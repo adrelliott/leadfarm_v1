@@ -107,7 +107,51 @@
                             
                             <div class="column_two">
                                 <!-- Content Here -->
-                                
+                                <div class="row clearfix">
+                                    <div class="col_12">
+                                        <div class="widget clearfix">
+                                            <h2>Contact Search</h2>
+                                            <div class="widget_inside">
+
+                                                <?php
+                                                //$this->load->model('comms_model');
+                                                $this->comms_model->test(); die;
+                                                ?>
+
+                                                <form id="contact-search" method="post" action="<?php echo html_escape($_SERVER['REQUEST_URI']) ?>"></form>
+
+                                                <script type="text/javascript">
+                                jQuery (document).ready (function ($) {
+                                    var options;
+                                    var plugin;
+
+                                    options = {
+                                        'operations' : <?php echo json_encode($this->contactsearch_model->get_valid_operations()) ?>,
+                                        'tags' : <?php echo json_encode($this->tags_model->get()) ?>,
+                                        'fields' : <?php echo json_encode($this->contactsearch_model->get_valid_fields()) ?>,
+                                        'searches' : <?php echo json_encode($this->contactsearch_model->get()) ?>
+                                    };
+
+                                    $('#contact-search').contactsearch (options);
+
+                                    plugin = $('#contact-search').data ('contactsearch');
+
+<?php if ($this->contactsearch_model->get_id()): ?>
+                                        plugin.setSearch (<?php echo json_encode($this->contactsearch_model->get_id()) ?>, <?php echo json_encode($this->contactsearch_model->get_name()) ?>);
+<?php endif; ?>
+
+                                    plugin.setCriteria (<?php echo json_encode($this->contactsearch_model->get_criteria()) ?>);
+                                    plugin.includeTags (<?php echo json_encode($this->contactsearch_model->get_included_tag_ids()) ?>);
+                                    plugin.excludeTags (<?php echo json_encode($this->contactsearch_model->get_excluded_tag_ids()) ?>);
+                                    plugin.start ();
+
+                                });
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 
                                 
                             </div>
