@@ -538,7 +538,7 @@ $config['contact'] = Array
                         '__contactjoin.__Reason' => 'Reason',
                         '__contactjoin.__contactId' => '',
                         '__contactjoin.__contactId2' => '',
-                        '__contactjoin.__ActiveYN' => 'Active?',
+                        //'__contactjoin.__ActiveYN' => 'Active?',
                         '__contactjoin._ActiveRecordYN' => '',
                     ),
                 ),

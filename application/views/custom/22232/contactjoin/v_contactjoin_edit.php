@@ -12,7 +12,7 @@
                             <?php echo form_open("contactjoin/add/edit/$rID/$ContactId", 'class="ajax"') ; ?>
                             <?php if($rID == 'new') {include('fieldsets/v_contact_join_table.php');} ?>
                                 <?php echo display_field($fields['__Reason']); ?> 
-                                <?php echo display_field($fields['__ActiveYN']); ?> 
+                                <?php //echo display_field($fields['__ActiveYN']); ?> 
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button red right large' style='float:right' value='Save'></input>
                                 </div>                            
