@@ -21,7 +21,12 @@ else
         }
         
         public function view($view_file, $rID, $ContactId = FALSE, $fieldset = 0, $pull = '') {
-            if( ! $ContactId ) $ContactId = $rID; //Allows us just to pass contact ID
+            if( ! $ContactId ) //Allows us just to pass contact ID
+            {
+                redirect( site_url ("contact/view/$view_file/$rID/$rID/$fieldset") ); 
+                return;
+            }
+            
             parent::view($view_file, $rID, $ContactId);   
             
             //What record fieldset do we show? Org, ind or unknown?
