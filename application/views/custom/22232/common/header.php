@@ -94,8 +94,13 @@
         <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/config.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="<?php echo site_url(); ?>assets/styles/custom_styles.php" type="text/css" media="screen" />
 
+        <!-- Contact search function -->
+        <script src="<?php echo site_url('assets/scripts/contactsearch.js'); ?>"></script>
+        
         <!-- All the js used in the demo -->
         <script src="<?php echo site_url(); ?>assets/scripts/alt_files/22232/app.js"></script>
+        
+        
 
 
     </head>

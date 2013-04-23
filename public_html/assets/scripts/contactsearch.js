@@ -195,7 +195,7 @@
         };
 
         /*
-         * Creates the table table
+         * Creates the tag table
          */
         var setupTagTable = function () {
             var table;

@@ -2,7 +2,8 @@
 <div class="row clearfix">
     <div class="col_12">
         <div class="widget clearfix">
-            <h2>Find Campaigns</h2>
+            <h2>Find Broadcast Campaigns</h2>
+            <p>This table shows all broadcasts and either escheduled or sent</p>
             <div class="widget_inside">   
                  <?php 
                     $this->table->set_template_custom(array ('anchor_uri' => 'campaign/view/edit'));    
