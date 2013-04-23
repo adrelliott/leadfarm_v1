@@ -20,7 +20,7 @@
                                     'Paid Office Staff' => 'Paid Office Staff', 
                                     'Community Staff' => 'Community Staff', 
                                     'Board Member' => 'Board Member', 
-                                    'External Consultant' => 'External Consultant', 
+                                    'External Supplier' => 'External Supplier', 
                                     'Coaching Staff' => 'Coaching Staff', 
                                     '1st Team Player' => '1st Team Player', 
                                     'Youth Team Player' => 'Youth Team Player', 
