@@ -34,14 +34,48 @@ class Contactjoin_model extends CRM_Model {
     }
     
     
-     public function joinon_ContactJoin($where = NULL) {
+     public function joinon_ContactJoin($where = NULL) { 
+        //get all relationship records where ID1 = current Id
+        $this->db->select(array_keys($this->data['model_setup']['datasets']['relationships']['fields']),array('contact.Id'));
+         $this->db->where('__ContactId', $this->current_ContactId);
+        $this->db->join(
+                'contact', 
+                'contact.id = ' . $this->table_name. '.__ContactId2',
+                'left outer'
+                );
+        $result[0] = $this->get();
+        
+        //get all relationship records where D2 = current Id
+        //print_array(array_keys($this->data['model_setup']['datasets']['relationships']['fields']), 1);
+        $this->db->select(array_keys($this->data['model_setup']['datasets']['relationships']['fields']),array('contact.Id'));
+        $this->db->where('__ContactId2', $this->current_ContactId);
+        $this->db->join(
+                'contact', 
+                'contact.id = ' . $this->table_name. '.__ContactId',
+                'left outer'
+                );
+        $result[1] = $this->get();
+        
+        //print_array($result, 1);
+        return array_merge($result[0], $result[1]);
+        
+       
+    }
+     public function joinon_ContactJoinOLD($where = NULL) {       
         //get all relationship records where ID1 or ID2 = current Id
         $this->db->where('__ContactId', $this->current_ContactId);
         $this->db->or_where('__ContactId2', $this->current_ContactId);
+        //$this->db->select('contact.*, contact.id AS contactid1, contact.id AS contactid2');
         if ($where != NULL) { $this->db->where($where); }   
+        /*$this->db->join(
+                'contact', 
+                'contactid1 = ' . $this->table_name. '.__ContactId1 AND contactid2 = ' . $this->table_name. '.__ContactId2',
+                'left outer'
+                );   */    
         $this->db->join(
                 'contact', 
-                'contact.Id = ' . $this->table_name. '.__ContactId2',
+                //'contact.Id = ' . $this->table_name. '.__ContactId2',
+                'contact.Id = ' . $this->table_name. '.__ContactId OR contact.Id = ' . $this->table_name. '.__ContactId2',
                 'left outer'
                 );       
                 

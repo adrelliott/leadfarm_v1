@@ -506,7 +506,7 @@ class MY_Table extends CI_Table {
 		}
 
 		$this->temp = $this->_default_template();
-		foreach (array('anchor_uri','ContactId_name','anchor_uri_append','anchor_attr','primary_key_fieldname','checkbox_flag','checkbox_class','checkbox_name','checkbox_value_is_id','delete_button_flag','delete_button_uri', 'table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
+		foreach (array('anchor_uri','ContactId_name','anchor_uri_append', 'anchor_uri_append_primaryidYN','anchor_attr','primary_key_fieldname','checkbox_flag','checkbox_class','checkbox_name','checkbox_value_is_id','delete_button_flag','delete_button_uri', 'table_open', 'thead_open', 'thead_close', 'heading_row_start', 'heading_row_end', 'heading_cell_start', 'heading_cell_end', 'tbody_open', 'tbody_close', 'row_start', 'row_end', 'cell_start', 'cell_end', 'row_alt_start', 'row_alt_end', 'cell_alt_start', 'cell_alt_end', 'table_close') as $val)
 		{
 			if ( ! isset($this->template[$val]))
 			{
@@ -529,6 +529,7 @@ class MY_Table extends CI_Table {
 			'anchor_uri'                   => '',
 			'ContactId_name'             => '', //set this to append the contact Id at end of link
 			'anchor_uri_append'           => '',
+			'anchor_uri_append_primaryidYN' => TRUE,    //Include the Id of the record in the link? Used mainly for relationship table
 			'anchor_attr'                 => '',    //e.g class="iframe"
 			'primary_key_fieldname'       => 'Id',    //this is usually 'Id' or '__Id'
 			'checkbox_flag'                 => '',    // set to TRUE for checkboxes
@@ -591,8 +592,15 @@ class MY_Table extends CI_Table {
                 {
                     $cid = $row[$this->template['ContactId_name']]['data'] . '/';
                 }
-                $retval['start'] = '<a href="' . base_url() . $this->template['anchor_uri'] . '/' . $id['data'] . '/' . $cid . $this->template['anchor_uri_append'] . '" ' . $attr . ' >';
+               // $retval['start'] = '<a href="' . base_url() . $this->template['anchor_uri'] . '/' . $id['data'] . '/' . $cid . $this->template['anchor_uri_append'] . '" ' . $attr . ' >';
+                $retval['start'] = '<a href="' . base_url() . $this->template['anchor_uri'] . '/';
+                if ( $this->template['anchor_uri_append_primaryidYN'] )
+                {
+                    $retval['start'] .= $id['data'] . '/';
+                }
+                $retval['start'] .= $cid . $this->template['anchor_uri_append'] . '" ' . $attr . ' >';
                 $retval['end'] = '</a>';
+                //anchor_uri_append_primaryidYN
             }
             return $retval;
         }

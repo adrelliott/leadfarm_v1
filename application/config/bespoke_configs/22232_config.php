@@ -530,6 +530,7 @@ $config['contact'] = Array
                     'model_params' => NULL,
                     'fields' => array 
                     (
+                        'Id' => '#',
                         'contact.Id' => '',
                         'contact.FirstName' => 'First Name',
                         'contact.LastName' => 'Last Name',
@@ -538,7 +539,7 @@ $config['contact'] = Array
                         '__contactjoin.__contactId' => '',
                         '__contactjoin.__contactId2' => '',
                         '__contactjoin.__ActiveYN' => 'Active?',
-                        '__contactjoin._ActiveRecordYN' => 'deleted??',
+                        '__contactjoin._ActiveRecordYN' => '',
                     ),
                 ),
                 'users' => array
@@ -2708,10 +2709,7 @@ $config['contactjoin'] = Array
                     'data_source' => 'contacts', //The dataset name defined in this file
                     'model_name' => 'contact_model',
                     'model_method' => 'get_all_records',
-                    'model_params' => array 
-                        (   //These are chained with 'AND'. To define an 'OR'...???
-                            //'_IsOrganisationYN !=' => 1, 
-                        ),
+                    'model_params' => NULL,
                     'fields' => array 
                     (
                         'Id' => '#',
@@ -2733,7 +2731,7 @@ $config['contactjoin'] = Array
                         'contact.Id' => 'contact Id',
                         'contact.FirstName' => 'First Name',
                         'contact.LastName' => 'Last Name',
-                        '__contactjoin.__Id' => 'Realtionship Id',
+                        '__contactjoin.__Id' => 'Relationship Id',
                         '__contactjoin.__Reason' => 'reason',
                         //'__contactjoin.__contactId' => 'reason',
                         '__contactjoin.__contactId2' => 'CId 2',

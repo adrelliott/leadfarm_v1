@@ -20,7 +20,8 @@ else
             $this->_generate_view($this->data);
         }
         
-        public function view($view_file, $rID, $ContactId, $fieldset, $pull = '') {
+        public function view($view_file, $rID, $ContactId = FALSE, $fieldset = 0, $pull = '') {
+            if( ! $ContactId ) $ContactId = $rID; //Allows us just to pass contact ID
             parent::view($view_file, $rID, $ContactId);   
             
             //What record fieldset do we show? Org, ind or unknown?
