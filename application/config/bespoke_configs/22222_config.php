@@ -28,7 +28,9 @@ define('OPT_IN_REASON', "This is my opt in reason");
 define('UNSUBSCRIBE_LINK', base_url( 'gen/comms/unsubs/' . DATAOWNER_ID . '/_:_ContactId_:_'));
 define('UNSUBSCRIBE', '<br/><br/><small><a href="' . UNSUBSCRIBE_LINK . '">Unsubscribe from all future emails here</a></small>');
 define('COUNTDOWN', 45);  //Notifies the user {45 days {VALUE} days before MOT/Service expires. see libraries/garages/garages.php
-define('ADMIN_LEVEL_SUPERVISOR', 5);  //set Contact->_AdminLevel to alow superior access
+define('ADMIN_LEVEL_ADMINISTRATOR', 5);  //set Contact->_AdminLevel to alow superior access
+define('ADMIN_LEVEL_SUPERVISOR', 4);  //set Contact->_AdminLevel to alow superior access
+define('ADMIN_LEVEL_USER', 3);  //set Contact->_AdminLevel to alow superior access
 
 
 /*
@@ -4648,13 +4650,48 @@ $config['template'] = Array
     );
 
 
-$config['links'] = Array
+
+$config['settings'] = Array
     (
     'datasets' => array 
         (
             'index' => array 
             (
-                //no index ever called
+                'products' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'product_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array
+                    (
+                        //'__ActionType !=' => 'TAG'
+                    ), 
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'ProductName' => 'Product Name',                       
+                        'ProductPrice' => 'Product Price',                       
+                    ),
+                ),
+                'users' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    //'data_source' => 'contacts', //The dataset name defined in this file
+                    'model_name' => 'contact_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            '_IsCrmUserYN =' => 1, 
+                        ),
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        'FirstName' => 'First Name',
+                        'LastName' => 'Last Name',
+                        'PostalCode' => 'Postcode',
+                    ),
+                ),   
             ),
             'view' => array 
             (  
@@ -4699,115 +4736,7 @@ $config['links'] = Array
                 ),
                 'fields' => array 
                 (
-                    '__Id' => array
-                    (
-                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
-                        'cssClassContainingDiv' => '',
-                        'cssIdContainingDiv' => '',
-                        'cssClassLabel' => '',
-                        'cssIdLabel' => '',
-                        'label' => 'Id',                  
-                        'cssClassInputDiv' => '',
-                        'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => 'readonly',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'text',
-                        'name' => '__Id',
-                        'helpText' => '',
-                        'length' => '',
-                        'HTML_before' => '',
-                        'HTML_after' => '',
-                        'value' => '', 
-                    ),
-                    '__LinkName' => array
-                    (
-                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
-                        'cssClassContainingDiv' => '',
-                        'cssIdContainingDiv' => '',
-                        'cssClassLabel' => '',
-                        'cssIdLabel' => '',
-                        'label' => 'Link Name',                  
-                        'cssClassInputDiv' => '',
-                        'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxlarge',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => 'placeholder="Click here for details" rel="tooltips" title="This the text your contacts see when you include this link in an email" ',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'text',
-                        'name' => '__LinkName',
-                        'helpText' => '',
-                        'length' => '',
-                        'HTML_before' => '',
-                        'HTML_after' => '',
-                        'value' => '', 
-                    ),
-                    '__LinkDescription' => array
-                    (
-                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
-                        'cssClassContainingDiv' => '',
-                        'cssIdContainingDiv' => '',
-                        'cssClassLabel' => '',
-                        'cssIdLabel' => '',
-                        'label' => 'Link Description',                  
-                        'cssClassInputDiv' => '',
-                        'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxxxlarge',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => 'rows=2',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'textarea',
-                        'name' => '__LinkDescription',
-                        'helpText' => '',
-                        'length' => '',
-                        'HTML_before' => '',
-                        'HTML_after' => '',
-                        'value' => '', 
-                    ),
-                    '__SequenceId' => array      
-                    (
-                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
-                        'cssClassContainingDiv' => '',
-                        'cssIdContainingDiv' => '',
-                        'cssClassLabel' => '',
-                        'cssIdLabel' => '',
-                        'label' => 'Start a Campaign?',                  
-                        'cssClassInputDiv' => '',
-                        'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxlarge',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'select',
-                        'name' => '__SequenceId',
-                        'helpText' => '',                        
-                        'length' => '',
-                        'options' => array
-                            (
-                                'test' => 1,
-                            ),
-                        'HTML_before' => '',
-                        'HTML_after' => '',
-                        'value' => '', 
-                    ),
-                    '__DestinationURL' => array              //prob a dropdown
-                    (
-                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
-                        'cssClassContainingDiv' => '',
-                        'cssIdContainingDiv' => '',
-                        'cssClassLabel' => '',
-                        'cssIdLabel' => '',
-                        'label' => 'Destination URL',                  
-                        'cssClassInputDiv' => '',
-                        'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xxxxlarge',
-                        'cssIdInput' => '',
-                        'extraHTMLInput' => ' placeholder="http://" ',  //eg. title="tooltip" rel="tooltips"
-                        'type' => 'text',
-                        'name' => '__DestinationURL',
-                        'helpText' => '',                        
-                        'length' => '',
-                        'HTML_before' => '',
-                        'HTML_after' => '',
-                        'value' => '', 
-                    ),        
+                    //no fields required  
                 ),                
             ),
         ),
@@ -5494,9 +5423,9 @@ $config['user'] = Array
                         'label' => 'Username:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => '',
+                        'cssClassInput' => ' mask_username',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' title="Just a-z or 1-9, with no spaces!" rel="tooltips"',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Username',
                         'helpText' => '',
@@ -5547,10 +5476,201 @@ $config['user'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
+                     '_IsCrmUserYN' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => ':',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'rows="20" ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'hidden',
+                        'name' => '_IsCrmUserYN',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => 1,              
+                    ),
                 ),                
             ),
         ),
     );
+
+$config['product'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                'products' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'product_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    /*'model_params' => array
+                    (
+                        '_Type =' => 'Link_Automation',
+                    ), */
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'ProductName' => 'Name',                       
+                        'ProductPrice' => '£',                       
+                        'ItemType' => 'Type',                          
+                    ),
+                ),
+            ),
+            'view' => array 
+            (  
+               //dont; think we need this
+                
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'product_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL, 
+                /*'dropdowns' => array    //or NULL
+                (                    
+                    'campaign_dropdown' => array
+                    (
+                        'source' => 'campaign_dropdown',    //which dataset are we using?
+                        'label' => array ('Name'),
+                        'label_separator' => '',
+                        'value' => 'Id',
+                    ),
+                    
+                ),*/
+                'fields' => array 
+                (
+                    'Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'readonly',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'ProductName' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Product Name',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',
+                        'type' => 'text',
+                        'name' => 'ProductName',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'ProductPrice' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Price',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'small input_mask_price',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'ProductPrice',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ), 
+                    'ItemType' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Type of Product',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => 'ItemType',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                        (
+                            'Garage Extras' => 'Garage Extras',
+                            'Upsell' => 'Upsell',
+                            'word' => 'Add more if you like!',
+                            
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ), 
+                    'ShortDescription' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Description',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xxxxlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'rows=2',  //eg. title="tooltip" rel="tooltips"rows
+                        'type' => 'textarea',
+                        'name' => 'ShortDescription',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ), 
+                ),                
+            ),
+        ),
+    );
+
 
 
 /* End of file */

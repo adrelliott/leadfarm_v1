@@ -7,6 +7,8 @@ else
 {   //nope? Use this default class then
   
     class User extends CRM_Controller {
+        
+        public $controller_name = 'user';
 
         public function __construct()    {
             parent::__construct();
@@ -20,7 +22,60 @@ else
             $this->_load_view_data();   //retrieves and process all data for view     
         }
 
-        public function view($view_file = 'edit', $rID) {  
+        public function  view($view_file = 'edit', $rID = 'new', $ContactId = FALSE, $pull = '') {   
+            $this->data['view_setup']['modal'] = TRUE;
+            parent::view($view_file, $rID, $ContactId);   
+
+            $this->_load_view_data($rID);    //retrieves and process all data for view    
+                // Generate the view!
+            $this->load_view($pull);
+        }
+
+        public function add($view_file, $rID, $ContactId) {
+            //clean input
+            $input = clean_data($this->input->post());
+            
+            //save record
+            $rID = $this->add_record($input, $rID);
+            
+             //Have we set nay client-specific methods to run?
+            //$method_name = 'add_' . DATAOWNER_ID;
+            //if (method_exists($this, $method_name)) $this->$method_name($input, $rID);
+            
+            $url = site_url ($this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $rID . '/0');
+
+            if ($this->input->is_ajax_request ()) {
+                $response = array (
+                    'success' => true,
+                );
+
+                if ($ContactId === 'new') {
+                    $response['redirect'] = $url;
+                }
+
+                $this->output->set_content_type('application/json');
+                $this->output->set_output(json_encode($response));
+                return;
+            }
+
+            //refresh page
+            redirect($url);
+
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        public function view_old($view_file = 'edit', $rID) {  
             parent::view($view_file, $rID);   
 
             //Do we show all users? Depends on admin level        
@@ -47,7 +102,7 @@ else
             $this->_generate_view($this->data);
         }
         
-        public function add($view_file, $rID) {  
+        public function add_old($view_file, $rID) {  
             //clean input
             $input = clean_data($this->input->post());
 

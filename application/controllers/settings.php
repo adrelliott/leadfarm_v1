@@ -14,31 +14,22 @@ else
             parent::__construct();
         }
         
-        public function index($view_file = 'index') {
+        public function index($view_file = 'index', $pull = '') {
             parent::index($view_file);
             $this->_load_view_data();   //retrieves and process all data for view  
             //print_array($this->data, 1);
-            $this->_generate_view($this->data);
+            $this->load_view($pull);
         } 
 
-        public function view($view_file = 'edit', $rID = 'new') {          
-            parent::view($view_file, $rID, $rID);   
-
-            $this->_load_view_data($rID);    //retrieves and process all data for view        
-                // Generate the view!
-            $this->_generate_view($this->data);
+        public function view($view_file = 'edit', $rID = 'new') {    
+            //no need for this
+            $this->index();
         }
         
-        public function add($view_file, $rID, $ContactId) {       
-            //clean input
-            $input = clean_data($this->input->post());
-
-            //save record
-            $rID = $this->add_record($input, $rID);
-
-            //refresh page
-            redirect( $this->controller_name . '/view/edit/' . $rID . '/' . $ContactId );
-        }
+       /*
+        * 
+        * no ned for these
+        
 
         public function change_password($rID, $ContactId) {       
             //clean input
@@ -104,6 +95,9 @@ else
 
 
         }
+        * 
+        * 
+        */
 
 
 

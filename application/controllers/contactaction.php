@@ -28,9 +28,9 @@ else
           $this->_load_view_data($rID);    //retrieves and process all data for view    
               // Generate the view!
           $this->load_view($pull);
-          }
+        }
 
-          public function add($view_file, $rID, $ContactId) {       
+        public function add($view_file, $rID, $ContactId) {       
           //clean input
           $input = clean_data($this->input->post());
           $input['ContactId'] = $ContactId;

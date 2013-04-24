@@ -112,6 +112,7 @@ $(function() {
     $(".input_mask_date").inputmask("d/m/y");  //direct mask
     $(".input_mask_phone").inputmask("mask", {"mask": "(999) 999-9999"}); //specifying fn & options
     $("#tin").inputmask({"mask": "99-9999999"}); //specifying options only
+    //$(".username").inputmask({"mask": "******?*******", "placeholder": " ", "validator": "[0-9\(\)\.\+/ ]",}); //specifying options only
     $(".input_mask_price").inputmask('£99999.99', { numericInput: true, rightAlignNumerics: false, "placeholder": " " }); //For prices
     
     //This is under PCSS3 - not as powerful a mask
@@ -124,6 +125,7 @@ $(function() {
     $(".serial").mask('***-***-***-***-***-***', {placeholder:'x'});
     $(".mask_tax").mask('99-9999999', {placeholder:'x'}); 
     $(".mask_price").mask('£?99999', {placeholder:'_'}); 
+    $(".mask_username").mask('******?******', {placeholder:'_'}); 
     
    $('<i class="icon-ok"></i><i class="icon-remove"></i>').appendTo($('.form section'));					
     $(".form_val").validate(

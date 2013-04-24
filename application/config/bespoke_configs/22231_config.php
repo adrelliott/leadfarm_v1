@@ -6090,6 +6090,8 @@ $config['product_join'] = Array
             ),
         ),
     );
+
+
 $config['product'] = Array
     (
     'datasets' => array 
@@ -6194,7 +6196,7 @@ $config['product'] = Array
                         'label' => 'Price',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'small',
+                        'cssClassInput' => 'small input_mask_price',
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
