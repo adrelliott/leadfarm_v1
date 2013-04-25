@@ -4,7 +4,7 @@
             <div class="widget clearfix tabs">
                 <ul>
                     <li><h2><a href="#tab-1">User's Profile</a></h2></li>
-                    <li><h2><a href="#tab-2">Login Details</a></h2></li>
+                    <?php //<li><h2><a href="#tab-2">Login Details</a></h2></li> ?>
                 </ul>							
                 <div class="widget_inside">
                     <div id="tab-1"><!-- Start of tab 1 -->
