@@ -334,7 +334,7 @@ $(function() {
     // @param string content content to display
     // @param element element to add the alert to
     var addAlert = function (type, content, element) {
-        $('<span/>').addClass ('notification').addClass (type).append (content).prependTo (element).delay (1000).fadeOut (300, function () {
+        $('<span/>').addClass ('notification').addClass (type).append (content).prependTo (element).delay (2000).fadeOut (300, function () {
             $(this).remove ();
         });
     };

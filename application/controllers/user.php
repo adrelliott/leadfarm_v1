@@ -9,10 +9,11 @@ else
     class User extends CRM_Controller {
         
         public $controller_name = 'user';
+        
 
         public function __construct()    {
             parent::__construct();
-            $this->load->library('form_validation');
+            $this->data['view_setup']['correct_password'] = NULL;
             $this->output->enable_profiler(TRUE);
         }
 
@@ -24,11 +25,29 @@ else
 
         public function  view($view_file = 'edit', $rID = 'new', $ContactId = FALSE, $pull = '') {   
             $this->data['view_setup']['modal'] = TRUE;
-            parent::view($view_file, $rID, $ContactId);   
+            parent::view($view_file, $rID, $ContactId);
 
             $this->_load_view_data($rID);    //retrieves and process all data for view    
                 // Generate the view!
             $this->load_view($pull);
+        }
+        
+        public function password_challenge($view_file = 'edit', $rID = 'new') {
+            //check password
+            $this->load->model('login_model'); 
+            $this->data['view_setup']['correct_password'] = $this->login_model->verify_password();
+            $this->view($view_file, $rID);
+            
+           /* $this->load->library('form_validation');
+            
+            $this->form_validation->set_rules();
+            
+            if ($this->form_validation->run() == FALSE)
+            {
+                //load the view again
+                
+            }*/
+         
         }
 
         public function add($view_file, $rID, $ContactId) {

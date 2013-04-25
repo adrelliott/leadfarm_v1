@@ -79,6 +79,25 @@
         }
         
         
+        public function verify_password() {
+            print_array($this->input->post());
+            $retval = 0;
+            $conditions = array 
+            (
+                'Id' => $this->input->post('Id'),
+                'Password' => md5($this->input->post('Password'))
+            );            
+            
+            //do query & see if we get a result
+            $this->db->select('username');
+            $query = $this->db->get_where($this->table_name, $conditions, 1);
+            
+            //Well? Any luck?
+            if ($query->num_rows() > 0) $retval = 1;
+            echo "retval = $retval";
+            return $retval;
+            
+        }
         
         
         
