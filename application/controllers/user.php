@@ -63,6 +63,24 @@ else
 
         }
         
+        function change_login_details($username, $password, $password_confirm, $new_user = TRUE) {
+            //if its a new user, then check given password's match
+            //else look up the user's record and check that the password matches with the one on record
+            //now do the validation:
+            $this->form_validation->set_rules('Username', 'Choose a Username', 'trim|required|min_length[6]|max_length[12]|is_unique[contact.Username]|xss_clean');
+            $this->form_validation->set_rules('Password', 'New Password', 'trim|required|matches[___passconf]|xss_clean|md5');
+            $this->form_validation->set_rules('___passconf', 'Password Confirmation', 'trim|required|xss_clean');
+            if ($this->form_validation->run() == FALSE)
+            {
+                $this->view_modal($view_file, $rID);
+                return;
+            }
+//            
+//check passwords match
+            
+            //now 
+        }
+        
         
         
         
