@@ -61,7 +61,11 @@ else
           //redirect($this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
 
       }
-      
+      public function delete_record($ContactId, $id) {
+              parent::delete_record($id, 'Id');
+              $url = 'contact/view/edit/' . $ContactId . '/' . $ContactId . '/0';
+              redirect ( $url );
+          }
        
 
 

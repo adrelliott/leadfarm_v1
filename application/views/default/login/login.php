@@ -6,7 +6,7 @@
 
         <link rel="apple-touch-con" href="" />
 
-	<title>LeadFarm.co.uk</title>
+	<title>Campaign Dashboard</title>
 
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 
@@ -46,7 +46,7 @@
                     <div class="row">
                         <div class="col_6 pre_3 padding_top_120">
                             <div class="widget clearfix">
-                                <h2>Login to LeadFarm.co.uk</h2>
+                                <h2>Login to your Campaign Dashboard here</h2>
                                 <div class="widget_inside">
                                     <?php  echo $this->data['page_setup']['message']; ?>
                                     <div class="form">
