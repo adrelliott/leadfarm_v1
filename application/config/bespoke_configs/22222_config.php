@@ -4689,7 +4689,7 @@ $config['settings'] = Array
                         'Id' => '#',
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
-                        'PostalCode' => 'Postcode',
+                        'UserName' => 'Username',
                     ),
                 ),   
             ),
@@ -5423,9 +5423,10 @@ $config['user'] = Array
                         'label' => 'Username:',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => ' mask_username',
+                        //'cssClassInput' => ' mask_username',
+                        'cssClassInput' => ' ',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => ' title="Just a-z or 1-9, with no spaces!" rel="tooltips"',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' autocomplete="off" title="Just a-z or 1-9, with no spaces!" rel="tooltips"',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Username',
                         'helpText' => '',
@@ -5436,7 +5437,7 @@ $config['user'] = Array
                     ),
                      'Password' => array
                     (
-                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'on' => FALSE,      //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
@@ -5446,7 +5447,7 @@ $config['user'] = Array
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' autocomplete="off"',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'Password',
                         'helpText' => '',
@@ -5496,6 +5497,34 @@ $config['user'] = Array
                         'HTML_before' => '',
                         'HTML_after' => '',  
                         'value' => 1,              
+                    ),
+                     '_AdminLevel' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Type of User:',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => 'rows="20" ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '_AdminLevel',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                         (
+                            'Admin(Highest)' => 5,
+                            'Supervisor' => 4,
+                            'User' => 3,
+                         ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => 1,
+                        'defaultvalue' => 3,
                     ),
                 ),                
             ),

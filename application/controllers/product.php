@@ -52,6 +52,12 @@ else
             
 
         }
+        
+         public function delete_record($id) {
+              parent::delete_record($id, 'Id');
+              $url = 'settings';
+              redirect ( $url );
+          }
 
     }
 }

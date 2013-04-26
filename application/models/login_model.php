@@ -80,7 +80,8 @@
         
         
         public function verify_password() {
-            print_array($this->input->post());
+            //print_array($this->input->post());
+            //echo "password = ".md5($this->input->post('Password'));
             $retval = 0;
             $conditions = array 
             (
@@ -89,12 +90,12 @@
             );            
             
             //do query & see if we get a result
-            $this->db->select('username');
+            $this->db->select('Id');
             $query = $this->db->get_where($this->table_name, $conditions, 1);
-            
+            //print_array($query->result_array(), 0, 'query resul');
             //Well? Any luck?
             if ($query->num_rows() > 0) $retval = 1;
-            echo "retval = $retval";
+            //echo "<br/>retval = $retval";
             return $retval;
             
         }

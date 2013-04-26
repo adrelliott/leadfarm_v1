@@ -14,7 +14,6 @@ else
         public function __construct()    {
             parent::__construct();
             $this->data['view_setup']['correct_password'] = NULL;
-            $this->data['view_setup']['message'] = '';
             $this->output->enable_profiler(TRUE);
         }
 
@@ -25,6 +24,7 @@ else
         }
 
         public function  view($view_file = 'edit', $rID = 'new', $ContactId = FALSE, $pull = '') {   
+            echo "got here";die;
             $this->data['view_setup']['modal'] = TRUE;
             parent::view($view_file, $rID, $ContactId);
 
@@ -38,45 +38,79 @@ else
             $this->load->model('login_model'); 
             $this->data['view_setup']['correct_password'] = $this->login_model->verify_password();
             $this->view($view_file, $rID);
-         
-        }
-        
-        public function edit_login($view_file, $rID, $ContactId) {
-            $this->load->library('form_validation');
-            if ($rID == 'new') 
-                $this->form_validation->set_rules('Username', 'Username', 'trim|required|min_length[6]|max_length[12]|is_unique[contact.Username]|xss_clean');
-            $this->form_validation->set_rules('Password', 'New Password', 'trim|required|matches[___Passconf]|xss_clean|md5');
-            $this->form_validation->set_rules('___Passconf', 'Password Confirmation', 'trim|required|xss_clean');
-            if ($this->form_validation->run() == FALSE)
-            {
-                $this->data['view_setup']['correct_password'] = 1;
-                $this->data['view_setup']['message'] = '<span class="notification warning"><h4>Ooops.</h4>' . validation_errors() . '</p></span>';
-                $this->view($view_file, $rID, $ContactId);
-                return;
-            }
-            $this->data['view_setup']['message'] = '<span class="notification done"><h4>Woo Hoo!</h4>Password Updated successfully.</p></span>';
-            $this->add($view_file, $rID, $ContactId);
         }
 
         public function add($view_file, $rID, $ContactId) {
+            
+            
+            //clean input
+            $input = clean_data($this->input->post());
+            
+            //save record
+            $rID = $this->add_record($input, $rID);
+            $this->data['view_setup']['correct_password'] = 1;
+            
+            $this->view($view_file, $rID, $ContactId);
+            
+
+        }
+        
+        public function change_password($view_file, $rID, $ContactId) {
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('Password', 'New Password', 'trim|required|matches[___passconf]|xss_clean|md5');
+        }
+        
+        
+        public function add_1($view_file, $rID, $ContactId) {
             //clean input
             $input = clean_data($this->input->post());
             
             //save record
             $rID = $this->add_record($input, $rID);
             
-            //return to page
-            if ( empty ($this->data['view_setup']['message']) )
-                $this->data['view_setup']['message'] = '<span class="notification done">Record Updated!</span>';
-            $this->data['view_setup']['correct_password'] = 1;
-            $this->view($view_file, $rID, $ContactId);
+             //Have we set nay client-specific methods to run?
+            //$method_name = 'add_' . DATAOWNER_ID;
+            //if (method_exists($this, $method_name)) $this->$method_name($input, $rID);
+            
+            $url = site_url ($this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $rID . '/0');
+
+            if ($this->input->is_ajax_request ()) {
+                $response = array (
+                    'success' => true,
+                );
+
+                if ($ContactId === 'new') {
+                    $response['redirect'] = $url;
+                }
+
+                $this->output->set_content_type('application/json');
+                $this->output->set_output(json_encode($response));
+                return;
+            }
+
+            //refresh page
+            redirect($url);
+            
+
         }
         
-        public function delete_record($id) {
-              parent::delete_record($id, 'Id');
-              $url = 'settings';
-              redirect ( $url );
-          }
+        function change_login_details($username, $password, $password_confirm, $new_user = TRUE) {
+            //if its a new user, then check given password's match
+            //else look up the user's record and check that the password matches with the one on record
+            //now do the validation:
+            $this->form_validation->set_rules('Username', 'Choose a Username', 'trim|required|min_length[6]|max_length[12]|is_unique[contact.Username]|xss_clean');
+            $this->form_validation->set_rules('Password', 'New Password', 'trim|required|matches[___passconf]|xss_clean|md5');
+            $this->form_validation->set_rules('___passconf', 'Password Confirmation', 'trim|required|xss_clean');
+            if ($this->form_validation->run() == FALSE)
+            {
+                $this->view_modal($view_file, $rID);
+                return;
+            }
+//            
+//check passwords match
+            
+            //now 
+        }
         
         
         
@@ -90,8 +124,6 @@ else
         
         
         
-        
-        /*
         public function view_old($view_file = 'edit', $rID) {  
             parent::view($view_file, $rID);   
 
@@ -203,8 +235,7 @@ else
 
 
         }
-         * 
-         * */
+
 
 
 

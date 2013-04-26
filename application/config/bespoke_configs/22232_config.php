@@ -28,8 +28,9 @@ define('OPT_IN_REASON', "This is my opt in reason");
 define('UNSUBSCRIBE_LINK', base_url( 'gen/comms/unsubs/' . DATAOWNER_ID . '/_:_ContactId_:_'));
 define('UNSUBSCRIBE', '<br/><br/><small><a href="' . UNSUBSCRIBE_LINK . '">Unsubscribe from all future emails here</a></small>');
 
-define('ADMIN_LEVEL_SUPERVISOR', 5);  //set Contact->_AdminLevel to alow superior access
-
+define('ADMIN_LEVEL_ADMINISTRATOR', 5);  //set Contact->_AdminLevel to alow superior access
+define('ADMIN_LEVEL_SUPERVISOR', 4);  //set Contact->_AdminLevel to alow superior access
+define('ADMIN_LEVEL_USER', 3);  //set Contact->_AdminLevel to alow superior access
 
 /*
 |--------------------------------------------------------------------------

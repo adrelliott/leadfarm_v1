@@ -28,7 +28,10 @@ define('OPT_IN_REASON', "This is my opt in reason");
 define('UNSUBSCRIBE_LINK', base_url( 'gen/comms/unsubs/' . DATAOWNER_ID . '/_:_ContactId_:_'));
 define('UNSUBSCRIBE', '<br/><br/><small><a href="' . UNSUBSCRIBE_LINK . '">Unsubscribe from all future emails here</a></small>');
 define('COUNTDOWN', 45);  //Notifies the user {45 days {VALUE} days before MOT/Service expires. see libraries/garages/garages.php
-define('ADMIN_LEVEL_SUPERVISOR', 5);  //set Contact->_AdminLevel to alow superior access
+define('ADMIN_LEVEL_ADMINISTRATOR', 5);  //set Contact->_AdminLevel to alow superior access
+define('ADMIN_LEVEL_SUPERVISOR', 4);  //set Contact->_AdminLevel to alow superior access
+define('ADMIN_LEVEL_USER', 3);  //set Contact->_AdminLevel to alow superior access
+
 
 
 /*
@@ -1231,12 +1234,12 @@ $config['contact'] = Array
                         'length' => '',
                         'options' => array
                           (
-                            'No' => '0',
-                            'Yes' => '1',
+                            'No' => 'No',
+                            'Yes' => 'Yes',
                           ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
-                        'value' => '',              
+                        'value' => '',                     
                     ),
                      '__Sector' => array
                     (
