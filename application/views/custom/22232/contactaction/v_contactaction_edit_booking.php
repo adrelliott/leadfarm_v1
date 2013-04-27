@@ -9,7 +9,7 @@
                     <div id="tab-1"><!-- Start of tab 1 -->
                         <h3>Create/edit a booking for this contact</h3>
                         <div class="form">
-                            <?php echo form_open("contactaction/add/edit_booking/$rID/$ContactId", 'class="ajax"') ; ?>
+                            <?php echo form_open("contactaction/add/edit_booking/$rID/$ContactId") ; ?>
                                 <?php //echo display_field($fields['Id'], array('type' => 'hidden'));  ?>
                                 <?php //echo display_field($fields['ContactId'], array('type' => 'hidden', 'value' => $ContactId));  ?>
                                 <?php echo display_field($fields['ActionType'], array('type' => 'hidden', 'value' => 'Booking')); ?>

@@ -9,7 +9,7 @@
                     <div id="tab-1"><!-- Start of tab 1 -->
                         <h3>Create/edit a Purchase for this contact</h3>
                         <div class="form">
-                            <?php echo form_open( "/order/add/edit/$rID/$ContactId", 'class="ajax"' ) ; ?>
+                            <?php echo form_open( "/order/add/edit/$rID/$ContactId") ; ?>
                                 <?php echo display_field($fields['DateCreated']); ?>
                                 <?php echo display_field(
                                         $fields['_ItemBought'], 
