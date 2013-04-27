@@ -71,7 +71,7 @@ else
                 );
 
                 if ($ContactId === 'new') {
-                    $response['redirect'] = $url;
+                   $response['redirect'] = $url;
                 }
 
                 $this->output->set_content_type('application/json');

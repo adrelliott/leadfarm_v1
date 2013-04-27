@@ -37,45 +37,98 @@
         
         public function validate_user() {
             //set up condition for query
-            $query = array();
+            $retval = array
+            (
+                'result' => FALSE,
+                'message' => '<span class="notification undone"><h4>I\'m sorry - username/password not recognised.</h4></span>'
+            );
             $conditions = array 
             (
                 '_IsCrmUserYN' => 1,
                 'Username' => $this->input->post('username'),
                 'Password' => md5($this->input->post('password'))
-            );            
-            //$this->db->where($conditions);
-            $this->db->select($this->fields);
-            //$this->db->limit(1);
+            );    
             
             //do query
+            $this->db->select($this->fields);
             $query = $this->db->get_where($this->table_name, $conditions, 1);
             
+            //Look at results
+            //print_array($query->row_array());
             if ($query->num_rows() > 0)
             {
-                //$query['results'] = $query[0]; unset($query[0]);
-                $query = $query->result_array();
-                $query['results'] = $query[0]; unset($query[0]);
+                $row = $query->row_array(); 
                 
-                //check for suspended reason
-                if ( $query['results']['_SuspendedReason'] ) //is there a suspended code reason?
+                //Is the user suspended?
+                if ( $row['_SuspendedReason'] )
                 {
-                     $query['message'] = '<span class="notification undone"><h4>I\'m sorry. There\'s a problem with your account.</h4><br/> Please call 0161 375 4444 (and quote Id = ' . $query['results']['_SuspendedReason'] . ')</span>';
-                     unset($query['results']);
+                     $retval['message'] = '<span class="notification undone"><h4>I\'m sorry. There\'s a problem with your account.</h4><br/> Please call 0161 375 4444 (and quote Code ' . $row['_SuspendedReason'] . ')</span>';
                 }
                 else
                 {
-                    $query['results']['is_logged_in'] = TRUE;
-                    $this->session->set_userdata($query['results']);
-                    $_SESSION['dID'] = $this->session->userdata('_dID');
+                    //Yup. All good. Set things up
+                    unset($retval['message']);
+                    $row['is_logged_in'] = TRUE;
+                    $retval['result'] = TRUE;
+                    
+                    //Set up sessions
+                    $this->session->set_userdata($row);
+                    $_SESSION['dID'] = $row['_dID'];
+                }               
+            }
+            
+            return $retval;
+        }
+        
+        
+        public function validate_user_old() {
+            //set up condition for query
+            $retval = array
+            (
+                'results' => FALSE,
+                'message' => '<span class="notification undone"><h4>I\'m sorry - username/password not recognised.</h4></span>'
+            );
+            $conditions = array 
+            (
+                '_IsCrmUserYN' => 1,
+                'Username' => $this->input->post('username'),
+                'Password' => md5($this->input->post('password'))
+            );    
+            
+            //do query
+            $this->db->select($this->fields);
+            $query = $this->db->get_where($this->table_name, $conditions, 1);
+            
+            //Look at results
+            print_array($query->row_array());
+            if ($query->num_rows() > 0)
+            {
+                $retval['results'] = TRUE;
+                $row = $query->row_array(); 
+//$query['results'] = $query[0]; unset($query[0]);
+                //$query = $query->result_array();
+                //$query['results'] = $query[0]; unset($query[0]);
+                
+                //check for suspended reason
+               // if ( $query['results']['_SuspendedReason'] ) //is there a suspended code reason?
+                if ( $row['_SuspendedReason'] )
+                {
+                     $retval['message'] = '<span class="notification undone"><h4>I\'m sorry. There\'s a problem with your account.</h4><br/> Please call 0161 375 4444 (and quote Id = ' . $query['results']['_SuspendedReason'] . ')</span>';
+                     //unset($query['results']);
+                }
+                else
+                {
+                    //$query['results']['is_logged_in'] = TRUE;
+                    $retval['is_logged_in'] = TRUE;
+                    $this->session->set_userdata($query->row_array());
+                    //$_SESSION['dID'] = $this->session->userdata('_dID');
+                    $_SESSION['dID'] = $row['_dID'];
                     //if ( ! defined('DATAOWNER_ID') )
                         //define('DATAOWNER_ID', $this->session->userdata('_dID'));
-                }                
+                }               
             }
-            else
-                 $query['message'] = '<span class="notification undone"><h4>I\'m sorry - username/password not recognised.</h4></span>';
             
-            return $query;
+            return $retval;
         }
         
         

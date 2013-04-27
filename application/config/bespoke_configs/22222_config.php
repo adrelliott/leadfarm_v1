@@ -1,5 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/* Charles Wilson */
+
 /*
 |--------------------------------------------------------------------------
 | Define settings for this client

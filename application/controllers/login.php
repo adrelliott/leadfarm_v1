@@ -26,16 +26,37 @@ class Login extends CI_Controller {
        $query = $this->login_model->validate_user();
        
        //what's been returned?
-       if ( isset($query['results']) ) redirect ( site_url('dashboard') );   //Yay!
-       elseif ( isset($query['message']) ) $this->log_out( $query['message'] ); //Oh no!
+       if ($query['result']) redirect ( site_url('dashboard') );   //Yay!
+       else $this->log_out( $query['message'] );
        
    }
-    
+   
     function log_out($message = '<span class="notification warning">You\'ve been logged out.</span>') {
         $this->session->sess_destroy();
         session_destroy();  //destroys PHP session too
         $this->index($message);
         
     }
+    
+    
+    
+    
+   
+   public function validate_old() {
+       $this->load->model('login_model'); 
+       $query = $this->login_model->validate_user();
+       
+       //print_array($this->session->all_userdata(), 0, 'session');
+       //print_array($query, 0, 'line 28');
+       //
+       //what's been returned?
+       if ($query['result']) redirect ( site_url('dashboard') );   //Yay!
+       else $this->log_out( $query['message'] );
+       //if ( isset($query['results']) ) redirect ( site_url('dashboard') );   //Yay!
+       //elseif ( isset($query['message']) ) $this->log_out( $query['message'] ); //Oh no!
+       
+   }
+    
+   
 
 }

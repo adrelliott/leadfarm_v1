@@ -1,5 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/* P3PM */
+
 /*
 |--------------------------------------------------------------------------
 | Define settings for this client

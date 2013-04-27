@@ -14,6 +14,7 @@ class Contact_model extends CRM_Model {
         $this->table_name = 'contact';
         $this->order_by = 'FirstName ASC';   //why isnt;' this reflected in datatable? 
         $this->contactId_fieldname = 'Id';
+        $this->db->where('_IsCrmUserYN !=', 1);
         //$this->primary_key = 'Id';
         /*if (isset($this->data))   //now set in MY_Model
         {
