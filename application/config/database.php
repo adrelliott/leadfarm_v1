@@ -64,6 +64,7 @@ $db['al-development']['swap_pre'] = '';
 $db['al-development']['autoinit'] = TRUE;
 $db['al-development']['stricton'] = FALSE;
 
+
 $db['al_MBP_development']['hostname'] = 'localhost';
 $db['al_MBP_development']['username'] = 'local_superadmin';
 $db['al_MBP_development']['password'] = 'DMmanch35';
@@ -79,6 +80,7 @@ $db['al_MBP_development']['dbcollat'] = 'utf8_general_ci';
 $db['al_MBP_development']['swap_pre'] = '';
 $db['al_MBP_development']['autoinit'] = TRUE;
 $db['al_MBP_development']['stricton'] = FALSE;
+
 
 $db['staging']['hostname'] = 'localhost';
 $db['staging']['username'] = 'leadfar2_user';
