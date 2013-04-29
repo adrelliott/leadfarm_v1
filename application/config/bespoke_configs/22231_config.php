@@ -1236,8 +1236,9 @@ $config['contact'] = Array
                         'length' => '',
                         'options' => array
                           (
-                            'No' => 'No',
-                            'Yes' => 'Yes',
+                            'No' => '0',
+                            'Yes' => '1',
+                            'Don\'t know' => '',
                           ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
