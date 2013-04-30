@@ -169,7 +169,7 @@ $config['dashboard'] = Array
                         'contact._OrganisationName' => 'Company Name',                        
                     ),
                 ),   
-                'leads' => array
+                /*'leads' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     //'data_source' => '', //The dataset name defined above
@@ -184,9 +184,27 @@ $config['dashboard'] = Array
                         'lead.__LeadType' => 'Type',
                         'contact.Id' => 'Id',
                         'contact.FirstName' => 'First Name',
+                        //'contact.LastName' => 'Last Name',
+                    ),
+                ), */
+                'leads' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    //'data_source' => '', //The dataset name defined above
+                    'model_name' => 'lead_model',
+                    'model_method' => 'join_on_contact', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'lead.Id' => 'Id',
+                        'lead.OpportunityTitle' => 'Name',
+                        'lead.ContactID' => 'contact Id',
+                        'lead.__LeadType' => 'Type',
+                        //'contact.Id' => 'Id',
+                        'contact.FirstName' => 'First Name',
                         'contact.LastName' => 'Last Name',
                     ),
-                ),         
+                ),
                 /*'organisations' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
@@ -236,8 +254,8 @@ $config['dashboard'] = Array
                     'fields' => array 
                     (
                         'Id' => '#',
-                        //'ActionType' => 'Type',
-                        //'ActionDate' => 'Date',
+                        'ActionType' => 'Type',
+                        'ActionDate' => 'Date',
                     ),
                 ),
                 /*'bookings' => array
@@ -462,7 +480,7 @@ $config['contact'] = Array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
                     'data_source' => 'users', //The dataset name defined above
-                    'model_name' => 'contact_model',
+                    'model_name' => 'user_model',
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
@@ -474,7 +492,7 @@ $config['contact'] = Array
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
                         'Username' => 'Username',
-                        'Password' => 'Password',
+                        //'Password' => 'Password',
                     ),
                 ),
             ),
@@ -1454,7 +1472,7 @@ $config['lead'] = Array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
                     //'data_source' => 'contacts', //The dataset name defined in this file
-                    'model_name' => 'contact_model',
+                    'model_name' => 'user_model',
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
