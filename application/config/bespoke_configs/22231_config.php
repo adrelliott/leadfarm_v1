@@ -151,7 +151,7 @@ $config['dashboard'] = Array
                     'model_method' => 'master_search',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            //'__vehicles.__ActiveYN =' => 1, 
+                            'contact._IsCrmUserYN !=' => 1, 
                         ),
                     'fields' => array 
                     (
@@ -311,7 +311,7 @@ $config['contact'] = Array
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisationYN !=' => 1, 
+                             'contact._IsCrmUserYN !=' => 1, 
                         ),
                     'fields' => array 
                     (
