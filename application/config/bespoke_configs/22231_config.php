@@ -1420,12 +1420,12 @@ $config['lead'] = Array
                         'ProductId' => 'Id',                    
                         'ContactId' => 'Id',                        
                         'InterestLevel' => 'Id',   
-                        'productjoin.Id' => 'Id',                    
-                        'productjoin.ProductId' => 'Id',                    
-                        'productjoin.ContactId' => 'Id',                    
-                        'product.Id' => 'Id',                    
-                        'product.ProductName' => 'Prod name1',  
-                        'product.ProductPrice' => '£',  
+                        //'productjoin.Id' => 'Id',                    
+                       // 'productjoin.ProductId' => 'Id',                    
+                        //'productjoin.ContactId' => 'Id',                    
+                        //'product.Id' => 'Id',                    
+                        //'product.ProductName' => 'Prod name1',  
+                        //'product.ProductPrice' => '£',  
                         //'contact.FirstName' => 'Id',                    
                         //'contact.LastName' => 'Id',                    
                     ),
@@ -5925,6 +5925,7 @@ $config['settings'] = Array
             ),
         ),
     );
+
 
 $config['product_join'] = Array
     (
