@@ -316,7 +316,11 @@ $config['contact'] = Array
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
+<<<<<<< HEAD
                             'contact._IsCrmUserYN !=' => 1, 
+=======
+                             'contact._IsCrmUserYN !=' => 1, 
+>>>>>>> p3PM
                         ),
                     'fields' => array 
                     (
