@@ -156,7 +156,7 @@ $config['dashboard'] = Array
                     'model_method' => 'master_search',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            //'__vehicles.__ActiveYN =' => 1, 
+                            'contact._IsCrmUserYN !=' => 1, 
                         ),
                     'fields' => array 
                     (
@@ -316,17 +316,19 @@ $config['contact'] = Array
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            '_IsOrganisationYN !=' => 1, 
+                            'contact._IsCrmUserYN !=' => 1, 
                         ),
                     'fields' => array 
                     (
                         'Id' => '#',
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
+                        '_OrganisationName' => 'Org Name',
+                        'StreetAddress1' => 'Address',
                         'PostalCode' => 'Postcode',
                     ),
                 ),            
-                'organisations' => array
+                /*'organisations' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
                     'data_source' => 'contacts', //The dataset name defined in this file
@@ -345,7 +347,7 @@ $config['contact'] = Array
                         'LastName' => '',
                         '_IsOrganisationYN' => '',
                     ),
-                ),            
+                ), */           
             ),
             'view' => array 
             (
