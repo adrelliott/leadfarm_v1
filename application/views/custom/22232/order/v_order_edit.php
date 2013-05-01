@@ -24,7 +24,7 @@
                                             'TreasureLine' => 'TreasureLine', 
                                             'Holiday Draw' => 'Holiday Draw',
                                             '--- Sponsorship ---'  => 'no6',
-                                            '127' => '127',
+                                            '127 Club' => '127 Club',
                                             'Match Sponsor' => 'Match Sponsor',
                                             'Matchball Sponsor' => 'Matchball Sponsor',
                                             'Matchday Programme Sponsor' => 'Matchday Programme Sponsor',
