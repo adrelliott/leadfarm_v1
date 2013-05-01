@@ -252,12 +252,11 @@ $(function() {
     */
 
 //Ajax datatable for showing contacts
-    $('.ajax_table').dataTable( {
+         var pathname = window.location.pathname;
+        $('.ajax_table').dataTable( {
         "bProcessing": true,
         "bServerSide": true,
-        //"sAjaxSource": "http://localhost:8888/projects/leadfarm_v1/public_html/contact/get_contact_data_ajax",
-        "sAjaxSource": "http://localhost:8888/projects/leadfarm_v1/public_html/contact/ajax_contact",
-        //"sAjaxSource": "/contact/ajax_contact",
+        "sAjaxSource":  pathname + "/ajax_feed",
         //window.location.pathname;window.location.href
         "sPaginationType": "full_numbers",
         "bJQueryUI": true,

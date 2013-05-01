@@ -8,14 +8,13 @@
             <div class="widget_inside">  
                  <h4>You can search by any of the columns you see below in the table:</h4>
                <?php //print_r($tables['contacts']);
-                    $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id'));    
-                   $this->table->set_heading_custom($tables['contacts']['table_headers']);
-                    //echo $this->table->generate_custom($tables['contacts']['table_data']); 
+                    //$this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id'));    
+                   //$this->table->set_heading_custom($tables['contacts']['table_headers']);
+                   //echo $this->table->generate_custom($tables['contacts']['table_data']); 
                 ?> 
                  <?php 
                  $this->table->set_template_custom(array('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id', 'table_open' => '<table class="ajax_table">'));
                 $this->table->set_heading_custom($tables['contacts']['table_headers']);
-                //$this->table->set_heading_custom(array('Id', 'FirstName', 'LastName'));
                 echo $this->table->generate_custom();
                 ?>
                 <div class="margin_top_15"></div>

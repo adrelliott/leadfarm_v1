@@ -194,12 +194,12 @@ table.noteTable td  { width: 250px}
 .DataTables_sort_icon {float: right;margin-right: 10px;margin-top: 8px;position: relative;}
 
 .fg-toolbar {padding: 10px;}
-.dataTable th {background: #b0e9e9; box-shadow: 0px 0 1px #d4f3f3 inset; border-top: none}
-.dataTable td {border-top: none; border-bottom: none;}
-.dataTable tr td:first-child {border-left: 1px solid #ABABAB}
-.dataTable tr td:last-child {border-right: 1px solid #ABABAB}
+.dataTable .ajax_table th {background: #b0e9e9; box-shadow: 0px 0 1px #d4f3f3 inset; border-top: none}
+.dataTable .ajax_table td {border-top: none; border-bottom: none;}
+.dataTable .ajax_table tr td:first-child {border-left: 1px solid #ABABAB}
+.dataTable .ajax_table tr td:last-child {border-right: 1px solid #ABABAB}
 
-.dataTable tr:nth-child(2n) {background: #f1f1f1}
+.dataTable .ajax_table tr:nth-child(2n) {background: #f1f1f1}
 .sorting_1 {background: #f6fefe}
 tr:nth-child(2n) .sorting_1 {background: #e9fdfc}
 

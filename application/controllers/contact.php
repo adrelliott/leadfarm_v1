@@ -132,7 +132,7 @@ else
             $this->add_record($input, $rID);
         }
         
-        public function ajax_contact($method_name = 'index', $dataset_name = 'contacts') {
+        public function ajax_feed($method_name = 'index', $dataset_name = 'contacts') {
             //what fields do we need?
             $config = $this->data['config']['datasets'][$method_name][$dataset_name];
             $fields = $this->_generate_table_headings($config['fields']);
