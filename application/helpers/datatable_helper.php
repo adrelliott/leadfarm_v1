@@ -1,7 +1,11 @@
 <?php
 	
 
-function generate_ajax_results($aColumns = array( 'Id', 'FirstName', 'LastName' ), $sTable = "contact", $sIndexColumn = "Id") {
+function generate_ajax_results(
+        $aColumns = array( 'Id', 'FirstName', 'LastName' ), 
+        $conn,
+        $sTable = "contact", 
+        $sIndexColumn = "Id") {
         /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Easy set variables
 	 */
@@ -18,14 +22,17 @@ function generate_ajax_results($aColumns = array( 'Id', 'FirstName', 'LastName' 
 	//*****Set in function args
 	
 	/* Database connection information */
-	$gaSql['user']       = "local_superadmin";
-	$gaSql['password']   = "DMmanch35";
-	$gaSql['db']         = "local_master";
-	$gaSql['server']     = "localhost";
+	//$gaSql['user']       = $conn['user'];
+	//$gaSql['password']   = $conn['password'];
+	//$gaSql['db']         = $conn['database'];
+	//$gaSql['server']     = $conn['hostname'];
+    
+            //print_array($conn,1);
+        $gaSql = $conn;
+        //print_array($gaSql, 1);
 	
 	/* REMOVE THIS LINE (it just includes my SQL connection user/pass) */
 	//include( $_SERVER['DOCUMENT_ROOT']."/datatables/mysql.php" );
-	
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * If you just want to use the basic configuration for DataTables with PHP server-side, there is

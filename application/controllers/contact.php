@@ -132,14 +132,30 @@ else
             $this->add_record($input, $rID);
         }
         
+        public function ajax_feed2 () {
+            //$conn = $this->db['username'];
+            //$conn = $this->config['env'];
+            
+            
+            print_array($conn);
+        }
+        
         public function ajax_feed($method_name = 'index', $dataset_name = 'contacts') {
             //what fields do we need?
             $config = $this->data['config']['datasets'][$method_name][$dataset_name];
             $fields = $this->_generate_table_headings($config['fields']);
             
+            //Whats database settings?
+            $this->load->database();
+            $conn = array
+            (
+                'user' => $this->db->username,
+                'password' => $this->db->password,
+                'db' => $this->db->database,
+                'server' => $this->db->hostname,
+            );
             //Now go get 'em...
-            //print_array($fields);
-            echo generate_ajax_results(array_keys($fields));
+            echo generate_ajax_results(array_keys($fields), $conn);
             
             //
             //echo generate_ajax_results($this->data['view_setup']['tables']['contacts']['table_headers']);
