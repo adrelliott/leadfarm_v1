@@ -422,6 +422,8 @@ class CRM_Controller extends CI_Controller {
         $this->load->view($this->_custom_or_default_file('common', $header_file), $data);
         $this->load->view($this->_custom_or_default_file($this->controller_name, $view_file), $data['view_setup']);
         $this->load->view($this->_custom_or_default_file('common', $footer_file), $data);
+        
+        
     }
     
   
@@ -429,6 +431,7 @@ class CRM_Controller extends CI_Controller {
         //looks in views/custom/DATAOWNER_ID/dir for filename first then, if it is
         //not found, it looks in views/default/dir
         //This allows us to over-ride deafult views with cutom ones
+         
         if (file_exists(APPPATH . "views/custom/" . DATAOWNER_ID . "/$dir/$filename.$file_ext"))
         {
             $retval = "custom/" . DATAOWNER_ID . "/$dir/$filename.$file_ext";
@@ -441,6 +444,7 @@ class CRM_Controller extends CI_Controller {
         {
              show_error("Unable to load the requested file: $filename.$file_ext");
         }
+        
         
         return $retval; //returns path & filename
         }

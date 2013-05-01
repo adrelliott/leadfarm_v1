@@ -271,7 +271,7 @@ $config['dashboard'] = Array
                         //'LastName' => 'Last Name',
                         //'PostalCode' => 'Postcode',
                     ),
-                ),*/#
+                ),*/
                 'campaigns' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE

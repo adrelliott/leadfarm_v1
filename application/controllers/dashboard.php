@@ -17,9 +17,10 @@ else
 
         public function index() {
             parent::index();    //Can send a $controller_setup array, see MY_Controlelr::index()
-
             $this->_load_view_data();   //retrieves and process all data for view
+            //print_array($this->data);
             $this->_generate_view($this->data);
+            
         }
 
     }
