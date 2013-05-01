@@ -131,5 +131,23 @@ else
             }
             $this->add_record($input, $rID);
         }
+        
+        public function ajax_contact($method_name = 'index', $dataset_name = 'contacts') {
+            //what fields do we need?
+            $config = $this->data['config']['datasets'][$method_name][$dataset_name];
+            $fields = $this->_generate_table_headings($config['fields']);
+            
+            //Now go get 'em...
+            //print_array($fields);
+            echo generate_ajax_results(array_keys($fields));
+            
+            //
+            //echo generate_ajax_results($this->data['view_setup']['tables']['contacts']['table_headers']);
+            //$cols = array('Id', 'FirstName', 'LastName');
+            //echo generate_ajax_results($cols);
+            //$this->config->load('bespoke_configs/' . DATAOWNER_ID . '_config');
+            //$cols = $this->data['view_setup']['tables']['contacts']['table_headers'];
+            
+        }
     }
 }   

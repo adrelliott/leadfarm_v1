@@ -251,6 +251,21 @@ $(function() {
     });
     */
 
+//Ajax datatable for showing contacts
+    $('.ajax_table').dataTable( {
+        "bProcessing": true,
+        "bServerSide": true,
+        //"sAjaxSource": "http://localhost:8888/projects/leadfarm_v1/public_html/contact/get_contact_data_ajax",
+        "sAjaxSource": "http://localhost:8888/projects/leadfarm_v1/public_html/contact/ajax_contact",
+        //"sAjaxSource": "/contact/ajax_contact",
+        //window.location.pathname;window.location.href
+        "sPaginationType": "full_numbers",
+        "bJQueryUI": true,
+        "iDisplayLength": 10,
+         "aaSorting": [], 
+        //"sAjaxSource": "/contact/get_contact_data_ajax"
+    } );
+
 
     //Datatable
     //$('.dataTable').dataTable({
