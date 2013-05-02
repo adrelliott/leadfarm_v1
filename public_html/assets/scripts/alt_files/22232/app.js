@@ -252,7 +252,7 @@ $(function() {
     */
 
 //Ajax datatable for showing contacts
-         var pathname = window.location.pathname;
+    var pathname = window.location.pathname;
         $('.ajax_table').dataTable( {
         "bProcessing": true,
         "bServerSide": true,
@@ -262,6 +262,20 @@ $(function() {
         "bJQueryUI": true,
         "iDisplayLength": 10,
          "aaSorting": [], 
+         "fnDrawCallback": function(){
+                    $('.ajax_table tbody tr').click(function() {
+                //var redirection = $(this).val;
+                var nTds = $('td', this);
+                var Id = $(nTds[0]).text();
+                document.location.href = "contact/view/edit/" + Id;
+            });
+ 
+            $('.ajax_table tbody tr').hover(function() {
+                $(this).css('cursor', 'pointer');
+            }, function() {
+                $(this).css('cursor', 'auto');
+            });
+}
         //"sAjaxSource": "/contact/get_contact_data_ajax"
     } );
 
