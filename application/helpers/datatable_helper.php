@@ -210,7 +210,7 @@ function generate_ajax_results(
 		}
 		$output['aaData'][] = $row;
 	}
-	
+	//print_array($output, 1, 'before json');
 	return json_encode( $output );
     }
 ?>

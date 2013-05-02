@@ -132,15 +132,26 @@ else
             $this->add_record($input, $rID);
         }
         
-        public function ajax_feed2 () {
-            //$conn = $this->db['username'];
-            //$conn = $this->config['env'];
+        
+        
+        
+        public function ajax_feed  () {
+            //load the model & run the method
+            $this->load->model('contact_model');
+            $output = $this->contact_model->get_data_via_ajax_non_codeigniter();
+            //$output = $this->contact_model->get_data_via_ajax_codeigniter();
             
-            
-            print_array($conn);
+            //output the results as JSON
+            echo json_encode( $output );
         }
         
-        public function ajax_feed($method_name = 'index', $dataset_name = 'contacts') {
+        
+        
+        
+        
+        
+        
+        public function ajax_feed_old($method_name = 'index', $dataset_name = 'contacts') {
             //what fields do we need?
             $config = $this->data['config']['datasets'][$method_name][$dataset_name];
             $fields = $this->_generate_table_headings($config['fields']);
@@ -154,15 +165,9 @@ else
                 'db' => $this->db->database,
                 'server' => $this->db->hostname,
             );
-            //Now go get 'em...
-            echo generate_ajax_results(array_keys($fields), $conn);
             
-            //
-            //echo generate_ajax_results($this->data['view_setup']['tables']['contacts']['table_headers']);
-            //$cols = array('Id', 'FirstName', 'LastName');
-            //echo generate_ajax_results($cols);
-            //$this->config->load('bespoke_configs/' . DATAOWNER_ID . '_config');
-            //$cols = $this->data['view_setup']['tables']['contacts']['table_headers'];
+            //Output
+            echo generate_ajax_results(array_keys($fields), $conn);
             
         }
     }
