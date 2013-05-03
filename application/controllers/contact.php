@@ -120,7 +120,7 @@ else
             //$this->load->model($method_name . '_model', 'contact');
             parent::delete_record($id);
             
-            $this->index();            
+            redirect( site_url( '/contact' ));          
         }
         
         public function add_22232($input, $rID) {
