@@ -12,7 +12,8 @@ class Contact_model extends CRM_Model {
         //parent::__construct();
         //$this->primary_key = 'Id'; This is set in MY_Model. Overwrite here if needs be
         $this->table_name = 'contact';
-        $this->order_by = 'FirstName ASC';   //why isnt;' this reflected in datatable? 
+        //$this->order_by = 'FirstName ASC';   //why isnt;' this reflected in datatable? 
+        $this->order_by = 'Id DESC';   //why isnt;' this reflected in datatable? 
         $this->contactId_fieldname = 'Id';
         $this->db->where('_IsCrmUserYN !=', 1);
         //$this->primary_key = 'Id';
@@ -149,7 +150,7 @@ class Contact_model extends CRM_Model {
 		$sOrder
 		$sLimit
 		";
-        
+        //echo "<p>query is $sQuery<p>";
 	//$rResult = mysql_query( $sQuery, $gaSql['link'] ) or die(mysql_error());
 	//$rResult = $this->db->query( $sQuery );
         //$this->db->select("SELECT SQL_CALC_FOUND_ROWS `".str_replace(" , ", " ", implode("`, `", $aColumns)), FALSE);
@@ -265,6 +266,7 @@ class Contact_model extends CRM_Model {
 			$sOrder = "";
 		}
 	}
+        else $sOrder = "ORDER BY  " . $this->order_by;
         
         //Filtering
         $sWhere = "";
