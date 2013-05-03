@@ -289,9 +289,9 @@ class Contact_model extends CRM_Model {
                 }
             }
             $sWhere = substr_replace( $sWhere, "", -4 );
-            $sWhere .= ' AND `_dID` = ' . DATAOWNER_ID . ')';
+            $sWhere .= ' AND `_dID` = ' . DATAOWNER_ID . ') AND (' . $this->table_name . '._ActiveRecordYN = 1)';
         }
-        else $sWhere = 'WHERE (`_dID` = ' . DATAOWNER_ID . ')';
+        else $sWhere = 'WHERE (`_dID` = ' . DATAOWNER_ID . ') AND (' . $this->table_name . '._ActiveRecordYN = 1)';
                 
         
         // Individual column filtering 
