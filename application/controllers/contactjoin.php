@@ -64,6 +64,15 @@ else
           }
 
 
+          public function ajax_feed  () {
+            //load the model & run the method
+            $this->load->model('contact_model');
+            $output = $this->contact_model->get_data_via_ajax_non_codeigniter();
+            //$output = $this->contact_model->get_data_via_ajax_codeigniter();
+            
+            //output the results as JSON
+            echo json_encode( $output );
+        }
     }
 }
    

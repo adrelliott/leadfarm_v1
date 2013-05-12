@@ -6,6 +6,10 @@ $(function() {
     $("#countries_uk").autocomplete({
         source: countryList_uk
     });
+    
+    
+    
+    
 
     // Accordion
     $(".accordion").accordion({ header: "h3" });
@@ -268,6 +272,33 @@ $(function() {
                 var nTds = $('td', this);
                 var Id = $(nTds[0]).text();
                 document.location.href = "contact/view/edit/" + Id;
+            });
+ 
+            $('.ajax_table tbody tr').hover(function() {
+                $(this).css('cursor', 'pointer');
+            }, function() {
+                $(this).css('cursor', 'auto');
+            });
+}
+        //"sAjaxSource": "/contact/get_contact_data_ajax"
+    } );
+//Ajax datatable for showing contacts
+    var pathname = window.location.pathname;
+        $('.ajax_contactjoin_table').dataTable( {
+        "bProcessing": true,
+        "bServerSide": true,
+        "sAjaxSource":  pathname + "/ajax_feed",
+        //window.location.pathname;window.location.href
+        "sPaginationType": "full_numbers",
+        "bJQueryUI": true,
+        "iDisplayLength": 10,
+         "aaSorting": [], 
+         "fnDrawCallback": function(){
+                    $('.ajax_table tbody tr').click(function() {
+                //var redirection = $(this).val;
+                var nTds = $('td', this);
+                var Id = $(nTds[0]).text();
+                document.location.href = "contact/view/edit/**" + pathname + "**" + Id;
             });
  
             $('.ajax_table tbody tr').hover(function() {

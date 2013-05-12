@@ -21,7 +21,7 @@
                                     'Community Staff' => 'Community Staff', 
                                     'Board Member' => 'Board Member', 
                                     'External Supplier' => 'External Supplier', 
-                                    'Coaching Staff' => 'Coaching Staff', 
+                                    'Coaching/Backroom Staff' => 'Coaching/Backroom Staff', 
                                     '1st Team Player' => '1st Team Player', 
                                     'Youth Team Player' => 'Youth Team Player', 
                                     'Women\'s Team Player' => 'Women\'s Team Player',
@@ -29,6 +29,7 @@
                                 <?php display_field($fields['ActionDescription'], array( 'label' => 'Full description')); ?>
                                 <?php echo display_field($fields['CreationNotes'], array('label' => 'Notes')); ?>
                                 <?php echo display_field($fields['_ValidUntil'], array('label' => 'Season')); ?>
+                            StartDate and EndDate
                                
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button red right large' style='float:right' value='Save'></input>

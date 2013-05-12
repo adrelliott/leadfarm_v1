@@ -10,6 +10,9 @@
                         <h3>Create/edit a Purchase for this contact</h3>
                         <div class="form">
                             <?php echo form_open( "/order/add/edit/$rID/$ContactId") ; ?>
+                            <div class="clearfix">
+                                    <input name='submit' type='submit' class='button red right large' style='float:right' value='Save'></input>
+                                </div>  
                                 <?php echo display_field($fields['DateCreated']); ?>
                                 <?php echo display_field(
                                         $fields['_ItemBought'], 
