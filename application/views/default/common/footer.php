@@ -15,7 +15,8 @@
     </body>
 </html>
 
-<?php if (strpos( ENVIRONMENT , 'development') OR isset($_GET['debug'])) : ?>
+
+<?php if (isset($_GET['debug'])) : ?>
 <pre>here is CI session
 <?php print_r($this->session->all_userdata()); ?>
 </pre>
