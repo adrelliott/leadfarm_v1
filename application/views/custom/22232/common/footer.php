@@ -23,7 +23,7 @@
 <?php print_r($_SESSION); ?>
 </pre>
 <pre>here is $this->data:
-<?php// print_r($this->data);?>
+<?php print_r($this->data);?>
 </pre>
 <?php endif; ?>
 
