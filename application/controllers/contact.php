@@ -123,14 +123,14 @@ else
             redirect( site_url( '/contact' ));          
         }
         
-        public function add_22232($input, $rID) {
+        /*public function add_22232($input, $rID) {
             //if memberhsip number is blank, then
             if ( $input['_LegacyMembershipNo'] == NULL )
             {
                 $input['_LegacyMembershipNo'] = $rID + 50000;
             }
             $this->add_record($input, $rID);
-        }
+        }*/
         
         function test1($ContactId) {
             //get maximum memberhsip number 
