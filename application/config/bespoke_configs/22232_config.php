@@ -324,7 +324,7 @@ $config['dashboard'] = Array
                         'Id' => '#',
                     ),
                 ),
-                'count_all_adult_records' => array
+                /*'count_all_adult_records' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
                     'data_source' => '', //The dataset name defined in this file
@@ -340,7 +340,7 @@ $config['dashboard'] = Array
                     (
                         'Id' => '#',
                     ),
-                ),
+                ),*/
                 'count_all_adult_membership_records' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
@@ -413,6 +413,25 @@ $config['dashboard'] = Array
                         'Id' => '#',
                     ),
                 ),
+                'count_all_adult_records' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE
+                    'data_source' => '', //The dataset name defined in this file
+                    'stat_type' => 'count', //count, average, etc
+                    'model_name' => 'contact_model',
+                    'model_method' => 'count_all_results',
+                    'model_params' => array
+                    (
+                        'FirstName !=' => 'count_all_ADUL_records', 
+                        //'Birthday <=' => date('Y-m-d', date('Y') - 16 ),
+                        'Birthday <' => date('Y-m-d', mktime(0,0,0,date('m'),date('d'),date('Y') - 16)),
+                        //'_LegacyMembershipNo > ' => 0,
+                     ),
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                    ),
+                ),
                 'count_all_junior_records' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
@@ -422,8 +441,10 @@ $config['dashboard'] = Array
                     'model_method' => 'count_all_results',
                     'model_params' => array
                     (
-                        'Birthday <=' => date('Y-m-d', date('Y') - 16 ),
-                        '_LegacyMembershipNo > ' => 0,
+                        'FirstName !=' => 'count_all_junior_records', 
+                        //'Birthday <=' => date('Y-m-d', date('Y') - 16 ),
+                        'Birthday >=' => date('Y-m-d', mktime(0,0,0,date('m'),date('d'),date('Y') - 16)),
+                        //'_LegacyMembershipNo > ' => 0,
                      ),
                     'fields' => array 
                     (
