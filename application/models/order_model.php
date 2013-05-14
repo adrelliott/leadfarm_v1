@@ -20,7 +20,9 @@ class Order_model extends CRM_Model {
         }
     }
     
-   
+   public function count_all_results_fcutd() {
+       return array(0 => '11');
+   }
     
     
 }

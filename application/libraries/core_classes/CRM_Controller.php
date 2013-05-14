@@ -184,6 +184,14 @@ class CRM_Controller extends CI_Controller {
                 if ($array['model_params']) $this->db->where($array['model_params']);
                 return $this->db->count_all_results($table_name[0]);                
                 break;
+            case 'count_FC_season':
+                // count     
+                $current_season = date(date('Y') - 1) . '/' . date(date('y'));
+                if ( date('n') >= 7 ) $current_season = date(date('Y')) . '/' . date(date('y') + 1);
+                $this->db->where('_ValidUntil', $current_season);
+                if ($array['model_params']) $this->db->where($array['model_params']);
+                return $this->db->count_all_results($table_name[0]);                
+                break;
             case 'average':
                 break;
             case 'increase':

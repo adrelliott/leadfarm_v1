@@ -334,6 +334,79 @@ $config['dashboard'] = Array
                     'model_params' => array
                     (
                         'Birthday >=' => date('Y-m-d', date('Y') - 16 ),
+                        '_LegacyMembershipNo > ' => 0,
+                     ),
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                    ),
+                ),
+                'count_all_adult_membership_records' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE
+                    'data_source' => '', //The dataset name defined in this file
+                    'stat_type' => 'count_FC_season', //count, average, etc
+                    'model_name' => 'order_model',
+                    'model_method' => 'count_all_results',
+                    'model_params' => array
+                    (
+                        //'_ValidUntil' => date('Y') . '/' . (date('y') + 1),
+                        //'_ValidUntil' => if(date('n') <= 6) date('Y'),
+                        '_ItemBought' => 'Adult Membership',
+                     ),
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                    ),
+                ),
+                'count_all_junior_membership_records' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE
+                    'data_source' => '', //The dataset name defined in this file
+                    'stat_type' => 'count_FC_season', //count, average, etc
+                    'model_name' => 'order_model',
+                    'model_method' => 'count_all_results',
+                    'model_params' => array
+                    (
+                        //'_ValidUntil' => date('Y') . '/' . (date('y') + 1),
+                        //'_ValidUntil' => if(date('n') <= 6) date('Y'),
+                        '_ItemBought' => 'Junior Membership',
+                     ),
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                    ),
+                ),
+                'count_all_adult_seasonticket_records' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE
+                    'data_source' => '', //The dataset name defined in this file
+                    'stat_type' => 'count_FC_season', //count, average, etc
+                    'model_name' => 'order_model',
+                    'model_method' => 'count_all_results',
+                    'model_params' => array
+                    (
+                        //'_ValidUntil' => date('Y') . '/' . (date('y') + 1),
+                        //'_ValidUntil' => if(date('n') <= 6) date('Y'),
+                        '_ItemBought' => 'Season Ticket (Adult)',
+                     ),
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                    ),
+                ),
+                'count_all_junior_seasonticket_records' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE
+                    'data_source' => '', //The dataset name defined in this file
+                    'stat_type' => 'count_FC_season', //count, average, etc
+                    'model_name' => 'order_model',
+                    'model_method' => 'count_all_results',
+                    'model_params' => array
+                    (
+                        //'_ValidUntil' => date('Y') . '/' . (date('y') + 1),
+                        //'_ValidUntil' => if(date('n') <= 6) date('Y'),
+                        '_ItemBought' => 'Season Ticket (Junior)',
                      ),
                     'fields' => array 
                     (
@@ -350,6 +423,7 @@ $config['dashboard'] = Array
                     'model_params' => array
                     (
                         'Birthday <=' => date('Y-m-d', date('Y') - 16 ),
+                        '_LegacyMembershipNo > ' => 0,
                      ),
                     'fields' => array 
                     (
@@ -468,6 +542,8 @@ $config['contact'] = Array
                         '_ActionSubtype' => 'Role',
                         'ActionDescription' => 'Description',
                         '_ValidUntil' => 'Season',
+                        'StartDate' => 'Start',
+                        'EndDate' => 'End',
                     ),
                 ),  
                 'orders' => array
@@ -2216,6 +2292,48 @@ $config['contactaction'] = Array
                         'extraHTMLInput' => ' readonly',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'ActionDate',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'StartDate' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Start Date',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'mask_date',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'StartDate',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'EndDate' => array       
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'End Date',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'mask_date',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'EndDate',
                         'helpText' => '',                        
                         'length' => '',
                         'HTML_before' => '',

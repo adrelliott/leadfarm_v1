@@ -10,6 +10,9 @@
                         <h3>Create/edit a role for this contact</h3>
                         <div class="form">
                             <?php echo form_open("contactaction/add/edit_role/$rID/$ContactId") ; ?>
+                             <div class="clearfix">
+                                    <input name='submit' type='submit' class='button red right large' style='float:right' value='Save'></input>
+                                </div>     
                                 <?php //echo display_field($fields['Id'], array('type' => 'hidden'));  ?>
                                 <?php //echo display_field($fields['ContactId'], array('type' => 'hidden', 'value' => $ContactId));  ?>
                                 <?php echo display_field($fields['ActionType'], array('type' => 'hidden', 'value' => 'Role')); ?>
@@ -29,7 +32,9 @@
                                 <?php display_field($fields['ActionDescription'], array( 'label' => 'Full description')); ?>
                                 <?php echo display_field($fields['CreationNotes'], array('label' => 'Notes')); ?>
                                 <?php echo display_field($fields['_ValidUntil'], array('label' => 'Season')); ?>
-                            StartDate and EndDate
+                                <?php echo display_field($fields['StartDate'], array('label' => 'StartDate')); ?>
+                                <?php echo display_field($fields['EndDate'], array('label' => 'EndDate')); ?>
+                           
                                
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button red right large' style='float:right' value='Save'></input>
