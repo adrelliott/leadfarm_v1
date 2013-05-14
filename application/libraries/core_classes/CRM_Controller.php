@@ -176,6 +176,8 @@ class CRM_Controller extends CI_Controller {
         //return;
         $model_name = $array['model_name'];
         $table_name = explode('_', $model_name);
+        $this->db->where('_ActiveRecordYN', 1);
+        $this->db->where('_dID', DATAOWNER_ID);
         
         switch ($array['stat_type'])
         {
