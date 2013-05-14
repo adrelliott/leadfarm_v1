@@ -132,7 +132,21 @@ else
             $this->add_record($input, $rID);
         }
         
-        
+        function test1($ContactId) {
+            //get maximum memberhsip number 
+            $this->load->model('contact_model');
+            $max_memb_no = $this->contact_model->get_max('_LegacyMembershipNo');
+          
+            //Now get this contact\s memberhsip number
+            $contact_record = $this->contact_model->get($ContactId);
+            $current_memb_no = $contact_record['_LegacyMembershipNo'];
+            if (  is_null($current_memb_no) || $current_memb_no < 1 )
+            {
+                $new_member_no = array('_LegacyMembershipNo' => $max_memb_no + 1);
+                $r = $this->contact_model->save($new_member_no, $ContactId);
+            }
+            
+        }
         
         
         public function ajax_feed  () {

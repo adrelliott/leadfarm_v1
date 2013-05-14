@@ -31,6 +31,8 @@ else
           //save record
           $rID = $this->add_record($input, $rID);
           
+         
+          
           $url = $this->controller_name . '/view/' . $view_file . '/' . $rID;
           
           if ($this->input->is_ajax_request ()) {

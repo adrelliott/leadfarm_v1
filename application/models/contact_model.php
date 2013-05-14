@@ -48,6 +48,14 @@ class Contact_model extends CRM_Model {
         $this->db->select($fields);
         return $this->get($Id);
     }
+    
+    function get_latest_record($field_name = NULL) {
+        if( ! $field_name )
+            return FALSE;
+        //options['field_name'] = '_LegacyMembershipNumber'
+        $this->db->select_max($field_name);
+        return $this->get();
+    }
  
    
     function get_data_via_ajax_codeignitor() {

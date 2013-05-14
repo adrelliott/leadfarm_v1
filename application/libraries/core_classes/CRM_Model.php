@@ -303,6 +303,17 @@ class CRM_Model extends CI_Model {
         return $this->get();
     }
     
+    public function get_max($field_name = 'Id') {
+        $retval = FALSE;
+        //return $this->db->select_max($field_name)->row_array();
+        $this->db->select_max($field_name);
+        $q = $this->get();
+        
+        if ( count($q) == 1 ) $retval = $q[0][$field_name];
+        
+        return $retval;
+    }
+    
     public function get_all_contacts_records($where = NULL) {
         //get all records. $where set up in dataset['model_params']
         if ($where != NULL) { $this->db->where($where); }

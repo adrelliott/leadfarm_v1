@@ -29,6 +29,24 @@ else
             $this->load_view($pull);
             }
 
+        //private function _update_memb_number($ContactId) {
+         private function _update_memb_number($ContactId) {
+            //get maximum memberhsip number 
+            $this->load->model('contact_model');
+            $max_memb_no = $this->contact_model->get_max('_LegacyMembershipNo');
+          
+            //Now get this contact\s memberhsip number
+            $contact_record = $this->contact_model->get($ContactId);
+            $current_memb_no = $contact_record['_LegacyMembershipNo'];
+            
+            //Now update membership number if contact
+            if (  is_null($current_memb_no) || $current_memb_no < 1 )
+            {
+                $new_member_no = array('_LegacyMembershipNo' => $max_memb_no + 1);
+                $r = $this->contact_model->save($new_member_no, $ContactId);
+            }
+             
+        }
         public function add($view_file, $rID, $ContactId) {       
             //clean input
             $input = clean_data($this->input->post());
@@ -36,6 +54,29 @@ else
 
             //save record
             $rID = $this->add_record($input, $rID);
+            
+             //Is it dID=22232 && strpos(_ItemBought, Membership)
+            
+            if( DATAOWNER_ID == 22232 
+                    && isset($input['_ItemBought']) 
+                    && strpos($input['_ItemBought'], 'Membership')
+                    )
+            {
+                //run the method to updare memberhsip number
+                $this->_update_memb_number($ContactId);
+            }
+            
+                   
+
+//get the latest mmeberhsip number
+                    
+                    //get the current memberhsip number
+                    
+                    //if there is no currentmeberhsip, then apply the next memb
+                    
+                    //now apply this to the cotact ID record
+             
+            
 
             $url = $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId;
 
