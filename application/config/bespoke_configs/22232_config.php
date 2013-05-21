@@ -1234,7 +1234,8 @@ $config['contact'] = Array
                         'label' => 'Overseas Number',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'mask_phone_overseas',
+                        'cssClassInput' => '',
+                        //'cssClassInput' => 'mask_phone_overseas',
                         'cssIdInput' => '',
                         'extraHTMLInput' => ' title="Overseas Only - (+44) 161 2762 987 (Optional space for 4 extra numbers at end)" rel="tooltips" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',

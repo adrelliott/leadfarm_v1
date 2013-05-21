@@ -131,7 +131,7 @@ $(function() {
     $(".mask_date").mask('99/99/9999', {placeholder:'-'});
     $(".mask_phone").mask('(0999) 999 9999', {placeholder:'_'});
     $(".mask_phone_work").mask('(0999) 999 9999  ?xxxx', {placeholder:'_'});
-    $(".mask_phone_overseas").mask('(+99) (999) 999 9999 ?999999', {placeholder:'_'});
+    $(".mask_phone_overseas").mask('(+99) (999) 999 ?9999 999999', {placeholder:'_'});
     $(".mask_mobile").mask('07999999999', {placeholder:'_'});
     $(".mask_card").mask('9999-9999-9999-9999', {placeholder:'x'});
     $(".serial").mask('***-***-***-***-***-***', {placeholder:'x'});

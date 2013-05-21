@@ -25,22 +25,28 @@ else
         }
 
         public function  view($view_file = 'edit', $rID = 'new', $ContactId, $pull = '') {   
+            
             $this->data['view_setup']['modal'] = TRUE;
             parent::view($view_file, $rID, $ContactId);   
 
             $this->_load_view_data($rID);    //retrieves and process all data for view    
+            
             $this->gen_product_list();
                 // Generate the view!
             $this->load_view($pull);
             }
 
-        public function add($view_file, $rID, $ContactId) {       
+        public function add($view_file, $rID, $ContactId) { 
             //clean input
             $input = clean_data($this->input->post());
             //$input['ContactID'] = $ContactId; //GOTCHA: the ID is capitalised
 
             //save record
             $rID = $this->add_record($input, $rID);
+            
+           
+            //do some error reporting
+           
 
             $url = $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId;
 
@@ -64,6 +70,53 @@ else
               //refresh page
               //redirect($this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId );
 
+          }
+          
+          public function upload_file($view_file, $rID, $ContactId) {
+            //do the upload if it exists
+            //print_array($this->input->post('_:_userfile'), 1);
+            //if (is_empty)
+              $retval = array();
+            $config['upload_path'] = APPPATH . '/uploads/' . DATAOWNER_ID;
+            $config['allowed_types'] = 'gif|jpg|jpeg|png|pdf|doc|docx|xls|xlsx|csv|txt|rtf|';
+            $config['max_size']	= '0';
+            $config['max_width']  = '0';
+            $config['max_height']  = '0';
+            $config['remove_spaces']  = TRUE;
+
+            $this->load->library('upload', $config);
+            if ( ! $this->upload->do_upload('_:_userfile'))
+            {
+                    $retval['error'] = $this->upload->display_errors();
+
+            }
+            else
+            {
+                    $retval['success'] = $this->upload->data();
+                    //now save in the filebox table
+                $upload_data = $this->upload->data();
+                $data = array
+                    (
+                        'FileName' => $upload_data['raw_name'],
+                        'Extension' => $upload_data['file_ext'],
+                        'FileSize' => $upload_data['file_size'],
+                        'ContactId' => $ContactId,
+                        'LeadId' => $rID,
+                        '_dID' => DATAOWNER_ID,
+
+                    );
+                $this->load->model('filebox_model');
+                $this->filebox_model->save($data);
+
+            }
+            $this->session->set_flashdata($retval);
+            
+            $url = $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId. '#tab-2';
+            
+            redirect($url);
+
+            
+            
           }
           
           public function save_productjoin($view_file, $rID, $ContactId) {
@@ -115,6 +168,20 @@ else
           
           public function gen_product_list () {
               $products = $this->data['view_setup']['tables']['products']['table_data'];
+                $dropdown = array();
+              //create the dropdown
+              foreach ($products as $product => $attr)
+              {
+                  //$label = $attr['ProductName'] . ' (' . $attr['ProductPrice'] . ')';
+                  $dropdown[$attr['ProductName']] = $attr['Id'];
+              }
+              //now get it ready for the view
+              $this->data['view_setup']['product_list'] = $dropdown;
+          }
+          
+          
+          public function gen_product_list_old () {
+              $products = $this->data['view_setup']['tables']['products']['table_data'];
               //Do we have any records in productjoin for this contact?
               if ( ! empty ( $this->data['view_setup']['tables']['productjoin']['table_data'] ) )
               {
@@ -163,7 +230,7 @@ else
             $this->_generate_view($this->data);
         }*/
 
-        /*  public function gen_product_list_old () {
+        /*  public function gen_product_list_older () {
               $products = $this->data['view_setup']['tables']['products']['table_data'];
               $html = '';
               

@@ -438,7 +438,7 @@ $config['contact'] = Array
                         'ContactID' => '',
                         'UserID' => '',
                         'OpportunityTitle' => 'Title',
-                        'DateCreated' => 'Date Created',
+                        'NextActionDate' => 'Next Action',
                         '__LeadType' => 'Stage',
                     ),
                 ),     
@@ -624,7 +624,7 @@ $config['contact'] = Array
                         'label' => 'First Name',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'large',
+                        'cssClassInput' => 'large validate[required]',
                         'cssIdInput' => 'FirstName',
                         'extraHTMLInput' => '',//' onpropertychange="updatenickname(event)" oninput="OnInput(event)" ',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
@@ -1283,10 +1283,7 @@ $config['contact'] = Array
                         'length' => '',
                         'options' => array
                           (
-                            'Manufacturing' => 'Manufacturing',
-                            'what other options...' => '3',
-                            '...would you like?' => '4',
-                            'Tell Al!!' => '5',
+                            'Accountant' => 'Accountant','Activeplan' => 'Activeplan','Activity' => 'Activity','Admin Support Services' => 'Admin Support Services','Agricultural' => 'Agricultural','Architect' => 'Architect','Associate' => 'Associate','Audit' => 'Audit','Bank' => 'Bank','Business Advisors' => 'Business Advisors','Car Rentals' => 'Car Rentals','Car Sales' => 'Car Sales','Catering/ Hospitality/ Travel' => 'Catering/ Hospitality/ Travel','Charity/ Voluntary Organisation' => 'Charity/ Voluntary Organisation','Child care/ Nursey' => 'Child care/ Nursey','Cleaning Company' => 'Cleaning Company','Coaching' => 'Coaching','Communications' => 'Communications','Construction' => 'Construction','Consultants' => 'Consultants','Corporate Hospitality' => 'Corporate Hospitality','Corporate Services' => 'Corporate Services','Cost Management' => 'Cost Management','Council' => 'Council','Courier' => 'Courier','Dating Agency' => 'Dating Agency','Debt Management' => 'Debt Management','Dental' => 'Dental','Designers' => 'Designers','Development' => 'Development','Disability Services and Information' => 'Disability Services and Information','Distributor' => 'Distributor','Documentary' => 'Documentary','Education' => 'Education','Electrics' => 'Electrics','Employee Benefits' => 'Employee Benefits','Energy' => 'Energy','Engineers' => 'Engineers','Entertainment' => 'Entertainment','Events' => 'Events','Finance/ Investment' => 'Finance/ Investment','Financial Advisor' => 'Financial Advisor','Financial Planning' => 'Financial Planning','Food' => 'Food','Goverment' => 'Goverment','Graphic Design' => 'Graphic Design','Haulier' => 'Haulier','Health and Beauty' => 'Health and Beauty','Health and Safety' => 'Health and Safety','Health and Wellbeing' => 'Health and Wellbeing','Health Care' => 'Health Care','Heating and Plumbing' => 'Heating and Plumbing','Hotel' => 'Hotel','Housing' => 'Housing','HR' => 'HR','Import / Export' => 'Import / Export','Insurance' => 'Insurance','Investment' => 'Investment','IT' => 'IT','Legal Estate Planner' => 'Legal Estate Planner','Legal Misc' => 'Legal Misc','Leisure' => 'Leisure','Machinery' => 'Machinery','Maintenance' => 'Maintenance','Management Consultancy' => 'Management Consultancy','Manufacturing' => 'Manufacturing','Marketing' => 'Marketing','Mechanics' => 'Mechanics','Media /Production' => 'Media /Production','Medical' => 'Medical','Mental Health/ Counsellor' => 'Mental Health/ Counsellor','Mortgages' => 'Mortgages','Motor Vehicles' => 'Motor Vehicles','Occupational Health' => 'Occupational Health','Office Equipment' => 'Office Equipment','Office Space' => 'Office Space','Other' => 'Other','Packaging' => 'Packaging','Payroll' => 'Payroll','Pensions' => 'Pensions','Pharmaceutical Chemical' => 'Pharmaceutical Chemical','Photographer' => 'Photographer','Police' => 'Police','Post Office' => 'Post Office','PR' => 'PR','Printers' => 'Printers','Promotion' => 'Promotion','Property Company' => 'Property Company','Protection' => 'Protection','Public House' => 'Public House','Publishing' => 'Publishing','Radio Station' => 'Radio Station','Recruitment' => 'Recruitment','Retail' => 'Retail','Sales' => 'Sales','Savings and Investments' => 'Savings and Investments','Science' => 'Science','Security' => 'Security','Service Plan Provider' => 'Service Plan Provider','Solicitor' => 'Solicitor','Sport' => 'Sport','Suppliers' => 'Suppliers','Surveyors' => 'Surveyors','Tax Exempt Savings' => 'Tax Exempt Savings','Technology' => 'Technology','Telecommunications' => 'Telecommunications','Telemarketing' => 'Telemarketing','Trade Associates' => 'Trade Associates','Training' => 'Training','Transport / Logistics' => 'Transport / Logistics','Travel' => 'Travel','Vehicle Tax' => 'Vehicle Tax','Venue' => 'Venue','Vets' => 'Vets',
                           ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
@@ -1361,12 +1358,21 @@ $config['contact'] = Array
                         'options' => array
                           (
                                 'Associate' => 'Associate',
+                                'Client Closed' => 'Client Closed',
+                                'Client Project' => 'Client Project',
+                                'Client Retained' => 'Client Retained',
                                 'Competitor' => 'Competitor',
                                 'Employee' => 'Employee',
                                 'Manchester Business Network' => 'Manchester Business Network',
                                 'MDD Contact' => 'MDD Contact',
                                 'Misc' => 'Misc',
                                 'Potential Associate' => 'Potential Associate', 
+                            'Potential Client' => 'Potential Client',
+                            'Property Associate' => 'Property Associate',
+                            'Property Aspects Group' => 'Property Aspects Group',
+                            'Prospect' => 'Prospect',
+                            'Social Media Contact' => 'Social Media Contact',
+                            'Supplier' => 'Supplier',
                           ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
@@ -1465,6 +1471,26 @@ $config['lead'] = Array
                         'ProductName' => 'Name',                       
                         'ProductPrice' => '£',                       
                         'ItemType' => 'Type',                       
+                        //'ActionType' => 'Action type',                        
+                    ),
+                ),
+                'files' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'filebox_model',
+                    'model_method' => 'get_all_opps_records', 
+                    'model_params' => NULL,
+                    /*'model_params' => array
+                    (
+                        '_Type =' => 'Link_Automation',
+                    ), */
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',                      
+                        'FileName' => 'FileName',                      
+                        'Extension' => 'Extension',                      
+                        'LeadId' => 'LeadId',                      
                         //'ActionType' => 'Action type',                        
                     ),
                 ),
@@ -1597,6 +1623,53 @@ $config['lead'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),                 
+                    'ProductId' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Product',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => 'ProductId',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => array
+                        (
+                            'blah' => 'blah',   //this is rpelaced by users dropdown
+                        ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    'NextActionDate' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Date of next action',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '', 
+                         'cssClassInput' => 'datetimepicker',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' readonly',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'date',
+                        'name' => 'NextActionDate',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'options' => NULL,
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
                     '__LeadType' => array      
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
@@ -1621,9 +1694,10 @@ $config['lead'] = Array
                             'Suspect' => 'suspect',
                             'Prospect' => 'prospect',*/
                             'Prospect' => 'Prospect',
-                            'Potential' => 'Potential',
                             'Lead' => 'Lead',
+                            'Potential' => 'Potential',
                             'Snoozing' => 'Snoozing',
+                            'Not Interested' => 'Not Interested',
                         ),
                         'HTML_before' => '',
                         'HTML_after' => '',

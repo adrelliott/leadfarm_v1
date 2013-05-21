@@ -68,7 +68,7 @@ class CRM_Controller extends CI_Controller {
         // 6. Finally set up last minute vars
         $this->data['controller_setup']['controller_name'] = $this->controller_name;
         
-        if ( isset( $_GET['debug'] ) ) $this->output->enable_profiler(TRUE);
+        if ( isset( $_GET['debug'] ) && strpos(ENVIRONMENT, 'development') ) $this->output->enable_profiler(TRUE);
     }
     
     

@@ -19,7 +19,7 @@
                         <?php //echo form_open('contact/add/0/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
                         <?php echo form_open('contact/add/edit/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
                         <!-- Form opened in fieldset file -->
-                                <?php include("fieldsets/v_contact_$fieldset.php");
+                                <?php include("fieldsets/v_contact_0.php");
                                     //v_contact_0 = contact, ..._1  org ?>
                                 <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'>
@@ -54,7 +54,7 @@
                             <div class="hide_toggle" id="option1">
                                 <div class="form margin_top_30">
                                     <?php display_field($fields['_OptinEmailYN']); ?>
-                                    <?php display_field($fields['_OptinSmsYN']); ?>
+                                    <?php //display_field($fields['_OptinSmsYN']); ?>
                                     <?php display_field($fields['_OptinSurfaceMailYN']); ?>
                                     <?php display_field($fields['_OptinNewsletterYN']); ?>
                                     <?php display_field($fields['_OptinPref']); ?>
