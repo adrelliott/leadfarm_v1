@@ -65,3 +65,4 @@
         </div>      
     </div>    
 </div>
+<?php print_array($this->data); ?>
