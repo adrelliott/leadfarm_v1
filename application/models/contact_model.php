@@ -387,7 +387,8 @@ class Contact_model extends CRM_Model {
            //print_array($result_row, 0, '180');
            foreach ($aHeaders as $k => $v)
            {
-                $row[] = $result_row[ $aHeaders[$k] ];
+               $link = site_url('contact/view/edit/' . $result_row['Id']) ;
+               $row[] = '<a href="'.$link.'">'.$result_row[ $aHeaders[$k] ].'</a>';
                 //print_array($row);
            }
            $output['aaData'][] = $row;

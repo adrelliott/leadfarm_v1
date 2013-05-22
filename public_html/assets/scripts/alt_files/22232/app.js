@@ -7,6 +7,18 @@ $(function() {
         source: countryList_uk
     });
     
+    //var test = ['label1'=>1, 'lable2'=>2];
+    var pathname = "http://localhost:8888/projects/leadfarm_v1/public_html/contact/dropdown_ajax_feed";
+    $("#test_dropdown").autocomplete({
+        source: pathname
+    });
+    
+    
+    var pathname = window.location.pathname + "/dropdown_ajax_feed";
+    $("#contacts").autocomplete({
+        source: pathname
+    });
+    
     
     
     
@@ -277,16 +289,16 @@ $(function() {
          "fnDrawCallback": function(){
                     $('.ajax_table tbody tr').click(function() {
                 //var redirection = $(this).val;
-                var nTds = $('td', this);
-                var Id = $(nTds[0]).text();
-                document.location.href = "contact/view/edit/" + Id;
+                //var nTds = $('td', this);
+                //var Id = $(nTds[0]).text();
+                //document.location.href = "contact/view/edit/" + Id;
             });
  
-            $('.ajax_table tbody tr').hover(function() {
-                $(this).css('cursor', 'pointer');
-            }, function() {
-                $(this).css('cursor', 'auto');
-            });
+            //$('.ajax_table tbody tr').hover(function() {
+            //    $(this).css('cursor', 'pointer');
+            //}, function() {
+            //    $(this).css('cursor', 'auto');
+            //});
 }
         //"sAjaxSource": "/contact/get_contact_data_ajax"
     } );

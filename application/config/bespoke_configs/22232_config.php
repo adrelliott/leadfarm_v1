@@ -1025,7 +1025,7 @@ $config['contact'] = Array
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => 'xlarge',
-                        'cssIdInput' => '',
+                        'cssIdInput' => 'test_dropdown',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => 'StreetAddress1',

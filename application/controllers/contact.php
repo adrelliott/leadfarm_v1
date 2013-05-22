@@ -159,6 +159,15 @@ else
             echo json_encode( $output );
         }
         
+        public function dropdown_ajax_feed() {
+            $r = array
+                (
+                    "al Elliott","lea Elliott","charlie Elliott"
+                );
+            
+            echo json_encode($r);
+        }
+        
         
         
         
