@@ -1642,7 +1642,23 @@ $config['lead'] = Array
                         'length' => '',
                         'options' => array
                         (
-                            'blah' => 'blah',   //this is rpelaced by users dropdown
+                            'Employment Advice Line' => 1,
+                            'Complete Outsourced HR' => 2,
+                            'Recruitment & Selection' => 3,
+                            'Assessment Centres' => 4,
+                            'Performance Managment' => 5,
+                            'Contracts of Employment' => 6,
+                            'Employee Handbooks' => 7,
+                            'Training & Development' => 8,
+                            'Business Restructuring' => 9,
+                            'Disciplinary & Grievances' => 10,
+                            'Mediation' => 11,
+                            'HR Onsite Support' => 12,
+                            'HR Admin Support' => 13,
+                            'Complimentary Seminars' => 14,
+                            'Coaching & Mentoring' => 15,
+                            'Insurance Backed Advice' => 16
+                            
                         ),
                         'HTML_before' => '',
                         'HTML_after' => '',

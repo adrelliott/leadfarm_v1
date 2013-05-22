@@ -14,7 +14,7 @@
                                 <?php echo display_field($fields['OpportunityTitle']); ?>
                                 <?php echo display_field($fields['ContactID'], array('type'=> 'hidden', 'value' => $ContactId)); ?>
                                 <?php echo display_field($fields['__LeadType'] ); ?>
-                                <?php echo display_field($fields['ProductId'], array('options' => $this->data['view_setup']['product_list']) ); ?>
+                                <?php echo display_field($fields['ProductId'] ); ?>
                                 <?php echo display_field($fields['OpportunityNotes']); ?>
                                 <?php echo display_field($fields['NextActionDate']); ?>
                                 <?php echo display_field($fields['UserID'], array('options' => $dropdowns['users'])); ?>  
@@ -65,4 +65,4 @@
         </div>      
     </div>    
 </div>
-<?php print_array($this->data); ?>
+<?php //print_array($this->data); ?>
