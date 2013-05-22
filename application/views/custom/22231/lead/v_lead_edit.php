@@ -54,7 +54,7 @@
                             {
                                 $file_name = $attr['FileName'] . $attr['Extension'];
                                 $link = anchor('filebox/download/' . $attr['Id'], '(Download File)');
-                                $html = '<li style="font-size:1.3em; color:blue">' . $file_name . ' '.$link.'</li>';
+                                $html .= '<li style="font-size:1.3em; color:blue; margin:10px">' . $file_name . ' '.$link.'</li>';
                             }
                             echo $html;
                             ?>
