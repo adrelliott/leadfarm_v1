@@ -9,7 +9,7 @@
                     <div id="tab-1"><!-- Start of tab 1 -->
                         <h3>Create a New Relationship</h3>
                         <div class="form">
-                            <?php echo form_open("contactjoin/add/edit/$rID/$ContactId", 'class="ajax"') ; ?>
+                            <?php echo form_open("contactjoin/add/edit/$rID/$ContactId", 'class=""') ; ?>
                             <?php if($rID == 'new') {include('fieldsets/v_contact_join_table.php');} ?>
                                 <?php echo display_field($fields['__Reason']); ?> 
                                 <?php echo display_field($fields['__ActiveYN']); ?> 
