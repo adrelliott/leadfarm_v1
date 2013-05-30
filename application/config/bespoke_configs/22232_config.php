@@ -528,6 +528,11 @@ $config['contact'] = Array
                     ),
                 ),            
             ),
+            'search' => array 
+            (
+                          
+                         
+            ),
             'view' => array 
             (
                 'all_actions' => array
@@ -663,6 +668,33 @@ $config['contact'] = Array
                 ),
             ),
         ),
+     'search' => array 
+            (
+                'contacts' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'contacts', //The dataset name defined in this file
+                    'model_name' => 'contact_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            '_IsOrganisationYN !=' => 1, 
+                        ),
+                    'fields' => array 
+                    (
+                        'contact.Id' => '#',
+                        'contact.FirstName' => 'First Name',
+                        'contact.LastName' => 'Last Name',
+                        'contact.Nickname' => 'Known As',
+                        'contact.PostalCode' => 'Postcode',
+                        'contact.Email' => 'Prim Email',
+                        'contact.Phone1' => 'Landline',
+                        'contact.Phone2' => 'Mobile',
+                        'contact.PostalCode' => 'Postcode',
+                        'contact._LegacyMembershipNo' => 'Memb No',
+                    ),
+                ),   
+         ),
         'record' => array
         (
             'view' => array

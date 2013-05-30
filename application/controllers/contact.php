@@ -193,5 +193,40 @@ else
             echo generate_ajax_results(array_keys($fields), $conn);
             
         }
+        
+        public function search($post_process = NULL) {
+            $this->load->model('search_model');
+            $this->data['tables']['search_results']['table_headers'] = array();
+            parent::search();
+            
+            if ($this->input->post('_::_submit'))
+            {
+                
+            //print_array($this->input->post(), 1);
+                //if ($this->input->post('_::_export') == 1) $export = TRUE;
+                    //print_array( $this->data['tables']['search_results']['csv_file'] , 1, 'normal search results');
+                if ($post_process === 'export')
+                {
+                    $this->load->helper('download');
+                    //$csv = $this->data['tables']['search_results']['csv_file'];
+                    $csv = $this->search_model->do_search(TRUE);
+                    $name = "csv_export.csv";
+                    //print_array( $this->data['tables']['search_results']['csv_file'] , 1);
+                    force_download($name, $csv);
+                    //return;
+                }
+                else $this->data['tables']['search_results'] = $this->search_model->do_search();
+                
+                $this->data['tables']['search_results']['post_data'] = $this->input->post();
+            }
+            //else
+            {
+            
+            $this->_load_view_data();
+            $this->_generate_view($this->data);
+            }
+            //Make sure we store the query somewhere ready to save as a saved search
+            
+        }
     }
 }   

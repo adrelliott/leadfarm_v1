@@ -78,6 +78,11 @@ class CRM_Controller extends CI_Controller {
         $this->data['controller_setup']['method_name'] = $method_name;
         $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file; 
     }
+    
+    protected function search($view_file = 'search', $method_name = 'search') {
+        $this->data['controller_setup']['method_name'] = $method_name;
+        $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file; 
+    }
    
     protected function view($view_file, $rID, $ContactId = NULL, $method_name = 'view'){
         $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file;      
