@@ -66,7 +66,7 @@ $criteria = array(
     'greaterthan' => 'Is after',
     'lessthan' => 'Is before'
 ), '0');
-                                        echo form_input('order_date_value', '','class="datepicker_thisyear" readonly="true"');
+                                        echo form_input('order_date_value', '','class="datepicker" readonly="true"');
                                         ?></h4>
                                     </div>
                                 </div>
