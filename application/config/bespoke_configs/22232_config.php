@@ -533,6 +533,11 @@ $config['contact'] = Array
                           
                          
             ),
+            'report' => array 
+            (
+                          
+                         
+            ),
             'view' => array 
             (
                 'all_actions' => array
@@ -6260,6 +6265,24 @@ $config['user'] = Array
         ),
     );
 
+
+
+$config['search'] = Array
+    (
+        'datasets' => array 
+        (
+            'index' => array 
+            (
+                
+            ),
+        ),
+        'record' => array
+        (
+                'index' => '',  //leave blank if no requirement
+                'view' => '',   //leave blank if no requirement
+        ),
+        
+    );
 
 /* End of file */
 
