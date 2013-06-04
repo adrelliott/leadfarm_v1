@@ -83,6 +83,11 @@ class CRM_Controller extends CI_Controller {
         $this->data['controller_setup']['method_name'] = $method_name;
         $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file; 
     }
+    
+    protected function report($view_file = 'index', $method_name = 'report') {
+        $this->data['controller_setup']['method_name'] = $method_name;
+        $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file; 
+    }
    
     protected function view($view_file, $rID, $ContactId = NULL, $method_name = 'view'){
         $this->data['view_setup']['view_file'] = 'v_'.$this->controller_name.'_' . $view_file;      
@@ -272,7 +277,8 @@ class CRM_Controller extends CI_Controller {
     |
     */
    protected function _prepare_model($config, $method_name) {
-         if (isset($config['datasets'][$method_name]))
+       $model_setup = '';  
+       if (isset($config['datasets'][$method_name]))
         {
             $model_setup['datasets'] = 
                     $config['datasets'][$method_name];

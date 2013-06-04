@@ -13,7 +13,7 @@
                             <div class="clearfix">
                                     <input name='submit' type='submit' class='button red right large' style='float:right' value='Save'></input>
                                 </div>  
-                                <?php echo display_field($fields['DateCreated']); ?>
+                                <?php echo display_field($fields['DateCreated'], array('value' => convert_DATE($fields['DateCreated']['value'], 'from_DATE'))); ?>
                                 <?php echo display_field(
                                         $fields['_ItemBought'], 
                                         array('options' => array(

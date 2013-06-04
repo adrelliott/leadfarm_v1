@@ -39,6 +39,14 @@ class Search_model extends CRM_Model {
         
     }
     
+    /*Method to search for orders
+     * 
+     */
+    
+    
+    
+    
+    
      /**
      * Performs the search and returns the results
      *
@@ -65,6 +73,14 @@ class Search_model extends CRM_Model {
         {
             if (substr($k, 0, 4) !== '_::_' && element('value', $a))
             {
+                //check for dates...
+                if (strpos($k, '::::') === TRUE)
+                {
+                    $array = convert_date_field($k, $a['value']);
+                    $k = $array['col_name'];
+                    $a['value'] = $array['value'];
+                }
+                
                 $operation = $this->_get_operation($a['operation']);
                 $where[] = $k . ' ' . $operation . ' ' . $this->db->escape ($a['value']);
                 //Do we need ot escape or are we doing this automacally????

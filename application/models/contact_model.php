@@ -24,6 +24,8 @@ class Contact_model extends CRM_Model {
                 $this->current_ContactId = $this->data['view_setup']['ContactId'];
             }
         }*/
+        
+        if (DATAOWNER_ID == 22231) $this->order_by = 'LastName ASC';
     }
     
     function get_contacts_details() {

@@ -9,6 +9,10 @@ else
     class Contact extends CRM_Controller {
         
         public $controller_name = 'contact';
+        public $search_tables = array   //should this be private??
+            (
+                'contact', 'order'
+            );
 
         public function __construct()    {
              parent::__construct();
@@ -194,6 +198,38 @@ else
             
         }
         
+        public function report($report_type) {
+           $this->output->enable_profiler();
+             $retval = array();
+             $export = FALSE;
+
+             //First work out if we need to export the results as a CSV
+             if ($this->input->post('export')) $export = TRUE;
+
+             //Now work out what report type and load the right model
+             switch ($report_type)
+             {
+                 case 'order':
+                     //load order model
+                     $this->load->model('order_model');
+                     $retval = $this->order_model->get_orders_join($export);
+                     break;
+                 default:
+                     break;
+             }
+             
+             //Either force download the CSV or show the table
+             $this->data['view_setup']['tables']['search_results'] = $retval;
+             //print_array($retval);
+             
+            parent::report();
+            
+              $this->_load_view_data();
+            $this->_generate_view($this->data);
+            
+             //print_array($this->data, 1);
+        }
+        
         public function search($post_process = NULL) {
             $this->load->model('search_model');
             $this->data['tables']['search_results']['table_headers'] = array();
@@ -226,6 +262,105 @@ else
             $this->_generate_view($this->data);
             }
             //Make sure we store the query somewhere ready to save as a saved search
+            
+        }
+        
+        public function search_orders() {
+            //$this->output->enable_profiler();
+            $this->load->model('order_model');
+            $results = $this->order_model->get_orders_join();
+            
+            //now paginate and also give option to export as csv
+            $this->load->library('pagination');
+
+            $config['base_url'] = site_url('contact/search_orders');
+            $config['total_rows'] = 200;
+            $config['per_page'] = 20; 
+
+            $this->pagination->initialize($config); 
+
+            echo $this->pagination->create_links();
+        }
+        
+        function search_new($table_name) {
+            
+            $this->output->enable_profiler();
+            $retval = '';
+            $export = FALSE;
+            //Validate the input
+            /*if ( ! in_array($table_name, $this->search_tables))
+            {
+                show_error ('Not allowed to search that table');
+                return;
+            }*/
+            
+            //Is export ticked? force download of file 
+            if ($this->input->post('export')) $export = TRUE;
+            
+            switch ($table_name)
+            {
+                case 'order':
+                    $this->load->model('order_model');
+                    $retval = $this->order_model->get_orders_join($export);
+            }
+            
+            
+            
+            //Set up pagination
+            $this->load->library('pagination');
+
+            $config['base_url'] = site_url('contact/search_new/' . $table_name);
+            $config['total_rows'] = 200;
+            $config['per_page'] = 20; 
+            $config['uri_segment'] = 4; 
+
+            
+            //View the results
+           print_array($retval);
+        }
+        
+        function convert_dates($input, $format = 'd/m/Y') {
+            $retval = FALSE;
+            
+            switch ($format)
+            {
+                case 'Y-m-d':
+                    $retval = join('-',array_reverse(explode('/',$input)));
+                    break;
+                case 'Y-m-d h:i':
+                    $retval = explode(' ', $input);
+                    $etval = join('-',array_reverse(explode('/',$retval[0]))) . $retval[1];
+                    break;
+                case 'Y-m-d h:i:s':
+                    $retval = join('-',array_reverse(explode('/',$input)));
+                    break;
+                
+            }
+            
+        }
+        function testing_dates() {
+            $this->load->helper('date');
+            
+            $dates = array
+                    (
+                         'from_db' => array
+                        (
+                            'DATE' => '2012-05-25',
+                            'DATETIME' => '2012-05-25 23:34:55',
+                            'TIMESTAMP' => '2012-05-25 23:34:55',
+                        ),
+                        'from_form' => array
+                        (
+                            'DATE' => '25/05/1977',
+                            'DATETIME' => '25/05/1977 23:02',
+                            'TIMESTAMP' => '25/05/1977 23:02:12',
+                        ),
+                    );
+           
+            //convert to_DATE
+            echo '<br/>this is converting 25/05/1977 to DATE for db: ',convert_DATE('25/05/1977');
+            echo '<br/>this is converting from 1977-05-25 for form: ',convert_DATE('1977-05-25', 'from_DATE');
+            
             
         }
     }

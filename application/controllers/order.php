@@ -26,6 +26,8 @@ else
 
             $this->_load_view_data($rID);    //retrieves and process all data for view    
                 // Generate the view!
+            
+            
             $this->load_view($pull);
             }
 
@@ -51,6 +53,8 @@ else
             //clean input
             $input = clean_data($this->input->post());
             $input['ContactId'] = $ContactId;
+            $input['DateCreated'] = convert_DATE($input['DateCreated'], 'to_DATE');
+            
 
             //save record
             $rID = $this->add_record($input, $rID);

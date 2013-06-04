@@ -390,6 +390,32 @@ class CRM_Model extends CI_Model {
        return $this->save($input, $rID);
     }
     
+     function get_operation($operation) {
+        switch ($operation)
+        {
+            case 'equal':
+                $operation = ' = ';
+                break;
+
+            case 'notequal':
+                $operation = ' != ';
+                break;
+
+            case 'greaterthan':
+                $operation = ' > ';
+                break;
+
+            case 'lessthan':
+                $operation = ' < ';
+                break;
+
+            default:
+                $operation = ''; //what should this be??????
+        }
+        
+        return $operation;
+    }
+    
     /*
      *  public function get_email_fields_old($recipients, $fields, $template_type = 'Email') {
         //This is used when we send out emails from a template

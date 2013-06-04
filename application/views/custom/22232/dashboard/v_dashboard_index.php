@@ -78,12 +78,9 @@
                     </tbody>
                 </table>
                 <div class="margin_top_15"></div>
-                <h4>Reports:</h4>
-                <?php
-                $this->table->set_template_custom(array('anchor_uri' => 'reports/view/edit'));
-                $this->table->set_heading_custom($tables['reports']['table_headers']);
-                echo $this->table->generate_custom($tables['reports']['table_data']);
-                ?>
+                 <div class="clearfix">
+                    <a href="<?php echo site_url('/search'); ?>" class="large red button right"><span>Create New Search</span></a>
+                </div>
 
             </div>
         </div>        

@@ -123,6 +123,14 @@ $(function() {
       dateFormat: 'dd/mm/yy'
     })
     
+    // Datepicker with 5 years either way
+    $('.datepicker_thisyear').datepicker({
+       changeMonth: true,
+      changeYear: true,
+      //defaultDate: '01/01/75',
+      dateFormat: 'dd/mm/yy'
+    })
+    
     // Datepicker
     $('.datepicker_dob').datepicker({
       changeMonth: true,
