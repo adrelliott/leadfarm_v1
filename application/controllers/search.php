@@ -30,7 +30,7 @@ else
         public function report($report_type, $start = 0) {
              $retval = array();
              $export = FALSE;
-             
+//print_array($this->input->post(), 1);
              //set up config for pagination
              $config = array();
              $config['base_url'] = base_url('search/report/' . $report_type);

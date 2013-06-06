@@ -6,6 +6,33 @@ $criteria = array(
     'greaterthan' => 'Is greater than',
     'lessthan' => 'Is less than'
 );
+
+$order_types = array(
+                'Adult Membership' => 'Adult Membership', 
+                'Junior Membership' => 'Junior Membership', 
+                'Season Ticket (Adult)' => 'Season Ticket (Adult)', 
+                'Season Ticket (Junior)' => 'Season Ticket (Junior) ', 
+                'Community Shares' => 'Community Shares',
+                'TreasureLine' => 'TreasureLine', 
+                'Holiday Draw' => 'Holiday Draw',
+                '127 Club' => '127 Club',
+                'Match Sponsor' => 'Match Sponsor',
+                'Matchball Sponsor' => 'Matchball Sponsor',
+                'Matchday Programme Sponsor' => 'Matchday Programme Sponsor',
+                'Programme Adverts' => 'Programme Adverts',
+                'Pitchside Hording' => 'Pitchside Hording',
+                'Pink Sponsorship' => 'Pink Sponsorship',
+                'Newsletter Sponsor' => 'Newsletter Sponsor',
+                'Community Sponsor' => 'Community Sponsor',
+                'Youth Team Sponsor' => 'Youth Team Sponsor',
+                'Women Team Sponsor' => 'Women Team Sponsor',
+                'Player Sponsor' => 'Player Sponsor',
+                'Club Donations' => 'Club Donations', 
+                'DF Donations' => 'DF Donations', 
+                'Club Events' => 'Club Events', 
+                'Merchanidise' => 'Merchanidise', 
+                'Away Match Travel' => 'Away Match Travel'
+    );
 ?>
 <div class="row clearfix">
     <div class="col_12">
@@ -20,9 +47,15 @@ $criteria = array(
             </ul>
             <div class="widget_inside">
                 <div id="tab-1">
+                    
                     <?php     
                         if (element('tables', $this->data['view_setup'])) { ?>
-                        <?php echo '<span class="notification information">' . $this->data['view_setup']['tables']['search_results']['count'] . ' records found. (<a href="' . site_url('search/export_as_csv/order') . '">Download as CSV</a>)</span>'; ?>
+                    <div class="clearfix margin_bottom_25">
+                        <?php echo '<span class="notification information col_9">' . $this->data['view_setup']['tables']['search_results']['count'] . ' records found. (<a href="' . site_url('search/export_as_csv/order') . '">Download as CSV</a>)</span>'; ?>
+                        <a href="<?php echo site_url('/search'); ?>" class="large red button right col_2 last">
+                            <span>Create New Search</span>
+                        </a>
+                    </div>
                             <table>
                                 <tr>
                                     <?php foreach ($this->data['view_setup']['tables']['search_results']['table_headers'] as $col => $label): ?>
@@ -40,7 +73,7 @@ $criteria = array(
                             <?php echo '<h4 class="margin_top_15">' . $this->data['view_setup']['tables']['search_results']['pagination_links'] . '</h4>'; ?>
                         <?php } else echo '<h3>Click on a tab to start a search</h3>'; ?>
                     <div class="clearfix">
-                    <a href="<?php echo site_url('/search'); ?>" class="large red button right"><span>Create New Search</span></a>
+                    <a href="<?php echo site_url('/search'); ?>" class="large red button left"><span>Create New Search</span></a>
                 </div>
                 </div>
                 <div id="tab-2">
@@ -48,32 +81,36 @@ $criteria = array(
                     <h3 class="index toggle_icon" id="option1_toggle">Orders...</h3>
                     <div class="hide_toggle" id="option1">
                             <p>What would you like your report to show?</p>
-                        <div class="col_8">
+                        <div class="col_12">
                             <div class="form">
                                 <?php echo form_open('search/report/order'); ?>
                                 <div class="clearfix" id="">
-                                    <label for="order_type" class="" id="">What order type do you want to see?</label>
+                                    <label for="order_type" class="" id="">Order Type: </label>
                                     <div class="input " id="">
-                                        <h4><?php echo form_dropdown('order_type', array('0' => 'All Order Types', 'Adult Membership' => 'Adult Membership', 'Junior Membership' => 'Junior Membership'), '0'); ?></h4>
+                                        <h4>Let's see all contacts that have
+                                        <?php //echo form_dropdown('order_type_operator[]',array('equal' => 'have got'), 'equal');?>
+                                        <?php echo form_dropdown('order_type', $order_types, '0'); ?> in season 
+                                        <?php echo form_dropdown('order_expire', array('0' => 'Any', '2005/06' => '2005/06', '2006/07' => '2006/07','2007/08' => '2007/08', '2009/10' => '2009/10', '2010/11' => '2011/12', '2012/13' => '2012/13', '2013/14' => '2013/14'), '0'); ?></h4>
+                                        
+                                        <?php //echo form_dropdown('order_type_operator[]',array('0' => '', 'equal' => 'have got', 'notequal' => 'have not got'), '0');?>
+                                        <?php //echo form_dropdown('order_type[]',array_merge(array('0' => ''),$order_types), '0'); ?> 
+                                        <?php //echo form_dropdown('order_expire[]', array('' => '', '0' => 'Any', '2005/06' => '2005/06', '2006/07' => '2006/07','2007/08' => '2007/08', '2009/10' => '2009/10', '2010/11' => '2011/12', '2012/13' => '2012/13', '2013/14' => '2013/14'), '0'); ?>
+                                        
                                     </div>
                                 </div>
                                 <div class="clearfix" id="">
                                     <label for="order_date_operator" class="" id="">Restrict by Order Date?</label>
                                     <div class="input " id="">
-                                        <h4>Order date: <?php echo form_dropdown('order_date_operator',  array(
+                                        <h4>...who's order date is <?php echo form_dropdown('order_date_operator',  array(
     '0' => 'Any',
-    'equal' => 'Is on',
-    'greaterthan' => 'Is after',
-    'lessthan' => 'Is before'
+    'equal' => 'on',
+    'greaterthan' => 'after',
+    'lessthan' => 'before',
+    'between' => 'between'
 ), '0');
                                         echo form_input('order_date_value', '','class="datepicker_thisyear" readonly="true"');
+                                        echo ' and ' . form_input('order_date_value_between', '','class="datepicker_thisyear" readonly="true"') . "(Only use for 'between')";
                                         ?></h4>
-                                    </div>
-                                </div>
-                                <div class="clearfix" id="">
-                                    <label for="order_expire" class="" id="">What Season?</label>
-                                    <div class="input " id="">
-                                        <h4><?php echo form_dropdown('order_expire', array('0' => 'Any', '2010/11' => '2011/12', '2012/13' => '2012/13', '2013/14' => '2013/14')); ?></h4>
                                     </div>
                                 </div>
                                 <div class="clearfix">

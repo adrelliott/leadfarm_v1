@@ -128,7 +128,7 @@ $(function() {
        changeMonth: true,
       changeYear: true,
       //defaultDate: '01/01/75',
-      dateFormat: 'dd/mm/yy'
+      dateFormat: 'dd/mm/yy' 
     });
     
     // Datepicker
