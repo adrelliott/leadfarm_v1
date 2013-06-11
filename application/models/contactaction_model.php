@@ -103,7 +103,14 @@ class Contactaction_model extends CRM_Model {
                switch ($k)
                 {
                     case 'role_type':
+                        /*if ($search_criteria['role_type2'])
+                        {
+                            $criteria['contactaction._ActionSubtype'] 
+                        }*/
                         $criteria['contactaction._ActionSubtype'] = $v;
+                        break;
+                    case 'role_type_2':
+                        if ($v) $this->db->where('contactaction._ActionSubtype', $v);
                         break;
                     
                     case 'role_expire':
@@ -127,6 +134,7 @@ class Contactaction_model extends CRM_Model {
        //$this->order_by = 'contact.LastName ASC';
        if ($limit) $this->db->limit($limit, $start);
         //foreach ($criteria as $k => $array) $this->db->where($array);
+       //print_array($criteria, 1);
        $this->db->where($criteria);
        $this->db->where('contact._ActiveRecordYN', 1);
        $this->db->where('contactaction._ActiveRecordYN', 1);

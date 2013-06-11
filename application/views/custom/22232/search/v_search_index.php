@@ -150,13 +150,19 @@ $role_types = array(
                                     <div class="input " id="">
                                         <h4>Let's see all volunteers who were a
                                         <?php //echo form_dropdown('order_type_operator[]',array('equal' => 'have got'), 'equal');?>
-                                        <?php echo form_dropdown('role_type', $role_types, '0'); ?> in season 
-                                        <?php echo form_dropdown('order_expire', array('0' => 'Any', '2005/06' => '2005/06', '2006/07' => '2006/07','2007/08' => '2007/08', '2009/10' => '2009/10', '2010/11' => '2011/12', '2012/13' => '2012/13', '2013/14' => '2013/14'), '0'); ?></h4>
+                                        <?php echo form_dropdown('role_type', $role_types, '0'); ?> and a <?php echo form_dropdown('role_type_2', $role_types, '0'); ?> (optional)
+                                       
                                         
                                         <?php //echo form_dropdown('order_type_operator[]',array('0' => '', 'equal' => 'have got', 'notequal' => 'have not got'), '0');?>
                                         <?php //echo form_dropdown('order_type[]',array_merge(array('0' => ''),$order_types), '0'); ?> 
                                         <?php //echo form_dropdown('order_expire[]', array('' => '', '0' => 'Any', '2005/06' => '2005/06', '2006/07' => '2006/07','2007/08' => '2007/08', '2009/10' => '2009/10', '2010/11' => '2011/12', '2012/13' => '2012/13', '2013/14' => '2013/14'), '0'); ?>
                                         
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <label for="role_type" class="" id="">Season</label>
+                                    <div class="input " id="">
+                                        <h4>in season  <?php echo form_dropdown('order_expire', array('0' => 'Any', '2005/06' => '2005/06', '2006/07' => '2006/07','2007/08' => '2007/08', '2009/10' => '2009/10', '2010/11' => '2011/12', '2012/13' => '2012/13', '2013/14' => '2013/14'), '0'); ?></h4>
                                     </div>
                                 </div>
                                 <div class="clearfix">
