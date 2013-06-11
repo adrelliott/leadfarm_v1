@@ -150,7 +150,8 @@ $role_types = array(
                                     <div class="input " id="">
                                         <h4>Let's see all volunteers who were a
                                         <?php //echo form_dropdown('order_type_operator[]',array('equal' => 'have got'), 'equal');?>
-                                        <?php echo form_dropdown('role_type', $role_types, '0'); ?> and a <?php echo form_dropdown('role_type_2', $role_types, '0'); ?> (optional)
+                                        <?php echo form_dropdown('role_type', $role_types, '0'); ?> 
+                                        <?php //echo form_dropdown('role_type_2', $role_types, '0'); ?> (optional)
                                        
                                         
                                         <?php //echo form_dropdown('order_type_operator[]',array('0' => '', 'equal' => 'have got', 'notequal' => 'have not got'), '0');?>
