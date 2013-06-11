@@ -40,6 +40,7 @@ else
              $start = $this->uri->segment(4);
 
              //Do the search
+             $this->session->set_userdata('report_type', $report_type);
              $retval = $this->do_search(FALSE, $limit, $start, $report_type);
              $config['total_rows'] = $retval['count'];
                      
@@ -82,6 +83,12 @@ else
                      //load order model
                      $this->load->model('order_model');
                      $retval = $this->order_model->get_orders_join($export, $limit, $start);
+                     //$config['total_rows'] = $this->order_model->record_count();
+                     break;
+                 case 'role':
+                     //load order model
+                     $this->load->model('contactaction_model');
+                     $retval = $this->contactaction_model->get_roles_join($export, $limit, $start);
                      //$config['total_rows'] = $this->order_model->record_count();
                      break;
                  default:

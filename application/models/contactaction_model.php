@@ -7,6 +7,55 @@
  */
 
 class Contactaction_model extends CRM_Model {
+     public $fields_for_search = array
+            (
+                'contact.Id' => 'cId',
+                'contact.FirstName' => 'First Name',
+                'contact.LastName' => 'Last Name',
+                'contactaction.ContactId' => 'CID',
+                'contactaction._ActionSubtype' => 'Role',
+                'contactaction._ValidUntil' => 'Season',
+                //'contactaction.Cread' => 'Date Created',
+            );
+    public $fields_for_export = array
+            (
+                'contact.Id' => 'cId',
+                'contact._IsOrganisationYN' => 'Org YN',
+                'contact.Title' => 'Title',
+                'contact.FirstName' => 'First Name',
+                'contact.LastName' => 'Last Name',
+                'contact.Nickname' => 'Known As',
+                'contact.Email' => 'Email 1',
+                'contact.EmailAddress2' => 'Email 2',
+                'contact._Gender' => 'Gender',
+                'contact.Birthday' => 'DoB',
+                'contact._LegacyMembershipNo' => 'Memb No',
+                'contact._OrganisationName' => 'Org Name',
+                'contact.StreetAddress1' => 'Address 1',
+                'contact.StreetAddress2' => 'Address 2',
+                'contact._StreetAddress3' => 'Address 3',
+                'contact.City' => 'Town',
+                'contact.State' => 'County',
+                'contact.Country' => 'Country',
+                'contact.PostalCode' => 'Postcode',
+                'contact.Phone1' => 'Landline',
+                'contact.Phone2' => 'Home',
+                'contact.Phone3' => 'Mobile',
+                'contact.Phone4' => 'Overseas',
+                'contact._TwitterName' => 'Twitter',
+                'contact._OptinEmailYN' => 'Email Opt In YN',
+                'contact._OptinSmsYN' => 'SMS Opt In YN',
+                'contact._OptinTwitterYN' => 'Twitter Opt In YN',
+                'contact._OptinSurfaceMailYN' => 'Post Opt In YN',
+                'contact._OptinNewsletterYN' => 'Newsletter Opt In YN',
+                'contact._OptinMerchandiseYN' => 'Mechandise Opt In YN',
+                'contact._OptinOtherYN' => 'Away Match Opt In YN',
+                'contactaction.ContactId' => 'CID',
+                'contactaction._ActionSubtype' => 'Role',
+                'contactaction._ValidUntil' => 'Season',
+                'contact._ActiveRecordYN' => 'Active_record',
+                'contactaction._ActiveRecordYN' => 'Active_record',
+            );
 
     function __construct (){
         //parent::__construct();
@@ -30,6 +79,89 @@ class Contactaction_model extends CRM_Model {
             $this->current_UserId = $this->data['view_setup']['user_data']['UserId'];
         }
     }
+    
+    public function get_roles_join($export = FALSE, $limit, $start) {
+       $criteria = array();
+       
+       if ($this->input->post())
+       {
+           $search_criteria = $this->input->post();
+       }
+       elseif ($this->session->userdata('search_criteria'))
+       {
+           $search_criteria = $this->session->userdata('search_criteria');
+       }
+       else return FALSE;
+       
+       //print_array($search_criteria);
+       
+       //Get criteria
+       foreach ($search_criteria as $k => $v)
+       {
+           if ($v !== '0')
+           {
+               switch ($k)
+                {
+                    case 'role_type':
+                        $criteria['contactaction._ActionSubtype'] = $v;
+                        break;
+                    
+                    case 'role_expire':
+                        $criteria['contactaction._ValidUntil'] = $v;
+                        break;
+
+                    default:
+                        break;
+                }
+           }
+           
+       }
+       
+       //print_array($criteria, 1,'criteria');
+       $this->session->set_userdata('search_criteria', $search_criteria);
+       //$_SESSION['test'] = 1;
+       //Set up & do query
+       if ( ! $export) $this->db->select(array_keys($this->fields_for_search));
+       else $this->db->select(array_keys($this->fields_for_export));
+       
+       //$this->order_by = 'contact.LastName ASC';
+       if ($limit) $this->db->limit($limit, $start);
+        //foreach ($criteria as $k => $array) $this->db->where($array);
+       $this->db->where($criteria);
+       $this->db->where('contact._ActiveRecordYN', 1);
+       $this->db->where('contactaction._ActiveRecordYN', 1);
+       $this->db->join('contact', 'contact.Id = contactaction.ContactId');
+       
+       if ($export)
+       {
+            $retval['result'] = $this->db->get($this->table_name);
+            $this->load->dbutil();
+            $retval['csv'] = $this->dbutil->csv_from_result($retval['result'], ",","\n");
+       }
+       else
+       {
+            $retval['table_data'] = $this->db->get($this->table_name)->result_array();
+            
+            //finally, turn array inot one that's understood by the table function
+            foreach ($this->fields_for_search as $col => $label)
+            {
+                $boom = '';
+                $boom = explode('.', $col);
+                $retval['table_headers'][$boom[1]] = $label;
+            }
+       }
+       
+       //do count
+        $this->db->where($criteria);
+        $this->db->from($this->table_name);
+       $this->db->where('contact._ActiveRecordYN', 1);
+       $this->db->where('contactaction._ActiveRecordYN', 1);
+        $this->db->join('contact', 'contact.Id = contactaction.ContactId');
+        $retval['count'] = $this->db->count_all_results();
+       
+       return $retval;
+    }
+    
     
     /*function add($input, $rID) {
        if ($rID == 'new')

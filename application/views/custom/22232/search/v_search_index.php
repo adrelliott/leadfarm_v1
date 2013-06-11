@@ -33,6 +33,18 @@ $order_types = array(
                 'Merchanidise' => 'Merchanidise', 
                 'Away Match Travel' => 'Away Match Travel'
     );
+$role_types = array(
+        'Volunteer (Office)' => 'Volunteer (Office)', 
+        'Volunteer (Matchday)' => 'Volunteer (Matchday)', 
+        'Paid Office Staff' => 'Paid Office Staff', 
+        'Community Staff' => 'Community Staff', 
+        'Board Member' => 'Board Member', 
+        'External Supplier' => 'External Supplier', 
+        'Coaching/Backroom Staff' => 'Coaching/Backroom Staff', 
+        '1st Team Player' => '1st Team Player', 
+        'Youth Team Player' => 'Youth Team Player', 
+        'Women\'s Team Player' => 'Women\'s Team Player',
+    );
 ?>
 <div class="row clearfix">
     <div class="col_12">
@@ -51,7 +63,9 @@ $order_types = array(
                     <?php     
                         if (element('tables', $this->data['view_setup'])) { ?>
                     <div class="clearfix margin_bottom_25">
-                        <?php echo '<span class="notification information col_9">' . $this->data['view_setup']['tables']['search_results']['count'] . ' records found. (<a href="' . site_url('search/export_as_csv/order') . '">Download as CSV</a>)</span>'; ?>
+                        <?php 
+                        $report_type = $this->session->userdata('report_type');
+                        echo '<span class="notification information col_9">' . $this->data['view_setup']['tables']['search_results']['count'] . ' records found. (<a href="' . site_url('search/export_as_csv/' . $report_type) . '">Download as CSV</a>)</span>'; ?>
                         <a href="<?php echo site_url('/search'); ?>" class="large red button right col_2 last">
                             <span>Create New Search</span>
                         </a>
@@ -124,6 +138,33 @@ $order_types = array(
                     <h3 class="index toggle_icon" id="option2_toggle">Contacts...</h3>
                     <div class="hide_toggle" id="option2">
                         <p>Coming soon...</p>
+                    </div>
+                    <h3 class="index toggle_icon" id="option3_toggle">Roles...</h3>
+                    <div class="hide_toggle" id="option3">
+                            <p>What would you like your report to show?</p>
+                        <div class="col_12">
+                            <div class="form">
+                                <?php echo form_open('search/report/role'); ?>
+                                <div class="clearfix" id="">
+                                    <label for="role_type" class="" id="">Role Type: </label>
+                                    <div class="input " id="">
+                                        <h4>Let's see all volunteers who were a
+                                        <?php //echo form_dropdown('order_type_operator[]',array('equal' => 'have got'), 'equal');?>
+                                        <?php echo form_dropdown('role_type', $role_types, '0'); ?> in season 
+                                        <?php echo form_dropdown('order_expire', array('0' => 'Any', '2005/06' => '2005/06', '2006/07' => '2006/07','2007/08' => '2007/08', '2009/10' => '2009/10', '2010/11' => '2011/12', '2012/13' => '2012/13', '2013/14' => '2013/14'), '0'); ?></h4>
+                                        
+                                        <?php //echo form_dropdown('order_type_operator[]',array('0' => '', 'equal' => 'have got', 'notequal' => 'have not got'), '0');?>
+                                        <?php //echo form_dropdown('order_type[]',array_merge(array('0' => ''),$order_types), '0'); ?> 
+                                        <?php //echo form_dropdown('order_expire[]', array('' => '', '0' => 'Any', '2005/06' => '2005/06', '2006/07' => '2006/07','2007/08' => '2007/08', '2009/10' => '2009/10', '2010/11' => '2011/12', '2012/13' => '2012/13', '2013/14' => '2013/14'), '0'); ?>
+                                        
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <input name='submit' type='submit' class='button red right large' style='float:right' value='Start Search'></input>
+                                </div>
+                                <?php echo form_close(); ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
