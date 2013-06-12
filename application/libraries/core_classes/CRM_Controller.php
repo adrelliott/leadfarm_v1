@@ -186,14 +186,17 @@ class CRM_Controller extends CI_Controller {
         //return;
         $model_name = $array['model_name'];
         $table_name = explode('_', $model_name);
-        $this->db->where('_ActiveRecordYN', 1);
-        $this->db->where('_dID', DATAOWNER_ID);
+        //$this->db->where('_ActiveRecordYN', 1);
+        //$this->db->where('_dID', DATAOWNER_ID);
         
         switch ($array['stat_type'])
         {
             case 'count':
                 //straight count                
                 if ($array['model_params']) $this->db->where($array['model_params']);
+                
+                $this->db->where('_ActiveRecordYN', 1);
+                $this->db->where('_dID', DATAOWNER_ID);
                 return $this->db->count_all_results($table_name[0]);                
                 break;
             case 'count_FC_season':
@@ -202,6 +205,11 @@ class CRM_Controller extends CI_Controller {
                 if ( date('n') >= 7 ) $current_season = date(date('Y')) . '/' . date(date('y') + 1);
                 $this->db->where('_ValidUntil', $current_season);
                 if ($array['model_params']) $this->db->where($array['model_params']);
+                
+       $this->db->where('contact._ActiveRecordYN', 1);
+       $this->db->where('order._ActiveRecordYN', 1);
+       $this->db->where('order._dID', DATAOWNER_ID);
+       $this->db->join('contact', 'contact.Id = order.ContactId');
                 return $this->db->count_all_results($table_name[0]);                
                 break;
             case 'average':
