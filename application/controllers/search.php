@@ -101,5 +101,155 @@ else
         
         
         
+        
+        function search_older() {
+       $retval = FALSE;
+       $criteria = $this->input->post();
+       $fields = implode(',', array_keys($this->fields_for_search));
+       $table = $this->table_name;
+       //$sql = 'SELECT ' . $fields . ' FROM ' . $this->db->protect_identifiers($table);
+       //$join = ' JOIN `contact` ON `contact`.`Id` = `order`.`ContactId` ';
+       //$where = ' WHERE ';
+       
+       print_array($criteria);
+       
+       foreach ($criteria['order_type'] as $k => $v)
+       {
+           if ($v)
+           {
+               if ($criteria['order_type_operator'][$k] === 'notequal') 
+               {
+                  //$sql = "SELECT `c`.`Id`, `c`.`FirstName` FROM `contact` `c` WHERE NOT EXISTS ( SELECT `o`.`Id`, `o`.`ContactId`, `o`.`_ItemBought`, `o`.`_ValidUntil` FROM `order` `o` WHERE `o`.`ContactId` = `c`.`Id` AND `o`.`_ItemBought` = 'Junior Membership'  AND `o`.`_ValidUntil` = '2009/10' ) ";
+                  $sql = "SELECT `c`.`Id`, `c`.`FirstName` FROM `contact` `c` WHERE `Id` NOT IN ( SELECT `ContactId` FROM `order` WHERE `_ItemBought` = 'Junior Membership'  AND `_ValidUntil` = '2009/10') ";
+                  //$sql = " SELECT * FROM `contact` LEFT OUTER JOIN `order` ON ( `contact`.`Id` = `order`.`ContactId`) WHERE `order`.`ContactId` IS NULL ";
+                   
+                   
+                   
+                  
+               }
+               /*if ($criteria['order_type_operator'][$k] === 'notequal') 
+               {
+                   $table = 'contact';
+                   $sql = 'SELECT ' . $fields . ' FROM ' . $this->db->protect_identifiers($table);
+                   $and_or = '';
+                    $operator = $this->get_operation($criteria['order_type_operator'][$k]);
+                   $join = ' RIGHT OUTER JOIN `order` ON `order`.`ContactId` = `contact`.`Id` ';
+                   $where .= ' order._ItemBought ' . $operator . $this->db->escape($v) .' ';
+                   //$where .= ' AND order.Id IS NOT null';
+                   if ($criteria['order_expire'][$k]) $where .= ' AND order._ValidUntil = ' .  $this->db->escape($criteria['order_expire'][$k]) . ' ';
+               }*/
+               else
+               {
+                   $and_or = '';
+                    $operator = $this->get_operation($criteria['order_type_operator'][$k]);
+                    $where .= $and_or . ' _ItemBought ' . $operator . $this->db->escape($v) .' ';
+
+                    if ($criteria['order_expire'][$k]) $where .= ' AND _ValidUntil = ' .  $this->db->escape($criteria['order_expire'][$k]) . ' ';
+               }
+                   
+               
+//$and_or = $criteria['search_type_operator'][$k];
+               
+               
+           }
+       }
+       
+       //$where .= " AND order._ActiveRecordYN = '1' AND contact._ActiveRecordYN = '1' ";
+       //$where .= " AND order._dID = '22232' AND contact._dID = '22232' ";
+       
+       //$sql = $sql . $join . $where;
+       echo $sql;
+       $query = $this->db->query($sql);
+       
+       
+        echo '<h1>Total Results: ' . $query->num_rows() . '</h1>';
+        //print_array($query->result_array());
+   }
+   function search_old() {
+       $retval = FALSE;
+       $criteria = $this->input->post();
+       $fields = implode(',', array_keys($this->fields_for_search));
+       $table = $this->table_name;
+       $sql = 'SELECT ' . $fields . ' FROM ' . $this->db->protect_identifiers($table);
+       $join = ' JOIN `contact` ON `contact`.`Id` = `order`.`ContactId` ';
+       $where = ' WHERE ';
+       
+       print_array($criteria);
+       
+       foreach ($criteria['order_type'] as $k => $v)
+       {
+           if ($v)
+           {
+                //if 'order_type_operator' = notequal then we use a
+                //right outer join and exclude records where contact
+               
+               //right outer jopin gets me alll contacts
+               if ($criteria['order_type_operator'][$k] === 'notequal') 
+               {
+                   //$table = 'contact';
+                   //$sql = 'SELECT ' . $fields . ' FROM ' . $this->db->protect_identifiers($table);
+                   $and_or = '';
+                    $operator = $this->get_operation($criteria['order_type_operator'][$k]);
+                   $join = ' LEFT OUTER JOIN `contact` ON `order`.`ContactId` = `contact`.`Id` ';
+                   
+                   $join .= ' UNION ';
+                   $join .= ' SELECT * FROM `contact` ';
+                   $join .= ' RIGHT OUTER JOIN `contact` ON `order`.`ContactId` = `contact`.`Id` ';
+                   
+                   //$where .= ' order._ItemBought ' . $operator . $this->db->escape($v) .' ';
+                   //$where .= ' AND order.Id IS null';
+                   //if ($criteria['order_expire'][$k]) $where .= ' AND order._ValidUntil = ' .  $this->db->escape($criteria['order_expire'][$k]) . ' ';
+               }
+               /*if ($criteria['order_type_operator'][$k] === 'notequal') 
+               {
+                   $table = 'contact';
+                   $sql = 'SELECT ' . $fields . ' FROM ' . $this->db->protect_identifiers($table);
+                   $and_or = '';
+                    $operator = $this->get_operation($criteria['order_type_operator'][$k]);
+                   $join = ' RIGHT OUTER JOIN `order` ON `order`.`ContactId` = `contact`.`Id` ';
+                   $where .= ' order._ItemBought ' . $operator . $this->db->escape($v) .' ';
+                   //$where .= ' AND order.Id IS NOT null';
+                   if ($criteria['order_expire'][$k]) $where .= ' AND order._ValidUntil = ' .  $this->db->escape($criteria['order_expire'][$k]) . ' ';
+               }*/
+               else
+               {
+                   $and_or = '';
+                    $operator = $this->get_operation($criteria['order_type_operator'][$k]);
+                    $where .= $and_or . ' _ItemBought ' . $operator . $this->db->escape($v) .' ';
+
+                    if ($criteria['order_expire'][$k]) $where .= ' AND _ValidUntil = ' .  $this->db->escape($criteria['order_expire'][$k]) . ' ';
+               }
+                   
+               
+//$and_or = $criteria['search_type_operator'][$k];
+               
+               
+           }
+       }
+       
+       $where .= " AND order._ActiveRecordYN = '1' AND contact._ActiveRecordYN = '1' ";
+       $where .= " AND order._dID = '22232' AND contact._dID = '22232' ";
+       
+       $sql = $sql . $join . $where;
+       echo $sql;
+       $query = $this->db->query($sql);
+       
+       
+        echo '<h1>Total Results: ' . $query->num_rows() . '</h1>';
+        //print_array($query->result_array());
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+        
+        
     }
 }   

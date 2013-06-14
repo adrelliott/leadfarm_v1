@@ -408,9 +408,9 @@ class CRM_Model extends CI_Model {
             case 'lessthan':
                 $operation = ' < ';
                 break;
-
+            
             default:
-                $operation = ''; //what should this be??????
+                show_error('No valid operator sent');
         }
         
         return $operation;
