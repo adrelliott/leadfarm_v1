@@ -4427,6 +4427,20 @@ $config['campaign'] = Array
                         '_Type' => 'Campaign Type',
                     ),
                 ),
+                'broadcasts' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    //'data_source' => '', //The dataset name defined above
+                    'model_name' => 'broadcast_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'BroadcastName' => 'Broadcast Name',
+                        'Subject' => 'Subject Line',
+                    ),
+                ),
                 'get_all_templates' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
@@ -4514,6 +4528,20 @@ $config['campaign'] = Array
                         '__ActionType' => 'Action type',                       
                     ),
                 ),
+                'get_all_saved_searches' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'saved_search_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'Name' => 'Name',                   
+                    ),
+                ),
+                
                 'get_all_tags' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
@@ -4717,6 +4745,260 @@ $config['campaign'] = Array
         ),
     );
 
+$config['broadcast'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                
+            ),
+            'view' => array 
+            (  
+               
+                'get_all_saved_searches' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'saved_search_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'Name' => 'Name',                   
+                    ),
+                ),
+                'template_dropdown' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'template_model',
+                    'model_method' => 'template_dropdown_html', 
+                    'model_params' => NULL, 
+                    'fields' => array 
+                    (
+                        '__Id' => 'Id',
+                        '__Name' => 'Name',                       
+                        '__ActionType' => 'Action type',                        
+                    ),
+                ),
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'broadcast_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL, 
+                'dropdowns' => array    //or NULL
+                (
+                    'template_dropdown' => array
+                    (
+                        'source' => 'template_dropdown',    //which dataset are we using?
+                        'label' => array ('template_dropdown'),
+                        'label_separator' => '',
+                        'value' => 'template_dropdown',
+                    ),
+                    
+                ),
+                
+                'fields' => array 
+                (
+                    'Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'BroadcastName' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Broadcast name',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'BroadcastName',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'TemplateId' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Template Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'TemplateId',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                    'SavedSearchId' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'SavedSearchId',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'SavedSearchId',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    'Sql' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Sql',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Sql',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    'From_name' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'From',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'From_name',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    'From_email' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'From_email',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'From_email',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    'Subject' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Subject',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Subject',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                    'Content' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Content',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' rows=2',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'textarea',
+                        'name' => 'Content',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
+                ),                
+            ),
+        ),
+    );
 
 $config['tags'] = Array
     (

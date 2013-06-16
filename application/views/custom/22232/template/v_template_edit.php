@@ -19,7 +19,7 @@
                         <?php echo display_field($fields['__Subject']); ?>
                             <?php echo display_field($fields['__Content'], array
                                 ('label' => '
-                                    <p><strong>Available Tags:</strong></p>
+                                    <p><strong>Available Tags11:</strong></p>
                                     <p>{{Contact.FirstName}}</p>
                                     <p>{{Contact.LastName}}</p>
                                     <p>{{Contact.Id}}</p>

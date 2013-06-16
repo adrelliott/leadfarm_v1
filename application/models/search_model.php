@@ -32,7 +32,15 @@ class Search_model extends CRM_Model {
     }
     
     
-    function search() {
+    function search($sql) {
+        if ($sql) 
+        {
+            $results['table_data'] = $this->db->query($sql)->result_array();
+            $results['table_headers'] = $this->fields_for_search;
+            $results['Sql'] = $sql;
+            $results['count'] = count($results['table_data']);
+            return $results;
+        }
         //Set up the vars
         $fields = implode(',', array_keys($this->fields_for_search));
         $table = 'order'; 
@@ -70,12 +78,12 @@ class Search_model extends CRM_Model {
                     $sql .= " AND `contact`.`_ActiveRecordYN` = '1' "; 
                     $sql .= " AND `order`.`_dID` = '22232' "; 
                     $sql .= " AND `contact`.`_dID` = '22232' ";
-                    echo "<p>here comes where for row $k: $where</p>";
+                    //echo "<p>here comes where for row $k: $where</p>";
                     
                     $results = $this->db->query($sql)->result_array();
                      //manipulate results
-                    echo "<h1>No of orders in this table count of array is " . count($results) . "</h1>";
-                    print_array($results, 0, 'all order records (dups included)');
+                    //echo "<h1>No of orders in this table count of array is " . count($results) . "</h1>";
+                   // print_array($results, 0, 'all order records (dups included)');
                     
                 }
                 //...AND
@@ -97,12 +105,12 @@ class Search_model extends CRM_Model {
                     $sql .= " AND `contact`.`_ActiveRecordYN` = '1' "; 
                     $sql .= " AND `order`.`_dID` = '22232' "; 
                     $sql .= " AND `contact`.`_dID` = '22232' ";
-                    echo "<p>here comes where for row $k: $where</p>";
+                    //echo "<p>here comes where for row $k: $where</p>";
                     
                     $results = $this->db->query($sql)->result_array();
                      //manipulate results
-                    echo "<h1>No of orders in this table count of array is " . count($results) . "</h1>";
-                    print_array($results, 0, 'all order records (dups included)');
+                    //echo "<h1>No of orders in this table count of array is " . count($results) . "</h1>";
+                   // print_array($results, 0, 'all order records (dups included)');
                 }
                 else    //must be the first row
                 {
@@ -123,21 +131,24 @@ class Search_model extends CRM_Model {
                     $sql .= " AND `order`.`_dID` = '22232' "; 
                     $sql .= " AND `contact`.`_dID` = '22232' ";
                     
-                    echo "<p>here comes where for row $k: $where</p>";
+                    //echo "<p>here comes where for row $k: $where</p>";
                     
-                    $results = $this->db->query($sql)->result_array();
+                    $results['table_data'] = $this->db->query($sql)->result_array();
+                    $results['table_headers'] = $this->fields_for_search;
+                    $results['Sql'] = $sql;
                      //manipulate results
-                    echo "<h1>No of orders in this table count of array is " . count($results) . "</h1>";
-                    print_array($results, 0, 'all order records (dups included)');
+                    //echo "<h1>No of orders in this table count of array is " . count($results) . "</h1>";
+                    //print_array($results, 0, 'all order records (dups included)');
                     
                 }
                 
                 //echo "<p>here comes sql for row $k: $where</p>";
+                return $results;
             }
         }
         
         
-        print_array($search_criteria);
+        //print_array($search_criteria);
         
         //create super table with all orders and the contact details
         /*$sql = " SELECT $fields FROM " . $this->db->protect_identifiers($table);

@@ -1,42 +1,58 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
 //Test to see if we have a bespoke controller class configured in controller_config.php
 include('controller_config/init.php');
 if( bespoke_controller('Campaign') ) get_bespoke_controller();   //yup = go get it.
 else
 {   //nope? Use this default class then
-  
-    class Broadcast extends CRM_Controller {
-        
-        public $controller_name = 'broadcast';
-        
-        
 
-        public function __construct()    {
-             parent::__construct();
-             $this->output->enable_profiler();
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+/**
+ * Controller - broadcast
+ * @author Al Elliott
+ * 
+ * 
+ * 
+ */
+class Broadcast extends CRM_Controller {
+
+    public $controller_name = 'broadcast';
+
+    public function __construct() {
+        parent::__construct();
+        $this->output->enable_profiler();
+        $this->load->helper('step');
+    }
+
+    public function index($view_file = 'index') {
+        redirect(site_url('campaign'));
+    }
+
+    public function view($view_file, $rID = 'new', $pull = '') {
+        parent::view($view_file, $rID);
+
+        $this->_load_view_data($rID);    //retrieves and process all data for view            
+
+        //print_array($this->data, 1);
+        $sql = element('value', $this->data['view_setup']['fields']['Sql'], FALSE);
+        if ($rID !== 'new' && $sql)
+        {
+            $this->search($sql);
         }
-
-      public function index($view_file = 'index') {   
-            redirect(site_url('campaign'));
-       }
-
-        public function view($view_file, $rID, $pull = '') {  
-            parent::view($view_file, $rID);   
-
-            $this->_load_view_data($rID);    //retrieves and process all data for view            
-
-            $this->load_view($pull);
-        }
-        
-         public function add($view_file, $rID) {
+        //else $_SESSION['step_include'] = 1;
+        $this->load_view($pull);
+    }
+    
+    public function add($view_file, $rID = 'new') {
 
         //clean input
         $input = clean_data($this->input->post());
         
         //save record
-        $campId = $this->add_record($input, $rID);
-        $url = site_url ($this->controller_name . '/view/edit/' . $campId );
+        $Id = $this->add_record($input, $rID);
+        $url = site_url ($this->controller_name . '/view/' . $view_file . '/' . $Id );
 
         if ($this->input->is_ajax_request ()) {
             $response = array (
@@ -57,29 +73,25 @@ else
        
     }
     
+    function advance_step($step_number, $view_file, $rID) {
+        $_SESSION['step_include'] = $step_number;
+        redirect(site_url("broadcast/view/$view_file/$rID"));
+    }
     
-    
-    function search() {
+    function search($sql = FALSE) {
         $this->load->model('search_model');
-        $results = $this->search_model->search();
-        
-        
-       
-       
+        $results = $this->search_model->search($sql);
+        $this->data['view_setup']['tables']['recipients'] = $results;
+        if ($sql) return;
+        $this->view('edit');
     }
-
-
-       /*
-      public function view($view_file = 'edit', $rID) {  
-            parent::view($view_file, $rID);
-
-              // Generate the view!
-            $this->_generate_view($this->data);
-        }
-        */
-
-
-
-    }
+    
 }
-   
+
+
+
+}
+
+
+/* End of file broadcast.php */
+/* Location: ./application/controllers/XXXXXXXXXXXXXXXXXXXX/broadcast.php */

@@ -20,9 +20,9 @@
                 </div>
                 <div id="tab-2">
                     <?php
-                    $this->table->set_template_custom(array('anchor_uri' => 'campaign/view/edit'));
-                    $this->table->set_heading_custom($tables['campaigns']['table_headers']);
-                    echo $this->table->generate_custom($tables['campaigns']['table_data']);
+                    $this->table->set_template_custom(array('anchor_uri' => 'broadcast/view/edit'));
+                    $this->table->set_heading_custom($tables['broadcasts']['table_headers']);
+                    echo $this->table->generate_custom($tables['broadcasts']['table_data']);
                     ?>
                     <div class="margin_top_15"></div>
                     <div class="clearfix">

@@ -152,6 +152,14 @@ else
             
         }
         
+        public function ajax_feed_ci() {
+            $this->load->library('Datatables');
+        
+            $this->datatables->select('Id, FirstName, LastName, Nickname, PostalCode, Email, Phone1, Phone2, _LegacyMembershipNo');
+            $this->datatables->from('contact');
+            $data['json_result'] = $this->datatables->generate();
+            echo $data['json_result'];
+        }
         
         public function ajax_feed  () {
             //load the model & run the method
