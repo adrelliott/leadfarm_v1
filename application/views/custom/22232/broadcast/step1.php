@@ -1,3 +1,4 @@
+<?php $_SESSION['step_include'] = 1; ?>
 <h3 class="index toggle_icon" id="option1_toggle">Step 1: Choose Recipients...</h3>
 <?php
     if (isset($tables['recipients']['table_data']))

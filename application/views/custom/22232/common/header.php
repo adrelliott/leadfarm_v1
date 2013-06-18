@@ -48,7 +48,7 @@
         <script src="<?php echo site_url(); ?>assets/scripts/twipsy.js"></script>
 
         <!-- WYSIWYG Editor -->
-        <script src="<?php echo site_url(); ?>assets/scripts/ckeditor/ckeditor.js"></script>
+        <script src="<?php echo site_url(); ?>assets/scripts/ckeditor/ckeditor_3.4.2/ckeditor.js"></script>
 
         <script src="<?php echo site_url(); ?>assets/scripts/cleditor/jquery.cleditor.min.js"></script>
         <link rel="stylesheet" href="<?php echo site_url(); ?>assets/scripts/cleditor/jquery.cleditor.css" type="text/css" media="screen" />

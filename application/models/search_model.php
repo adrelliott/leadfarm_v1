@@ -37,8 +37,8 @@ class Search_model extends CRM_Model {
         {
             $results['table_data'] = $this->db->query($sql)->result_array();
             $results['table_headers'] = $this->fields_for_search;
-            $results['Sql'] = $sql;
-            $results['count'] = count($results['table_data']);
+                $results['Sql'] = $sql;
+                $results['count'] = count($results['table_data']);
             return $results;
         }
         //Set up the vars
