@@ -54,7 +54,7 @@
 <div class="widget_inside" id="option3">
     <H3>Either send a test email or send for real. (<a href="#" target="_blank">Preview email</a>)</h3>
     <div class="form">
-        <?php //echo form_open('broadcast/send/test/' . $view_setup['rID']); ?>
+        <?php echo form_open('broadcast/send/test/' . $view_setup['rID']); ?>
         <div class="clearfix">
             <label>First Name of Recipient</label>
             <div class="input">
@@ -72,14 +72,14 @@
                 <?php echo form_submit('submit', 'Send Test Email', 'class="button blue right"'); ?>
             </div>
         </div>
-        <?php //echo form_close(); ?>
+        <?php echo form_close(); ?>
     </div>
     
 </div>
 
 
 <div class="clearfix">
-    <a href="<?php echo base_url('/broadcast/advance_step/2/edit/' . $view_setup['rID']); ?>" class="button large red left">
+    <a href="<?php //echo base_url('/broadcast/advance_step/2/edit/' . $view_setup['rID']); ?>" class="button large red left">
         Back to Step 2...
     </a>
 

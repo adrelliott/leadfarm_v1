@@ -12,7 +12,7 @@
                     echo $this->table->generate_custom($tables['master_search']['table_data']); 
                 ?> 
                 <div class="col_5 last clearfix margin_top_15 right">                    
-                    <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contact/view/edit/new/new/0" class="large blue button right"><span>Create New Contact</span></a>
+                    <a href="<?php echo site_url( '/contact/view/edit/new/new/0' ); ?>" class="large blue button right"><span>Create New Contact</span></a>
                     <a href="<?php echo site_url() . DATAOWNER_ID; ?>/contact/view/edit/new/new/1" class="large button left"><span>Create New Organisation</span></a>
                 </div>
             </div>
