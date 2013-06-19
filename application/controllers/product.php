@@ -14,7 +14,12 @@ else
             parent::__construct();
         }
 
-
+ public function ajax_products($param = FALSE) {
+                $this->load->model('product_model');
+                $results = $this->product_model->get_products($param);
+                echo json_encode($results);
+                
+            }
         public function view($view_file = 'edit', $rID = 'new', $pull = '') {          
             $this->data['view_setup']['modal'] = TRUE;
             parent::view($view_file, $rID);   

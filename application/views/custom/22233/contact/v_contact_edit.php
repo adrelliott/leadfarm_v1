@@ -19,7 +19,8 @@
                         <?php //echo form_open('contact/add/0/' . $rID . '/' . $ContactId . '/0', 'class="ajax"' ); ?>
                         <?php echo form_open('contact/add/edit/' . $rID . '/' . $ContactId . '/0', 'class="ajax form_val"'); ?>
                         <!-- Form opened in fieldset file -->
-                                <?php include("fieldsets/v_contact_$fieldset.php");
+                                <?php //include("fieldsets/v_contact_$fieldset.php");
+                                include("fieldsets/v_contact_0.php");
                                     //v_contact_0 = contact, ..._1  org ?>
                                 
                                 <span class="notification done" style="display:none">Record Updated!</span>

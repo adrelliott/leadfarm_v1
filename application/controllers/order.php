@@ -30,6 +30,8 @@ else
             
             $this->load_view($pull);
             }
+            
+           
 
         //private function _update_memb_number($ContactId) {
          private function _update_memb_number($ContactId) {

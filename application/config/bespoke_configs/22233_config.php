@@ -241,20 +241,21 @@ $config['dashboard'] = Array
                     'include_in_query' => TRUE, //TRUE or FALSE
                     'data_source' => 'orders', //The dataset name defined in this file
                     'model_name' => 'order_model',
-                    'model_method' => 'get_all_records',
+                    //'model_method' => 'get_all_records',
+                    'model_method' => 'joinon_Contact',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
                             //'ActionType =' => 'Booking', 
                         ), 
                     'fields' => array 
                     (
-                        'Id' => '#',
-                        'OrderTitle' => 'Order Title    ',
-                        'ContactId' => 'ContactId',
-                        'TotalPrice_A' => '£',
-                        'DateCreated' => 'Date',
+                        'order.Id' => '#',
+                        'order.OrderTitle' => 'Order Title    ',
+                        'order.ContactId' => 'ContactId',
+                        'order.TotalPrice_A' => '£',
+                        'order.DateCreated' => 'Date',
                         //'FirstName' => 'First Name',
-                        //'LastName' => 'Last Name',
+                        'contact.LastName' => 'Last Name',
                         //'PostalCode' => 'Postcode',
                     ),
                 ),
@@ -665,6 +666,34 @@ $config['contact'] = Array
                         'type' => 'text',
                         'name' => '_OrganisationName',
                         'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
+                     '__Sector' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Organisation Type',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'select',
+                        'name' => '__Sector',
+                        'helpText' => '',
+                        'options' => array(
+                            'Individual' => 'Individual',
+                            'Care Home' => 'Care Home',
+                            'Hospital' => 'Hospital',
+                            'Library' => 'Library',
+                            'Other' => 'Other'
+                        ),
                         'length' => '',
                         'HTML_before' => '',
                         'HTML_after' => '',  

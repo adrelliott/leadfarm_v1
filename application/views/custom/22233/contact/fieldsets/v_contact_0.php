@@ -1,7 +1,7 @@
 <?php $save_button = '<div class="clearfix"><input name="submit" type="submit" class="button blue right small" value="Save"></input></div>'; ?>
 
 <div class="form">
-    <?php echo display_field($fields['_IsOrganisationYN']); ?>  
+    <?php display_field($fields['__Sector']); ?>  
     <?php display_field($fields['Title']); ?>
     <?php display_field($fields['FirstName']); ?>
     <?php display_field($fields['LastName']); ?>
@@ -12,8 +12,8 @@
 <div class="form margin_top_15">
     <?php display_field($fields['Email']); ?>
     <?php display_field($fields['EmailAddress2']); ?>
-    <?php display_field($fields['_Gender']); ?>
-    <?php display_field($fields['Birthday']); ?>
+    <?php //display_field($fields['_Gender']); ?>
+    <?php //display_field($fields['Birthday']); ?>
     <?php display_field($fields['_LegacyMembershipNo'], array('value' => $rID)); ?>
     <?php echo $save_button; ?>
 </div>

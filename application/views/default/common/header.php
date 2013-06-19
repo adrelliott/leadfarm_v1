@@ -47,6 +47,12 @@
 
         <!-- Custom Tooltips -->
         <script src="<?php echo site_url(); ?>assets/scripts/twipsy.js"></script>
+        
+        <!-- Invoicing -->
+        <script src="<?php echo site_url(); ?>assets/scripts/invoicing/js/mioinvoice-scripts.min.js"></script>
+       <!--<link href="<?php //echo site_url(); ?>assets/scripts/invoicing/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php //echo site_url(); ?>assets/scripts/invoicing/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php //echo site_url(); ?>assets/scripts/invoicing/css/themes/base/jquery.ui.all.css" rel="stylesheet">-->
 
         <!-- WYSIWYG Editor -->
         <script src="<?php echo site_url(); ?>assets/scripts/ckeditor/ckeditor.js"></script>

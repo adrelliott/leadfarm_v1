@@ -4,6 +4,7 @@
             <div class="widget clearfix tabs">
                 <ul>
                     <li><h2><a href="#tab-1">Add a Purchase</a></h2></li>
+                    <li><h2><a href="#tab-2">Add a Purchase</a></h2></li>
                 </ul>							
                 <div class="widget_inside">
                     <div id="tab-1"><!-- Start of tab 1 -->
@@ -55,6 +56,85 @@
                             <?php echo form_close(); ?>
                         </div>
                     </div>
+                     <div id="tab-2"><!-- Start of tab 2 -->
+                         <?php echo form_open( "/order/add/edit/$rID/$ContactId", 'class="ajax"' ) ; ?>
+                         <div class="page-header">
+                             <div id="alert"></div>
+                             <div class="row-fluid">
+                                 <h3>Create/edit a Purchase for this contact</h3>
+                                <?php echo display_field($fields['DateCreated']); ?>
+                             </div>
+                         </div>
+                         <div class="row-fluid">
+                             <form id="itemsForm">
+
+                                 <table class="table table-striped" id="itemsTable">
+                                     <thead>
+                                         <tr>
+                                             <th></th>
+                                             <th>Item Code</th>
+                                             <th>Description</th>
+                                             <th>Qty</th>
+                                             <th>Price</th>
+                                             <th>Total</th>
+                                         </tr>
+                                     </thead>
+                                     <tbody>
+                                         <tr class="item-row">
+                                             <td></td>
+                                             <td><input type="text" name="itemCode[]" value="" class="input-mini" id="itemCode"
+                                                        tabindex="1"/>
+                                             </td>
+                                             <td><input type="text" name="itemDesc[]" value="" class="input-large" id="itemDesc"
+                                                        readonly="readonly"/></td>
+                                             <td><input type="text" name="itemQty[]" value="" class="input-mini" id="itemQty" tabindex="2"/>
+                                             </td>
+                                             <td>
+                                                 <div class="input-prepend input-append"><span class="add-on">£</span><input
+                                                         name="itemPrice[]"
+                                                         class=" input-small"
+                                                         id="itemPrice"
+                                                         type="text"></div>
+                                             </td>
+                                             <td>
+                                                 <div class="input-prepend input-append"><span class="add-on">£</span><input
+                                                         name="itemLineTotal[]" class=" input-small" id="itemLineTotal" type="text"
+                                                         readonly="readonly"></div>
+                                             </td>
+                                         </tr>
+                                     </tbody>
+                                 </table>
+
+                             </form>
+
+                             <a href="#" id="addRow" class="btn btn-primary"><i class="icon-plus icon-white"></i> Add Item</a>
+
+                             <hr class="">
+
+                         </div>
+
+
+                         <div class="row-fluid">
+                             <div class="span8">
+                                 <div class="alert alert-info"> </div>
+                             </div>
+                             <div class="span4">
+                                 <h3 class="pull-right">
+                                     <span>Order Total:</span>
+                                     <?php //<span id="invGrandTotal"></span>?>
+                                 </h3>
+                             </div>
+                         </div>
+                         <?php //echo display_field($fields['TotalPrice_A']); ?>
+                         
+                         <?php echo form_input('invGrandTotal', '', 'id="invGrandTotal'); ?>
+                        <?php echo display_field($fields['PaymentMethod']); ?>
+                        <?php echo display_field($fields['OrderNotes']); ?> 
+                         <div class="clearfix">
+                                    <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
+                        </div>
+                        <?php echo form_close(); ?>
+                     </div>
                 </div>                
             </div>
         </div>      

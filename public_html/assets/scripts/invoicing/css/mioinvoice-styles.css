@@ -1,0 +1,143 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+
+@import url(http://fonts.googleapis.com/css?family=Economica|Unica+One|Baumans|Roboto+Condensed:400,700|Didact+Gothic|Open+Sans+Condensed:300);
+
+/*font-family: 'Economica', sans-serif;*/
+/*font-family: 'Unica One', cursive;*/
+/*font-family: 'Baumans', cursive;*/
+/*font-family: 'Roboto Condensed', sans-serif;*/
+/*font-family: 'Didact Gothic', sans-serif;*/
+/*font-family: 'Open Sans Condensed', sans-serif;*/
+
+html,
+body {
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 40px;
+
+    /* The html and body elements cannot have any padding or margin. */
+}
+input[type="text"] {
+    margin-bottom: 0!important;
+}
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 60px;
+}
+
+#footer {
+    background-color: #f5f5f5;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 700px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* Custom page CSS - Override Bootstrap CSS
+-------------------------------------------------- */
+
+.page-header {
+    padding-bottom: 15px!important;
+}
+
+#invGrandTotalTop > h4 {
+    margin: 0;
+}
+
+.container {
+    width: auto;
+    max-width: 760px;
+}
+
+.container .credit {
+    margin: 20px 0;
+}
+
+#deleteRow {
+    cursor: pointer;
+}
+
+.logoContainer {
+    text-align: right;
+}
+
+.logo {
+    font-size: 45px;
+    font-family: 'Economica', sans-serif;
+}
+
+.companyInfo {
+    text-align: right;
+}
+
+#deleteRow {
+    font-size: 25px;
+    color: red;
+}
+
+/* Autocomplete - Additional Information Box */
+
+.additionalInfo h4 {
+    margin: 0 0 4px 0!important;
+}
+
+.additionalInfo {
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+}
+
+.additionalInfo span {
+    margin-left: -999em;
+    position: absolute;
+    font-size: 0.9em;
+}
+
+.additionalInfo:hover span {
+    /*opacity:0.9;*/
+    /*filter:alpha(opacity=90);*/
+    border-radius: 5px 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+    font-family: Calibri, Tahoma, Geneva, sans-serif;
+    color: #000;
+    position: absolute;
+    left: 155px;
+    top: 1px;
+    z-index: 99;
+    margin-left: 0;
+    width: 200px;
+}
+
+.additionalInfo:hover img {
+    border: 0;
+    margin: -10px 0 0 -55px;
+    float: left;
+    position: absolute;
+}
+
+.additionalInfoColor {
+    padding: 10px;
+    background: #fcf8e3;
+    border: 1px solid #fbeed5;
+}

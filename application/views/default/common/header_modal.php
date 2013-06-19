@@ -45,6 +45,9 @@
 
         <!-- Custom Tooltips -->
         <script src="<?php echo site_url(); ?>assets/scripts/twipsy.js"></script>
+        
+        <!-- Invoicing -->
+        <script type="text/javascript" src="<?php echo site_url(); ?>assets/scripts/invoicing/js/mioinvoice-scripts.js"></script>
 
         <!-- WYSIWYG Editor -->
         <script src="<?php echo site_url(); ?>assets/scripts/ckeditor/ckeditor.js"></script>

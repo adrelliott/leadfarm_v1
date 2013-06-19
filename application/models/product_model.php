@@ -47,6 +47,58 @@ class Product_model extends CRM_Model {
         
        
     }
+    
+    
+    //Get for assets/invoicing/js/moiinvoice
+    
+   function get_products($param) {
+       $this->db->select('Id, ProductName, ProductPrice, ItemType');
+       $return_arr = array();
+       
+       if ( ! $param) $param = $_GET["term"];
+       $this->db->like('ProductName', $param);
+       $results = $this->get();
+       
+       //print_array($results);
+       foreach ($results as $row => $array)
+       {
+           $row_array = array();
+           foreach ($array as $col => $val)
+           {
+                switch ($col) 
+                {
+                    case 'Id':
+                        $row_array['jItemCode'] = $val;
+                        break;
+                    case 'ProductName':
+                        $row_array['jItemDesc'] = $val;
+                        break;
+                    case 'ProductPrice':
+                        $row_array['jItemPrice'] = $val;
+                        break;
+                    case 'ItemType':
+                        $row_array['jItemType'] = $val;
+                        break;
+                }
+           }
+           $row_array['jQtyOnHand'] = 1;
+           $row_array['jItemWholesale'] = 1;
+           $row_array['jItemRetail'] = 1;
+           
+           
+           $return_arr[] = $row_array;
+       }
+       //print_array($return_arr, 1);
+       
+       return $return_arr;
+     
+
+    /* Toss back results as json encoded array. */
+    
+   }
+    
+    
+    
     /*
     function get_link_fields_old($array, $recipients) {
         //Retrieve the link info for each of the links

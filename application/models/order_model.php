@@ -75,6 +75,7 @@ class Order_model extends CRM_Model {
        return array(0 => '11');
    }
    
+   
    public function record_count() {
        return $this->db->count_all($this->table_name);
    }
