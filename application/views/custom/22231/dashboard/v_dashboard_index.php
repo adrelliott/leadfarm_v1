@@ -45,9 +45,9 @@
 <div class="row clearfix">
     <div class="col_12">
         <?php 
-            $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => 'unknown', 'ContactId_name' => 'Id'));    
-            $this->table->set_heading_custom($tables['master_search']['table_headers']);
-            echo $this->table->generate_custom($tables['master_search']['table_data']); 
+            //$this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => 'unknown', 'ContactId_name' => 'Id'));    
+            //$this->table->set_heading_custom($tables['master_search']['table_headers']);
+            //echo $this->table->generate_custom($tables['master_search']['table_data']); 
         ?> 
     </div>
 </div>

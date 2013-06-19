@@ -2224,12 +2224,12 @@ $config['contactaction'] = Array
                         '__Service_expiry' => 'Service Exp',
                         '__ActiveYN' => 'Active?',
                     ),
-                ),   
+                ), 
                 'users' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,
-                    'data_source' => 'users', //The dataset name defined above
-                    'model_name' => 'contact_model',
+                    //'data_source' => 'contacts', //The dataset name defined in this file
+                    'model_name' => 'user_model',
                     'model_method' => 'get_all_records', 
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
@@ -2237,13 +2237,12 @@ $config['contactaction'] = Array
                         ),
                     'fields' => array 
                     (
-                        'Id' => '#',
+                        'Id' => '',
                         'FirstName' => 'First Name',
                         'LastName' => 'Last Name',
-                        'Username' => 'Username',
-                        //'Password' => 'Password',
+                        'UserName' => 'Username',
                     ),
-                ),
+                ),   
                 /*'tasks_join' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    

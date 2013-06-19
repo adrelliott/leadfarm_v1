@@ -127,7 +127,7 @@
                          </div>
                          <?php //echo display_field($fields['TotalPrice_A']); ?>
                          
-                         <?php echo form_input('invGrandTotal', '', 'id="invGrandTotal'); ?>
+                         <?php echo form_input('TotalPrice_A', '', 'id="invGrandTotal1'); ?>
                         <?php echo display_field($fields['PaymentMethod']); ?>
                         <?php echo display_field($fields['OrderNotes']); ?> 
                          <div class="clearfix">
