@@ -2,7 +2,7 @@
     <?php display_field($fields['Title']); ?>
     <?php display_field($fields['FirstName']); ?>
     <?php display_field($fields['LastName']); ?>
-    <?php display_field($fields['Nickname']); ?>
+    <?php //display_field($fields['Nickname']); ?>
 </div><!-- End of form div-->
 <div class="form margin_top_15">
     <?php display_field($fields['Email']); ?>   
