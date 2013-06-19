@@ -47,7 +47,8 @@ $(document).ready(function () {
     // Use the .autocomplete() method to compile the list based on input from user
     $('#itemCode').autocomplete({
         //source: 'services/fetch-item-data.php',
-        source: 'http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products',
+        //source: 'http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products',
+        source: 'http://mymarketingcentre.co.uk/product/ajax_products',
         minLength: 1,
         select:function (event, ui) {
             var $itemrow = $(this).closest('tr');
@@ -102,7 +103,8 @@ $(document).ready(function () {
             // apply autocomplete method to newly created row
             $row.find('#itemCode').autocomplete({
                 //source:'services/fetch-item-data.php',
-                source: 'http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products',
+                //source: 'http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products',
+                source: 'http://mymarketingcentre.co.uk/product/ajax_products',
                 minLength:1,
                 select:function (event, ui) {
                     $itemCode.val(ui.item.jItemCode);
