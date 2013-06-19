@@ -39,6 +39,7 @@
                                     <?php display_field($fields['__NoStaff']); ?>
                                     <?php display_field($fields['__INHousehrYN']); ?>
                                     <?php display_field($fields['__Sector']); ?>
+                                    <?php display_field($fields['ContactType']); ?>
                                     <div class="clearfix">
                                         <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
 

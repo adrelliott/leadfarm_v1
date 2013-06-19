@@ -1074,6 +1074,7 @@ $config['contact'] = Array
                         'HTML_before' => '',
                         'HTML_after' => '',  
                         'value' => '',              
+                        'defaultvalue' => 1,              
                     ),
                      '_OptinSmsYN' => array
                     (
@@ -1265,7 +1266,7 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',                     
                     ),
-                     '__Sector' => array
+                     'ContactType' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
                         'cssClassContainingDiv' => '',
@@ -1279,13 +1280,55 @@ $config['contact'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
+                        'name' => 'ContactType',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                          (
+                            'Agricultural' => 'Agricultural',
+                            'Business Consultant' => 'Business Consultant',
+                            'Charity/Voluntary' => 'Charity/Voluntary',
+                            'Construction' => 'Construction',    //label => val
+                            'Education' => 'Education',
+                            'Finance' => 'Finance',
+                            'Health/Wellbeing' => 'Health/Wellbeing',
+                            'HR/Recruitment' => 'HR/Recruitment',
+                            'IT' => 'IT',
+                            'Learning/Dev' => 'Learning/Dev',
+                            'Legal' => 'Legal',
+                            'Manufacturing' => 'Manufacturing',
+                            'Marketing/Comms' => 'Marketing/Comms',
+                            'Other' => 'Other',
+                            'Property' => 'Property',
+                            'Public Sector' => 'Public Sector',
+                            'Retail/Wholesale' => 'Retail/Wholesale',
+                            'Transport/Logistic' => 'Transport/Logistic',
+                          ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',                     
+                    ),
+                     '__Sector' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'ACT! Sector',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => ' readonly ',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
                         'name' => '__Sector',
                         'helpText' => '',
                         'length' => '',
                         'options' => array
                           (
-                            'Accountant' => 'Accountant','Activeplan' => 'Activeplan','Activity' => 'Activity','Admin Support Services' => 'Admin Support Services','Agricultural' => 'Agricultural','Architect' => 'Architect','Associate' => 'Associate','Audit' => 'Audit','Bank' => 'Bank','Business Advisors' => 'Business Advisors','Car Rentals' => 'Car Rentals','Car Sales' => 'Car Sales','Catering/Hospitality/Travel' => 'Catering/Hospitality/Travel','Charity/Voluntary Organisation' => 'Charity/Voluntary Organisation','Child care/Nursey' => 'Child care/Nursey','Cleaning Company' => 'Cleaning Company','Coaching' => 'Coaching','Communications' => 'Communications','Construction' => 'Construction','Consultants' => 'Consultants','Corporate Hospitality' => 'Corporate Hospitality','Corporate Services' => 'Corporate Services','Cost Management' => 'Cost Management','Council' => 'Council','Courier' => 'Courier','Dating Agency' => 'Dating Agency','Debt Management' => 'Debt Management','Dental' => 'Dental','Designers' => 'Designers','Development' => 'Development','Disability Services and Information' => 'Disability Services and Information','Distributor' => 'Distributor','Documentary' => 'Documentary','Education' => 'Education','Electrics' => 'Electrics','Employee Benefits' => 'Employee Benefits','Energy' => 'Energy','Engineers' => 'Engineers','Entertainment' => 'Entertainment','Events' => 'Events','Finance/ Investment' => 'Finance/Investment','Financial Advisor' => 'Financial Advisor','Financial Planning' => 'Financial Planning','Food' => 'Food','Government' => 'Government','Graphic Designer' => 'Graphic Designer','Haulier' => 'Haulier','Health and Beauty' => 'Health and Beauty','Health and Safety' => 'Health and Safety','Health and Wellbeing' => 'Health and Wellbeing','Health Care' => 'Health Care','Heating and Plumbing' => 'Heating and Plumbing','Hotel' => 'Hotel','Housing' => 'Housing','HR' => 'HR','Import/Export' => 'Import/Export','Insurance' => 'Insurance','Investment' => 'Investment','IT' => 'IT','IT Consultancy and Training' => 'IT Consultancy and Training','Legal Estate Planner' => 'Legal Estate Planner','Legal Misc' => 'Legal Misc','Leisure' => 'Leisure','Machinery' => 'Machinery','Maintenance' => 'Maintenance','Management Consultancy' => 'Management Consultancy','Manufacturing' => 'Manufacturing','Marketing' => 'Marketing','Mechanics' => 'Mechanics','Media/Production' => 'Media/Production','Medical' => 'Medical','Mental Health/Counsellor' => 'Mental Health/Counsellor','Merchandise' => 'Merchandise','Mortgages' => 'Mortgages','Motor Vehicles' => 'Motor Vehicles','Occupational Health' => 'Occupational Health','Office Equipment' => 'Office Equipment','Office Space' => 'Office Space','Other' => 'Other','Packaging' => 'Packaging','Payroll' => 'Payroll','Pensions' => 'Pensions','Pharmaceutical Chemical' => 'Pharmaceutical Chemical','Photographer' => 'Photographer','Police' => 'Police','Post Office' => 'Post Office','PR' => 'PR','Printers' => 'Printers','Promotion' => 'Promotion','Property Company' => 'Property Company','Protection' => 'Protection','Public House' => 'Public House','Publishing' => 'Publishing','Radio Station' => 'Radio Station','Recruitment' => 'Recruitment','Retail' => 'Retail','Sales' => 'Sales','Savings and Investments' => 'Savings and Investments','Science' => 'Science','Security' => 'Security','Service Plan Provider' => 'Service Plan Provider','Software House' => 'Software House', 'Solicitor' => 'Solicitor','Sport' => 'Sport','Stockbrokers' => 'Stockbrokers','Suppliers' => 'Suppliers','Surveyors' => 'Surveyors','Tax Exempt Savings' => 'Tax Exempt Savings','Technology' => 'Technology','Telecommunications' => 'Telecommunications','Telemarketing' => 'Telemarketing','Trade Associates' => 'Trade Associates','Training' => 'Training','Transport/Logistics' => 'Transport/Logistics','Travel' => 'Travel','Vehicle Tax' => 'Vehicle Tax','Venue' => 'Venue','Vets' => 'Vets',
-                          ),
+                          'Accountant' => 'Accountant', 'Activeplan' => 'Activeplan', 'Activity' => 'Activity', 'Admin Support Services' => 'Admin Support Services', 'Agricultural' => 'Agricultural', 'Architect' => 'Architect', 'Associate' => 'Associate', 'Audit' => 'Audit', 'Bank' => 'Bank', 'Business Advisors' => 'Business Advisors', 'Car Rentals' => 'Car Rentals', 'Car Sales' => 'Car Sales', 'Catering/Hospitality/Travel' => 'Catering/Hospitality/Travel', 'Charity/Voluntary Organisation' => 'Charity/Voluntary Organisation', 'Child care/Nursey' => 'Child care/Nursey', 'Cleaning Company' => 'Cleaning Company', 'Coaching' => 'Coaching', 'Communications' => 'Communications', 'Construction' => 'Construction', 'Consultants' => 'Consultants', 'Corporate Hospitality' => 'Corporate Hospitality', 'Corporate Services' => 'Corporate Services', 'Cost Management' => 'Cost Management', 'Council' => 'Council', 'Courier' => 'Courier', 'Dating Agency' => 'Dating Agency', 'Debt Management' => 'Debt Management', 'Dental' => 'Dental', 'Designers' => 'Designers', 'Development' => 'Development', 'Disability Services and Information' => 'Disability Services and Information', 'Distributor' => 'Distributor', 'Documentary' => 'Documentary', 'Education' => 'Education', 'Electrics' => 'Electrics', 'Employee Benefits' => 'Employee Benefits', 'Energy' => 'Energy', 'Engineers' => 'Engineers', 'Entertainment' => 'Entertainment', 'Events' => 'Events', 'Finance/ Investment' => 'Finance/Investment', 'Financial Advisor' => 'Financial Advisor', 'Financial Planning' => 'Financial Planning', 'Food' => 'Food', 'Government' => 'Government', 'Graphic Designer' => 'Graphic Designer', 'Haulier' => 'Haulier', 'Health and Beauty' => 'Health and Beauty', 'Health and Safety' => 'Health and Safety', 'Health and Wellbeing' => 'Health and Wellbeing', 'Health Care' => 'Health Care', 'Heating and Plumbing' => 'Heating and Plumbing', 'Hotel' => 'Hotel', 'Housing' => 'Housing', 'HR' => 'HR', 'Import/Export' => 'Import/Export', 'Insurance' => 'Insurance', 'Investment' => 'Investment', 'IT' => 'IT', 'IT Consultancy and Training' => 'IT Consultancy and Training', 'Legal Estate Planner' => 'Legal Estate Planner','Leisure' => 'Leisure', 'Machinery' => 'Machinery', 'Maintenance' => 'Maintenance', 'Management Consultancy' => 'Management Consultancy', 'Manufacturing' => 'Manufacturing', 'Marketing' => 'Marketing', 'Mechanics' => 'Mechanics', 'Media/Production' => 'Media/Production', 'Medical' => 'Medical', 'Mental Health/Counsellor' => 'Mental Health/Counsellor', 'Merchandise' => 'Merchandise', 'Mortgages' => 'Mortgages', 'Motor Vehicles' => 'Motor Vehicles', 'Occupational Health' => 'Occupational Health', 'Office Equipment' => 'Office Equipment', 'Office Space' => 'Office Space', 'Other' => 'Other', 'Packaging' => 'Packaging', 'Payroll' => 'Payroll', 'Pensions' => 'Pensions', 'Pharmaceutical Chemical' => 'Pharmaceutical Chemical', 'Photographer' => 'Photographer', 'Police' => 'Police', 'Post Office' => 'Post Office', 'PR' => 'PR', 'Printers' => 'Printers', 'Promotion' => 'Promotion', 'Property Company' => 'Property Company', 'Protection' => 'Protection', 'Public House' => 'Public House', 'Publishing' => 'Publishing', 'Radio Station' => 'Radio Station', 'Recruitment' => 'Recruitment', 'Retail' => 'Retail', 'Sales' => 'Sales', 'Savings and Investments' => 'Savings and Investments', 'Science' => 'Science', 'Security' => 'Security', 'Service Plan Provider' => 'Service Plan Provider', 'Software House' => 'Software House', 'Solicitor' => 'Solicitor', 'Sport' => 'Sport', 'Stockbrokers' => 'Stockbrokers', 'Suppliers' => 'Suppliers', 'Surveyors' => 'Surveyors', 'Tax Exempt Savings' => 'Tax Exempt Savings', 'Technology' => 'Technology', 'Telecommunications' => 'Telecommunications', 'Telemarketing' => 'Telemarketing', 'Trade Associates' => 'Trade Associates', 'Training' => 'Training', 'Transport/Logistics' => 'Transport/Logistics', 'Travel' => 'Travel', 'Vehicle Tax' => 'Vehicle Tax', 'Venue' => 'Venue', 'Vets' => 'Vets',
+                    ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
                         'value' => '',              
