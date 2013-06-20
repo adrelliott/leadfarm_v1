@@ -2,8 +2,8 @@
     <div class="col_12">
         <div class="widget clearfix">
             <h3 class="index speech_icon">"Hello <?php echo $this->session->userdata('Nickname');?> . What's on your mind...?"</h3>
-            <h3 class="index toggle_icon" id="option1_toggle">Contacts...</h3>
-            <div class="widget_inside hide_toggle" id="option1">
+            <a href="<?php echo site_url('contact'); ?>" style="text-decoration: none"><h3 class="index toggle_icon">Contacts...</h3></a>
+            <?php /*<div class="widget_inside hide_toggle" id="option1">
                 <h4>You can search by <em>Name</em>, or <em>Postcode</em>, or <em>Company Name</em>, or <em>Phone Number</em></h4>
                 <div class="margin_top_15"></div>
                 <?php 
@@ -14,7 +14,7 @@
                 <div class="col_5 last clearfix margin_top_15 right">                    
                     <a href="<?php echo site_url( '/contact/view/edit/new/new/0' ); ?>" class="large blue button right"><span>Create New Contact</span></a>
                 </div>
-            </div>
+            </div> */ ?>
             <div class="clearfix"></div>
             <h3 class="index toggle_icon" id="option3_toggle">Leads...</h3>
             <div class="widget_inside hide_toggle" id="option3">
