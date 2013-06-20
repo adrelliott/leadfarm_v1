@@ -956,6 +956,27 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
+                      'Website' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Website',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Website',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
                       'Leadsource' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
@@ -1028,6 +1049,27 @@ $config['contact'] = Array
                         'HTML_after' => '',  
                         'value' => '',              
                     ),
+                      'JobTitle' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Job Title',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'JobTitle',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
                       'ContactNotes' => array
                     (
                         'on' => TRUE,    //TRUE or FALSE includes/excludes from query
@@ -1076,6 +1118,33 @@ $config['contact'] = Array
                         'value' => '',              
                         'defaultvalue' => 1,              
                     ),
+                      '_OptinOtherYN' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Opt into Phone calls?',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'radio',
+                        'name' => '_OptinOtherYN',
+                        'helpText' => '',
+                        'length' => '',
+                        'options' => array
+                          (
+                            'Yes' => 1,
+                            'No' => 0,
+                          ),
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                        'defaultvalue' => 1,              
+                    ),
                      '_OptinSmsYN' => array
                     (
                         'on' => TRUE,      //TRUE/FALSE to include/exclude from query
@@ -1109,7 +1178,7 @@ $config['contact'] = Array
                         'cssIdContainingDiv' => '',
                         'cssClassLabel' => '',
                         'cssIdLabel' => '',
-                        'label' => 'Opt into Surface Mail?',                  
+                        'label' => 'Opt into Post?',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
                         'cssClassInput' => '',
@@ -1127,6 +1196,7 @@ $config['contact'] = Array
                         'HTML_before' => '',
                         'HTML_after' => '',  
                         'value' => '',              
+                        'defaultvalue' => 1,              
                     ),
                      '_OptinNewsletterYN' => array
                     (
@@ -1407,11 +1477,12 @@ $config['contact'] = Array
                                 'Client Project' => 'Client Project',
                                 'Client Retained' => 'Client Retained',
                                 'Competitor' => 'Competitor',
+                                'Contact' => 'Contact',
                                 'Employee' => 'P3PM',
                                 'P3PM' => 'Employee',
                                 'Lead' => 'Lead',
+                                'Potential' => 'Potential',
                                 'Prospect' => 'Prospect',
-                                'Contact' => 'Contact',
                                 'Supplier' => 'Supplier',
                           ),
                         'HTML_before' => '',
@@ -1749,10 +1820,11 @@ $config['lead'] = Array
                             'Lead' => 'lead',
                             'Suspect' => 'suspect',
                             'Prospect' => 'prospect',*/
-                            'Prospect' => 'Prospect',
-                            'Lead' => 'Lead',
                             'Potential' => 'Potential',
-                            'Snoozing' => 'Snoozing',
+                            'Lead' => 'Lead',
+                            'Prospect' => 'Prospect',
+                            'Won' => 'Won',
+                            'Snoozing' => 'Snoozing', 
                             'Not Interested' => 'Not Interested',
                         ),
                         'HTML_before' => '',

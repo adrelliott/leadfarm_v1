@@ -58,6 +58,7 @@
                                     <?php //display_field($fields['_OptinSmsYN']); ?>
                                     <?php display_field($fields['_OptinSurfaceMailYN']); ?>
                                     <?php display_field($fields['_OptinNewsletterYN']); ?>
+                                    <?php //display_field($fields['_OptinOtherYN']); ?>
                                     <?php display_field($fields['_OptinPref']); ?>
                                     <div class="clearfix">
                                         <input name='submit' type='submit' class='button blue right medium' style='float:right' value='Save'></input>
@@ -149,7 +150,7 @@
                 </div>
             </div>
         </div>
-        <div class='row'>
+        <?php /*<div class='row'>
             <div class="widget clearfix  form">
                 <h2>Quick Actions</h2>
                 <div class="clearfix">
@@ -165,6 +166,6 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div> */ ?>        
     </div>
 </div>
