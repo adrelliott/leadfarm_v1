@@ -241,21 +241,63 @@ $config['dashboard'] = Array
                         //'PostalCode' => 'Postcode',
                     ),
                 ), */
-                'tasks' => array
+                'users' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,
+                    'data_source' => 'users', //The dataset name defined above
+                    'model_name' => 'user_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            '_IsCrmUserYN =' => 1, 
+                        ),
+                    'fields' => array 
+                    (
+                        'Id' => '#',
+                        'FirstName' => 'First Name',
+                        'LastName' => 'Last Name',
+                        'Username' => 'Username',
+                        //'Password' => 'Password',
+                    ),
+                ),
+                'users_tasks' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE
                     'data_source' => 'actions', //The dataset name defined in this file
                     'model_name' => 'contactaction_model',
-                    'model_method' => 'get_all_records',
+                    'model_method' => 'get_users_tasks',
                     'model_params' => array 
                         (   //These are chained with 'AND'. To define an 'OR'...???
-                            'ActionType !=' => 'Booking', 
+                            //'ActionType !=' => 'Booking', 
+                            '_CompletedYN !=' => 1, 
                         ), 
                     'fields' => array 
                     (
-                        'Id' => '#',
-                        'ActionType' => 'Type',
-                        'ActionDate' => 'Date',
+                        'contactaction.Id' => '#',
+                        'contactaction.ActionType' => 'Type',
+                        'contactaction.ActionDescription' => 'Description',
+                        'contactaction.ActionDate' => 'Date',
+                        'c.FirstName' => 'Task Owner',
+                    ),
+                ),
+                'all_tasks' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE
+                    'data_source' => 'actions', //The dataset name defined in this file
+                    'model_name' => 'contactaction_model',
+                    'model_method' => 'get_all_tasks',
+                    'model_params' => array 
+                        (   //These are chained with 'AND'. To define an 'OR'...???
+                            //'ActionType !=' => 'Booking', 
+                            //'_CompletedYN !=' => 1, 
+                        ), 
+                    'fields' => array 
+                    (
+                        'contactaction.Id' => '#',
+                        'contactaction.ActionType' => 'Type',
+                        'contactaction.ActionDescription' => 'Description',
+                        'contactaction.ActionDate' => 'Date',
+                        'c.FirstName' => 'Task Owner',
                     ),
                 ),
                 /*'bookings' => array
@@ -2484,9 +2526,9 @@ $config['contactaction'] = Array
                         'label' => 'Notes',                  
                         'cssClassInputDiv' => '',
                         'cssIdInputDiv' => '',                   
-                        'cssClassInput' => 'xlarge',
+                        'cssClassInput' => 'xxxxlarge',
                         'cssIdInput' => '',
-                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'extraHTMLInput' => ' rows="6"',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'textarea',
                         'name' => 'CreationNotes',
                         'helpText' => '',                        
@@ -2572,7 +2614,7 @@ $config['contactaction'] = Array
                         'cssIdInput' => '',
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'select',
-                        'name' => 'ActionDate',
+                        'name' => 'UserID',
                         'helpText' => '',                        
                         'length' => '',
                         'options' => array
@@ -2608,6 +2650,7 @@ $config['contactaction'] = Array
                         'HTML_before' => '',
                         'HTML_after' => '',
                         'value' => '', 
+                        'defaultvalue' => 0, 
                     ),
                 ),
             ),

@@ -31,11 +31,18 @@
             <div class="widget_inside hide_toggle" id="option2">
                 <div class="margin_top_15"></div>
                 <?php 
-                    $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id'));    
-                    $this->table->set_heading_custom($tables['tasks']['table_headers']);
-                    echo $this->table->generate_custom($tables['tasks']['table_data']); 
+                    if (isset($_GET['all_tasks'])) $table_data = 'all_tasks';
+                    else $table_data = 'users_tasks';
+                    
+                    $this->table->set_template_custom(array ('anchor_uri' => 'contactaction/view/edit', 'ContactId_name' => 'ContactId', 'anchor_attr' => 'class="iframe" '));    
+                    $this->table->set_heading_custom($tables[$table_data]['table_headers']);
+                    
+                    echo $this->table->generate_custom($tables[$table_data]['table_data']); 
                 ?> 
-                
+                <div class="clearfix margin_top_15">
+                    <a href="<?php echo site_url( '/dashboard?all_tasks' ); ?>" class="blue button right"><span>View All Tasks</span></a>
+                    <a href="<?php echo site_url( '/dashboard' ); ?>" class="blue button right"><span>View My Tasks</span></a>
+                </div>
             </div>
             <div class="clearfix"></div>
         </div>        

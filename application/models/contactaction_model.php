@@ -235,6 +235,21 @@ class Contactaction_model extends CRM_Model {
         return $this->get($rID);
     }
     
+    function get_all_tasks($where = NULL) {
+        if ($where != NULL) { $this->db->where($where); }
+        $this->db->join('contact', 'contact.Id = ' . $this->table_name . '.ContactId', 'left' );
+        $this->db->join('contact c', 'c.Id = ' . $this->table_name . '.UserID', 'left' );
+        return $this->get();
+    }
+    
+    function get_users_tasks($where = NULL) {
+        $this->db->where(
+            'UserID', 
+            $this->session->userdata('Id')
+            );
+        
+        return $this->get_all_tasks($where);
+    }
     
     function get_all_users_records($where = NULL){
         if ($where != NULL) { $this->db->where($where); }

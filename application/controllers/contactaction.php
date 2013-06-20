@@ -30,10 +30,12 @@ else
           $this->load_view($pull);
         }
 
-        public function add($view_file, $rID, $ContactId) {       
+        public function add($view_file, $rID, $ContactId = FALSE) {       
           //clean input
           $input = clean_data($this->input->post());
-          $input['ContactId'] = $ContactId;
+           if ($rID === 'new') { 
+               $input['ContactId'] = $ContactId;
+           }
 
           //save record
           $rID = $this->add_record($input, $rID);
