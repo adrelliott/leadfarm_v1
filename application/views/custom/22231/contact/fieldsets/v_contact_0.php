@@ -2,12 +2,13 @@
     <?php display_field($fields['Title']); ?>
     <?php display_field($fields['FirstName']); ?>
     <?php display_field($fields['LastName']); ?>
-    <?php display_field($fields['JobTitle']); ?>
     <?php //display_field($fields['Nickname']); ?>
 </div><!-- End of form div-->
 <div class="form margin_top_15">
+    <?php display_field($fields['JobTitle']); ?>
     <?php display_field($fields['Email']); ?>   
     <?php display_field($fields['EmailAddress2']); ?>
+    <?php display_field($fields['Website']); ?>
     <?php display_field($fields['_Gender']); ?>
     <?php display_field($fields['__ReferredBy']); ?>
     <?php display_field($fields['__Consultant']); ?>
