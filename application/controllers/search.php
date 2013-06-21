@@ -76,6 +76,23 @@ else
             force_download($name, $csv);
         }
         
+        
+        function custom_search() {
+            $this->load->model('order_model');
+                     $retval = $this->order_model->search_custom();
+                     //print_array($retval, 1);
+                     
+                     parent::report();
+            $this->_load_view_data();
+            
+            $this->_generate_view($this->data);
+            
+             $this->load->helper('download');
+            $csv = $retval['csv'];
+            $name = "csv_export.csv";
+            //print_array( $this->data['tables']['search_results']['csv_file'] , 1);
+            force_download($name, $csv); 
+        }
         function do_search($export, $limit, $start, $report_type) {
             switch ($report_type)
              {

@@ -74,7 +74,30 @@ class Order_model extends CRM_Model {
    public function count_all_results_fcutd() {
        return array(0 => '11');
    }
-   
+   function search_custom() {
+        $fields = implode(',', array_keys($this->fields_for_search));
+        $table = 'order';
+        $sql = '';
+        $where = '';
+        $sql = " SELECT $fields FROM " . $this->db->protect_identifiers($table);
+        $sql .= " JOIN `contact` ON `contact`.`Id` = `order`.`ContactId` ";
+        $sql .= $where;
+        $sql .= " AND `order`.`_ActiveRecordYN` = '1' ";
+        $sql .= " AND `contact`.`_ActiveRecordYN` = '1' ";
+        $sql .= " AND `order`.`_dID` = '22232' ";
+        $sql .= " AND `contact`.`_dID` = '22232' ";
+       // echo "<p>here comes sql: $sql</p>";
+
+        $results['csv'] = $this->db->query($sql);
+         $results['table_data'] = $this->db->query($sql)->result_array();
+                    $results['table_headers'] = $this->fields_for_search;
+                    $results['Sql'] = $sql;
+            $this->load->dbutil();
+            $retval['csv'] = $this->dbutil->csv_from_result($results['csv'], ",","\n");
+                    
+                    return $results;
+ 
+    }
    
    public function record_count() {
        return $this->db->count_all($this->table_name);

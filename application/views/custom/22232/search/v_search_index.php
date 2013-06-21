@@ -173,6 +173,10 @@ $role_types = array(
                             </div>
                         </div>
                     </div>
+                    <h3 class="index toggle_icon" id="option4_toggle">Bespoke...</h3>
+                    <div class="hide_toggle" id="option4">
+                        <a href="<?php echo site_url('search/custom_search'); ?>" class="button">Get all contacts, without membership in 2012/13</a>
+                    </div>
                 </div>
             </div>
         </div>

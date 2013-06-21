@@ -32,6 +32,7 @@ class Search_model extends CRM_Model {
     }
     
     
+    
     function search($sql) {
         if ($sql) 
         {
