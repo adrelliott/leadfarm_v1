@@ -78,19 +78,12 @@ foreach ($tables['get_all_saved_searches']['table_data'] as $row => $array)
 //echo form_submit('submit', 'Go!') . '</h4>';
 //echo form_close();
 
+
 echo form_open(site_url('broadcast/search')); ?>
-    <h3>
-        <?php echo form_radio('search_type', 'everyone', TRUE) ?>
-        I want to send to everyone
-    </h3>
-    <h3>
-        <?php echo form_radio('search_type', 'specific', FALSE) ?>
-        I want to send to specific group(s) of fans
-    </h3>
-    <div id="specific" class="hidden margin_bottom_30">
-        <table  id="never_ending_table" style="border: 0">
+<table  id="never_ending_table" style="border: 0">
     <thead>
       <tr>
+        <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
@@ -98,90 +91,24 @@ echo form_open(site_url('broadcast/search')); ?>
     </thead>
       <tr id="row_1">
         <td>
-             <h4>I'm looking for contacts that have got </h4>
+             <h4>I'm looking for contacts that <?php echo form_dropdown('order_type_operator[]',array('equal' => 'have got'), 'equal'); ?></h4>
         </td>
         <td>
-             <?php echo form_dropdown('item_bought[]', $order_types, '0'); ?>
+             <?php echo form_dropdown('order_type[]', $order_types, '0'); ?>
         </td>
         <td>
-             in season <?php echo form_dropdown('season[]', $seasons, 0); ?>
-        </td>
-      </tr>
-      <tr id="row_2">
-        <td>
-             <h4>OR...</h4>
+             in season <?php echo form_dropdown('order_expire[]', $seasons, 0); ?>
         </td>
         <td>
-             <?php echo form_dropdown('item_bought[]', $order_types, '0'); ?>
-        </td>
-        <td>
-             in season <?php echo form_dropdown('season[]', $seasons, 0); ?>
-        </td>
-      </tr>
-      <tr id="row_3">
-        <td>
-             <h4>OR... </h4>
-        </td>
-        <td>
-             <?php echo form_dropdown('item_bought[]', $order_types, '0'); ?>
-        </td>
-        <td>
-             in season <?php echo form_dropdown('season[]', $seasons, 0); ?>
+            
         </td>
       </tr>
     </tbody>
   </table>
-       
-    </div>
-    <h3>
-        <?php echo form_radio('search_type', 'upsell', FALSE) ?>
-        I want to encourage sales of a product
-    </h3>
-    <div id="upsell" class="hidden margin_bottom_30">
-        upsell
-    </div>
-    
-<div class="clearfix margin_top_15">
+
+<div class="clearfix">
     <input name='submit' type='submit' class='button red right large' style='float:right' value='Start Search'></input>
 </div>
 
 <?php echo form_close();?>
 </div>
-
-<?php $new_row = '<tr id="row_1">
-        <td>
-             <h4>I\'m looking for contacts that have got </h4>
-        </td>
-        <td>
-             ' . form_dropdown('order_type[]', $order_types, '0') . '
-        </td>
-        <td>
-             in season ' . form_dropdown('order_expire[]', $seasons, 0) . '
-        </td>
-      </tr>'; ?>
-<script>
-$(document).ready(function($)
-{
-  // trigger event when button is clicked
-  $('#add_row').click(function()
-  {
-    // add new row to table using addTableRow function
-    addTableRow($('#never_ending_table'));
- 
-    // prevent button redirecting to new page
-    return false;
-  });
-   
-  // function to add a new row to a table by cloning the last row and
-  // incrementing the name and id values by 1 to make them unique
-  function addTableRow(table)
-  {
-    // clone the last row in the table
-    var $tr = $(table).find("tbody tr:last").clone();
- 
-         
-    // append the new row to the table
-    $(table).find("tbody tr:last").after($tr);
-  };
-});
-</script> 

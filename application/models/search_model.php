@@ -47,6 +47,96 @@ class Search_model extends CRM_Model {
         $table = 'order'; 
         $search_criteria = $this->input->post(); 
         $where = ' WHERE ';
+        $conditions = array();
+        $table = $this->db->protect_identifiers($table);
+        
+        //print_array($search_criteria);
+        
+        //Set up the where statement(s)
+        switch ($search_criteria['search_type'])
+        {
+            //find all opted in contacts
+            case 'everyone':
+                $where .= " contact.`_OptinEmailYN` != 0 ";
+                break;
+            
+            case 'specific':
+                foreach ($search_criteria['item_bought'] as $k => $item_bought)
+                {
+                    //Get the items bought
+                    if ($item_bought) 
+                        $conditions['items_bought'][$k] = " ($table.`_ItemBought` = '{$item_bought}' ";
+                }
+
+                foreach ($search_criteria['season'] as $k => $season)
+                {
+                    if (element($k, $conditions['items_bought'], FALSE))
+                    {
+                        if ($season) 
+                                $conditions['or'][] = $conditions['items_bought'][$k] . " AND $table.`_ValidUntil` = '{$season}') ";
+                    }
+                }
+                
+                $where .= implode(' OR ', $conditions['or']);
+                break;
+            
+            
+        }
+        
+                    
+        $sql = " SELECT DISTINCT $fields FROM " . $this->db->protect_identifiers($table);
+        $sql .= " JOIN `contact` ON `contact`.`Id` = `order`.`ContactId` ";
+        $sql .= $where;
+        $sql .= " AND `order`.`_ActiveRecordYN` = '1' "; 
+        $sql .= " AND `contact`.`_ActiveRecordYN` = '1' "; 
+        $sql .= " AND `order`.`_dID` = '22232' "; 
+        $sql .= " AND `contact`.`_dID` = '22232' ";
+        //echo "<p>here comes where for row $k: $where</p>";
+
+        //$results = $this->db->query($sql)->result_array();
+        
+        $results['all_results'] = $this->db->query($sql);
+       
+         //$results['table_data'] = $this->db->query($sql)->result_array();
+         $results['table_data'] = $results['all_results']->result_array();
+         
+                    $results['table_headers'] = $this->fields_for_search;
+                    $results['Sql'] = $sql;
+            
+                    
+        //return $results;
+
+        //remove duplictes
+            
+            echo "<p>Count od results BEFORE desup: " . count($results['table_data']) . "</p>";
+            $results['table_data'] = $this->to_assoc($results['table_data']);
+        //$results['table_data'] = array_unique($results['table_data']);
+            echo "<p>Count od results AFTER desup: " . count($results['table_data']) . "</p>";
+            
+            // $this->load->dbutil();
+            //$results['csv'] = $this->dbutil->csv_from_result($results['all_results'], ",","\n");
+            die();
+        
+        //print_array($results, 1);
+        //return $results;
+         
+    }
+        
+        
+        function search_old44($sql) {
+        if ($sql) 
+        {
+            $results['table_data'] = $this->db->query($sql)->result_array();
+            $results['table_headers'] = $this->fields_for_search;
+                $results['Sql'] = $sql;
+                $results['count'] = count($results['table_data']);
+            return $results;
+        }
+        //Set up the vars
+        $fields = implode(',', array_keys($this->fields_for_search));
+        $table = 'order'; 
+        $search_criteria = $this->input->post(); 
+        $where = ' WHERE ';
         
         //Set up the where statement(s)
         foreach ($search_criteria['order_type'] as $k => $v)
@@ -56,12 +146,8 @@ class Search_model extends CRM_Model {
                 
                 //$sql = '';
                // //Deal with the 'not in' queries
-                if ($search_criteria['order_type_operator'][$k] === 'notequal') 
-                {
-                    $nothing = 'nothing';
-                }
-                //...OR
-                elseif ($search_criteria['order_type_operator'][$k] === 'equalor') 
+                
+                if ($search_criteria['order_type_operator'][$k] === 'equalor') 
                 {
                     $item_bought = $this->db->escape($search_criteria['order_type'][$k]);
                     $where .= " OR (`order`.`_ItemBought` = $item_bought ";
@@ -147,6 +233,7 @@ class Search_model extends CRM_Model {
                 return $results;
             }
         }
+        
         
         
         //print_array($search_criteria);

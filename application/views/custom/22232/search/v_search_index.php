@@ -56,6 +56,9 @@ $role_types = array(
                 <li>
                     <h2><a href="#tab-2">Saved Searches/Reports</a></h2>
                 </li>
+                <li>
+                    <h2><a href="#tab-3" >Experimental</a></h2>
+                </li>
             </ul>
             <div class="widget_inside">
                 <div id="tab-1">
@@ -88,7 +91,7 @@ $role_types = array(
                         <?php } else echo '<h3>Click on a tab to start a search</h3>'; ?>
                     <div class="clearfix">
                     <a href="<?php echo site_url('/search'); ?>" class="large red button left"><span>Create New Search</span></a>
-                </div>
+                    </div>
                 </div>
                 <div id="tab-2">
                     <h4 class="margin_bottom_25">What type of report do you want?</h4>
@@ -135,10 +138,6 @@ $role_types = array(
                         </div>
                     </div>
                     <div class="clearfix"></div>
-                    <h3 class="index toggle_icon" id="option2_toggle">Contacts...</h3>
-                    <div class="hide_toggle" id="option2">
-                        <p>Coming soon...</p>
-                    </div>
                     <h3 class="index toggle_icon" id="option3_toggle">Roles...</h3>
                     <div class="hide_toggle" id="option3">
                             <p>What would you like your report to show?</p>
@@ -178,9 +177,105 @@ $role_types = array(
                         <a href="<?php echo site_url('search/custom_search'); ?>" class="button">Get all contacts, without membership in 2012/13</a>
                     </div>
                 </div>
+                <div id="tab-3">
+                     <h3 class="index toggle_icon" id="option2_toggle">New Search...</h3>
+                    <div class="hide_toggle" id="option2">
+                        <div class="">
+                                <?php echo form_open('search/search_22'); ?>
+                                    <h4>Show me fans that MIGHT have the following:</h4>
+                                    <div class="input " id="">
+                                        <?php echo form_dropdown('items_bought[or][]', $order_types, '0'); ?> in season 
+                                        <?php echo form_checkbox('order_expire[or][1][]', '0') . 'Any'; ?>
+                                        <?php echo form_checkbox('order_expire[or][1][]', '2005/06') . '2005/06'; ?>
+                                        <?php echo form_checkbox('order_expire[or][1][]', '2006/07') . '2006/07'; ?>
+                                        <?php echo form_checkbox('order_expire[or][1][]', '2007/08') . '2007/08'; ?>
+                                        <?php echo form_checkbox('order_expire[or][1][]', '2008/09') . '2008/09'; ?>
+                                        <?php echo form_checkbox('order_expire[or][1][]', '2009/10') . '2009/10'; ?>
+                                        <?php echo form_checkbox('order_expire[or][1][]', '2010/11') . '2010/11'; ?>
+                                        <?php echo form_checkbox('order_expire[or][1][]', '2011/12') . '2011/12'; ?>
+                                        <?php echo form_checkbox('order_expire[or][1][]', '2012/13') . '2012/13'; ?>
+                                        <?php echo form_checkbox('order_expire[or][1][]', '2013/14') . '2013/14'; ?>
+                                    </div>
+                                    <div class="input " id="">
+                                        <?php echo form_dropdown('items_bought[or][]', (array('' => '') + $order_types), '0'); ?> in season 
+                                        <?php echo form_checkbox('order_expire[or][2][]', '0') . 'Any'; ?>
+                                        <?php echo form_checkbox('order_expire[or][2][]', '2005/06') . '2005/06'; ?>
+                                        <?php echo form_checkbox('order_expire[or][2][]', '2006/07') . '2006/07'; ?>
+                                        <?php echo form_checkbox('order_expire[or][2][]', '2007/08') . '2007/08'; ?>
+                                        <?php echo form_checkbox('order_expire[or][2][]', '2008/09') . '2008/09'; ?>
+                                        <?php echo form_checkbox('order_expire[or][2][]', '2009/10') . '2009/10'; ?>
+                                        <?php echo form_checkbox('order_expire[or][2][]', '2010/11') . '2010/11'; ?>
+                                        <?php echo form_checkbox('order_expire[or][2][]', '2011/12') . '2011/12'; ?>
+                                        <?php echo form_checkbox('order_expire[or][2][]', '2012/13') . '2012/13'; ?>
+                                        <?php echo form_checkbox('order_expire[or][2][]', '2013/14') . '2013/14'; ?>
+                                    </div>
+                                    <div class="input " id="">
+                                        <?php echo form_dropdown('items_bought[or][]', (array('' => '') + $order_types), '0'); ?> in season 
+                                        <?php echo form_checkbox('order_expire[or][3][]', '0') . 'Any'; ?>
+                                        <?php echo form_checkbox('order_expire[or][3][]', '2005/06') . '2005/06'; ?>
+                                        <?php echo form_checkbox('order_expire[or][3][]', '2006/07') . '2006/07'; ?>
+                                        <?php echo form_checkbox('order_expire[or][3][]', '2007/08') . '2007/08'; ?>
+                                        <?php echo form_checkbox('order_expire[or][3][]', '2008/09') . '2008/09'; ?>
+                                        <?php echo form_checkbox('order_expire[or][3][]', '2009/10') . '2009/10'; ?>
+                                        <?php echo form_checkbox('order_expire[or][3][]', '2010/11') . '2010/11'; ?>
+                                        <?php echo form_checkbox('order_expire[or][3][]', '2011/12') . '2011/12'; ?>
+                                        <?php echo form_checkbox('order_expire[or][3][]', '2012/13') . '2012/13'; ?>
+                                        <?php echo form_checkbox('order_expire[or][3][]', '2013/14') . '2013/14'; ?>
+                                    </div>
+                                </div>
+                                <h4>In addition, these contacts MUST have</h4>
+                                    <div class="input " id="">
+                                        <?php echo form_dropdown('items_bought[and][]', (array('' => '') + $order_types), '0'); ?> in season 
+                                        <?php echo form_checkbox('order_expire[and][1][]', '0') . 'Any'; ?>
+                                        <?php echo form_checkbox('order_expire[and][1][]', '2005/06') . '2005/06'; ?>
+                                        <?php echo form_checkbox('order_expire[and][1][]', '2006/07') . '2006/07'; ?>
+                                        <?php echo form_checkbox('order_expire[and][1][]', '2007/08') . '2007/08'; ?>
+                                        <?php echo form_checkbox('order_expire[and][1][]', '2008/09') . '2008/09'; ?>
+                                        <?php echo form_checkbox('order_expire[and][1][]', '2009/10') . '2009/10'; ?>
+                                        <?php echo form_checkbox('order_expire[and][1][]', '2010/11') . '2010/11'; ?>
+                                        <?php echo form_checkbox('order_expire[and][1][]', '2011/12') . '2011/12'; ?>
+                                        <?php echo form_checkbox('order_expire[and][1][]', '2012/13') . '2012/13'; ?>
+                                        <?php echo form_checkbox('order_expire[and][1][]', '2013/14') . '2013/14'; ?>
+                                    </div>
+                                    <div class="input " id="">
+                                        <?php echo form_dropdown('items_bought[and][]', (array('' => '') + $order_types), '0'); ?> in season 
+                                        <?php echo form_checkbox('order_expire[and][2][]', '0') . 'Any'; ?>
+                                        <?php echo form_checkbox('order_expire[and][2][]', '2005/06') . '2005/06'; ?>
+                                        <?php echo form_checkbox('order_expire[and][2][]', '2006/07') . '2006/07'; ?>
+                                        <?php echo form_checkbox('order_expire[and][2][]', '2007/08') . '2007/08'; ?>
+                                        <?php echo form_checkbox('order_expire[and][2][]', '2008/09') . '2008/09'; ?>
+                                        <?php echo form_checkbox('order_expire[and][2][]', '2009/10') . '2009/10'; ?>
+                                        <?php echo form_checkbox('order_expire[and][2][]', '2010/11') . '2010/11'; ?>
+                                        <?php echo form_checkbox('order_expire[and][2][]', '2011/12') . '2011/12'; ?>
+                                        <?php echo form_checkbox('order_expire[and][2][]', '2012/13') . '2012/13'; ?>
+                                        <?php echo form_checkbox('order_expire[and][2][]', '2013/14') . '2013/14'; ?>
+                                    </div>
+                                    <div class="input " id="">
+                                        <?php echo form_dropdown('items_bought[and][]', (array('' => '') + $order_types), '0'); ?> in season 
+                                        <?php echo form_checkbox('order_expire[and][3][]', '0') . 'Any'; ?>
+                                        <?php echo form_checkbox('order_expire[and][3][]', '2005/06') . '2005/06'; ?>
+                                        <?php echo form_checkbox('order_expire[and][3][]', '2006/07') . '2006/07'; ?>
+                                        <?php echo form_checkbox('order_expire[and][3][]', '2007/08') . '2007/08'; ?>
+                                        <?php echo form_checkbox('order_expire[and][3][]', '2008/09') . '2008/09'; ?>
+                                        <?php echo form_checkbox('order_expire[and][3][]', '2009/10') . '2009/10'; ?>
+                                        <?php echo form_checkbox('order_expire[and][3][]', '2010/11') . '2010/11'; ?>
+                                        <?php echo form_checkbox('order_expire[and][3][]', '2011/12') . '2011/12'; ?>
+                                        <?php echo form_checkbox('order_expire[and][3][]', '2012/13') . '2012/13'; ?>
+                                        <?php echo form_checkbox('order_expire[and][3][]', '2013/14') . '2013/14'; ?>
+                                    </div>
+                                </div>
+                                
+     
+                                <div class="clearfix">
+                                    <input name='submit' type='submit' class='button red right large' style='float:right' value='Start Search'></input>
+                                </div>
+                                <?php echo form_close(); ?>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <?php //print_array($this->session->userdata('search_criteria')); ?>
-<?php //print_array($this->data); ?>
+<?php 
+
+//print_array($this->data); ?>

@@ -55,6 +55,10 @@ class Order_model extends CRM_Model {
                 'order._ItemBought' => 'Item',
                 'order._ValidUntil' => 'Season',
                 'order.DateCreated' => 'Date Created',
+                'order.OrderNotes' => 'Order Notes',
+                'order.TotalPrice_A' => 'Price',
+                'order.Source' => 'Source',
+                'order.PaymentMethod' => 'Payment Method',
                 'contact._ActiveRecordYN' => 'Active_record',
                 'order._ActiveRecordYN' => 'Active_record',
             );
@@ -74,11 +78,10 @@ class Order_model extends CRM_Model {
    public function count_all_results_fcutd() {
        return array(0 => '11');
    }
-   function search_custom() {
+   function search_custom($where = '') {
         $fields = implode(',', array_keys($this->fields_for_search));
         $table = 'order';
         $sql = '';
-        $where = '';
         $sql = " SELECT $fields FROM " . $this->db->protect_identifiers($table);
         $sql .= " JOIN `contact` ON `contact`.`Id` = `order`.`ContactId` ";
         $sql .= $where;
@@ -89,14 +92,25 @@ class Order_model extends CRM_Model {
        // echo "<p>here comes sql: $sql</p>";
 
         $results['csv'] = $this->db->query($sql);
-         $results['table_data'] = $this->db->query($sql)->result_array();
+         //$results['table_data'] = $this->db->query($sql)->result_array();
+         $results['table_data'] = $results['csv']->result_array();
                     $results['table_headers'] = $this->fields_for_search;
                     $results['Sql'] = $sql;
             $this->load->dbutil();
             $retval['csv'] = $this->dbutil->csv_from_result($results['csv'], ",","\n");
                     
-                    return $results;
- 
+        //return $results;
+
+        //remove duplictes
+            
+            echo "<p>Count od results BEFORE desup: " . count($results['table_data']) . "</p>";
+            $results['table_data'] = $this->to_assoc($results['table_data']);
+        //$results['table_data'] = array_unique($results['table_data']);
+            echo "<p>Count od results AFTER desup: " . count($results['table_data']) . "</p>";
+            
+            //print_array($results);
+            
+            return $results;
     }
    
    public function record_count() {

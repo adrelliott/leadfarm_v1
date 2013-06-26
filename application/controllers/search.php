@@ -13,11 +13,15 @@ else
             (
                 'contact', 'order'
             );
+        
+        private $items_bought = array(
+            'Adult Membership', 'Junior Membership', 'Season Ticket (Adult)', 'Season Ticket (Junior)', 'Community Shares', 'TreasureLine', 'Holiday Draw', '127 Club', 'Match Sponsor', 'Matchball Sponsor', 'Matchday Programme Sponsor', 'Programme Adverts', 'Pitchside Hording', 'Pink Sponsorship', 'Newsletter Sponsor', 'Community Sponsor', 'Youth Team Sponsor', 'Women Team Sponsor', 'Player Sponsor', 'Club Donations', 'DF Donations',  'Club Events', 'Merchanidise', 'Away Match Travel'
+    );
 
         public function __construct()    {
              parent::__construct();
              
-           //$this->output->enable_profiler();
+           $this->output->enable_profiler();
              $this->load->library('pagination');
         }
 
@@ -26,6 +30,62 @@ else
             $this->_load_view_data();
             $this->_generate_view($this->data);
         }
+        
+        
+        public function search_22() {
+            //print_array($this->input->post());
+            $where = array();
+            $conditions = $this->input->post();
+            $table = $this->db->protect_identifiers('order');
+            
+            //Cycle through the input array and extract the where conditions
+            foreach ($conditions['items_bought'] as $search_type => $array)
+            {
+                //Get the items bought
+                foreach ($array as $k => $v)
+                {
+                    if (in_array($v, $this->items_bought))
+                        $where['items_bought'][$k+1] = " ($table.`_ItemBought` = '{$v}' ";
+                }
+            }
+              
+            foreach ($conditions['order_expire'] as $search_type => $info)
+            {
+                foreach ($info as $k => $array)
+                {
+                    if (element($k, $where['items_bought'], FALSE))
+                    {
+                        foreach ($array as $k2 => $v)
+                        {
+                            if ($v) 
+                                $where['conditions'][$search_type][] = $where['items_bought'][$k] . " AND $table.`_ValidUntil` = '{$v}') ";
+                        }
+                    }
+                }
+                
+                $glue = ' ' . strtoupper($search_type) . ' ';
+                $where[$search_type . '_conditions'] = implode($glue, $where['conditions'][$search_type]);
+                
+            }
+            
+            $sql = ' WHERE ';
+            if (element('or_conditions', $where, FALSE)) $sql .= $where['or_conditions'];
+            if (element('and_conditions', $where, FALSE)) $sql .= ' AND ' . $where['and_conditions'];
+            
+            
+            $this->load->model('order_model');
+            $retval = $this->order_model->search_custom($sql);
+            
+            
+            
+            print_array($retval);
+            
+            
+            
+        }
+        
+        
+        
         
         public function report($report_type, $start = 0) {
              $retval = array();
@@ -93,6 +153,7 @@ else
             //print_array( $this->data['tables']['search_results']['csv_file'] , 1);
             force_download($name, $csv); 
         }
+        
         function do_search($export, $limit, $start, $report_type) {
             switch ($report_type)
              {
