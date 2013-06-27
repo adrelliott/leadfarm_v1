@@ -41,6 +41,23 @@ $(document).ready(function () {
         // Update the price.
         updatePrice($itemRow);
     });
+    
+    
+    
+    
+    // Update invoice totals when discount or P&P inputs have been updated
+    $("#invPostage, #invDiscount").on('keyup', function () {
+        var $discount = $("#invDiscount").val();
+        
+        //check that the discount is negative
+        if($discount > 0) {
+         $discount = 0 - $discount;
+        }
+        $("#invDiscount").val($discount);
+       
+        // Update the totals.
+        update_grand_total();
+    });
 
 
 
@@ -56,7 +73,7 @@ $(document).ready(function () {
             $itemrow.find('#itemCode').val(ui.item.jItemCode);
             $itemrow.find('#itemDesc').val(ui.item.jItemDesc);
             $itemrow.find('#itemPrice').val(ui.item.jItemPrice);
-            $itemrow.find('#itemVat').val(ui.item.jItemVat);
+            $itemrow.find('#vatRate').val(ui.item.jItemVatRate);
 
             // Give focus to the next input field to recieve input from user
             $('#itemQty').focus();
@@ -89,14 +106,16 @@ $(document).ready(function () {
        
        var rowTemp = [
            '<tr class = "item-row">',
-            '<td><i id="deleteRow" class="icon-remove"></i></td>',
+            '<td><i id="deleteRow" class="icon-remove">X</i></td>',
                 '<td><input type="text" name="itemCode[]" value="" class="input-mini mini" id="itemCode" tabindex="1" /></td>',
                 '<td><input type="text" name="itemDesc[]" value="" class="input-large xlarge" id="itemDesc" readonly="readonly" /> </td>',
                 '<td> <input type="text" name="itemQty[]" value="" class="input-mini  mini" id="itemQty" tabindex="2" /></td>',
                 '<td><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemPrice[]" class="input-small small" id="itemPrice" type="text"> </div></td>',
                 
-                '<td><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemVat[]" class="input-small small" id="itemVat" type="text"> </div></td>',
-                '<td ><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemLineTotal[]" class="small input-small" id="itemLineTotal" type="text" readonly="readonly" > </div></td>',
+                '<td><input name="vatRate[]" id="vatRate" type="hidden"><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemVatTotal[]" class="input-small small" id="itemVatTotal" type="text"  readonly="readonly"> </div></td>',
+                '<td><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemLineTotal[]" class="small input-small" id="itemLineTotal" type="text" readonly="readonly" > </div>',
+                //'<input name="itemVatTotal[]" id="itemVatTotal" type="hidden"></td>',
+                
                 '</tr>'
        ].join('');
         
@@ -110,10 +129,10 @@ $(document).ready(function () {
         var $itemDesc = $row.find('#itemDesc');
         var $itemPrice = $row.find('#itemPrice');
         var $itemQty = $row.find('#itemQty');
-        var $itemVat = $row.find('#itemVat');
+        var $itemVat = $row.find('#vatRate');
 
         // If the last row itemCode is empty then don't let the user continue adding a row
-        //if ($('#itemCode:last').val() != '') {
+        if ($('#itemCode:last').val() != '') {
 
             // Add row after the first row in table
             $('.item-row:last', $itemsTable).after($row);
@@ -129,7 +148,7 @@ $(document).ready(function () {
                     $itemCode.val(ui.item.jItemCode);
                     $itemDesc.val(ui.item.jItemDesc);
                     $itemPrice.val(ui.item.jItemPrice);
-                    $itemVat.val(ui.item.jItemVat);
+                    $itemVat.val(ui.item.jItemVatRate);
                     // Give focus to the next input field to receive input from user
                     $itemQty.focus();
                     return false;
@@ -146,6 +165,8 @@ $(document).ready(function () {
                 if ($(".item-row").length < 2) $("#deleteRow").hide();
                 // Update total
                 update_total();
+                update_total_vat();
+                update_grand_total();
             });
 
             // Update the invoice total on keyup when the user updates the item qty or price input
@@ -158,9 +179,9 @@ $(document).ready(function () {
             });
 
 
-       //} else {
-        //    $('.alert').fadeIn('slow').html('You need to complete the item inputs');
-       // }
+       } else {
+           $('.alert').fadeIn('slow').html('You need to complete the item inputs');
+      }
 
         // End if last itemCode input is empty
         return false;
@@ -178,7 +199,20 @@ $(document).ready(function () {
     var price = $itemRow.find('#itemPrice').val().replace("£", "") * $itemRow.find('#itemQty').val();
     price = roundNumber(price, 2);
     isNaN(price) ? $itemRow.find('#itemLineTotal').val("N/A") : $itemRow.find('#itemLineTotal').val(price);
+    
+    //Update the vat on this product
+    var indiv_vat = $itemRow.find('#vatRate').val() * $itemRow.find('#itemPrice').val() * $itemRow.find('#itemQty').val() / 100;
+    indiv_vat = roundNumber(indiv_vat, 2);
+    isNaN(indiv_vat) ? $itemRow.find('#itemVatTotal').val("N/A") : $itemRow.find('#itemVatTotal').val(indiv_vat);
+    
+    //Update the total vat on this row
+    //var vat = $itemRow.find('#itemVat').val() * $itemRow.find('#itemQty').val();
+    //vat = roundNumber(vat, 2);
+    //isNaN(vat) ? $itemRow.find('#itemVatTotal').val("N/A") : $itemRow.find('#itemVatTotal').val(vat);
+    
     update_total();
+    update_total_vat();
+    update_grand_total();
 };
 
 var update_total = function() {
@@ -195,6 +229,27 @@ var update_total = function() {
 
 };
 
+var update_total_vat = function() {
+    var total_vat = 0;
+    $('input#itemVatTotal').each(function (i) {
+        vat = $(this).val().replace("£", "");
+        if (!isNaN(vat)) total_vat += Number(vat);
+    });
+    
+    total_vat = roundNumber(total_vat, 2);
+     $('input[name="totalVat"]').val(total_vat);
+};
+
+var update_grand_total = function() {
+    grand_total = 0;
+    running_total = 0;
+     $('input.subtotal').each(function (i) {
+        running_total = $(this).val().replace("£", "");
+        if (!isNaN(running_total)) grand_total += Number(running_total);
+    });
+    grand_total = roundNumber(grand_total, 2);
+     $('input[name="total"]').val(grand_total);
+};
 
 // Update message
 var updateMessage = function(msgType, message, delay){

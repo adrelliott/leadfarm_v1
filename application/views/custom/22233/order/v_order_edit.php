@@ -108,16 +108,18 @@
                                                          type="text"></div>
                                              </td>
                                              <td>
-                                                 <div class="input-prepend input-append"><span class="add-on">£</span><input
-                                                         name="itemVat[]"
+                                                 <input name="vatRate[]" id="vatRate" type="hidden">
+                                                 <div class="input-prepend input-append"><span class="add-on">£ </span><input
+                                                         name="itemVatTotal[]"
                                                          class=" input-small small"
-                                                         id="itemVat"
-                                                         type="text"></div>
+                                                         id="itemVatTotal"
+                                                         type="text" readonly="readonly"></div>
                                              </td>
                                              <td>
-                                                 <div class="input-prepend input-append"><span class="add-on">£</span><input
+                                                 <div class="input-prepend input-append"><span class="add-on">£ </span><input
                                                          name="itemLineTotal[]" class="small input-small" id="itemLineTotal" type="text"
                                                          readonly="readonly"></div>
+                                                 
                                              </td>
                                          </tr>
                                      </tbody>
@@ -150,31 +152,32 @@
                                          <tr>
                                              <td>
                                                  <span>Net Price</span>
-                                                <?php echo form_input('TotalPrice_A', '', 'id="invSubTotal"'); ?>
-                                             </td>
-                                         </tr>
-                                         <tr>
-                                             <td>
-                                                 <span>Postage & packing:</span>
-                                                 <?php echo form_input('pp', '2.99', '', 'id="invPacking"'); ?>
+                                                <?php echo form_input('TotalPrice_A', '', 'id="invSubTotal" class="subtotal"  readonly="readonly"'); ?>
                                              </td>
                                          </tr>
                                          <tr>
                                              <td>
                                                 <span>Total VAT</span>
-                                                <?php echo form_input('totalVat', '', 'id="invTotalVat"'); ?>
+                                                <?php echo form_input('totalVat', '', 'id="invTotalVat" class="subtotal"  readonly="readonly"'); ?>
+                                             </td>
+                                         </tr>
+                                         <tr>
+                                             <td>
+                                                 <span>Postage & packing:</span>
+                                                 <?php echo form_input('postage', '', 'id="invPostage" class="subtotal" '); ?>
                                              </td>
                                          </tr>
                                          <tr>
                                              <td>
                                                 <span>Discount</span>
-                                                <?php echo form_input('discount', '', 'id="invDiscount"'); ?>
+                                                <?php echo form_input('discount', '', 'id="invDiscount" 
+                                                    class="subtotal" '); ?>
                                              </td>
                                          </tr>
                                          <tr>
                                              <td>
                                                 <span>Total invoice</span>
-                                                <?php echo form_input('total', '', 'id="invGrandTotal"'); ?>
+                                                <?php echo form_input('total', '', 'id="invGrandTotal" class=""  readonly="readonly"'); ?>
                                              </td>
                                          </tr>
                                      </tbody>

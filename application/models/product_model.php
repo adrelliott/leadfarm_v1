@@ -78,9 +78,7 @@ class Product_model extends CRM_Model {
                         $row_array['jItemPrice'] = $val;
                         break;
                     case 'Taxable':
-                        //$row_array['jItemVat'] = round((($row_array['jItemPrice'] * $val)/100),2);
-                        $vat = $row_array['jItemPrice'] * $val/100;
-                        $row_array['jItemVat'] = number_format($vat,2);
+                        $row_array['jItemVatRate'] = $val;
                         break;
                     case 'ItemType':
                         $row_array['jItemType'] = $val;
