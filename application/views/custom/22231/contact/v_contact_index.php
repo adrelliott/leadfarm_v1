@@ -5,7 +5,12 @@
         </div>
         <div class="widget clearfix">            
             <h2>Find Contacts</h2>
-            <div class="widget_inside">                
+            <div class="widget_inside"> 
+                <?php 
+                 //$this->table->set_template_custom(array('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id', 'table_open' => '<table class="ajax_table">'));
+                //$this->table->set_heading_custom($tables['contacts']['table_headers']);
+                //echo $this->table->generate_custom();
+                ?>
                <?php 
                     $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id'));    
                     $this->table->set_heading_custom($tables['contacts']['table_headers']);
