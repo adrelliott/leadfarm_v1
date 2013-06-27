@@ -60,10 +60,20 @@
                          <?php echo form_open( "/order/add/edit/$rID/$ContactId", 'class="ajax"' ) ; ?>
                          <div class="page-header">
                              <div id="alert"></div>
-                             <div class="row-fluid">
-                                 <h3>Create/edit a Purchase for this contact</h3>
-                                <?php echo display_field($fields['DateCreated']); ?>
-                             </div>
+                            <div class="span6 left">
+                                <h4>FirstName LastName</h4>
+                                <p>Address 1</p>
+                                <p>Address 2</p>
+                                <p>Address 3</p>
+                                <p>City, Postcode, Countrynamelong</p>
+                            </div>
+                            <div class="span5 right last">
+                                <p><?php echo form_label('Shipping Method & Cost:'); ?> <?php echo form_dropdown('name', array('Fed-Ex' => 'Fed-Ex', 'Royal Mail' => 'Royal mail')); ?></p>
+                                <p>Cost of Shipping: <?php echo form_input('name', 'val'); ?></p>
+                                <p>Sage invoice Number: <?php echo form_input('name', 'val', 'class="small" '); ?>(Order Id: 23232)</p>
+                                <p>Payment Method: <?php echo form_dropdown('name', array('Cash' => 'Cash', 'Invoice' => 'Invoice')); ?></p>
+                                <p>Date of Order: <?php echo form_input('name', 'val'); ?></p>
+                            </div>
                          </div>
                          <div class="row-fluid">
                              <form id="itemsForm">
@@ -75,30 +85,38 @@
                                              <th>Item Code</th>
                                              <th>Description</th>
                                              <th>Qty</th>
-                                             <th>Price</th>
+                                             <th>Net Price</th>
+                                             <th>VAT</th>
                                              <th>Total</th>
                                          </tr>
                                      </thead>
                                      <tbody>
                                          <tr class="item-row">
                                              <td></td>
-                                             <td><input type="text" name="itemCode[]" value="" class="input-mini" id="itemCode"
+                                             <td><input type="text" name="itemCode[]" value="" class="input-mini mini" id="itemCode"
                                                         tabindex="1"/>
                                              </td>
-                                             <td><input type="text" name="itemDesc[]" value="" class="input-large" id="itemDesc"
+                                             <td><input type="text" name="itemDesc[]" value="" class="input-large xlarge" id="itemDesc"
                                                         readonly="readonly"/></td>
-                                             <td><input type="text" name="itemQty[]" value="" class="input-mini" id="itemQty" tabindex="2"/>
+                                             <td><input type="text" name="itemQty[]" value="" class="input-mini  mini" id="itemQty" tabindex="2"/>
                                              </td>
                                              <td>
-                                                 <div class="input-prepend input-append"><span class="add-on">£</span><input
+                                                 <div class="input-prepend input-append"><span class="add-on">£ </span><input
                                                          name="itemPrice[]"
-                                                         class=" input-small"
+                                                         class=" input-small small"
                                                          id="itemPrice"
                                                          type="text"></div>
                                              </td>
                                              <td>
                                                  <div class="input-prepend input-append"><span class="add-on">£</span><input
-                                                         name="itemLineTotal[]" class=" input-small" id="itemLineTotal" type="text"
+                                                         name="itemVat[]"
+                                                         class=" input-small small"
+                                                         id="itemVat"
+                                                         type="text"></div>
+                                             </td>
+                                             <td>
+                                                 <div class="input-prepend input-append"><span class="add-on">£</span><input
+                                                         name="itemLineTotal[]" class="small input-small" id="itemLineTotal" type="text"
                                                          readonly="readonly"></div>
                                              </td>
                                          </tr>
@@ -114,22 +132,55 @@
                          </div>
 
 
-                         <div class="row-fluid">
-                             <div class="span8">
+                         <div class="row">
+                             <div>
                                  <div class="alert alert-info"> </div>
                              </div>
-                             <div class="span4">
-                                 <h3 class="pull-right">
-                                     <span>Order Total:</span>
-                                     <?php //<span id="invGrandTotal"></span>?>
-                                 </h3>
+                             <div class="col_7 ">
+                                 order notes
+                             </div>
+                             <div class="col_5 last ">
+                                 <table id="grand_totals">
+                                     <thead>
+                                         <tr>
+                                             <th></th>
+                                         </tr>
+                                     </thead>
+                                     <tbody>
+                                         <tr>
+                                             <td>
+                                                 <span>Net Price</span>
+                                                <?php echo form_input('TotalPrice_A', '', 'id="invSubTotal"'); ?>
+                                             </td>
+                                         </tr>
+                                         <tr>
+                                             <td>
+                                                 <span>Postage & packing:</span>
+                                                 <?php echo form_input('pp', '2.99', '', 'id="invPacking"'); ?>
+                                             </td>
+                                         </tr>
+                                         <tr>
+                                             <td>
+                                                <span>Total VAT</span>
+                                                <?php echo form_input('totalVat', '', 'id="invTotalVat"'); ?>
+                                             </td>
+                                         </tr>
+                                         <tr>
+                                             <td>
+                                                <span>Discount</span>
+                                                <?php echo form_input('discount', '', 'id="invDiscount"'); ?>
+                                             </td>
+                                         </tr>
+                                         <tr>
+                                             <td>
+                                                <span>Total invoice</span>
+                                                <?php echo form_input('total', '', 'id="invGrandTotal"'); ?>
+                                             </td>
+                                         </tr>
+                                     </tbody>
+                                 </table>
                              </div>
                          </div>
-                         <?php //echo display_field($fields['TotalPrice_A']); ?>
-                         
-                         <?php echo form_input('TotalPrice_A', '', 'id="invGrandTotal1'); ?>
-                        <?php echo display_field($fields['PaymentMethod']); ?>
-                        <?php echo display_field($fields['OrderNotes']); ?> 
                          <div class="clearfix">
                                     <input name='submit' type='submit' class='button blue right large' style='float:right' value='Save'></input>
                         </div>
@@ -140,3 +191,20 @@
         </div>      
     </div>    
 </div> 
+
+<?php 
+/*
+ var rowTemp = [
+           '<tr class = "item-row">',
+            '<td><i id="deleteRow" class="icon-remove"></i></td>',
+                '<td><input type="text" name="itemCode[]" value="" class="input-mini mini" id="itemCode" tabindex="1" /></td>',
+                '<td><input type="text" name="itemDesc[]" value="" class="input-large xlarge" id="itemDesc" readonly="readonly" /> </td>',
+                '<td> <input type="text" name="itemQty[]" value="" class="input-mini  mini" id="itemQty" tabindex="2" /></td>',
+                '<td><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemPrice[]" class="input-small small" id="itemPrice" type="text"> </div></td>',
+                
+                '<td><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemVat[]" class="input-small small" id="itemVat" type="text"> </div></td>',
+                '<td ><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemLineTotal[]" class="small input-small" id="itemLineTotal" type="text" readonly="readonly" > </div></td>',
+                '</tr>'
+       ].join('');
+ * 
+ */

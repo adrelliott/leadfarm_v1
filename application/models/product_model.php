@@ -15,6 +15,7 @@ class Product_model extends CRM_Model {
         $this->order_by = 'product.ProductName ASC';   //why isnt;' this reflected in datatable? 
         //$this->contactId_fieldname = '__ContactId'; 
         $this->primary_key = 'Id';
+        setlocale(LC_MONETARY, 'en_GB');
     }
     
     /*function get_link_fields($Id_array) {
@@ -52,7 +53,7 @@ class Product_model extends CRM_Model {
     //Get for assets/invoicing/js/moiinvoice
     
    function get_products($param) {
-       $this->db->select('Id, ProductName, ProductPrice, ItemType');
+       $this->db->select('Id, ProductName, ProductPrice, ItemType, Taxable');
        $return_arr = array();
        
        if ( ! $param) $param = $_GET["term"];
@@ -75,6 +76,11 @@ class Product_model extends CRM_Model {
                         break;
                     case 'ProductPrice':
                         $row_array['jItemPrice'] = $val;
+                        break;
+                    case 'Taxable':
+                        //$row_array['jItemVat'] = round((($row_array['jItemPrice'] * $val)/100),2);
+                        $vat = $row_array['jItemPrice'] * $val/100;
+                        $row_array['jItemVat'] = number_format($vat,2);
                         break;
                     case 'ItemType':
                         $row_array['jItemType'] = $val;

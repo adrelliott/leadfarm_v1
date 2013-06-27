@@ -47,8 +47,8 @@ $(document).ready(function () {
     // Use the .autocomplete() method to compile the list based on input from user
     $('#itemCode').autocomplete({
         //source: 'services/fetch-item-data.php',
-        //source: 'http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products',
-        source: 'http://mymarketingcentre.co.uk/product/ajax_products',
+        source: 'http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products',
+        //source: 'http://mymarketingcentre.co.uk/product/ajax_products',
         minLength: 1,
         select:function (event, ui) {
             var $itemrow = $(this).closest('tr');
@@ -56,6 +56,7 @@ $(document).ready(function () {
             $itemrow.find('#itemCode').val(ui.item.jItemCode);
             $itemrow.find('#itemDesc').val(ui.item.jItemDesc);
             $itemrow.find('#itemPrice').val(ui.item.jItemPrice);
+            $itemrow.find('#itemVat').val(ui.item.jItemVat);
 
             // Give focus to the next input field to recieve input from user
             $('#itemQty').focus();
@@ -74,7 +75,7 @@ $(document).ready(function () {
         var $itemsTable = $('#itemsTable');
 
         // Create an Array to for the table row. ** Just to make things a bit easier to read.
-        var rowTemp = [
+        /*var rowTemp = [
             '<tr class="item-row">',
             '<td><i id="deleteRow" class="icon-remove"></i></td>',
             '<td><input type="text" name="itemCode[]" class="input-mini" value="" id="itemCode" /> </td>',
@@ -84,6 +85,23 @@ $(document).ready(function () {
             '<td><div class="input-prepend input-append"><span class="add-on">£</span><input name="itemLineTotal[]" class=" input-small" id="itemLineTotal" type="text" readonly="readonly"></div></td>',
             '</tr>'
         ].join('');
+        */
+       
+       var rowTemp = [
+           '<tr class = "item-row">',
+            '<td><i id="deleteRow" class="icon-remove"></i></td>',
+                '<td><input type="text" name="itemCode[]" value="" class="input-mini mini" id="itemCode" tabindex="1" /></td>',
+                '<td><input type="text" name="itemDesc[]" value="" class="input-large xlarge" id="itemDesc" readonly="readonly" /> </td>',
+                '<td> <input type="text" name="itemQty[]" value="" class="input-mini  mini" id="itemQty" tabindex="2" /></td>',
+                '<td><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemPrice[]" class="input-small small" id="itemPrice" type="text"> </div></td>',
+                
+                '<td><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemVat[]" class="input-small small" id="itemVat" type="text"> </div></td>',
+                '<td ><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemLineTotal[]" class="small input-small" id="itemLineTotal" type="text" readonly="readonly" > </div></td>',
+                '</tr>'
+       ].join('');
+        
+       
+       
 
         var $row = $(rowTemp);
 
@@ -92,9 +110,10 @@ $(document).ready(function () {
         var $itemDesc = $row.find('#itemDesc');
         var $itemPrice = $row.find('#itemPrice');
         var $itemQty = $row.find('#itemQty');
+        var $itemVat = $row.find('#itemVat');
 
         // If the last row itemCode is empty then don't let the user continue adding a row
-        if ($('#itemCode:last').val() != '') {
+        //if ($('#itemCode:last').val() != '') {
 
             // Add row after the first row in table
             $('.item-row:last', $itemsTable).after($row);
@@ -103,13 +122,14 @@ $(document).ready(function () {
             // apply autocomplete method to newly created row
             $row.find('#itemCode').autocomplete({
                 //source:'services/fetch-item-data.php',
-                //source: 'http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products',
-                source: 'http://mymarketingcentre.co.uk/product/ajax_products',
+                source: 'http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products',
+                //source: 'http://mymarketingcentre.co.uk/product/ajax_products',
                 minLength:1,
                 select:function (event, ui) {
                     $itemCode.val(ui.item.jItemCode);
                     $itemDesc.val(ui.item.jItemDesc);
                     $itemPrice.val(ui.item.jItemPrice);
+                    $itemVat.val(ui.item.jItemVat);
                     // Give focus to the next input field to receive input from user
                     $itemQty.focus();
                     return false;
@@ -138,9 +158,9 @@ $(document).ready(function () {
             });
 
 
-        } else {
-            $('.alert').fadeIn('slow').html('You need to complete the item inputs');
-        }
+       //} else {
+        //    $('.alert').fadeIn('slow').html('You need to complete the item inputs');
+       // }
 
         // End if last itemCode input is empty
         return false;

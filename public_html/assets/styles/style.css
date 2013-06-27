@@ -742,3 +742,12 @@ h3.speech_icon {
 }
 
 .hidden {display:none}
+
+table#grand_totals input[type="text"] {
+    text-align: right;
+    float: right;
+    width: 100px;
+}
+table#grand_totals span {
+    text-align:right;
+}
