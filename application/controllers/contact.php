@@ -371,5 +371,109 @@ else
             
             
         }
+        
+         
+    function read_word() {
+        $this->load->helper('file');
+        $filename = 'http://localhost:8888/projects/leadfarm_v1/public_html/assets/includes/fc_utd_changes_v1.docx';
+        
+        $content = $this->read_file_docx($filename);
+        
+        if ($content !== FALSE) echo nl2br($content);
+        else echo "No!";
+       
+        
+        return
+        
+        $string = read_file('includes/fc_utd_changes_v1.docx');
+        //print $string;
+        echo "hello - this is type; " . get_mime_by_extension('includes/fc_utd_changes_v1.docx');
+    }
+    
+    public function unzip() {
+        $this->load->library('unzip');
+        $this->load->helper('file');
+        $this->load->helper('xml');
+        $this->load->helper('text');
+        
+        //$this->unzip->extract('assets/includes/fc_utd_changes_v1.docx');
+        //$string1 = read_file('assets/includes/word/document.xml');
+        $string2 = read_file('assets/includes/Martin_Gradwell_CV_2.5.doc');
+        //$string = read_file('assets/includes/customXml/item1.xml');
+        //$string = xml_convert($string);
+        //$string1 = ascii_to_entities($string1);
+        $string2 = ascii_to_entities($string2);
+        
+        //strip out punctation & make it all lowercase
+        $remove = array ( "!", "@", "$", "%","^", "&", ":", ",", ".", "*", "(", ")",);
+        $string2 = str_replace($remove,"",$string2);
+        //$string2 = strtolower($string2);
+        
+        //first find the position of 
+$re = '/# Match position between camelCase "words".
+    (?<=[a-z])  # Position is after a lowercase,
+    (?=[A-Z])   # and before an uppercase letter.
+    /x';
+//$string = preg_split($re, $string);
+//$string = ascii_to_entities($string);
+        $keywords = array(
+            'CLINICAL INSTRUCTION', 'CI experience', 'sorry', 'walsh', 'Create New Contact', 'Curriculum Vitae','C', 'C++', 'C#', 'HTML', 'XML', 'Java', 'Javascript', 'COBOL', 'Delphi', 'Pascal','Visual Basic'
+        );
+        $count = array();
+        
+        //foreach ($keywords as $keyword)
+        //{
+       //     $count[$keyword] = substr_count(strtolower($string1), strtolower($keyword));
+      //  }
+        
+       // print_array($count, 0, 'count of kw in string1');
+        
+        foreach ($keywords as $keyword)
+        {
+            $count[$keyword] = substr_count(strtolower($string2), strtolower($keyword));
+        }
+        
+        echo "<h1>Contents of Word doc</h1>".$string2;
+        print_array($count, 0, 'count of kw in string2');
+        
+
+
+
+        //echo "<h1>String1</h1>".$string1;
+    }
+    
+    function read_file_docx($filename) {
+        $striped_content = '';
+        $content = '';
+        die('fielname:' . $filename);
+        if(!$filename ||!file_exists($filename)) return '397';
+        
+        
+        $zip = zip_open($filename);
+        if (!$zip || is_numeric($zip)) return '401';
+        
+        while ($zip_entry = zip_read($zip)) 
+        { 
+            if (zip_entry_open($zip, $zip_entry) == FALSE) continue;
+            if (zip_entry_name($zip_entry) != "word/document.xml") continue;
+            
+            $content .= zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
+            zip_entry_close($zip_entry);
+        }// end while 
+        zip_close($zip); 
+
+        //echo $content; 
+        //echo ""; 
+        //file_put_contents('1.xml', $content);	 
+        
+        $content = str_replace('', " ", $content); 
+        $content = str_replace('', "\r\n", $content); 
+        $striped_content = strip_tags($content); return $striped_content; 
+        
+        return $striped_content;
+        
+    }
+    
+    
     }
 }   

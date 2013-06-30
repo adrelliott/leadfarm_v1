@@ -746,7 +746,7 @@ h3.speech_icon {
 table#grand_totals input[type="text"] {
     text-align: right;
     float: right;
-    width: 100px;
+    width: 120px;
 }
 table#grand_totals span {
     text-align:right;

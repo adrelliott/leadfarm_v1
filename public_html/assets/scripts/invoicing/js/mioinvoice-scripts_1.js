@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     // We are overriding the autocomplete UI menu styles to create our own.
     // You can add information from the returned json array as needed
     // Just be sure that your array contains the correct value when returned
@@ -11,7 +10,20 @@ $(document).ready(function () {
             .data("item.autocomplete", item)
 
             // This is the autocomplete list that is generated
-            .append("<a class='additionalInfo'>" + item.jItemCode + " - [" + item.jItemType + "] " + item.jItemDesc).appendTo(ul);
+            .append("<a class='additionalInfo'>" + item.jItemCode + " - [" + item.jItemType + "] " + item.jItemDesc + 
+
+            // This is the hover box that is generated when you hover over an item in the list
+            "<span class='additionalInfoColor'>" +
+            /*"<div><h4>Item Information</h4></div>" +
+            "<div><strong>Item Code:</strong> " + item.jItemCode + "</div>" +
+            "<div><strong>Qty on Hand:</strong> " + item.jQtyOnHand + "</div>" +
+            "<div><strong>Merchant:</strong> $" + item.jItemPrice + "</div>" +
+            "<div><strong>Wholesale:</strong> $" + item.jItemWholesale + "</div>" +
+            "<div><strong>Retail:</strong> $" + item.jItemRetail + "</div>" + 
+                 */
+            "</span> </a>")
+
+            .appendTo(ul);
     };
 
     // We don't want the user to leave the page if they have started working with it so we set the
@@ -48,12 +60,12 @@ $(document).ready(function () {
     });
 
 
-    //Get source URL
-    var $source = $("#itemsTable").attr("data-source");
 
     // Use the .autocomplete() method to compile the list based on input from user
     $('#itemCode').autocomplete({
-        source: $source,
+        //source: 'services/fetch-item-data.php',
+        source: 'http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products',
+        //source: 'http://mymarketingcentre.co.uk/product/ajax_products',
         minLength: 1,
         select:function (event, ui) {
             var $itemrow = $(this).closest('tr');
@@ -78,17 +90,39 @@ $(document).ready(function () {
 
         // Get the table object to use for adding a row at the end of the table
         var $itemsTable = $('#itemsTable');
+
+        // Create an Array to for the table row. ** Just to make things a bit easier to read.
+        /*var rowTemp = [
+            '<tr class="item-row">',
+            '<td><i id="deleteRow" class="icon-remove"></i></td>',
+            '<td><input type="text" name="itemCode[]" class="input-mini" value="" id="itemCode" /> </td>',
+            '<td><input type="text" name="itemDesc[]" class="input-large" value="" id="itemDesc"  readonly="readonly" /></td>',
+            '<td><input type="text" name="itemQty[]" class="input-mini" value="" id="itemQty" /></td>',
+            '<td><div class="input-prepend input-append"><span class="add-on">£</span><input name="itemPrice[]" class=" input-small" id="itemPrice" type="text"></div></td>',
+            '<td><div class="input-prepend input-append"><span class="add-on">£</span><input name="itemLineTotal[]" class=" input-small" id="itemLineTotal" type="text" readonly="readonly"></div></td>',
+            '</tr>'
+        ].join('');
+        */
        
-       //Clone last row and reset all data
-       var $row = $('#itemsTable').find("tbody tr:last").clone();
-       $row.find('#itemCode').val('');
-       $row.find('#itemDesc').val('');
-       $row.find('#itemPrice').val('');
-       $row.find('#itemQty').val('');
-       $row.find('#vatRate').val('');
+       var rowTemp = [
+           '<tr class = "item-row">',
+            '<td><i id="deleteRow" class="icon-remove">X</i></td>',
+                '<td><input type="text" name="itemCode[]" value="" class="input-mini mini" id="itemCode" tabindex="1" /></td>',
+                '<td><input type="text" name="itemDesc[]" value="" class="input-large xlarge" id="itemDesc" readonly="readonly" /> </td>',
+                '<td> <input type="text" name="itemQty[]" value="" class="input-mini  mini" id="itemQty" tabindex="2" /></td>',
+                '<td><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemPrice[]" class="input-small small" id="itemPrice" type="text"> </div></td>',
+                
+                '<td><input name="vatRate[]" id="vatRate" type="hidden"><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemVatTotal[]" class="input-small small" id="itemVatTotal" type="text"  readonly="readonly"> </div></td>',
+                '<td><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemLineTotal[]" class="small input-small" id="itemLineTotal" type="text" readonly="readonly" > </div>',
+                //'<input name="itemVatTotal[]" id="itemVatTotal" type="hidden"></td>',
+                
+                '</tr>'
+       ].join('');
+        
        
-        // Update the row calculated fields.
-        updatePrice($row);
+       
+
+        var $row = $(rowTemp);
 
         // save reference to inputs within row
         var $itemCode = $row.find('#itemCode');
@@ -106,7 +140,9 @@ $(document).ready(function () {
 
             // apply autocomplete method to newly created row
             $row.find('#itemCode').autocomplete({
-                source: $source,
+                //source:'services/fetch-item-data.php',
+                source: 'http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products',
+                //source: 'http://mymarketingcentre.co.uk/product/ajax_products',
                 minLength:1,
                 select:function (event, ui) {
                     $itemCode.val(ui.item.jItemCode);
@@ -169,7 +205,11 @@ $(document).ready(function () {
     indiv_vat = roundNumber(indiv_vat, 2);
     isNaN(indiv_vat) ? $itemRow.find('#itemVatTotal').val("N/A") : $itemRow.find('#itemVatTotal').val(indiv_vat);
     
-    //Update all totals
+    //Update the total vat on this row
+    //var vat = $itemRow.find('#itemVat').val() * $itemRow.find('#itemQty').val();
+    //vat = roundNumber(vat, 2);
+    //isNaN(vat) ? $itemRow.find('#itemVatTotal').val("N/A") : $itemRow.find('#itemVatTotal').val(vat);
+    
     update_total();
     update_total_vat();
     update_grand_total();
@@ -183,7 +223,7 @@ var update_total = function() {
     });
 
     total = roundNumber(total, 2);
-    //$('#invGrandTotalTop, #invGrandTotal').html("<h4>£" + total + "</h4>");
+    $('#invGrandTotalTop, #invGrandTotal').html("<h4>£" + total + "</h4>");
     //$('input#invGrandTotal1').val(total);
     $('input[name="TotalPrice_A"]').val(total);
 

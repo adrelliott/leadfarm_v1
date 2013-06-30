@@ -1,3 +1,13 @@
+<?php 
+$contact_info = $this->data['view_setup']['tables']['contact_info']['table_data'];
+$order_info = $this->data['view_setup']['fields'];
+$payment_options = array('Cash' => 'Cash', 'Invoice' => 'Invoice');
+$shipping_options = array(
+    'Royal Mail' => 'Royal Mail',
+    'DPD' => 'DPD',
+    'UPS' => 'UPS',
+);
+print_array($contact_info)?>
 <div class="row clearfix"> 
     <div class="row">
         <div class="row clearfix"> 
@@ -61,24 +71,31 @@
                          <div class="page-header">
                              <div id="alert"></div>
                             <div class="span6 left">
-                                <h4>FirstName LastName</h4>
-                                <p>Address 1</p>
-                                <p>Address 2</p>
-                                <p>Address 3</p>
-                                <p>City, Postcode, Countrynamelong</p>
+                                <h4>Enter Shipping Info</h4>
+                                <p><?php 
+                                    echo form_input('ShipFirstName', element('ShipFirstName', $shipping_info, $contact_info['FirstName']));
+                                    echo form_input('ShipLastName', element('ShipLastName', $shipping_info, $contact_info['LastName'])); 
+                                    ?>
+                                </p>
+                                <p><?php echo form_input('ShipStreet1', element('ShipStreet1', $shipping_info, $contact_info['StreetAddress1']));?></p>
+                                <p><?php echo form_input('ShipStreet2', element('ShipStreet2', $shipping_info, $contact_info['StreetAddress2']));?></p>
+                                <p><?php echo form_input('_ShipStreet3', element('_ShipStreet3', $shipping_info, $contact_info['_StreetAddress3']));?></p>
+                                <p><?php echo form_input('ShipCity', element('ShipCity', $shipping_info, $contact_info['StreetCity']));?></p>
+                                <p><?php echo form_input('ShipState', element('ShipState', $shipping_info, $contact_info['State']));?>, <?php echo form_input('ShipZip', element('ShipZip', $shipping_info, $contact_info['PostalCode']));?></p>
+                                <p><?php echo form_input('ShipCountry', element('ShipCountry', $shipping_info, $contact_info['Country']));?></p>
                             </div>
                             <div class="span5 right last">
-                                <p><?php echo form_label('Shipping Method & Cost:'); ?> <?php echo form_dropdown('name', array('Fed-Ex' => 'Fed-Ex', 'Royal Mail' => 'Royal mail')); ?></p>
-                                <p>Cost of Shipping: <?php echo form_input('name', 'val'); ?></p>
-                                <p>Sage invoice Number: <?php echo form_input('name', 'val', 'class="small" '); ?>(Order Id: 23232)</p>
-                                <p>Payment Method: <?php echo form_dropdown('name', array('Cash' => 'Cash', 'Invoice' => 'Invoice')); ?></p>
-                                <p>Date of Order: <?php echo form_input('name', 'val'); ?></p>
+                                <p><?php echo form_label('Shipping Method & Cost:'); ?> <?php echo form_dropdown('_ShippingMethod', $shipping_options, element('_ShippingMethod', $shipping_info, '')); ?></p>
+                                <p>Cost of Shipping: <?php echo form_input('_CostOfShipping', element('_CostOfShipping', $shipping_info, '')); ?></p>
+                                <p>Sage invoice Number: <?php echo form_input('_LegacyOrderId', element('_LegacyOrderId', $shipping_info, ''), 'class="small" '); ?>(Order Id: 23232)</p>
+                                <p>Payment Method: <?php echo form_dropdown('PaymentMethod', $payment_options, element('PaymentMethod', $shipping_info, '')); ?></p>
+                                <p>Date of Order: <?php echo form_input('DateCreated', element('DateCreated', $shipping_info, '')); ?></p>
                             </div>
                          </div>
                          <div class="row-fluid">
                              <form id="itemsForm">
 
-                                 <table class="table table-striped" id="itemsTable">
+                                 <table class="table table-striped" id="itemsTable" data-source="http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products">
                                      <thead>
                                          <tr>
                                              <th></th>
@@ -176,8 +193,8 @@
                                          </tr>
                                          <tr>
                                              <td>
-                                                <span>Total invoice</span>
-                                                <?php echo form_input('total', '', 'id="invGrandTotal" class=""  readonly="readonly"'); ?>
+                                                 <h3><span>Total invoice</span>
+                                                <?php echo form_input('total', '', 'id="invGrandTotal" class="large"  readonly="readonly"'); ?></h3>
                                              </td>
                                          </tr>
                                      </tbody>
@@ -195,19 +212,4 @@
     </div>    
 </div> 
 
-<?php 
-/*
- var rowTemp = [
-           '<tr class = "item-row">',
-            '<td><i id="deleteRow" class="icon-remove"></i></td>',
-                '<td><input type="text" name="itemCode[]" value="" class="input-mini mini" id="itemCode" tabindex="1" /></td>',
-                '<td><input type="text" name="itemDesc[]" value="" class="input-large xlarge" id="itemDesc" readonly="readonly" /> </td>',
-                '<td> <input type="text" name="itemQty[]" value="" class="input-mini  mini" id="itemQty" tabindex="2" /></td>',
-                '<td><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemPrice[]" class="input-small small" id="itemPrice" type="text"> </div></td>',
-                
-                '<td><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemVat[]" class="input-small small" id="itemVat" type="text"> </div></td>',
-                '<td ><div class="input-prepend input-append"> <span class="add-on"> £ </span><input name="itemLineTotal[]" class="small input-small" id="itemLineTotal" type="text" readonly="readonly" > </div></td>',
-                '</tr>'
-       ].join('');
- * 
- */
+<?php  print_array($this->data);

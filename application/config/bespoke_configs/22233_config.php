@@ -5163,7 +5163,31 @@ $config['order'] = Array
             ),
             'view' => array 
             (  
-               //dont; think we need this                
+               'contact_info' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'contact_model',
+                    'model_method' => 'get_contacts_details', 
+                    'model_params' => NULL,
+                    /*'model_params' => array
+                    (
+                        '_Type =' => 'Link_Automation',
+                    ), */
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'FirstName' => 'First Name',                            
+                        'LastName' => 'Last Name',                            
+                        'StreetAddress1' => 'Address 1',                            
+                        'StreetAddress2' => 'Address 2',                            
+                        '_StreetAddress3' => 'Address 3',                            
+                        'City' => 'City',
+                        'State' => 'State',
+                        'PostalCode' => 'PostalCode',
+                        'Country' => 'Country'
+                    ),
+                ),               
             ),
         ),
         'record' => array
