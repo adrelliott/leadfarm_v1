@@ -17,13 +17,9 @@ foreach ($this->data['view_setup']['fields'] as $field => $array)
             <div class="widget clearfix tabs">
                 <ul>
                     <li><h2><a href="#tab-1">Add a Purchase</a></h2></li>
-                    <li><h2><a href="#tab-2" >Add a Purchase</a></h2></li>
                 </ul>							
                 <div class="widget_inside">
-                    <div id="tab-1"><!-- Start of tab 1 -->
-                       
-                    </div>
-                     <div id="tab-2"><!-- Start of tab 2 -->
+                     <div id="tab-1"><!-- Start of tab 1 -->
                          <?php echo form_open( "/order/add_order/edit/$rID/$ContactId" ) ; ?>
                          <div class="page-header">
                              <div id="alert"></div>
@@ -50,7 +46,7 @@ foreach ($this->data['view_setup']['fields'] as $field => $array)
                          <div class="row-fluid">
                              <form id="itemsForm">
 
-                                 <table class="table table-striped" id="itemsTable" data-source="http://localhost:8888/projects/leadfarm_v1/public_html/product/ajax_products">
+                                 <table class="table table-striped" id="itemsTable" data-source="<?php echo site_url('product/ajax_products'); ?>">
                                      <thead>
                                          <tr>
                                              <th></th>

@@ -140,7 +140,9 @@ else
             //save record
             $rID = $this->add_record($input, $rID);
             //die('rid = ' . $rID);
+          
             
+            /*
             //Save order items
             foreach ($order['orderItem'] as $col => $array)
             {
@@ -153,11 +155,12 @@ else
                 }
                 
             }
-            
             $this->load->model('order_item_model');
             $r = $this->order_item_model->add($order['input'], $rID);
        
 
+             * */
+            
             $url = $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId;
 
             if ($this->input->is_ajax_request ()) {

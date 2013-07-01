@@ -16,11 +16,12 @@ $(document).ready(function () {
 
     // We don't want the user to leave the page if they have started working with it so we set the
     // onbeforeload method
-    $('#itemCode').focus(function () {
+    /*$('#itemCode').focus(function () {
         window.onbeforeunload = function () {
             return "You haven't saved your data.  Are you sure you want to leave this page without saving first?";
         };
     });
+    */
 
     // Update invoice total when item Qty or Price inputs have been updated
     $("#itemQty, #itemPrice").on('keyup', function () {
