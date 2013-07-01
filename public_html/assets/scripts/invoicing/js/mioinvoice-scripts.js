@@ -22,6 +22,8 @@ $(document).ready(function () {
         };
     });
     */
+   
+   
 
     // Update invoice total when item Qty or Price inputs have been updated
     $("#itemQty, #itemPrice").on('keyup', function () {
