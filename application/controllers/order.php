@@ -118,6 +118,68 @@ else
                 // Generate the view!
             $this->_generate_view($this->data);
         }*/
+          
+          
+          function add_order($view_file, $rID, $ContactId) {     
+              $order = array();
+              foreach ($this->input->post() as $key => $val)
+              {
+                  if (strpos($key, 'orderItem_') !== FALSE)
+                    {
+                      $tmp = explode('orderItem_', $key);
+                        $order['orderItem'][$tmp[1]] = $val;
+                    }
+                    else $order['order'][$key] = $val;
+              }
+              
+            //clean input
+            $input = clean_data($order['order']);
+            $input['ContactId'] = $ContactId;
+            //$input['DateCreated'] = convert_DATE($input['DateCreated'], 'to_DATE');
+            //print_array($input, 1);
+            //save record
+            $rID = $this->add_record($input, $rID);
+            //die('rid = ' . $rID);
+            
+            //Save order items
+            foreach ($order['orderItem'] as $col => $array)
+            {
+                if ($col !== 'itemVatTotal' OR $col !== 'itemLineTotal')
+                {
+                    foreach ($array as $k => $v)
+                    {
+                        $order['input'][$k][$col] = $v;
+                    }
+                }
+                
+            }
+            
+            $this->load->model('order_item_model');
+            $r = $this->order_item_model->add($order['input'], $rID);
+       
+
+            $url = $this->controller_name . '/view/' . $view_file . '/' . $rID . '/' . $ContactId;
+
+            if ($this->input->is_ajax_request ()) {
+                  $response = array (
+                      'success' => true,
+                  );
+
+                  if ($rID === 'new') {
+                      $response['redirect'] = $url;
+                  }
+
+                  $this->output->set_content_type('application/json');
+                  $this->output->set_output(json_encode($response));
+                  return;
+              }
+
+              //refresh page
+              redirect(site_url($url));
+    }
 
     }
+    
+    
+
 }

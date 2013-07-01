@@ -121,6 +121,8 @@ $(function() {
     //$(".username").inputmask({"mask": "******?*******", "placeholder": " ", "validator": "[0-9\(\)\.\+/ ]",}); //specifying options only
     $(".input_mask_price").inputmask('£99999.99', { numericInput: true, rightAlignNumerics: false, "placeholder": " " }); //For prices
     
+    $(".input_mask_price2").inputmask('£99999.99', { numericInput: true, rightAlignNumerics: true, "placeholder": " " }); //For prices
+    
     //This is under PCSS3 - not as powerful a mask
     $(".mask_date").mask('99/99/9999', {placeholder:'-'});
     $(".mask_phone").mask('(0999) 999 9999', {placeholder:'_'});

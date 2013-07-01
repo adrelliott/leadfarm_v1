@@ -144,7 +144,7 @@ $(document).ready(function () {
 
 
        } else {
-           $('.alert').fadeIn('slow').html('You need to complete the item inputs');
+           $('.alert').fadeIn('slow').html('Add a product to this row, before adding a new row!');
       }
 
         // End if last itemCode input is empty
@@ -185,7 +185,7 @@ var update_total = function() {
     total = roundNumber(total, 2);
     //$('#invGrandTotalTop, #invGrandTotal').html("<h4>£" + total + "</h4>");
     //$('input#invGrandTotal1').val(total);
-    $('input[name="TotalPrice_A"]').val(total);
+    $('input[name="_NetTotalPrice"]').val(total);
 
 };
 
@@ -197,7 +197,7 @@ var update_total_vat = function() {
     });
     
     total_vat = roundNumber(total_vat, 2);
-     $('input[name="totalVat"]').val(total_vat);
+     $('input[name="_TotalVat"]').val(total_vat);
 };
 
 var update_grand_total = function() {
@@ -208,7 +208,7 @@ var update_grand_total = function() {
         if (!isNaN(running_total)) grand_total += Number(running_total);
     });
     grand_total = roundNumber(grand_total, 2);
-     $('input[name="total"]').val(grand_total);
+     $('input[name="_GrandTotal"]').val(grand_total);
 };
 
 // Update message

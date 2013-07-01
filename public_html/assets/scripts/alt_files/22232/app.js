@@ -155,6 +155,7 @@ $("input[name$='search_type']").click(function() {
     $(".twitter").inputmask({"mask": "a-z_1-9"}); //specifying options only
     $(".input_mask_price").inputmask('£99999.99', { numericInput: true, rightAlignNumerics: false, "placeholder": " " }); //For prices
     
+    
     //This is under PCSS3 - not as powerful a mask
     $(".mask_date").mask('99/99/9999', {placeholder:'-'});
     $(".mask_phone").mask('(0999) 999 9999', {placeholder:'_'});
