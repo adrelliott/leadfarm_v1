@@ -139,6 +139,8 @@ $("input[name$='search_type']").click(function() {
       dateFormat: 'dd/mm/yy' 
     });
     
+   
+    
     // Datepicker
     $('.datepicker_dob').datepicker({
       changeMonth: true,
@@ -146,6 +148,9 @@ $("input[name$='search_type']").click(function() {
       defaultDate: '01/01/70',
       dateFormat: 'dd/mm/yy'
     });
+    
+    
+    
     
     //Inputmask mask - a much more powerful mask: https://github.com/RobinHerbots/jquery.inputmask
     $(":input").inputmask();
@@ -248,7 +253,45 @@ $("input[name$='search_type']").click(function() {
             orientation: "vertical"
         });
     });
+    
+    $("a.add_row").click(function()
+  {
+      //get the table Id we're working with
+      var table_id = "table#"+$(this).attr("table-id");
+      
+      // clone the last row in the table
+        var $tr = $(table_id).find("tbody tr:last").clone();
+        // append the new row to the table
+        $(table_id).find("tbody tr:last").after($tr);
+ 
+        // prevent button redirecting to new page
+        return false;
+  }); 
+  
+  
 
+//reveals divs based on values chosen on dropdown
+$(".dropdown_reveal").change(function () {
+        var div_id = $(this).attr("div-id");
+        var selected_val = $(this).val();
+        $("."+div_id).hide();
+        $("#"+div_id+"_"+selected_val).show();
+    });
+    
+    // 1. make sure the div to be displayd is hidden
+    // 2. make sure all divs to be displayed has got class matching the div-id value
+    // 3. make sure the div to be revealed has id of div-id value then '_{value}'. e.g. if div-id = 'elephant_size', and value to display the div is 'huge' then the markup would be
+    /*
+    <select div-id="elephant_size" class="dropdown_reveal">
+    <option value="">Pick one</option>
+    <option value="small">Small</option>
+    <option value="large">Large</option>
+    <option value="huge">Huge</option>
+</select>
+
+<div class="elephant_size" id="elephant_size_huge" style="display:none">Wow! That's flippin big!</div>
+    
+    */
     //hover states on the static widgets
     $('#dialog_link, ul#icons li').hover(
         function() {

@@ -6566,6 +6566,31 @@ $config['search'] = Array
         
     );
 
+$config['fields_for_search'] = array (
+    'contact' => array (
+        'order' => array (
+            'contact' => array (
+                'Id', 'FirstName', 'LastName'
+            ), 
+            'order' => array (
+                'Id','ContactId', '_ItemBought', '_ValidUntil',
+            ),
+            'search_cols' => array (
+                'fc_order_item' => array (
+                    'table' => 'order',
+                    'col' => '_ItemBought',
+                ),
+                'fc_order_expire' => array (
+                    'table' => 'order',
+                    'col' => '_ValidUntil',
+                ),
+            ),
+            'grouping' => array ('fc_order_item', 'fc_order_expire')//GROUP THESE fields together
+        ),
+        
+    ),
+);
+
 /* End of file */
 
 
