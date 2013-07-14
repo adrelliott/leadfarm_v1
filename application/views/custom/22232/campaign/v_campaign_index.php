@@ -26,7 +26,7 @@
                     ?>
                     <div class="margin_top_15"></div>
                     <div class="clearfix">
-                        <a href="<?php echo site_url('/broadcast/view/edit/new'); ?>" class="large red button right"><span>Create New Broadcast Campaign</span></a>
+                        <a href="<?php echo site_url('/broadcast/view/edit/new/1'); ?>" class="large red button right"><span>Create New Broadcast Campaign</span></a>
                     </div>
                 </div>
             </div>

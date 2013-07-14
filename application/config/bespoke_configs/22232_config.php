@@ -4974,6 +4974,27 @@ $config['broadcast'] = Array
                         'HTML_after' => '',
                         'value' => '', 
                     ),                 
+                    'PA_TemplateName' => array      
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'PA_TemplateName',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'PA_TemplateName',
+                        'helpText' => '',                        
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),                 
                     'Content' => array      
                     (
                         'on' => TRUE,    //TRUE/FALSE to include/exclude from query
@@ -6573,7 +6594,8 @@ $config['fields_for_search'] = array (
                 'Id', 'FirstName', 'LastName'
             ), 
             'order' => array (
-                'Id','ContactId', '_ItemBought', '_ValidUntil',
+                //'Id','ContactId', '_ItemBought', '_ValidUntil',
+                '_ItemBought', '_ValidUntil',
             ),
             'search_cols' => array (
                 'fc_order_item' => array (
@@ -6585,7 +6607,8 @@ $config['fields_for_search'] = array (
                     'col' => '_ValidUntil',
                 ),
             ),
-            'grouping' => array ('fc_order_item', 'fc_order_expire')//GROUP THESE fields together
+            'grouping' => array ('fc_order_item', 'fc_order_expire'),//GROUP THESE fields together
+            'display_fields' => array('Id', 'First Name', 'Last Name', 'Order', 'Season')
         ),
         
     ),

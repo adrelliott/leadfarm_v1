@@ -56,7 +56,7 @@ $seasons =  array(
     '2008/09' => '2008/09', 
     '2009/10' => '2009/10', 
     '2010/11' => '2010/11', 
-    '2011/12' => '2011/12', 
+    '2011/12' => '2011/12',
     '2012/13' => '2012/13', 
     '2013/14' => '2013/14');
 $date_choices = array(
@@ -88,7 +88,29 @@ $date_choices = array(
             <div class="widget_inside">
                 <div id="tab-1">
                     <?php if (element('tables', $this->data['view_setup'])): ?>
-                    Search results table goes here
+                    <div class="clearfix margin_bottom_25">
+                        <?php 
+                        $report_type = $this->session->userdata('report_type');
+                        echo '<span class="notification information col_9">' . $this->data['view_setup']['tables']['search_results']['count_results'] . ' records found. (<a href="' . site_url('search/export_as_csv/' . $report_type) . '">Download as CSV</a>)</span>'; ?>
+                        <a href="<?php echo site_url('/search'); ?>" class="large red button right col_2 last">
+                            <span>Create New Search</span>
+                        </a>
+                    </div>
+                            <table>
+                                <tr>
+                                    <?php foreach ($this->data['view_setup']['tables']['search_results']['table_headers'] as $col => $label): ?>
+                                    <th><?php echo $label; ?></th>
+                                    <?php endforeach; ?>
+                                </tr>
+                                <?php foreach ($this->data['view_setup']['tables']['search_results']['table_data'] as $row => $table_data) : ?>
+                                <tr>
+                                    <?php foreach ($table_data as $col => $val) : ?>
+                                    <td><?php echo $val; ?></td>
+                                    <?php endforeach; ?>
+                                </tr>
+                                <?php endforeach; ?>
+                            </table>
+                            <?php echo '<h4 class="margin_top_15">' . $this->data['view_setup']['tables']['search_results']['pagination_links'] . '</h4>'; ?>
                     <?php else : ?>
                     <h4>Use one of the tabs to start a search (your results appear here)</h4>
                     <?php endif; ?>
@@ -188,4 +210,5 @@ $date_choices = array(
 <?php print_array($this->session->userdata('search_criteria')); ?>
 <?php 
 
+print_array($_SESSION);
 print_array($this->data); ?>

@@ -29,8 +29,9 @@ class Search_page_model extends CRM_Model {
         
     }
 
-    public function do_search($main_table, $join_table, $query_type, $search_type) {
+    public function do_search($main_table, $join_table, $query_type, $search_type, $start, $limit ) {
         //clean the post
+        $retval = array();
         $this->_post = clean_data($this->input->post());
         $this->_tables = array(
             $main_table => array (
@@ -59,17 +60,41 @@ class Search_page_model extends CRM_Model {
                 break;
         }
         
+        $last_query = array('last_query' => $this->_query['sql']);
+        $this->session->set_userdata($last_query);
+        //$retval['count_results'] = $this->_query['sql'];
+        //now add limit $ start
+        //$this->_query['sql'] .= ' LIMIT ' . $start . ',' . $limit;
+        
+        
         //now do the search & return the results
-        $this->load->model($main_table . '_model', 'main_model');
-        $this->_query['results'] = $this->db->query($this->_query['sql']);
+       // $this->load->model($main_table . '_model', 'main_model');
+        return $this->do_query($this->_query['sql'], $start, $limit);
+        /*
+        $retval['sql'] = $this->_query['sql'];
+        $this->_query = $this->db->query($this->_query['sql']);
+        $retval['results'] = $this->_query->result_array();
+        $retval['cols'] = $this->_fields['display_fields'];
         $totalquery = $this->db->query('SELECT FOUND_ROWS() as total;');
-$row= $totalquery->row();
-echo $row->total; 
-        //Do we want to export?
-            //save query in PHP Session?
-        //echo "count = " . $this->_query['count'];
+$row= $totalquery->row()->total;
+        $retval['count_results'] = $row;
+        
+        return $retval;*/
     }
     
+     function do_query($sql, $start = 0, $limit = 50) {
+        $retval = array();
+        
+        $sql .= ' LIMIT ' . $start . ',' . $limit;
+        $this->_query = $this->db->query($sql);
+        $retval['results'] = $this->_query->result_array();
+        $fields = $this->config->item('fields_for_search');
+        $totalquery = $this->db->query('SELECT FOUND_ROWS() as total;');
+$row= $totalquery->row()->total;
+        $retval['count_results'] = $row;
+        
+        return $retval;
+    }
     
     
     private function _or_search($search_type) {
@@ -88,7 +113,7 @@ echo $row->total;
                 //set up the query
                 //$this->_set_alias('contact', 'c');
                 $this->_set_alias('order', 'o');
-                $this->_query['select'] = 'SELECT ' . $this->_set_fields('contact');
+                $this->_query['select'] = 'SELECT SQL_CALC_FOUND_ROWS ' . $this->_set_fields('contact');
                 $this->_query['select'] .= ',' . $this->_set_fields('order');
                 $this->_query['from'] = $this->_set_table('contact', 'FROM');
                 $this->_query['join'] = $this->_set_table('order','left join');
@@ -126,7 +151,7 @@ echo $row->total;
                 //set up the query
                 $this->_set_alias('contact', 'c');
                 $this->_set_alias('order', 'o1');
-                $this->_query['select'] = 'SELECT ' . $this->_set_fields('contact');
+                $this->_query['select'] = 'SELECT SQL_CALC_FOUND_ROWS ' . $this->_set_fields('contact');
                 $this->_query['select'] .= ',' . $this->_set_fields('order');
                 $this->_query['from'] = $this->_set_table('contact', 'FROM');
                 

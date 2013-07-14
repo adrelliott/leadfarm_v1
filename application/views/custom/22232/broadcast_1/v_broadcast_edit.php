@@ -1,10 +1,9 @@
-
 <div class="col_8"><!-- Start Column 1-->
     <div class="row clearfix">
         <div class="widget clearfix">
             <h2>Edit/Create Broadcast Campaign</h2>
             <div class="widget_inside">
-                <?php include('step' . $_SESSION['step']['current'] . '.php'); ?>
+                <?php include('step' . step_manager() . '.php'); ?>
             </div>
         </div>
     </div>

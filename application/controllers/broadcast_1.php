@@ -19,10 +19,6 @@ if (!defined('BASEPATH'))
 class Broadcast extends CRM_Controller {
 
     public $controller_name = 'broadcast';
-    
-    public $fields_to_replace = array(
-        'FirstName', 'LastName', 'NickName', 'Email'
-    );
 
     public function __construct() {
         parent::__construct();
@@ -34,9 +30,7 @@ class Broadcast extends CRM_Controller {
         redirect(site_url('campaign'));
     }
 
-    public function view($view_file, $rID = 'new', $step_no = 1, $pull = '') {
-        $_SESSION['step']['current'] = $step_no;
-        //if (! element('step', $_SESSION, FALSE)) $_SESSION['step']['current'] = 1;
+    public function view($view_file, $rID = 'new', $pull = '') {
         parent::view($view_file, $rID);
         
         $this->_instantiate_ckeditor();
@@ -65,10 +59,10 @@ class Broadcast extends CRM_Controller {
             'path' => '',
             //Optional values
             'config' => array(
-                'toolbar' => "Full", //Using the Full toolbar
+                //'toolbar' => "Full", //Using the Full toolbar
                 'width' => "650px", //Setting a custom width
                 'height' => '400px', //Setting a custom height
-                //'toolbar' => "Simple",
+                'toolbar' => "Simple",
                 
             ),
             //Replacing styles from the "Styles tool"
@@ -104,17 +98,15 @@ class Broadcast extends CRM_Controller {
         
     }
     
-   
-
     
+    public function add($view_file, $rID = 'new') {
 
-    public function add($view_file, $rID = 'new', $step_no = FALSE) {
-        //if ($step_no) $_SESSION['step']['current'] = $step_no;
         //clean input
         $input = clean_data($this->input->post());
+        
         //save record
         $Id = $this->add_record($input, $rID);
-        $url = site_url ($this->controller_name . '/view/' . $view_file . '/' . $Id . '/' . $step_no);
+        $url = site_url ($this->controller_name . '/view/' . $view_file . '/' . $Id );
 
         if ($this->input->is_ajax_request ()) {
             $response = array (
@@ -148,136 +140,53 @@ class Broadcast extends CRM_Controller {
         $this->view('edit');
     }
     
-    public function send($action, $view_file, $rID) {
+    public function send($action, $rID) {
         $this->load->library('postageapp');
         $this->load->model('broadcast_model');
         $retval = array();
         
         //Retrive template Id details
         $template_data = $this->broadcast_model->get($rID);
-        
+        print_array($template_data);
         //Set up basic PA configs
         $this->postageapp->from($template_data['From_email']);
         $this->postageapp->subject($template_data['Subject']);
         $this->postageapp->template($template_data['PA_TemplateName']);
         $this->postageapp->message($template_data['Content']);
-        
-        
-        //now find all merge fields and remove if they;re not approved merge fields
-         $message = preg_replace_callback(
-                 '/\{\{(.*)\}\}/', //find words with double curly brackets
-                 array($this, 'replace_placeholders'), 
-                 $template_data['Content']
-                 );
-         
-         //echo "<hr/>" . $message . "<Hr/>";
-         $this->postageapp->message($message);
+        //$this->postageapp->message(array(
+          //  'text/html'   => $template_data['Content'],
+            //'text/plain'  => 'text content'
+          //));
         
         //Now set up recipients
         switch ($action) 
         {
             case 'test':
                 $recipients = clean_data($this->input->post());
-                $recipients = array (
-                    $recipients['Email'] => array ('firstname' => $recipients['FirstName'])
-                );
-                //print_array($recipients);
-                $this->postageapp->to($recipients);
+                print_array($recipients);
+                $this->postageapp->to(array($recipients['Email']));
                 
-                
+                $retval['reponse'] = $this->postageapp->send();
                 break;
             case 'actual':
-                //get reciptions
-                //$recip = get_recipients($template_data['SavedSearchId']);
-                    
-                $this->postageapp->to(array(
-                    'al@dallasmatthews.co.uk' => array('firstname' => 'Al1',
-                                                      'lastname' => 'Elliott1'),
-                    'al2@dallasmatthews.co.uk' => array('firstname' => 'Al2',
-                                                      'lastname' => 'Elliott2'),
-                    //'al3@dallasmatthews.co.uk' => array('FirstName' => 'Al3',
-                     //                                 'LastName' => 'Elliott3'),
-                  ));
                 //prepare the array for PostageApp
-                
-                //
                 //$input = $this->_prepare_postageapp($rID);
-                
+                $this->postageapp->to(array(
+                    $recipients['Email'] => array('variable1' => 'value',
+                                                      'variable2' => 'value'),
+                    'recipient2@example.com' => array('variable1' => 'value',
+                                                      'variable2' => 'value')
+                  ));
+                //Send it to postageApp
 
             default:
                 break;
         }
-        $this->data['postageapp'] = $this->postageapp->send();
-        //print_array($this->postageapp);
         
-        /*if ($this->data['postageapp']['response']['status'] === 'ok' )
-        {
-            $this->data['view_setup']['message'] = '<span class="notification done">Emails sent!</span>';
-        }
-        elseif ($this->data['postageapp']['response']['status'] === 'bad_request')
-        {
-            $response =  $this->data['postageapp']['response']['message'];
-            $this->data['view_setup']['message'] = '<span class="notification undone">There was a problem sending your email: <br/><code>' . $response . '</code></span>';
-        }*/
+        print_array($retval);
         
-        $url = site_url ($this->controller_name . '/view/' . $view_file . '/' . $rID . '/2');
-        redirect($url);
+        return;
     }
-    
-    function replace_placeholders($match){
-        $merge_fields = array('firstname', 'lastname', 'nickname');
-        if (in_array(strtolower($match[1]), $merge_fields)) return strtolower($match[0]);
-        else return '';
-    }
-    
-    function get_recipients($saved_search_id) {
-        //Get the data
-        $this->load->model('saved_search_model');
-        $data = $this->saved_search_model->do_search($saved_search_id);
-        
-        //turninot a PostageApp data array
-        foreach ($data as $id => $array)
-        {
-            $retval[$data['Email']] = $array;
-        }
-        
-        
-        
-        
-    }
-    
-    
-    function prep_recipients($data) {
-        $this->load->model('saved_search_model');
-        return $this->saved_search_model->do_search($saved_search_id);
-    }
-    
-   /* function prep_recip_data($recip_data, $fields) {
-        //set the fields we can use
-        
-       
-        //now find any woird that fist this pattern and remove the curly brackets {{word}}
-        $content = preg_replace_callback('/\{\{(.*)\}\}/', $this->replace_placeholders, $content);
-        
-        //now cycle through and create a Postage App friendly array
-        
-        //fubally return the array
-    }
-    
-    function replace_placeholders($match) {
-       
-        $field_list = array(
-            'FirstName', 'LastName', 'Email'
-        );
-        
-        if (isset($data[$match[1]])) {  
-        // return the replacement string  
-        return $match[1];  
-        } else {  
-            return 'NOTFOUND';  
-        }  
-    }
-    */
     
     /* @var $array Broadcast */
 
@@ -307,11 +216,6 @@ class Broadcast extends CRM_Controller {
     
 }
 
-function replace_placeholders($match){
-        $merge_fields = array('FirstName', 'LastName', 'Nickname');
-        if (in_array($match[1], $merge_fields)) return $match[0];
-        else return '';
-    }
 
 
 }
