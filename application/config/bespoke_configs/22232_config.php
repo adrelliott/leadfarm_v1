@@ -5734,6 +5734,7 @@ $config['order'] = Array
                             'Cheque' => 'Cheque',
                             'Credit-Debit Card' => 'Credit-Debit Card',
                             'Standing Order' => 'Standing Order', 
+                            'PayPal' => 'PayPal', 
                         ),
                         'HTML_before' => '',
                         'HTML_after' => '',

@@ -43,7 +43,7 @@ foreach ($this->data['view_setup']['fields'] as $field => $array)
                                 <p>Date of Order: <?php echo form_input('DateCreated', element('DateCreated', $shipping_info, ''), "class='datepicker mask_date small' "); ?></p>
                             </div>
                          </div>
-                         <div class="row-fluid">
+                         <div class="row-fluid clearfix">
                              <form id="itemsForm">
 
                                  <table class="table table-striped" id="itemsTable" data-source="<?php echo site_url('product/ajax_products'); ?>">

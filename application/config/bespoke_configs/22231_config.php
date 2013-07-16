@@ -1313,9 +1313,10 @@ $config['contact'] = Array
                         'options' => array
                           (
                             'Ltd Co' => 'Ltd',
-                            'Sole Property' => 'SoleProp',
+                            'Sole Trader' => 'SoleProp',
                              'LLP' => 'LLP',
-                            'PLC' => 'PLC'
+                            'PLC' => 'PLC',
+                            'Not for Profit' => 'Not for Profit',
                           ),
                         'HTML_before' => '',
                         'HTML_after' => '',  
