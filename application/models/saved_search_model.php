@@ -16,7 +16,30 @@ class Saved_search_model extends CRM_Model {
         //$this->contactId_fieldname = 'ContactId';
     }
     
-   
+   function saved_search_dropdown_html() {
+        //get all axctive templates
+        //$this->db->where('__ActiveYN =', 1);  no need for this complexity
+        $this->order_by = 'Name ASC';  
+        $results = $this->get();        
+        
+        //create dropdown 
+        $retval = array();  
+        foreach ($results as $key => $array)
+        {
+            $array['saved_search_dropdown'] = $array['Name'];
+            $retval[$key+1] = $array;
+        }
+        /*$tmp = array 
+        (
+            '__Id' => 0,
+            '__Name' => '',
+            '__ActionType' => 'TAG',
+            'template_dropdown' => '[TAG 0] APPLY TAG ONLY',
+        );
+        array_unshift($retval, $tmp);*/
+        return $retval;
+    }
+    
     
     
 }

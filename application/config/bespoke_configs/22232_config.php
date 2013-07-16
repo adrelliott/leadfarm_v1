@@ -6582,10 +6582,125 @@ $config['search'] = Array
         ),
         'record' => array
         (
-                'index' => '',  //leave blank if no requirement
-                'view' => '',   //leave blank if no requirement
+                'index' => array (
+                    'saved_searches' => array
+                    (
+                        'include_in_query' => TRUE, //TRUE or FALSE,
+                        //'data_source' => 'contacts', //The dataset name defined in this file
+                        'model_name' => 'contact_model',
+                        'model_method' => 'get_all_records', 
+                        'model_params' => array 
+                            (   //These are chained with 'AND'. To define an 'OR'...???
+                                '_IsCrmUserYN =' => 1, 
+                            ),
+                        'fields' => array 
+                        (
+                            'Id' => '',
+                            'FirstName' => 'First Name',
+                            'LastName' => 'Last Name',
+                            'UserName' => 'Username',
+                        ),
+                    ),   
+                ),
+                'view' => array (
+                    'saved_searches' => array
+                    (
+                        'include_in_query' => TRUE, //TRUE or FALSE,
+                        //'data_source' => 'contacts', //The dataset name defined in this file
+                        'model_name' => 'contact_model',
+                        'model_method' => 'get_all_records', 
+                        'model_params' => array 
+                            (   //These are chained with 'AND'. To define an 'OR'...???
+                                '_IsCrmUserYN =' => 1, 
+                            ),
+                        'fields' => array 
+                        (
+                            'Id' => '',
+                            'FirstName' => 'First Name',
+                            'LastName' => 'Last Name',
+                            'UserName' => 'Username',
+                        ),
+                    ),   
+                )
         ),
         
+    );
+$config['search_page'] = Array
+    (
+    'datasets' => array 
+        (
+            'index' => array 
+            (
+                'get_all_saved_searches' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'saved_search_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'Name' => 'Name',                   
+                    ),
+                ),
+                
+            ),
+            'view' => array 
+            (  
+               
+                'get_all_saved_searches' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'saved_search_model',
+                    'model_method' => 'get_all_records', 
+                    'model_params' => NULL,
+                    'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'Name' => 'Name',                   
+                    ),
+                ),
+                
+            ),
+        ),
+        'record' => array
+        (
+            'view' => array
+            (
+                'model_name' => 'broadcast_model',
+                'model_method' => 'get_single_record',
+                'model_params' => NULL, 
+                'dropdowns' => NULL,
+                
+                'fields' => array 
+                (
+                    'Id' => array
+                    (
+                        'on' => TRUE,    //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Id',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => '',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => 'Id',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',
+                        'value' => '', 
+                    ),
+                                  
+                ),                
+            ),
+        ),
     );
 
 $config['fields_for_search'] = array (
@@ -6609,6 +6724,27 @@ $config['fields_for_search'] = array (
                 ),
             ),
             'grouping' => array ('fc_order_item', 'fc_order_expire'),//GROUP THESE fields together
+            'display_fields' => array('Id', 'First Name', 'Last Name', 'Order', 'Season')
+        ),
+        'contactaction' => array (
+            'contact' => array (
+                'Id', 'FirstName', 'LastName'
+            ), 
+            'contactaction' => array (
+                //'Id','ContactId', '_ItemBought', '_ValidUntil',
+                'ActionType', '_ValidUntil',
+            ),
+            'search_cols' => array (
+                'fc_role' => array (
+                    'table' => 'contactaction',
+                    'col' => 'ActionType',
+                ),
+                'fc_role_expire' => array (
+                    'table' => 'contactaction',
+                    'col' => '_ValidUntil',
+                ),
+            ),
+            'grouping' => array ('fc_role', 'fc_role_expire'),//GROUP THESE fields together
             'display_fields' => array('Id', 'First Name', 'Last Name', 'Order', 'Season')
         ),
         

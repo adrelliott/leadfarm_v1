@@ -101,6 +101,27 @@ $row= $totalquery->row()->total;
         //Prepare the query for a search using OR
        switch ($search_type) 
         {
+           case 'fc_role_search':
+               $join_on = array (
+                    'contact' => 'Id',
+                    'contactaction' => 'ContactId',
+                );
+                $group_by = array (
+                    'contact' => 'Id',
+                );
+                
+                 //set up the query
+                //$this->_set_alias('contact', 'c');
+                $this->_set_alias('contactaction', 'ca');
+                $this->_query['select'] = 'SELECT SQL_CALC_FOUND_ROWS ' . $this->_set_fields('contact');
+                $this->_query['select'] .= ',' . $this->_set_fields('contactaction');
+                $this->_query['from'] = $this->_set_table('contact', 'FROM');
+                $this->_query['join'] = $this->_set_table('contactaction','left join');
+                $this->_query['on'] = $this->_set_join_on($join_on);
+                $this->_query['where'] = 'WHERE ' . $this->_set_where('or');
+                $this->_query['other'] = $this->_group_by($group_by);
+                //set up the conditions
+                break;
             //FC UTD use Orders as products...
             case 'fc_order_search':
                 $join_on = array (

@@ -32,18 +32,22 @@ class Search_page extends CRM_Controller {
     
     public function index() {   
         parent::index();
+        //$this->data['viw_setup']['tables']['saved_searches'] = $
         $this->_load_view_data();
         $this->_generate_view($this->data);
     }
     
+    public function save_this_search() {
+        $this->load->model('saved_search_model', 'saved_search');
+        $input = clean_data($this->input->post());
+        
+        $rID = $this->saved_search->save($input);
+        $this->session->set_flashdata('message', 'Search saved!');
+        
+        redirect(site_url('search_page'));
+    }
+    
     public function search($main_table, $join_table, $query_type, $search_type, $start = 0) {
-        //print_array($this->input->post());
-        //pass data to model & get results
-        
-        
-        //return;
-        
-        
         //Do the search
         $limit =50;
         //$this->session->set_userdata('report_type', $report_type);
@@ -53,7 +57,7 @@ class Search_page extends CRM_Controller {
         
         //$retval = $this->do_search(FALSE, $limit, $start, $report_type);
         $this->data['view_setup']['tables']['search_results']['table_data'] = $this->_results['results'];
-        $this->data['view_setup']['tables']['search_results']['table_headers'] = $this->_results['cols'];
+        //$this->data['view_setup']['tables']['search_results']['table_headers'] = $this->_results['cols'];
         $this->data['view_setup']['tables']['search_results']['count_results'] = $this->_results['count_results'];
         //$config['total_rows'] = $this->_results['count_results'];
         
@@ -112,6 +116,19 @@ class Search_page extends CRM_Controller {
     
     public function load_search() {
         //load the search
+        
+    }
+    public function do_search($rID) {
+        //load the search from the saved search table
+        $this->load->model('saved_search_model', 'saved_search');
+        $q = $this->saved_search->get($rID);
+        
+        $this->data['view_setup']['tables']['search_results']['table_data'] = $this->db->query($q['Query'])->result_array();
+        $totalquery = $this->db->query('SELECT FOUND_ROWS() as total;');
+$row= $totalquery->row()->total;
+         $this->data['view_setup']['tables']['search_results']['count_results'] = $row;
+         $this->data['view_setup']['search_name'] = $q['Name'];
+        $this->index();
         
     }
     
