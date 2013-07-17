@@ -50,7 +50,7 @@ class Broadcast extends CRM_Controller {
         }
         //elseif($sql) $this->search($sql);
         //
-         $this->load_view($pull);≈
+         $this->load_view($pull);
     
     }
     public function view1($view_file, $rID = 'new', $step_no = 1, $pull = '') {
