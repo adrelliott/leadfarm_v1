@@ -40,7 +40,16 @@ class Broadcast extends CRM_Controller {
           parent::view($view_file, $rID);
            $this->_instantiate_ckeditor();
 
-        $this->_load_view_data($rID);    //retrieves and process all data for view        
+        $this->_load_view_data($rID);    //retrieves and process all data for view 
+        
+         //print_array($this->data, 1);
+        $sql = element('value', $this->data['view_setup']['fields']['Sql'], FALSE);
+        if ($rID === 'new')
+        {
+            $_SESSION['step_include'] = 1;
+        }
+        elseif($sql) $this->search($sql);
+        
         print_array($_SESSION);
     
     }
