@@ -33,8 +33,13 @@ class Broadcast extends CRM_Controller {
     public function index($view_file = 'index') {
         redirect(site_url('campaign'));
     }
-
+    
+    
     public function view($view_file, $rID = 'new', $step_no = 1, $pull = '') {
+        print_array($_SESSION);
+    
+    }
+    public function view1($view_file, $rID = 'new', $step_no = 1, $pull = '') {
         $_SESSION['step']['current'] = $step_no;
         //if (! element('step', $_SESSION, FALSE)) $_SESSION['step']['current'] = 1;
         parent::view($view_file, $rID);
@@ -158,7 +163,11 @@ class Broadcast extends CRM_Controller {
         //print_array($template_data);
         
         //Set up basic PA configs
-        $this->postageapp->from($template_data['From_email']);
+        
+        $from = $template_data['From_name'] . ' <' . $template_data['From_email'] . '>';
+        $this->postageapp->from($from);
+        //$this->postageapp->reply-to($template_data['From_name']);
+        
         $this->postageapp->subject($template_data['Subject']);
         $this->postageapp->template($template_data['PA_TemplateName']);
         $this->postageapp->message($template_data['Content']);
@@ -180,7 +189,7 @@ class Broadcast extends CRM_Controller {
             case 'test':
                 $recipients = clean_data($this->input->post());
                 $recipients = array (
-                    $recipients['Email'] => array ('firstname' => $recipients['FirstName'])
+                    $recipients['Email'] => array ('firstname' => $recipients['FirstName'], 'nickname' => $recipients['FirstName'])
                 );
                 //print_array($recipients);
                 $this->postageapp->to($recipients);
@@ -212,7 +221,7 @@ class Broadcast extends CRM_Controller {
          //uncomment me to test!
                 //$this->postageapp->to($arr);
                 
-                print_array($arr, 1);
+                print_array($arr, 1, 'count is ' . $recip->num_rows());
                 $this->postageapp->to(array(
                     'al@dallasmatthews.co.uk' => array('firstname' => 'Al1',
                                                       'lastname' => 'Elliott1'),

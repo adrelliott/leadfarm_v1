@@ -1,6 +1,7 @@
 <?php
 
-$saved_searches = array('0' => 'Everyone who has opted into emails',);
+//$saved_searches = array('0' => 'Everyone who has opted into emails',);
+$saved_searches = array();
 $dropdown = $this->data['view_setup']['tables']['get_all_saved_searches']['table_data'];
 foreach ($dropdown as $k => $array)
 {

@@ -1,7 +1,8 @@
 <?php
 $options = array(
     '' => 'None',
-    'FC_Red' => 'FC Utd red',
+    'FC_Red' => 'FC Utd Red',
+    'FC_White' => 'FC Utd White',
     'FC_Pink' => 'FC Utd Pink',
     'FC_Black' => 'FC Utd Black'
 );
