@@ -38,6 +38,9 @@ class Broadcast extends CRM_Controller {
     public function view($view_file, $rID = 'new', $step_no = 1, $pull = '') {
          $_SESSION['step']['current'] = $step_no;
           parent::view($view_file, $rID);
+           $this->_instantiate_ckeditor();
+
+        $this->_load_view_data($rID);    //retrieves and process all data for view        
         print_array($_SESSION);
     
     }
