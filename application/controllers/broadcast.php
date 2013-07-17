@@ -155,6 +155,7 @@ class Broadcast extends CRM_Controller {
         
         //Retrive template Id details
         $template_data = $this->broadcast_model->get($rID);
+        //print_array($template_data);
         
         //Set up basic PA configs
         $this->postageapp->from($template_data['From_email']);
@@ -170,7 +171,7 @@ class Broadcast extends CRM_Controller {
                  $template_data['Content']
                  );
          
-         //echo "<hr/>" . $message . "<Hr/>";
+         //echo "<hr/>" . $message . "<Hr/>";die();
          $this->postageapp->message($message);
         
         //Now set up recipients
@@ -188,8 +189,30 @@ class Broadcast extends CRM_Controller {
                 break;
             case 'actual':
                 //get reciptions
-                //$recip = get_recipients($template_data['SavedSearchId']);
-                    
+                $this->load->model('Saved_search_model', 'recipients');
+                $saved_search = $this->recipients->get_by('Id', $template_data['SavedSearchId']);
+                $recip = $this->db->query($saved_search[0]['Query']);
+                
+                if ($recip->num_rows() > 0)
+                {
+                   $arr = array();
+                    foreach ($recip->result() as $row)
+                   {
+                      if ($row->Email)
+                      {
+                          $arr[$row->Email] = array(
+                                'firstname' => $row->FirstName,
+                                'lastname' => $row->LastName,
+                                    );
+                      }
+                            
+                   }
+                }
+                
+         //uncomment me to test!
+                //$this->postageapp->to($arr);
+                
+                
                 $this->postageapp->to(array(
                     'al@dallasmatthews.co.uk' => array('firstname' => 'Al1',
                                                       'lastname' => 'Elliott1'),

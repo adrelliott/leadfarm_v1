@@ -2,7 +2,8 @@
 $options = array(
     '' => 'None',
     'FC_Red' => 'FC Utd red',
-    'FC_Pink' => 'FC Utd Pink'
+    'FC_Pink' => 'FC Utd Pink',
+    'FC_Black' => 'FC Utd Black'
 );
 $from_email = array(
     'al@fc-utd.co.uk' => 'al@FC-Utd.co.uk',

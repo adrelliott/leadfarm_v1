@@ -1,11 +1,12 @@
 <?php
-$options = array(
-    '0' => 'Everyone who has opted into emails',
-    '1' => 'Template 1',
-    '2' => 'Template 2',
-    '3' => 'Template 3',
-    '4' => 'Template 4',
-);
+
+$saved_searches = array('0' => 'Everyone who has opted into emails',);
+$dropdown = $this->data['view_setup']['tables']['get_all_saved_searches']['table_data'];
+foreach ($dropdown as $k => $array)
+{
+    $saved_searches[$array['Id']] = $array['Name'];
+}
+
 ?>
 
 <h3 class="index toggle_icon">Step 1: Choose Recipients...</h3>
@@ -22,11 +23,11 @@ $options = array(
         <div class="clearfix">
             <label>Who's getting this email?</label>
             <div class="input">
-               <?php echo form_dropdown('TemplateId', $options, element('value', $fields['TemplateId'], ''), 'class="large" rel="tooltip" title="Choose a Saved Search" '); ?>
+               <?php echo form_dropdown('SavedSearchId', $saved_searches, element('value', $fields['SavedSearchId'], ''), 'class="large" rel="tooltip" title="Choose a Saved Search" '); ?>
             </div>
         </div>
         <div class="clearfix">
-            <a href="<?php echo site_url('/campaign/view/edit/new'); ?>" target="_blank" class="grey button left"><span>Create A New Search</span></a>
+            <a href="<?php echo site_url('/search_page'); ?>" target="_blank" class="grey button left"><span>Create A New Search</span></a>
              <input name='submit' type='submit' class='button red right large' value='Save'></input>
         </div>
     </div>

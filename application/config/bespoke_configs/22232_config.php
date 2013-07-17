@@ -6707,7 +6707,7 @@ $config['fields_for_search'] = array (
     'contact' => array (
         'order' => array (
             'contact' => array (
-                'Id', 'FirstName', 'LastName'
+                'Id', 'FirstName', 'LastName', 'Email', 'Nickname'
             ), 
             'order' => array (
                 //'Id','ContactId', '_ItemBought', '_ValidUntil',
@@ -6728,7 +6728,7 @@ $config['fields_for_search'] = array (
         ),
         'contactaction' => array (
             'contact' => array (
-                'Id', 'FirstName', 'LastName'
+                'Id', 'FirstName', 'LastName', 'Email', 'Email', 'Nickname'
             ), 
             'contactaction' => array (
                 //'Id','ContactId', '_ItemBought', '_ValidUntil',
