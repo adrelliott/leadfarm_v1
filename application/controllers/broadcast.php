@@ -49,7 +49,7 @@ class Broadcast extends CRM_Controller {
             $_SESSION['step_include'] = 1;
         }
         elseif($sql) $this->search($sql);
-        
+         $this->load_view($pull);
         print_array($_SESSION);
     
     }
