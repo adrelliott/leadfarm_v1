@@ -49,8 +49,8 @@ class Broadcast extends CRM_Controller {
             $_SESSION['step_include'] = 1;
         }
         elseif($sql) $this->search($sql);
-         $this->load_view($pull);
-        print_array($_SESSION);
+print_array($this->data);
+         //$this->load_view($pull);≈
     
     }
     public function view1($view_file, $rID = 'new', $step_no = 1, $pull = '') {
