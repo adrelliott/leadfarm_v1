@@ -36,7 +36,8 @@ class Broadcast extends CRM_Controller {
     
     
     public function view($view_file, $rID = 'new', $step_no = 1, $pull = '') {
-        
+         $_SESSION['step']['current'] = $step_no;
+          parent::view($view_file, $rID);
         print_array($_SESSION);
     
     }
