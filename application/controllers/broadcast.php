@@ -212,7 +212,7 @@ class Broadcast extends CRM_Controller {
          //uncomment me to test!
                 //$this->postageapp->to($arr);
                 
-                
+                print_array($arr, 1);
                 $this->postageapp->to(array(
                     'al@dallasmatthews.co.uk' => array('firstname' => 'Al1',
                                                       'lastname' => 'Elliott1'),
