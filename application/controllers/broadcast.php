@@ -226,6 +226,7 @@ class Broadcast extends CRM_Controller {
                           $arr[$row->Email] = array(
                                 'firstname' => $row->FirstName,
                                 'lastname' => $row->LastName,
+                                'nickname' => $row->Nickname,
                                     );
                       }
                             
@@ -233,10 +234,10 @@ class Broadcast extends CRM_Controller {
                 }
                 
          //uncomment me to test!
-                //$this->postageapp->to($arr);
+                $this->postageapp->to($arr);
                 
-                print_array($arr, 1, 'count is ' . $recip->num_rows());
-                $this->postageapp->to(array(
+               // print_array($arr, 1, 'count is ' . $recip->num_rows());
+                /*$this->postageapp->to(array(
                     'al@dallasmatthews.co.uk' => array('firstname' => 'Al1',
                                                       'lastname' => 'Elliott1'),
                     'al2@dallasmatthews.co.uk' => array('firstname' => 'Al2',
@@ -244,6 +245,9 @@ class Broadcast extends CRM_Controller {
                     //'al3@dallasmatthews.co.uk' => array('FirstName' => 'Al3',
                      //                                 'LastName' => 'Elliott3'),
                   ));
+                 * 
+                 * 
+                 */
                 //prepare the array for PostageApp
                 
                 //
