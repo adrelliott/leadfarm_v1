@@ -4769,7 +4769,7 @@ $config['broadcast'] = Array
                         'Name' => 'Name',                   
                     ),
                 ),
-                'template_dropdown' => array
+                /*'template_dropdown' => array
                 (
                     'include_in_query' => TRUE, //TRUE or FALSE,                    
                     'data_source' => '', //The dataset name defined above
@@ -4782,7 +4782,7 @@ $config['broadcast'] = Array
                         '__Name' => 'Name',                       
                         '__ActionType' => 'Action type',                        
                     ),
-                ),
+                ),*/
             ),
         ),
         'record' => array
@@ -4792,7 +4792,8 @@ $config['broadcast'] = Array
                 'model_name' => 'broadcast_model',
                 'model_method' => 'get_single_record',
                 'model_params' => NULL, 
-                'dropdowns' => array    //or NULL
+                'dropdowns' => NULL,    //or NULL
+               /* 'dropdowns' => array    //or NULL
                 (
                     'template_dropdown' => array
                     (
@@ -4802,7 +4803,7 @@ $config['broadcast'] = Array
                         'value' => 'template_dropdown',
                     ),
                     
-                ),
+                ),*/
                 
                 'fields' => array 
                 (
