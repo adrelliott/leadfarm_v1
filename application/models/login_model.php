@@ -69,6 +69,7 @@
                     //Yup. All good. Set things up
                     unset($retval['message']);
                     $row['is_logged_in'] = TRUE;
+                    //print_array($row, 1);
                     $retval['result'] = TRUE;
                     
                     //Set up sessions

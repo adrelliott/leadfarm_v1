@@ -188,7 +188,7 @@ $date_choices = array(
                             </div>
                         </div>
                     </div>
-                    <h3 class="index toggle_icon" id="option2_toggle">Find people with certain roles...</h3>
+                    <!--<h3 class="index toggle_icon" id="option2_toggle">Find people with certain roles...</h3>-->
                     <div class="hide_toggle" id="option2">
                         <div class="widget_inside clearfix margin_bottom_25">
                             <div class="col_6">

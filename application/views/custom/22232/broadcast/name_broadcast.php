@@ -25,12 +25,12 @@ foreach ($dropdown as $k => $array)
             <label>Who's getting this email?</label>
             <div class="input">
                <?php echo form_dropdown('SavedSearchId', $saved_searches, element('value', $fields['SavedSearchId'], ''), 'class="large" rel="tooltip" title="Choose a Saved Search" '); ?>
-                 <a href="<?php echo site_url('/search_page'); ?>" target="_blank" class="grey button left"><span>Create A New Search</span></a>
+                 <a href="<?php echo site_url('/search_page'); ?>" target="_blank" class="">Create A New Search</a>
             </div>
         </div>
     </div>
     
 
-    <?php echo form_close(); ?>
+    
 
 </div>

@@ -3,21 +3,21 @@
     <div class="col_12">
         <div class="widget clearfix tabs">
             <ul>
-                <li><h2><a href='#tab-1'>Follow-Up Campaign</a></h2></li>
+                <?php //<li><h2><a href='#tab-1'>Follow-Up Campaign</a></h2></li> ?>
                 <li><h2><a href='#tab-2'>Broadcast Campaign</a></h2></li>
             </ul>
             <div class="widget_inside">
-                <div id="tab-1">
+                <!--<div id="tab-1">
                     <?php
-                    $this->table->set_template_custom(array('anchor_uri' => 'campaign/view/edit'));
-                    $this->table->set_heading_custom($tables['campaigns']['table_headers']);
-                    echo $this->table->generate_custom($tables['campaigns']['table_data']);
+                    //$this->table->set_template_custom(array('anchor_uri' => 'campaign/view/edit'));
+                    //$this->table->set_heading_custom($tables['campaigns']['table_headers']);
+                    //echo $this->table->generate_custom($tables['campaigns']['table_data']);
                     ?>
                     <div class="margin_top_15"></div>
                     <div class="clearfix">
-                        <a href="<?php echo site_url('/campaign/view/edit/new'); ?>" class="large red button right"><span>Create New Campaign</span></a>
+                        <a href="<?php //echo site_url('/campaign/view/edit/new'); ?>" class="large red button right"><span>Create New Campaign</span></a>
                     </div>
-                </div>
+                </div> -->
                 <div id="tab-2">
                     <?php
                     $this->table->set_template_custom(array('anchor_uri' => 'broadcast/view/edit'));

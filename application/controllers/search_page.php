@@ -124,9 +124,9 @@ class Search_page extends CRM_Controller {
         $q = $this->saved_search->get($rID);
         
         $this->data['view_setup']['tables']['search_results']['table_data'] = $this->db->query($q['Query'])->result_array();
-        $totalquery = $this->db->query('SELECT FOUND_ROWS() as total;');
-$row= $totalquery->row()->total;
-         $this->data['view_setup']['tables']['search_results']['count_results'] = $row;
+        //$totalquery = $this->db->query('SELECT FOUND_ROWS() as total;');
+//$row= $totalquery->row()->total;
+         ///$this->data['view_setup']['tables']['search_results']['count_results'] = $row;
          $this->data['view_setup']['search_name'] = $q['Name'];
         $this->index();
         

@@ -1,27 +1,25 @@
 
-<div class="col_8"><!-- Start Column 1-->
+
     <div class="row clearfix">
         <div class="widget clearfix">
             <h2>Edit/Create Broadcast Campaign</h2>
             <div class="widget_inside">
-                <?php include('step' . $_SESSION['step']['current'] . '.php'); ?>
+                <?php include('name_broadcast.php'); ?>
+                <?php if (! element('value', $fields['BroadcastName'], '')) : ?>
+                    <div class="clearfix">
+                         <input name='submit' type='submit' class='button red right large' value='Save'></input>
+                    </div>
+                <?php else: ?>
+                    <div class="clearfix">
+                        <input name='submit' type='submit' class='button red right large' value='Update'></input>
+                   </div>
+                <?php echo form_close(); ?>
+                   <?php include ('write_email.php'); ?>
+                    <?php if (element('value', $fields['Subject'], '')) include ('send_email.php'); ?>
+                <?php endif; ?>
+                
             </div>
         </div>
     </div>
-</div>
-<!-- Start Column 2-->
-<div class="col_3 last">
-    <div class="row clearfix">
-        <div class="widget clearfix">
-            <h2>Help</h2>
-            <div class="widget_inside">
-                
-                instruction go here
-            </div>
-        </div>       
-    </div>
-</div>
-<div class="clearfix"></div>
-
 <?php print_array($_SESSION); ?>
 <?php print_array($this->data); ?>
