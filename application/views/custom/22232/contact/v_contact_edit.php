@@ -38,14 +38,98 @@
                             </p> 
                             <div class="hide_toggle" id="option1">
                                 <div class="form margin_top_30">
-                                    <?php display_field($fields['_OptinPref']); ?>
-                                    <?php display_field($fields['_OptinEmailYN']); ?>
-                                    <?php display_field($fields['_OptinSmsYN']); ?>
-                                    <?php display_field($fields['_OptinSurfaceMailYN']); ?>
+                                    <div class="clearfix" id="">
+                                        <label class="" id="">Opt into Emails?</label>
+                                        <div class="input " id="">
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['_OptinEmailYN']['value'] == 1) $checked = 'checked';
+                                            echo form_radio('_OptinEmailYN', 1, $checked); ?>Yes
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['_OptinEmailYN']['value'] == 0) $checked = 'checked';
+                                            echo form_radio('_OptinEmailYN', 0, $checked); ?>NO
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="clearfix" id="">
+                                        <label class="" id="">Opt into SMS?</label>
+                                        <div class="input " id="">
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['_OptinSmsYN']['value'] == 1) $checked = 'checked';
+                                            echo form_radio('_OptinSmsYN', 1, $checked); ?>Yes
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['_OptinSmsYN']['value'] == 0) $checked = 'checked';
+                                            echo form_radio('_OptinSmsYN', 0, $checked); ?>NO
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="clearfix" id="">
+                                        <label class="" id="">Opt into Post?</label>
+                                        <div class="input " id="">
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['_OptinSurfaceMailYN']['value'] == 1) $checked = 'checked';
+                                            echo form_radio('_OptinSurfaceMailYN', 1, $checked); ?>Yes
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['_OptinSurfaceMailYN']['value'] == 0) $checked = 'checked';
+                                            echo form_radio('_OptinSurfaceMailYN', 0, $checked); ?>NO
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="clearfix" id="">
+                                        <label class="" id="">Opt into Mechandise Emails?</label>
+                                        <div class="input " id="">
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['_OptinMerchandiseYN']['value'] == 1) $checked = 'checked';
+                                            echo form_radio('_OptinMerchandiseYN', 1, $checked); ?>Yes
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['_OptinMerchandiseYN']['value'] == 0) $checked = 'checked';
+                                            echo form_radio('_OptinMerchandiseYN', 0, $checked); ?>NO
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="clearfix" id="">
+                                        <label class="" id="">Opt into Club Events?</label>
+                                        <div class="input " id="">
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['__ClubEventsYN']['value'] == 1) $checked = 'checked';
+                                            echo form_radio('__ClubEventsYN', 1, $checked, TRUE); ?>Yes
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['__ClubEventsYN']['value'] == 0) $checked = 'checked';
+                                            echo form_radio('__ClubEventsYN', 0, $checked); ?>NO
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="clearfix" id="">
+                                        <label class="" id="">Opt into Away Match Details?</label>
+                                        <div class="input " id="">
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['__AwayMatchYN']['value'] == 1) $checked = 'checked';
+                                            echo form_radio('__AwayMatchYN', 1, $checked); ?>Yes
+                                            <?php 
+                                            $checked = '';
+                                            if($fields['__AwayMatchYN']['value'] == 0) $checked = 'checked';
+                                            echo form_radio('__AwayMatchYN', 0, $checked, TRUE); ?>NO
+                                        </div>
+                                    </div>
+                                    
+                                    <?php //display_field($fields['_OptinPref']); ?>
+                                    <?php //display_field($fields['_OptinEmailYN']); ?>
+                                    <?php //display_field($fields['_OptinSmsYN']); ?>
+                                    <?php //display_field($fields['_OptinSurfaceMailYN']); ?>
                                     <?php //display_field($fields['_OptinNewsletterYN']); ?>
-                                    <?php display_field($fields['_OptinMerchandiseYN']); ?>
-                                    <?php display_field($fields['__ClubEventsYN']); ?>
-                                    <?php display_field($fields['__AwayMatchYN']); ?>
+                                    <?php //display_field($fields['_OptinMerchandiseYN']); ?>
+                                    <?php //display_field($fields['__ClubEventsYN']); ?>
+                                    <?php //display_field($fields['__AwayMatchYN']); ?>
                                     <div class="clearfix">
                                         <input name='submit' type='submit' class='button red right small' style='float:right' value='Save'></input>
 
