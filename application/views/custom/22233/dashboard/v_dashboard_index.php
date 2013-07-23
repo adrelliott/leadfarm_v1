@@ -2,20 +2,8 @@
     <div class="col_12">
         <div class="widget clearfix">
            <h3 class="index speech_icon">"Hello <?php echo $this->session->userdata('Nickname');?> . What's on your mind?"</h3>
-            <h3 class="index toggle_icon" id="option1_toggle">Customers...</h3>
-            <div class="widget_inside hide_toggle" id="option1">
-                <h4>"Psst...You can search by any of the columns you see below."</h4>
-                <div class="margin_top_15"></div>
-                <?php 
-                    $this->table->set_template_custom(array ('anchor_uri' => 'contact/view/edit', 'anchor_uri_append' => '0', 'ContactId_name' => 'Id'));    
-                    $this->table->set_heading_custom($tables['master_search']['table_headers']);
-                    echo $this->table->generate_custom($tables['master_search']['table_data']); 
-                ?> 
-                <div class="col_5 last clearfix margin_top_15 right">                    
-                    <a href="<?php echo site_url( '/contact/view/edit/new/new/0' ); ?>" class="large blue button right"><span>Create New Customer</span></a>
-                    <a href="<?php echo site_url( '/contact/view/edit/new/new/1' ); ?>" class="large button left"><span>Create New Organisation</span></a>
-                </div>
-            </div>
+            <a href="<?php echo site_url('contact'); ?>" style="text-decoration: none"><h3 class="index toggle_icon">Customers...</h3></a>
+            
             <h3 class="index toggle_icon" id="option2_toggle">Orders...</h3>
             <div class="widget_inside hide_toggle" id="option2">
                 <div class="margin_top_15"></div>

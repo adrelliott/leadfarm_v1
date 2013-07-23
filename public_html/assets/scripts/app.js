@@ -106,6 +106,14 @@ $(function() {
     }).children().show();
     
     // Datepicker
+    $('.datepicker_today').datepicker({
+      changeMonth: true,
+      changeYear: true,
+      //defaultDate: '01/01/70',
+      dateFormat: 'yy-mm-dd'
+    }).children().show();
+    
+    // Datepicker
     $('.datepicker_dob').datepicker({
       changeMonth: true,
       changeYear: true,

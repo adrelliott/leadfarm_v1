@@ -122,24 +122,46 @@ else
           
           function add_order($view_file, $rID, $ContactId) {     
               $order = array();
+              //$count = count($this->input->post('orderItem_ProductId'));
+              //print_array($this->input->post(), 0);
               foreach ($this->input->post() as $key => $val)
               {
                   if (strpos($key, 'orderItem_') !== FALSE)
                     {
                       $tmp = explode('orderItem_', $key);
-                        $order['orderItem'][$tmp[1]] = $val;
+                      foreach ($val as $k => $v)
+                      {
+                          $order['orderItem'][$k][$tmp[1]] = $v;
+                      }
+                        
                     }
                     else $order['order'][$key] = $val;
               }
               
-            //clean input
+              
+            //print_array($order, 0);
+              //clean input & add order
             $input = clean_data($order['order']);
             $input['ContactId'] = $ContactId;
-            //$input['DateCreated'] = convert_DATE($input['DateCreated'], 'to_DATE');
-            //print_array($input, 1);
+            $input['DateCreated'] = convert_DATE($input['DateCreated'], 'to_DATE');
             //save record
             $rID = $this->add_record($input, $rID);
-            //die('rid = ' . $rID);
+              
+              
+              //now save the orderitems
+              //first delete all order tiems with this orderid
+              $this->load->model('order_item_model', 'order_item');
+              //$this->order_item->delete_order_items($rID);
+              
+              $orderItemId = $this->order_item->add($order['orderItem'], $rID);
+              //now insert new records
+              /*foreach ($order['orderItem'] as $line => $array)
+              {
+                  $order['orderItem'][$line]['OrderId'] = $rID;
+                  $orderItemId = $this->add_record($array, 'new');
+              }*/
+              
+            
           
             
             /*
@@ -178,7 +200,7 @@ else
               }
 
               //refresh page
-              redirect(site_url($url));
+             redirect(site_url($url));
     }
 
     }

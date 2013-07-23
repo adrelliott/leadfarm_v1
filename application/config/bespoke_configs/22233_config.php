@@ -432,6 +432,7 @@ $config['contact'] = Array
                         'contact.Id' => '#',
                         'contact.FirstName' => 'First Name',
                         'contact.LastName' => 'Last Name',
+                        'contact._OrganisationName' => 'Org Name',
                         'contact.PostalCode' => 'Postcode',
                         'contact.Email' => 'Prim Email',
                         'contact.Phone1' => 'Landline',
@@ -665,6 +666,27 @@ $config['contact'] = Array
                         'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
                         'type' => 'text',
                         'name' => '_OrganisationName',
+                        'helpText' => '',
+                        'length' => '',
+                        'HTML_before' => '',
+                        'HTML_after' => '',  
+                        'value' => '',              
+                    ),
+                     '__OrgStructure' => array
+                    (
+                        'on' => TRUE,      //TRUE/FALSE to include/exclude from query
+                        'cssClassContainingDiv' => '',
+                        'cssIdContainingDiv' => '',
+                        'cssClassLabel' => '',
+                        'cssIdLabel' => '',
+                        'label' => 'Care Home Group/PCT Name',                  
+                        'cssClassInputDiv' => '',
+                        'cssIdInputDiv' => '',                   
+                        'cssClassInput' => 'xlarge',
+                        'cssIdInput' => '',
+                        'extraHTMLInput' => '',  //eg. title="tooltip" rel="tooltips"
+                        'type' => 'text',
+                        'name' => '__OrgStructure',
                         'helpText' => '',
                         'length' => '',
                         'HTML_before' => '',
@@ -5187,8 +5209,30 @@ $config['order'] = Array
                         'PostalCode' => 'PostalCode',
                         'Country' => 'Country'
                     ),
-                ),               
-                        
+                ), 
+                'order_items' => array
+                (
+                    'include_in_query' => TRUE, //TRUE or FALSE,                    
+                    'data_source' => '', //The dataset name defined above
+                    'model_name' => 'order_item_model',
+                    'model_method' => 'get_orders_orderitems', 
+                    'model_params' => NULL,
+                     'fields' => array 
+                    (
+                        'Id' => 'Id',
+                        'ProductId' => 'ProductId',                       
+                        'ItemName' => 'ItemName',                       
+                        'Qty' => 'Qty',                       
+                        'PPU' => 'PPU',                       
+                        'vat_rate' => 'vat_rate',                       
+                        'ItemName' => 'ItemName',                       
+                        'itemVatTotal' => 'itemVatTotal',                       
+                        'itemLineTotal' => 'itemLineTotal',                       
+                        '_dID' => '_dID',                       
+                        'OrderId' => 'OrderId',                       
+                        //'ActionType' => 'Action type',                        
+                    ),
+                ),
             ),
         ),
         'record' => array

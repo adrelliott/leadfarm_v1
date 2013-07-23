@@ -67,7 +67,8 @@ $(document).ready(function () {
             $itemrow.find('#vatRate').val(ui.item.jItemVatRate);
 
             // Give focus to the next input field to recieve input from user
-            $('#itemQty').focus();
+            //$('#itemQty').focus();
+            
             return false;
         }
     });
@@ -89,6 +90,8 @@ $(document).ready(function () {
        $row.find('#itemPrice').val('');
        $row.find('#itemQty').val('');
        $row.find('#vatRate').val('');
+       //$row.find('#itemQty').addId('next');
+       //$row.find("").addClass("hidden33");
        
         // Update the row calculated fields.
         updatePrice($row);
@@ -101,7 +104,7 @@ $(document).ready(function () {
         var $itemVat = $row.find('#vatRate');
 
         // If the last row itemCode is empty then don't let the user continue adding a row
-        if ($('#itemCode:last').val() != '') {
+        //if ($('#itemCode:last').val() != '') {
 
             // Add row after the first row in table
             $('.item-row:last', $itemsTable).after($row);
@@ -146,9 +149,9 @@ $(document).ready(function () {
             });
 
 
-       } else {
-           $('.alert').fadeIn('slow').html('Add a product to this row, before adding a new row!');
-      }
+      // } else {
+       //    $('.alert').fadeIn('slow').html('Add a product to this row, before adding a new row!');
+      //}
 
         // End if last itemCode input is empty
         return false;
@@ -169,7 +172,8 @@ $(document).ready(function () {
     
     //Update the vat on this product
     var indiv_vat = $itemRow.find('#vatRate').val() * $itemRow.find('#itemPrice').val() * $itemRow.find('#itemQty').val() / 100;
-    indiv_vat = roundNumber(indiv_vat, 2);
+    //indiv_vat = roundNumber(indiv_vat, 2);
+    indiv_vat = indiv_vat.toFixed(2);
     isNaN(indiv_vat) ? $itemRow.find('#itemVatTotal').val("N/A") : $itemRow.find('#itemVatTotal').val(indiv_vat);
     
     //Update all totals

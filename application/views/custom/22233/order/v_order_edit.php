@@ -24,7 +24,7 @@ foreach ($this->data['view_setup']['fields'] as $field => $array)
                          <div class="page-header">
                              <div id="alert"></div>
                             <div class="span6 left">
-                                <h4>Enter Shipping Info</h4>
+                                <h4>Shipping Info for Customer <?php echo $view_setup['rID']; ?></h4>
                                     <?php 
                                     echo form_input('ShipFirstName', element('ShipFirstName', $shipping_info, $contact_info['FirstName']));
                                     echo form_input('ShipLastName', element('ShipLastName', $shipping_info, $contact_info['LastName'])); 
@@ -40,7 +40,7 @@ foreach ($this->data['view_setup']['fields'] as $field => $array)
                                 <p>Cost of Shipping: £<?php echo form_input('_CostOfShipping', element('_CostOfShipping', $shipping_info, ''), "class='small'"); ?></p>
                                 <p>Sage invoice Number: <?php echo form_input('_LegacyOrderId', element('_LegacyOrderId', $shipping_info, ''), 'class="small" '); ?>(Order Id: 23232)</p>
                                 <p>Payment Method: <?php echo form_dropdown('PaymentMethod', $payment_options, element('PaymentMethod', $shipping_info, '')); ?></p>
-                                <p>Date of Order: <?php echo form_input('DateCreated', element('DateCreated', $shipping_info, ''), "class='datepicker mask_date small' "); ?></p>
+                                <p>Date of Order: <?php echo form_input('DateCreated', element('DateCreated', $shipping_info, ''), "class='datepicker_today small' readonly"); ?></p>
                             </div>
                          </div>
                          <div class="row-fluid clearfix">
@@ -55,25 +55,63 @@ foreach ($this->data['view_setup']['fields'] as $field => $array)
                                              <th>Qty</th>
                                              <th>Net Price</th>
                                              <th>VAT</th>
-                                             <th>Total</th>
+                                             <th>Net Total</th>
                                          </tr>
                                      </thead>
                                      <tbody>
+                                         <?php if(element('order_items', $tables, FALSE) && COUNT($tables['order_items']['table_data'])) : ?>
+                                         <?php foreach ($tables['order_items']['table_data'] as $row => $array) : ?>
+                                         <? //print_array($array); ?>
                                          <tr class="item-row">
                                              <td></td>
-                                             <td><input type="text" name="orderItem_ProductId[]" value="" class="input-mini mini" id="itemCode"
-                                                        tabindex="1"/>
+                                             <td><input type="text" name="orderItem_ProductId[]" value="<?php echo element('ProductId', $array, ''); ?>" class="input-mini mini" id="" readonly="readonly"
+                                                       />
+                                                 
                                              </td>
-                                             <td><input type="text" name="orderItem_ItemName[]" value="" class="input-large xlarge" id="itemDesc"
+                                             <td><input type="text" name="orderItem_ItemName[]" value="<?php echo element('ItemName', $array, ''); ?>" class="input-large xlarge" id=""
                                                         readonly="readonly"/></td>
-                                             <td><input type="text" name="orderItem_Qty[]" value="" class="input-mini  mini" id="itemQty" tabindex="2"/>
+                                             <td><input type="text" name="orderItem_Qty[]" value="<?php echo element('Qty', $array, ''); ?>" class="input-mini  mini" id="itemQty" />
                                              </td>
                                              <td>
                                                  <div class="input-prepend input-append"><span class="add-on">£ </span><input
                                                          name="orderItem_PPU[]"
                                                          class=" input-small small"
                                                          id="itemPrice"
-                                                         type="text"></div>
+                                                         type="text" readonly="readonly" value="<?php echo element('PPU', $array, ''); ?>"></div>
+                                             </td>
+                                             <td>
+                                                 <input name="orderItem_vat_rate[]" id="vatRate" type="hidden" value="<?php echo element('vat_rate', $array, ''); ?>" >
+                                                 <div class="input-prepend input-append"><span class="add-on">£ </span><input
+                                                         name="orderItem_itemVatTotal[]"
+                                                         class=" input-small small"
+                                                         id="itemVatTotal"
+                                                         type="text" readonly="readonly" value="<?php echo element('itemVatTotal', $array, ''); ?>"></div>
+                                             </td>
+                                             <td>
+                                                 <div class="input-prepend input-append"><span class="add-on">£ </span><input
+                                                         name="orderItem_itemLineTotal[]" class="small input-small" id="itemLineTotal" type="text" value="<?php echo element('itemLineTotal', $array, ''); ?>"
+                                                         readonly="readonly"></div>
+                                                 
+                                             </td>
+                                         </tr>
+                                         <?php endforeach;?>
+                                         
+                                         <?php endif; ?>
+                                         <?php //else : ?>
+                                         <tr class="item-row">
+                                             <td></td>
+                                             <td><input type="text" name="orderItem_ProductId[]" value="" class="input-mini mini" id="itemCode" tabindex=1 />
+                                             </td>
+                                             <td><input type="text" name="orderItem_ItemName[]" value="" class="input-large xlarge" id="itemDesc"
+                                                        readonly="readonly"/></td>
+                                             <td><input type="text" name="orderItem_Qty[]" value="" class="input-mini  mini" id="itemQty" tabindex=2 />
+                                             </td>
+                                             <td>
+                                                 <div class="input-prepend input-append"><span class="add-on">£ </span><input
+                                                         name="orderItem_PPU[]"
+                                                         class=" input-small small"
+                                                         id="itemPrice"
+                                                         type="text" readonly="readonly"></div>
                                              </td>
                                              <td>
                                                  <input name="orderItem_vat_rate[]" id="vatRate" type="hidden">
@@ -90,6 +128,7 @@ foreach ($this->data['view_setup']['fields'] as $field => $array)
                                                  
                                              </td>
                                          </tr>
+                                         
                                      </tbody>
                                  </table>
 
