@@ -30,7 +30,7 @@ class Unsubscribe extends CI_Controller {
         
         //if (! $dID OR ! $cID) show_error ('Ooops. That link didn\'t work');
        /// else
-        {
+        
         if( ! defined('DATAOWNER_ID')) $this->_lookup_dID($cID);
         $this->load->model('contact_model', 'contact');
         $this->data['fields'] = $this->contact->get($cID);
@@ -38,7 +38,7 @@ class Unsubscribe extends CI_Controller {
             if (! $this->message) $this->message = '<span class="notification information">Please review and change your email preferences below</span>';
             
             $this->load->view('custom/' . DATAOWNER_ID . '/v_unsubscribe.php', $this->data);
-        }
+        
     }
     
     function edit($cID, $input = FALSE) {
@@ -74,7 +74,7 @@ class Unsubscribe extends CI_Controller {
         $this->db->where('Id', $cID);
         $q = $this->db->get('contact');
         
-        //print_array($q);
+        print_array($q);
         
         if ($q->num_rows() > 0 ) 
         {
