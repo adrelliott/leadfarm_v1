@@ -87,6 +87,7 @@ class Unsubscribe extends CI_Controller {
             die();
         }
         echo "dataowner id = " . DATAOWNER_ID;
+        die();
         
     }
 
