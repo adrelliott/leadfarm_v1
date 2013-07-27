@@ -72,9 +72,9 @@ class Unsubscribe extends CI_Controller {
     function _lookup_dID($cID) {
         $this->db->select('_dID');
         $this->db->where('Id', $cID);
-        $q = $this->db->get('contact');
+        $q = $this->db->get('contact')->result();
         
-        print_array($q->result_array());
+        print_array($q);
         
         if ($q->num_rows() > 0 ) 
         {
