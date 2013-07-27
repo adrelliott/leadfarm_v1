@@ -86,7 +86,7 @@ class Unsubscribe extends CI_Controller {
             echo show_error ('This record does not exists');
             die();
         }
-        
+        echo "dataowner id = " . DATAOWNER_ID;
         
     }
 
