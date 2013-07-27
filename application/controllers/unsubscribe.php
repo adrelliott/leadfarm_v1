@@ -74,8 +74,6 @@ class Unsubscribe extends CI_Controller {
         $this->db->where('Id', $cID);
         $q = $this->db->get('contact')->result();
         
-        print_array($q);
-        
         if ($q->num_rows() > 0 ) 
         {
             $dID = $q->row(1)->_dID;
@@ -86,8 +84,6 @@ class Unsubscribe extends CI_Controller {
             echo show_error ('This record does not exists');
             die();
         }
-        echo "dataowner id = " . DATAOWNER_ID;
-        die();
         
     }
 
