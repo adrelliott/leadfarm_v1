@@ -33,13 +33,12 @@ else
             
            
 
-        //private function _update_memb_number($ContactId) {
-         private function _update_memb_number($ContactId) {
-            //get maximum memberhsip number 
+        private function _update_memb_number($ContactId) {
+            //get maximum membership number 
             $this->load->model('contact_model');
             $max_memb_no = $this->contact_model->get_max('_LegacyMembershipNo');
           
-            //Now get this contact\s memberhsip number
+            //Now get this contact's memberhsip number
             $contact_record = $this->contact_model->get($ContactId);
             $current_memb_no = $contact_record['_LegacyMembershipNo'];
             
@@ -51,6 +50,8 @@ else
             }
              
         }
+        
+        
         public function add($view_file, $rID, $ContactId) {       
             //clean input
             $input = clean_data($this->input->post());

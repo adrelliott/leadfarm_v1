@@ -20,22 +20,63 @@ class Unsubscribe extends CI_Controller {
     }
     
     function  index($secret_url) {
-        //unsramble the url
+        //unscramble the url
         
         //then do the action
     }
     
-    function show($dID = FALSE, $cID = FALSE) {
-        if (! $dID OR ! $cID) show_error ('Ooops. That link didn\'t work');
-        else
+    function show($cID = FALSE) {
+        
+        
+        //if (! $dID OR ! $cID) show_error ('Ooops. That link didn\'t work');
+       /// else
         {
-            define('DATAOWNER_ID', $dID);
+        if( ! defined('DATAOWNER_ID')) $this->_lookup_dID($cID);
         $this->load->model('contact_model', 'contact');
+        $this->data['fields'] = $this->contact->get($cID);
             $this->rID = $cID;
-            $this->load->view('custom/' . DATAOWNER_ID . '/v_unsubscribe.php');
+            if (! $this->message) $this->message = '<span class="notification information">Please review and change your email preferences below</span>';
+            
+            $this->load->view('custom/' . DATAOWNER_ID . '/v_unsubscribe.php', $this->data);
         }
     }
+    
+    function edit($cID, $input = FALSE) {
+         if( ! defined('DATAOWNER_ID')) $this->_lookup_dID($cID);
+        if ( ! $input) $input = clean_data($this->input->post());
+        //define('DATAOWNER_ID', $dID);
         
+        $this->load->model('contact_model', 'contact');
+        $r = $this->contact->save($input, $cID);
+        
+        $this->message = '<span class="notification done">Your preferences have been updated!</span>';
+        $this->show($cID);
+    }
+        
+    function remove($cID) {
+        //set all options to no
+        $input = array(
+            '_OptinEmailYN'=> 0,
+            '_OptinSmsYN'=> 0,
+            '_OptinSurfaceMailYN'=> 0,
+            '_OptinMerchandiseYN'=> 0,
+            '__ClubEventsYN'=> 0,
+            '__AwayMatchYN'=> 0,
+            'Email'=> '',
+            
+        );
+        
+        $this->edit($cID, $input);
+    }
+    
+    function _lookup_dID($cID) {
+        $this->db->select('_dID');
+        $this->db->where('Id', $cID);
+        $q = $this->db->get('contact')->result_array();
+        
+        if(! count($q)) show_error ('This record does not exists');
+        elseif( ! defined('DATAOWNER_ID')) define('DATAOWNER_ID', $q[0]['_dID']);
+    }
 
 }
 

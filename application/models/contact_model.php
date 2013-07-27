@@ -33,6 +33,10 @@ class Contact_model extends CRM_Model {
         //return $this->get($this->current_ContactId);
     }
     
+    function lookup_dID($rID) {
+        
+    }
+    
         
     public function master_search() {
         //get all records. $where set up in dataset['model_params']
