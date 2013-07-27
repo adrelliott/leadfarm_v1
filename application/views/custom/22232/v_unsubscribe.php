@@ -144,17 +144,4 @@
         </footer>
     </body>
 </html>
-<?php print_array($fields);?>
-
-	
-You should change the third parameter according to the content of the $data variable.
-
-So you will have something similar:
-
-<label for="level1" >
-    <input type="radio" id="level1" name="menu_type" value="1" <?php echo set_radio(
-            'fmenu_type', 
-            '1', 
-            $menu_type['value'] == '1'
-            ); ?> />Do't have sub menu</label>
-
+<?php //print_array($fields);?>
