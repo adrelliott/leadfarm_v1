@@ -74,7 +74,7 @@ class Unsubscribe extends CI_Controller {
         $this->db->where('Id', $cID);
         $q = $this->db->get('contact');
         
-        print_array($q);
+        print_array($q->result_array());
         
         if ($q->num_rows() > 0 ) 
         {
