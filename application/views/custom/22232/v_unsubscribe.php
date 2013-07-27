@@ -46,7 +46,7 @@
                     <div class="row">
                         <div class="col_6 pre_3 padding_top_120">
                             <div class="widget clearfix">
-                                <h2>Amend your subscription settings</h2>
+                                <h2>Subscription Settings</h2>
                                 <div class="widget_inside">
                                     <?php echo $this->message; ?>
                                     <div class="form margin_top_15">
@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="form margin_top_45">
                                         <div class="clearfix center margin_top_15">
-                                            <h3 class="margin_bottom_15 margin_top_15"><a href="<?php echo site_url(('unsubscribe/remove/' . $this->rID)); ?>" class="button red padding_top_15 padding_bottom_15 ">Do NOT contact me again!</a></h3>
+                                            <h3 class="margin_bottom_15 margin_top_15"><a href="<?php echo site_url(('unsubscribe/remove/' . $this->rID)); ?>" class="button red padding_top_15 padding_bottom_15 ">Unsubscribe from Everything</a></h3>
                                             <h4>NOTE: This will set all the above settings to 'NO' and DELETE your email address from our system</h4>
                                         </div>
                                     </div>
