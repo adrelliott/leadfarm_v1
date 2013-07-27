@@ -78,13 +78,10 @@ class Unsubscribe extends CI_Controller {
         {
             $dID = $q->row(1)->_dID;
             if( ! defined('DATAOWNER_ID')) define('DATAOWNER_ID', $dID);
-            echo " line81";
         }
         else
         {
             echo show_error ('This record does not exists');
-            echo " line86";
-           // die();
         }
         
     }
