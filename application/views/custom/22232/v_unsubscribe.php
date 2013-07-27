@@ -53,7 +53,7 @@
 <div class="form">
                                         <div class="clearfix center margin_top_15">
                                             <h3 class="margin_bottom_15 margin_top_15"><a href="<?php echo site_url(('unsubscribe/remove/' . $this->rID)); ?>" class="button red padding_top_15 padding_bottom_15 ">Do NOT contact me again!</a></h3>
-                                            <h4>NOTE: This will set all the below to 'NO'</h4>
+                                            <h4>NOTE: This will set all the below to 'NO' and DELETE your email address</h4>
                                         </div>
                                     </div>
                                     <div class="form margin_top_15">

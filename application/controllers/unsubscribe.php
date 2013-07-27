@@ -72,10 +72,14 @@ class Unsubscribe extends CI_Controller {
     function _lookup_dID($cID) {
         $this->db->select('_dID');
         $this->db->where('Id', $cID);
-        $q = $this->db->get('contact')->result_array();
+        $q = $this->db->get('contact');
         
-        if(! count($q)) show_error ('This record does not exists');
-        elseif( ! defined('DATAOWNER_ID')) define('DATAOWNER_ID', $q[0]['_dID']);
+        //print_array($q);
+        
+        if ($q->num_rows() > 0 ) $dID = $q->row(1)->_dID;
+        else echo show_error ('This record does not exists');
+        
+        if( ! defined('DATAOWNER_ID')) define('DATAOWNER_ID', $dID);
     }
 
 }
