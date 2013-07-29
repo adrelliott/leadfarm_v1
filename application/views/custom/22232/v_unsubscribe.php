@@ -106,12 +106,12 @@
                                             </div>
                                         </div>
 
-                                        <div class="clearfix" id="">
+                                        <!--<div class="clearfix" id="">
                                             <label class="" id="">Change my email address:</label>
                                             <div class="input " id="">
-                                                <input name="Email" type="text" class="larger" value="<? echo $fields['Email']; ?>" />
+                                                <input name="Email" type="text" class="larger" value="<? //echo $fields['Email']; ?>" />
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <div class="clearfix grey-highlight">
                                             <div class="input no-label ">
                                                 <input type='submit' name='submit' class='button large green right' value='Save These Preferences' />
