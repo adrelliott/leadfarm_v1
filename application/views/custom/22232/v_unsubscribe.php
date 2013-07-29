@@ -55,54 +55,54 @@
                                         </div>
                                         <?php echo form_open('unsubscribe/edit/' . $this->rID); ?>
                                         <div class="clearfix" id="">
-                                            <label class="radio_button" id="">I want to get general email messages: </label>
+                                            <label class="" id="">FC United Emails: </label>
                                             <div class="input " id="">
-                                                <input type="radio" id="_OptinEmailYN" name="_OptinEmailYN" value="1" <?php echo set_radio('_OptinEmailYN', '1', $fields['_OptinEmailYN'] == '1'); ?> />Yes
-                                                <input type="radio" id="_OptinEmailYN" name="_OptinEmailYN" value="0" <?php echo set_radio('_OptinEmailYN', '0', $fields['_OptinEmailYN'] == '0'); ?> />No
+                                                <input type="radio" id="_OptinEmailYN" name="_OptinEmailYN" value="1" <?php echo set_radio('_OptinEmailYN', '1', $fields['_OptinEmailYN'] == '1'); ?> />Subscribed
+                                                <input type="radio" id="_OptinEmailYN" name="_OptinEmailYN" value="0" <?php echo set_radio('_OptinEmailYN', '0', $fields['_OptinEmailYN'] == '0'); ?> />Unsubscribed
 
                                             </div>
                                         </div>
 
                                         <div class="clearfix" id="">
-                                            <label class="radio_button" id="">I want to get general text messages"</label>
+                                            <label class="" id="">FC United Text messages:</label>
                                             <div class="input " id="">
-                                                <input type="radio" id="_OptinSmsYN" name="_OptinSmsYN" value="1" <?php echo set_radio('_OptinSmsYN', '1', $fields['_OptinSmsYN'] == '1'); ?> />Yes
-                                                <input type="radio" id="_OptinSmsYN" name="_OptinSmsYN" value="0" <?php echo set_radio('_OptinSmsYN', '0', $fields['_OptinSmsYN'] == '0'); ?> />No
+                                                <input type="radio" id="_OptinSmsYN" name="_OptinSmsYN" value="1" <?php echo set_radio('_OptinSmsYN', '1', $fields['_OptinSmsYN'] == '1'); ?> />Subscribed
+                                                <input type="radio" id="_OptinSmsYN" name="_OptinSmsYN" value="0" <?php echo set_radio('_OptinSmsYN', '0', $fields['_OptinSmsYN'] == '0'); ?> />Unsubscribed
 
                                             </div>
                                         </div>
 
                                         <div class="clearfix" id="">
-                                            <label class="radio_button" id="">I'm happy to get things through the post:</label>
+                                            <label class="" id="">FC United Information through the Post:</label>
                                             <div class="input " id="">
-                                                <input type="radio" id="_OptinSurfaceMailYN" name="_OptinSurfaceMailYN" value="1" <?php echo set_radio('_OptinSurfaceMailYN', '1', $fields['_OptinSurfaceMailYN'] == '1'); ?> />Yes
-                                                <input type="radio" id="_OptinSurfaceMailYN" name="_OptinSurfaceMailYN" value="0" <?php echo set_radio('_OptinSurfaceMailYN', '0', $fields['_OptinSurfaceMailYN'] == '0'); ?> />No
+                                                <input type="radio" id="_OptinSurfaceMailYN" name="_OptinSurfaceMailYN" value="1" <?php echo set_radio('_OptinSurfaceMailYN', '1', $fields['_OptinSurfaceMailYN'] == '1'); ?> />Subscribed
+                                                <input type="radio" id="_OptinSurfaceMailYN" name="_OptinSurfaceMailYN" value="0" <?php echo set_radio('_OptinSurfaceMailYN', '0', $fields['_OptinSurfaceMailYN'] == '0'); ?> />Unsubscribed
 
                                             </div>
                                         </div>
 
                                         <div class="clearfix" id="">
-                                            <label class="radio_button" id="">I'm happy to get offers via email:</label>
+                                            <label class="" id="">FC United Merchandise Emails:</label>
                                             <div class="input " id="">
-                                                <input type="radio" id="_OptinMerchandiseYN" name="_OptinMerchandiseYN" value="1" <?php echo set_radio('_OptinMerchandiseYN', '1', $fields['_OptinMerchandiseYN'] == '1'); ?> />Yes
-                                                <input type="radio" id="_OptinMerchandiseYN" name="_OptinMerchandiseYN" value="0" <?php echo set_radio('_OptinMerchandiseYN', '0', $fields['_OptinMerchandiseYN'] == '0'); ?> />No
+                                                <input type="radio" id="_OptinMerchandiseYN" name="_OptinMerchandiseYN" value="1" <?php echo set_radio('_OptinMerchandiseYN', '1', $fields['_OptinMerchandiseYN'] == '1'); ?> />Subscribed
+                                                <input type="radio" id="_OptinMerchandiseYN" name="_OptinMerchandiseYN" value="0" <?php echo set_radio('_OptinMerchandiseYN', '0', $fields['_OptinMerchandiseYN'] == '0'); ?> />Unsubscribed
 
                                             </div>
                                         </div>
 
                                         <div class="clearfix" id="">
-                                            <label class="radio_button" id="">I want to hear about events via email:</label>
+                                            <label class="" id="">FC United Events emails:</label>
                                             <div class="input " id="">
-                                                <input type="radio" id="__ClubEventsYN" name="__ClubEventsYN" value="1" <?php echo set_radio('__ClubEventsYN', '1', $fields['__ClubEventsYN'] == '1'); ?> />Yes
-                                                <input type="radio" id="__ClubEventsYN" name="__ClubEventsYN" value="0" <?php echo set_radio('__ClubEventsYN', '0', $fields['__ClubEventsYN'] == '0'); ?> />No
+                                                <input type="radio" id="__ClubEventsYN" name="__ClubEventsYN" value="1" <?php echo set_radio('__ClubEventsYN', '1', $fields['__ClubEventsYN'] == '1'); ?> />Subscribed
+                                                <input type="radio" id="__ClubEventsYN" name="__ClubEventsYN" value="0" <?php echo set_radio('__ClubEventsYN', '0', $fields['__ClubEventsYN'] == '0'); ?> />Unsubscribed
                                             </div>
                                         </div>
 
                                         <div class="clearfix" id="">
-                                            <label class="radio_button" id="">I want to be contacted about Away Match travel arrangements:</label>
+                                            <label class="" id="">FC United Away Match travel emails:</label>
                                             <div class="input " id="">
-                                                <input type="radio" id="__AwayMatchYN" name="__AwayMatchYN" value="1" <?php echo set_radio('__AwayMatchYN', '1', $fields['__AwayMatchYN'] == '1'); ?> />Yes
-                                                <input type="radio" id="__AwayMatchYN" name="__AwayMatchYN" value="0" <?php echo set_radio('__AwayMatchYN', '0', $fields['__AwayMatchYN'] == '0'); ?> />No
+                                                <input type="radio" id="__AwayMatchYN" name="__AwayMatchYN" value="1" <?php echo set_radio('__AwayMatchYN', '1', $fields['__AwayMatchYN'] == '1'); ?> />Subscribed
+                                                <input type="radio" id="__AwayMatchYN" name="__AwayMatchYN" value="0" <?php echo set_radio('__AwayMatchYN', '0', $fields['__AwayMatchYN'] == '0'); ?> />Unsubscribed
                                             </div>
                                         </div>
 
