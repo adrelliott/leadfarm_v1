@@ -61,7 +61,7 @@ class Unsubscribe extends CI_Controller {
     function remove($cID) {
         
         $cID = $this->encryption->decode($cID);
-        
+        die('cid = ' . $cID);
         //set all options to no
         $input = array(
             '_OptinEmailYN'=> 0,
