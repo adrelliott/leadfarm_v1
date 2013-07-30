@@ -216,7 +216,7 @@ class Broadcast extends CRM_Controller {
                 $saved_search = $this->recipients->get_by('Id', $template_data['SavedSearchId']);
                 $recip = $this->db->query($saved_search[0]['Query']);
                 
-                $this->load->library('encrypt');
+                $this->load->library('encryption');
                 
                 if ($recip->num_rows() > 0)
                 {
