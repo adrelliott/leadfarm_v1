@@ -216,6 +216,8 @@ class Broadcast extends CRM_Controller {
                 $saved_search = $this->recipients->get_by('Id', $template_data['SavedSearchId']);
                 $recip = $this->db->query($saved_search[0]['Query']);
                 
+                $this->load->library('encrypt');
+                
                 if ($recip->num_rows() > 0)
                 {
                    $arr = array();
@@ -224,7 +226,7 @@ class Broadcast extends CRM_Controller {
                       if ($row->Email)
                       {
                           $arr[$row->Email] = array(
-                                'id' => $row->Id,
+                                'id' => $this->encrypt->encode($row->Id),
                                 'firstname' => $row->FirstName,
                                 'lastname' => $row->LastName,
                                 'nickname' => $row->Nickname,

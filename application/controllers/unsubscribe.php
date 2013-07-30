@@ -26,7 +26,8 @@ class Unsubscribe extends CI_Controller {
     }
     
     function show($cID = FALSE) {
-        
+        $this->load->library('encrypt');
+        $cID = $this->encrypt->decode($cID);
         
         //if (! $dID OR ! $cID) show_error ('Ooops. That link didn\'t work');
        /// else
