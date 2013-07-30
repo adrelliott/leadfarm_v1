@@ -95,16 +95,19 @@ $date_choices = array(
                     <div class="clearfix margin_bottom_25">
                         <?php 
                         $report_type = $this->session->userdata('report_type');
-                        echo '<span class="notification information clearfix">' . $this->data['view_setup']['tables']['search_results']['count_results'] . ' records found. </span>'; ?>
-                        <div class='form padding_5'>
-                            <?php echo form_open(site_url('search_page/save_this_search')); ?>
+                        echo '<span class="notification information clearfix">' . $this->data['view_setup']['tables']['search_results']['count_results'] . ' records found. <a href="' . current_url() . '?view_table" class="">See all results (could take a while)</a></span>'; ?>
+                        <!--<div class='form padding_5'>
+                            <?php //echo form_open(site_url('search_page/save_this_search')); ?>
                             <p>
                                 Save this search as:  
-                                <?php echo form_input('Name', element('search_name', $view_setup, '')); ?>
-                                <?php echo form_hidden('Query', $this->session->userdata('last_query'));?>
-                                <?php echo form_submit('submit', 'Save'); ?>
+                                <?php// echo form_input('Name', element('search_name', $view_setup, '')); ?>
+                                <?php //echo form_hidden('Query', $this->session->userdata('last_query'));?>
+                                <?php //echo form_submit('submit', 'Save'); ?>
                             </p>
-                            <?php echo form_close(); ?>
+                            <?php //echo form_close(); ?>
+                        </div>-->
+                        <div>
+                            <?php if (isset($_GET['view_table'])) include ('results_table.php'); ?>
                         </div>
                     </div>
                     <?php else : ?>
