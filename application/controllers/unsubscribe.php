@@ -71,7 +71,7 @@ class Unsubscribe extends CI_Controller {
             //'Email'=> '',
             
         );
-        
+        $encrypted = $cID;
          $cID = $this->encryption->decode($cID);
         
          if( ! defined('DATAOWNER_ID')) $this->_lookup_dID($cID);
@@ -81,7 +81,7 @@ class Unsubscribe extends CI_Controller {
         $r = $this->contact->save($input, $cID);
         
         $this->message = '<span class="notification done">Your preferences have been updated!</span>';
-        $this->show($cID);
+        redirect(site_url('unsubscribe/show/' . $encrypted));
         
     }
     
