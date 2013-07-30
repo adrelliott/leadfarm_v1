@@ -48,6 +48,8 @@
                             <div class="widget clearfix">
                                 <h2>Subscription Settings</h2>
                                 <div class="widget_inside">
+                                    <h3 class="margin_bottom_5">Hi <?php echo $fields['FirstName'] . ' ' . $fields['LastName']; ?>!</h3>
+                                    <p>How would you like us to keep in touch with you?</p>
                                     <?php echo $this->message; ?>
                                     <div class="form margin_top_15">
                                         <div class="clearfix center" id="">
