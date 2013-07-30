@@ -122,7 +122,7 @@
                                     <div class="form margin_top_45">
                                         <div class="clearfix center margin_top_15">
                                             <h3 class="margin_bottom_15 margin_top_15"><a href="<?php echo site_url(('unsubscribe/remove/' . $this->rID)); ?>" class="button red padding_top_15 padding_bottom_15 ">Unsubscribe from Everything</a></h3>
-                                            <h4>NOTE: This will set all the above settings to 'UNSUBSCRIBE' and REMOVE your email address from our system</h4>
+                                            <h4>NOTE: This will set all the above settings to 'UNSUBSCRIBE'</h4>
                                         </div>
                                     </div>
                                 </div>
