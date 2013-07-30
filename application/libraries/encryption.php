@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 class Encryption {
-	var $skey 	= "SuPerEncKey2010"; // you can change it
+	var $skey 	= "e103dS9Ncei9+Q2"; // you can change it
 	
     public  function safe_b64encode($string) {
 	

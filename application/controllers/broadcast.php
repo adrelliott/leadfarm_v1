@@ -226,7 +226,7 @@ class Broadcast extends CRM_Controller {
                       if ($row->Email)
                       {
                           $arr[$row->Email] = array(
-                                'id' => $this->encrypt->encode($row->Id),
+                                'id' => $this->encryption->encode($row->Id),
                                 'firstname' => $row->FirstName,
                                 'lastname' => $row->LastName,
                                 'nickname' => $row->Nickname,
