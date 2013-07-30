@@ -12,12 +12,12 @@ if (count($tables['search_results']['table_data']))
     //print_array($headings);
     $this->table->set_template_custom(array (
         //'anchor_uri' => 'contactjoin/view/edit', 
-        'anchor_uri' => 'contact/view/edit',
+        //'anchor_uri' => 'contact/view/edit',
         'anchor_uri_append_primaryidYN' => FALSE,
         //'anchor_uri_append' => $ContactId, 'anchor_attr' => 
         'class="iframe" ' ,
-        //'primary_key_fieldname' => 'Id',
-        'ContactId_name' => 'Id',   //
+        //'primary_key_fieldname' => 'ContactId',
+        'ContactId_name' => 'ContactId',   //
         //'delete_button_flag' => TRUE,
         //'delete_button_uri' => 'contactjoin/delete_record/' . $ContactId,
         ));    
