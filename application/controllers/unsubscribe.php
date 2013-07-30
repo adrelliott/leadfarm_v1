@@ -62,7 +62,7 @@ class Unsubscribe extends CI_Controller {
             '_OptinMerchandiseYN'=> 0,
             '__ClubEventsYN'=> 0,
             '__AwayMatchYN'=> 0,
-            'Email'=> '',
+            //'Email'=> '',
             
         );
         
