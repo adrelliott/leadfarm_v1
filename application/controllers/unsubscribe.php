@@ -72,7 +72,17 @@ class Unsubscribe extends CI_Controller {
             
         );
         
-        $this->edit($cID, $input);
+         $cID = $this->encryption->decode($cID);
+        
+         if( ! defined('DATAOWNER_ID')) $this->_lookup_dID($cID);
+        //define('DATAOWNER_ID', $dID);
+        
+        $this->load->model('contact_model', 'contact');
+        $r = $this->contact->save($input, $cID);
+        
+        $this->message = '<span class="notification done">Your preferences have been updated!</span>';
+        $this->show($cID);
+        
     }
     
     function _lookup_dID($cID) {

@@ -1,8 +1,7 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * from here: http://www.99points.info/2010/06/php-encrypt-decrypt-functions-to-encrypt-url-data/
  */
 class Encryption {
 	var $skey 	= "e103dS9Ncei9+Q2"; // you can change it
