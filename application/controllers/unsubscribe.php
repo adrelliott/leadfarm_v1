@@ -17,6 +17,8 @@ class Unsubscribe extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        
+        $this->load->library('encryption');
     }
     
     function  index($secret_url) {
@@ -26,7 +28,6 @@ class Unsubscribe extends CI_Controller {
     }
     
     function show($cID = FALSE) {
-        $this->load->library('encryption');
         $cID = $this->encryption->decode($cID);
         
         //if (! $dID OR ! $cID) show_error ('Ooops. That link didn\'t work');
@@ -43,6 +44,9 @@ class Unsubscribe extends CI_Controller {
     }
     
     function edit($cID, $input = FALSE) {
+        
+        $cID = $this->encryption->decode($cID);
+        
          if( ! defined('DATAOWNER_ID')) $this->_lookup_dID($cID);
         if ( ! $input) $input = clean_data($this->input->post());
         //define('DATAOWNER_ID', $dID);
@@ -55,6 +59,9 @@ class Unsubscribe extends CI_Controller {
     }
         
     function remove($cID) {
+        
+        $cID = $this->encryption->decode($cID);
+        
         //set all options to no
         $input = array(
             '_OptinEmailYN'=> 0,
