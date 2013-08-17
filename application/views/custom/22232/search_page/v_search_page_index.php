@@ -263,8 +263,8 @@ $date_choices = array(
         </div>
     </div>
 </div>
-<?php print_array($this->session->userdata('search_criteria')); ?>
+<?php //print_array($this->session->userdata('search_criteria')); ?>
 <?php 
 
-print_array($_SESSION);
-print_array($this->data); ?>
+//print_array($_SESSION);
+//print_array($this->data); ?>
