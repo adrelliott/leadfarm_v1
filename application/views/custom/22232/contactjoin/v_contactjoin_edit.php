@@ -10,7 +10,7 @@
                         <h3>Create a New Relationship</h3>
                         <div class="form">
                             <?php echo form_open("contactjoin/add/edit/$rID/$ContactId") ; ?>
-                            <?php if($rID == 'new') {include('fieldsets/v_contact_join_table.php');} ?>
+                            <?php //include('fieldsets/v_contact_join_table.php'); ?>
                                 <?php echo display_field($fields['__Reason']); ?> 
                                 <?php //echo display_field($fields['__ActiveYN']); ?> 
                                 <div class="clearfix">
@@ -24,4 +24,5 @@
         </div>      
     </div>    
 </div> 
+<?php //print_array($this->data); 
         

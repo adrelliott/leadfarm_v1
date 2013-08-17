@@ -15,7 +15,7 @@
             <h2>Potential</h2>
             <div class="widget_inside">
                 <?php if ( ! empty ( $tables['leads_by_type']['Potential'] )) : ?>
-                <?php foreach($tables['leads_by_type']['Potential'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url( '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID'] ) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . '</a> (' . $array['OpportunityTitle'] . ')</p>'; } ?>
+                <?php foreach($tables['leads_by_type']['Potential'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url( '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID'] ) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . ' ' . $array['_OrganisationName'] . '</a> (' . $array['OpportunityTitle'] . ')</p>'; } ?>
                 <?php else: ?>
                 <p>No records found...</p>
                 <?php endif; ?>
@@ -27,7 +27,7 @@
             <h2>Lead</h2>
             <div class="widget_inside">
                 <?php if ( ! empty ( $tables['leads_by_type']['Lead'] )) : ?>
-                <?php foreach($tables['leads_by_type']['Lead'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url( '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID'] ) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . '</a> (' . $array['OpportunityTitle'] . ')</p>'; } ?>
+                <?php foreach($tables['leads_by_type']['Lead'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url( '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID'] ) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . ' ' . $array['_OrganisationName'] . '</a> (' . $array['OpportunityTitle'] . ')</p>'; } ?>
                 <?php else: ?>
                 <p>No records found...</p>
                 <?php endif; ?>
@@ -39,7 +39,7 @@
             <h2>Prospect</h2>
             <div class="widget_inside">
                 <?php if ( ! empty ( $tables['leads_by_type']['Prospect'] )) : ?>
-                <?php foreach($tables['leads_by_type']['Prospect'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url( '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID'] ) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . '</a> (' . $array['OpportunityTitle'] . ')</p>'; } ?>
+                <?php foreach($tables['leads_by_type']['Prospect'] as $k => $array) { echo '<p class="button leadBox"><a href="' . site_url( '/lead/view/edit/' . $array['Id'] . '/' . $array['ContactID'] ) . '" class="iframe">' . $array['FirstName'] . ' ' . $array['LastName'] . ' ' . $array['_OrganisationName'] . '</a> (' . $array['OpportunityTitle'] . ')</p>'; } ?>
                 <?php else: ?>
                 <p>No records found...</p>
                 <?php endif; ?>

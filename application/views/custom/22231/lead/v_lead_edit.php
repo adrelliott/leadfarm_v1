@@ -1,3 +1,8 @@
+<?php 
+    //$this->load->model('contact_model');
+    $contact_info = $this->contact_model->get($this->data['view_setup']['ContactId']);
+    //print_array($contact_info);
+?>
 <div class="row clearfix"> 
     <div class="row">
         <div class="row clearfix"> 
@@ -8,7 +13,8 @@
                 </ul>							
                 <div class="widget_inside">
                     <div id="tab-1"><!-- Start of tab 1 -->
-                        <h3>Create/edit an Opportunity for this contact</h3>
+                        <h3>Create/edit an Opportunity</h3>
+                        <span class="notification information">Lead for <a href="<?php echo site_url('contact/view/edit/' . $contact_info['Id']); ?>" target="_blank"><?php echo $contact_info['FirstName'], ' ', $contact_info['LastName'], ' ', $contact_info['_OrganisationName']; ?></a></span>
                         <div class="form">
                             <?php echo form_open( "/lead/add/edit/$rID/$ContactId") ; ?>
                                 <?php echo display_field($fields['OpportunityTitle']); ?>
@@ -65,4 +71,4 @@
         </div>      
     </div>    
 </div>
-<?php print_array($this->data); ?>
+<?php //print_array($this->data); ?>

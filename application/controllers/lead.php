@@ -32,6 +32,9 @@ else
             $this->_load_view_data($rID);    //retrieves and process all data for view    
             
             $this->gen_product_list();
+            $this->load->model('contact_model');
+    $this->data['contact_info'] = $this->contact_model->get($ContactId);
+            
                 // Generate the view!
             $this->load_view($pull);
             }
