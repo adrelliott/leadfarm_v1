@@ -1,4 +1,17 @@
 <?php
+$seasons =  array(
+    ''=>'',  
+    //'0' => 'Any', 
+    '2005/06' => '2005/06', 
+    '2006/07' => '2006/07',
+    '2007/08' => '2007/08', 
+    '2008/09' => '2008/09', 
+    '2009/10' => '2009/10', 
+    '2010/11' => '2010/11', 
+    '2011/12' => '2011/12',
+    '2012/13' => '2012/13', 
+    '2013/14' => '2013/14');
+
 $criteria = array(
     '0' => 'Any',
     'equal' => 'Equals',
@@ -107,7 +120,7 @@ $role_types = array(
                                         <h4>Let's see all contacts that have
                                         <?php //echo form_dropdown('order_type_operator[]',array('equal' => 'have got'), 'equal');?>
                                         <?php echo form_dropdown('order_type', $order_types, '0'); ?> in season 
-                                        <?php echo form_dropdown('order_expire', array('0' => 'Any', '2005/06' => '2005/06', '2006/07' => '2006/07','2007/08' => '2007/08', '2009/10' => '2009/10', '2010/11' => '2011/12', '2012/13' => '2012/13', '2013/14' => '2013/14'), '0'); ?></h4>
+                                        <?php echo form_dropdown('order_expire', $seasons, '0'); ?></h4>
                                         
                                         <?php //echo form_dropdown('order_type_operator[]',array('0' => '', 'equal' => 'have got', 'notequal' => 'have not got'), '0');?>
                                         <?php //echo form_dropdown('order_type[]',array_merge(array('0' => ''),$order_types), '0'); ?> 
@@ -162,7 +175,7 @@ $role_types = array(
                                 <div class="clearfix">
                                     <label for="role_type" class="" id="">Season</label>
                                     <div class="input " id="">
-                                        <h4>in season  <?php echo form_dropdown('order_expire', array('0' => 'Any', '2005/06' => '2005/06', '2006/07' => '2006/07','2007/08' => '2007/08', '2009/10' => '2009/10', '2010/11' => '2011/12', '2012/13' => '2012/13', '2013/14' => '2013/14'), '0'); ?></h4>
+                                        <h4>in season  <?php echo form_dropdown('order_expire', $seasons, '0'); ?></h4>
                                     </div>
                                 </div>
                                 <div class="clearfix">
