@@ -27,7 +27,7 @@ class Broadcast extends CRM_Controller {
     public function __construct() {
         parent::__construct();
         //echo ENVIRONMENT;
-        $this->output->enable_profiler(ENVIRONMENT !== 'production');
+        $this->output->enable_profiler(ENVIRONMENT !== 'demo');
         $this->load->helper('step');
     }
 
